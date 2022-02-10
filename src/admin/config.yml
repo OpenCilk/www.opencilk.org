@@ -4,7 +4,7 @@ backend:
   branch: master
   ### enable below lines for github integration ###
   # name: github
-  # repo: surjithctly/neat-starter
+  # repo: beh333/opencilk-website
 media_folder: "src/static/img"
 public_folder: "/static/img"
 

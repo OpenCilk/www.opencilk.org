@@ -5,9 +5,9 @@ sidebar: Documentation
 eleventyNavigation:
   key: Installing OpenCilk
 images:
-  placement:  # options: feature, background
-  feature: grey-silk-bg.jpg
-  feature-height: h-64
+  placement: feature # options: feature, background
+  feature: flow-760x400.jpg
+  feature-height: h-1/1
 ---
 
 ## Requirements

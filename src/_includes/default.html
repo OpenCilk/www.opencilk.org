@@ -22,8 +22,8 @@
       {% include "./partials/masthead.njk" %}
 
       {% if images.placement == 'feature' %}
-        <figure class="w-screen {{ images.feature-height or "h-48 md:h-1/3" }}">
-          <img class="object-cover {{ images.align }} w-full h-full" src="{{ images.feature if 'http' in images.feature else "/static/img/" + images.feature }}" alt="{{ title }}">
+        <figure class="{{ images.feature-height }}">
+          <img class="object-contain {{ images.feature-height }} {{ images.align }} w-full" src="{{ images.feature if 'http' in images.feature else "/static/img/" + images.feature }}" alt="{{ title }}">
         </figure>
         
       {% elif images.placement == 'background' %}
