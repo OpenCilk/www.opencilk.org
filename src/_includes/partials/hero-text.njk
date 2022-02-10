@@ -10,7 +10,7 @@
 {% if hero.links %}
   <div class="items-center justify-center mx-auto w-full  max-w-2xl grid grid-cols-1 lg:grid-cols-2 gap-4 my-8 px-4">
     {% for item in hero.links %}
-        <a href="{{item.url}}" target="_blank" class="p-5 h-full border bg-indigo-500 bg-opacity-5 hover:bg-cilk-pink hover:bg-opacity-5 rounded border-indigo-500 hover:border-cilk-pink">
+        <a href="{{item.url}}" class="p-5 h-full border bg-indigo-500 bg-opacity-5 hover:bg-cilk-pink hover:bg-opacity-5 rounded border-indigo-500 hover:border-cilk-pink">
             <h3>{{item.title}}
                 →</h3>
             <p>{{item.desc}}</p>
