@@ -40,18 +40,20 @@ OpenCilk is an open-source platform that makes parallel programming a simple ext
  - Provably efficient scheduling tunes each execution of your OpenCilk program to its host environment.
  - Provable race-detection guarantees that your OpenCilk program has a deterministic result.
 
-## Highlights of Work to Be Done
+# Welcome to the test site
 
-This site is incomplete and many things do not yet work.
- - Missing
-    * 99% of the content
-    * Featured list of blog posts (at bottom of home page)
-    * Search
-    * LaTex
-    * Inline images
-    * Analytics
-    * And more!
- - Not yet working
-    * Lots of issues with text styling (e.g. line spacing and bullets)
-    * Featured images
-    * Blog page and sidebar
+Some things are missing:
+ * 99% of the content
+ * Featured list of blog posts (at bottom of home page)
+ * Search
+ * Sidebar styling
+ * LaTex
+ * Inline images
+ * Analytics
+ * Tag pages
+ * And more!
+
+And some things are not yet working:
+ * Lots of issues with text styling (e.g. line spacing and bullets)
+ * Featured images
+ * Blog page
