@@ -1,0 +1,10 @@
+{
+    "layout": "pages",
+    "permalink": "/doc/howto/{{ page.fileSlug }}/", 
+    "eleventyNavigation": {
+        "parent": "How to"
+    },
+    "tags": [
+        "howto"
+    ]
+}

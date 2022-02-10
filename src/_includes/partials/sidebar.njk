@@ -1,0 +1,19 @@
+{% if sidebar != "Blog" %}
+    {% set sidebar = "Documentation" %}
+{% endif %}
+{% set navPages = collections.all | eleventyNavigation(sidebar) %}
+<nav class="flex h-screen sticky top-0 mt-6 w-1/4">
+{% macro renderNavListItem(entry) -%}
+    <li{% if entry.url == page.url %} class="my-active-class"{% endif %}>
+    <a href="{{ entry.url | url }}">{{ entry.title }}</a>
+    {%- if entry.children.length -%}
+    <ul class="list-none ml-2">
+        {%- for child in entry.children %}{{ renderNavListItem(child) }}{% endfor -%}
+    </ul>
+    {%- endif -%}
+    </li>
+{%- endmacro %}
+<ul class="list-none ml-2">
+{%- for entry in navPages %}{{ renderNavListItem(entry) }}{%- endfor -%}
+</ul>
+</nav>

@@ -15,21 +15,54 @@
     {% if prism == true %}
       <link rel="stylesheet" type="text/css" href="/static/css/prism-tomorrow.css">
     {% endif %}
+    <!-- RSS from 11ta-template not yet implemented <link rel="alternate" type="application/atom+xml" title="RSS Feed for {{ meta.siteName }}" href="/feed.xml"/> -->
   </head>
   <body>
-    {% include "./partials/navbar.html" %}
+    <div class="flex flex-col min-h-screen">
+      {% include "./partials/masthead.njk" %}
 
-    {{ content | safe }}
+      {% if images.placement == 'feature' %}
+        <figure class="w-screen {{ images.feature-height or "h-48 md:h-1/3" }}">
+          <img class="object-cover {{ images.align }} w-full h-full" src="{{ images.feature if 'http' in images.feature else "/static/img/" + images.feature }}" alt="{{ title }}">
+        </figure>
+        
+      {% elif images.placement == 'background' %}
+        <div class="bg-fixed bg-no-repeat bg-cover bg-center" style="background-image: url(/static/img/{{ images.background }});">
+          <div class="flex-grow max-w-full">
+            <div class="flex {{ structure.g_pageWidth }}" id="content">
+              <div class="flex-grow w-3/4 max-w-full">
+                <main class="block {{ structure.g_pageWidth }}" id="content">
+                  {% include "partials/hero-text.njk" %}
+                </main>
+              </div>
+            </div>
+          </div>  
+        </div>
 
-    {% include "./partials/footer.html" %}
+      {% endif %}
 
-    <script src="/static/js/alpine.js"></script>
+      <div class="flex-grow max-w-full">
+        <div class="flex {{ structure.g_pageWidth }}" id="content">
+          {% if (sidebar | lower) != "none" %}
+            {% include "partials/sidebar.njk" %}
+          {% endif %}
+          <div class="flex-grow w-3/4 max-w-full">
+            <main class="block" id="content">
+              {{ content | safe }}
+            </main>
+          </div>
+        </div>
+      </div>  
+      
+      {% include "./partials/footer.html" %}
+      
+      <script src="/static/js/alpine.js"></script>
 
-    {% if path == "home" %}
-      <!-- Netlify Identity Widget -->
-      <!-- Needed only if you are using Netlify Identity feature -->
-      <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    {% endif %}
-
+      {% if path == "home" %}
+        <!-- Netlify Identity Widget -->
+        <!-- Needed only if you are using Netlify Identity feature -->
+        <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+      {% endif %}
+    </div>
   </body>
 </html>

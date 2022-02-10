@@ -1,0 +1,12 @@
+---
+layout: default
+prism: true
+---
+
+<div class="container max-w-4xl mt-6  px-6">
+    <article class="prose lg:prose-xl my-4 mx-auto">
+        <h1>{{ title }}</h1>
+        {% include "./partials/tags.njk" %}       
+        {{ layoutContent | safe }}</article>
+
+</div>

@@ -1,0 +1,18 @@
+---
+layout: blog
+sidebar: Blog
+eleventyNavigation:
+  key: Blog
+---
+
+<section class="mt-15">
+    {% set postslist = collections.post %}
+
+    {% include 'partials/postslistcards.njk' %}
+
+    {# ===== Paginate based on "size" frontmatter value above =====  #}
+    {# Don't even include the pagination component if there are fewer posts than needed to paginate  #}
+    {% if postslist.length > pagination.size %}
+        {% include "partials/pagination.njk" %}
+    {% endif %}
+</section>

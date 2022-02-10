@@ -5,7 +5,10 @@ module.exports = {
       center: true,
     },
     extend: {
-      colors: {},
+      colors: {
+        'cilk-pink': '#fc3dc2',
+        'cilk-blue': 'blue-600'
+      },
     },
   },
   variants: {},

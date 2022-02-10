@@ -1,10 +1,14 @@
 ---
 items:
-  - text: Menu One
-    url: "#"
-  - text: Menu Two
-    url: "#"
-  - text: Menu Three
-    url: "#"
-  - text: Blog
-    url: "/blog"
+  - title: Install
+    url: "/doc/howto/install/"
+  - title: Learn
+    url: "/learn/"
+  - title: Blog
+    url: "/blog/"
+  - title: Documentation
+    url: "/doc/"
+  - title: Community
+    url: "/community/"
+  - title: Contribute
+    url: "/contribute/"

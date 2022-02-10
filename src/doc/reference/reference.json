@@ -1,0 +1,7 @@
+{
+    "layout": "pages",
+    "permalink": "/doc/reference/{{ page.fileSlug }}/", 
+    "tags": [
+        "reference"
+    ]
+}

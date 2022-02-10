@@ -9,6 +9,8 @@ tags:
   - left
   - center
   - right
+eleventyNavigation:
+  key: This is my first post
 ---
 # This is a Heading h1
 
