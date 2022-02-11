@@ -4,6 +4,10 @@
 
 /*Your Custom CSS Goes here*/
 
+body {
+  font-family: Ubuntu, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
 h1 {
   @apply text-4xl tracking-tighter mb-3 lg:text-5xl;
 }
