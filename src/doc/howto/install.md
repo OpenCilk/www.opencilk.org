@@ -6,8 +6,8 @@ eleventyNavigation:
   key: Installing OpenCilk
 images:
   placement: feature # options: feature, background
-  feature: flow-760x400.jpg
-  feature-height: h-1/1
+  feature: flow-colorized-1800.jpg
+  featureheight: h-48
 ---
 
 ## Requirements

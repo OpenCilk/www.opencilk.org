@@ -12,7 +12,7 @@ images:
   align: object-center # object-center (default) - other options at https://tailwindcss.com/docs/object-position
 hero:
   title: logo
-  subtitle: The language of performance engineering.
+  subtitle: The language of performance engineering
   links:
     - title: Get started
       url: "/doc/howto/install/"
@@ -33,14 +33,14 @@ pagination:
   alias: posts
 ---
 
-## Writing fast parallel programs is easy with C/C++ and OpenCilk.
+# Writing fast code is easy with C/C++ and OpenCilk.
 
 OpenCilk is an open-source platform that makes parallel programming a simple extension of serial programming.
  - Efficient compiling makes your OpenCilk program faster.
  - Provably efficient scheduling tunes each execution of your OpenCilk program to its host environment.
  - Provable race-detection guarantees that your OpenCilk program has a deterministic result.
 
-# Welcome to the test site
+## Welcome to the test site
 
 Some things are missing:
  * 99% of the content

@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,6 +14,16 @@
     {% endif %}
     {% block head %}{% endblock %}
     <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff00e7">
+    <meta name="msapplication-TileColor" content="#9f00a7">
+    <meta name="theme-color" content="#ffffff">
     {% if prism == true %}
       <link rel="stylesheet" type="text/css" href="/static/css/prism-tomorrow.css">
     {% endif %}
@@ -22,8 +34,8 @@
       {% include "./partials/masthead.njk" %}
 
       {% if images.placement == 'feature' %}
-        <figure class="{{ images.feature-height }}">
-          <img class="object-contain {{ images.feature-height }} {{ images.align }} w-full" src="{{ images.feature if 'http' in images.feature else "/static/img/" + images.feature }}" alt="{{ title }}">
+        <figure class="{{ images.featureheight }}">
+          <img class="object-cover {{ images.featureheight }} {{ images.align }} w-full" src="{{ images.feature if 'http' in images.feature else "/static/img/" + images.feature }}" alt="{{ title }}">
         </figure>
         
       {% elif images.placement == 'background' %}

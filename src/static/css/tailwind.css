@@ -2,16 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/*Your Custom CSS Goes here*/
+/* Your Custom CSS Goes here? OR somehow into Tailwind Typography */
 
-body {
-  font-family: Ubuntu, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+html {
+  font-family: Ubuntu, sans-serif;
 }
 
 h1 {
-  @apply text-4xl tracking-tighter mb-3 lg:text-5xl;
+  @apply text-4xl mb-3 lg:text-5xl;
 }
-
+h2 {
+  @apply text-3xl mb-3 lg:text-4xl;
+}
 h3 {
   @apply text-2xl font-bold mb-3;
 }
