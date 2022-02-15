@@ -3,6 +3,8 @@ layout: pages
 title: 
 path: home
 sidebar: none
+eleventyNavigation:
+  key: home
 images:
   placement: background # options: feature, background
   feature: flow-760x400.jpg
@@ -30,7 +32,6 @@ pagination:
   data: collections.post 
   size: 3
   reverse: true
-  alias: posts
 ---
 
 # Writing fast code is easy with C/C++ and OpenCilk.

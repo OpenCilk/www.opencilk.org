@@ -9,7 +9,7 @@ html {
 }
 
 h1 {
-  @apply text-4xl mb-3 lg:text-5xl;
+  @apply text-4xl mt-6 lg:text-5xl font-bold text-header-blue;
 }
 h2 {
   @apply text-3xl mb-3 lg:text-4xl;

@@ -1,10 +1,10 @@
 ---
-title: Building OpenCilk v1.1 from Source
+title: Build OpenCilk v1.1 from Source
 sidebar: Documentation
 tags: install
 eleventyNavigation:
-  key: Building from Source
-  parent: Installing OpenCilk
+  key: Build from Source
+  parent: Install OpenCilk
 ---
 
 If you want to build from source, our welcome message and build

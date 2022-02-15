@@ -1,18 +1,31 @@
 ---
-layout: blog
+title: Go Multicore
+images:
+  placement:  # options: feature, background
+  background: grey-silk-bg.jpg
+  align: object-center # object-center (default) - other options at https://tailwindcss.com/docs/object-position
+hero:
+  title: Go Multicore
+  subtitle: 
+  links:
+layout: pages
 sidebar: Blog
 eleventyNavigation:
   key: Blog
+  parent: home
+  order: 3
+pagination:
+  data: collections.post
+  size: 12
+  reverse: true
 ---
 
 <section class="mt-15">
-    {% set postslist = collections.post %}
+    {% set postslist = pagination.items %}
 
     {% include 'partials/postslistcards.njk' %}
 
-    {# ===== Paginate based on "size" frontmatter value above =====  #}
-    {# Don't even include the pagination component if there are fewer posts than needed to paginate  #}
-    {% if postslist.length > pagination.size %}
+    {% if collections.post.length > pagination.size %}
         {% include "partials/pagination.njk" %}
     {% endif %}
 </section>

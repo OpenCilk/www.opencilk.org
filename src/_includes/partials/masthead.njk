@@ -1,6 +1,6 @@
-{% set navPages = navigation.items %}
+{% set navPages = collections.all | eleventyNavigation("home") %}
 <nav x-data="{ open: false }" class="{{ colors.navCustom.barBg or colors.navDefault.barBg }} shadow relative">
-  <div class="flex {{ structure.g_pageWidth }} justify-between flex-wrap container">
+  <div class="flex {{ structure.g_pageWidth }} py-2 justify-between flex-wrap container">
     <!--Logo etc-->
     <div class="flex items-center">
       <a href="/">

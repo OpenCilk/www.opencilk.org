@@ -1,13 +1,14 @@
 ---
-title: Installing OpenCilk v1.1
+title: Install OpenCilk v1.1
 tags: install
 sidebar: Documentation
 eleventyNavigation:
-  key: Installing OpenCilk
+  key: Install OpenCilk
+  parent: How to
 images:
-  placement: feature # options: feature, background
+  placement:  # options: feature, background
   feature: flow-colorized-1800.jpg
-  featureheight: h-48
+  featureheight: h-36
 ---
 
 ## Requirements

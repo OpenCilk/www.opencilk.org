@@ -2,6 +2,10 @@
 layout: pages
 sidebar: none
 title: Contribute to OpenCilk
+eleventyNavigation:
+  key: Contribute
+  parent: home
+  order: 6
 ---
 
 The OpenCilk project welcomes your expertise and enthusiasm.

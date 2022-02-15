@@ -2,6 +2,10 @@
 layout: pages
 title: Community
 sidebar: none
+eleventyNavigation:
+  key: Community
+  parent: home
+  order: 5
 ---
 
 OpenCilk is a community-driven open source project developed by a diverse group of contributors. Please read the OpenCilk Code of Conduct for guidance on how to interact with others in a way that makes the community thrive.

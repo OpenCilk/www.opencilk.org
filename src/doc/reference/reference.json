@@ -1,6 +1,9 @@
 {
     "layout": "pages",
     "permalink": "/doc/reference/{{ page.fileSlug }}/", 
+    "eleventyNavigation": {
+        "parent": "Reference"
+    },
     "tags": [
         "reference"
     ]

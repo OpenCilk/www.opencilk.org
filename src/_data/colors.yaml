@@ -22,7 +22,7 @@ navCustom:
   text: 'text-gray-700'
   textActive: 'text-blue-600'
   textHover: 'text-cilk-pink'
-  textActiveBg: 'bg-gray-100'
+  textActiveBg: 'bg-silk-grey'
   textFocus: 'text-gray-500'
   mobileBg: ''
   mobileBgActive: 'bg-gray-700'

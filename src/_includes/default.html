@@ -33,13 +33,22 @@
     <div class="flex flex-col min-h-screen">
       {% include "./partials/masthead.njk" %}
 
+      {% set navPages = collections.all | eleventyNavigationBreadcrumb( eleventyNavigation.key ) %}
+      {% if navPages.length > 0 %}
+      <div class="bg-no-repeat bg-cover bg-center" style="background-image: url(/static/img/grey-silk-bg.jpg );">
+          <div class="my-3 {{ structure.g_pageWidth }}">
+                {% include "partials/breadcrumb.njk" %}
+          </div>
+      </div>
+      {% endif %}
+
       {% if images.placement == 'feature' %}
         <figure class="{{ images.featureheight }}">
           <img class="object-cover {{ images.featureheight }} {{ images.align }} w-full" src="{{ images.feature if 'http' in images.feature else "/static/img/" + images.feature }}" alt="{{ title }}">
         </figure>
-        
+
       {% elif images.placement == 'background' %}
-        <div class="bg-fixed bg-no-repeat bg-cover bg-center" style="background-image: url(/static/img/{{ images.background }});">
+        <div class="bg-fixed bg-no-repeat bg-cover bg-center" style="background-image: url(/static/img/{{ images.background }} );">
           <div class="flex-grow max-w-full">
             <div class="flex {{ structure.g_pageWidth }}" id="content">
               <div class="flex-grow w-3/4 max-w-full">
@@ -54,14 +63,16 @@
       {% endif %}
 
       <div class="flex-grow max-w-full">
-        <div class="flex {{ structure.g_pageWidth }}" id="content">
-          {% if (sidebar | lower) != "none" %}
-            {% include "partials/sidebar.njk" %}
-          {% endif %}
-          <div class="flex-grow w-3/4 max-w-full">
-            <main class="block" id="content">
-              {{ content | safe }}
-            </main>
+        <div>
+          <div class="flex {{ structure.g_pageWidth }}" id="content">
+            {% if (sidebar | lower) != "none" %}
+              {% include "partials/sidebar.njk" %}
+            {% endif %}
+            <div class="flex-grow w-3/4 max-w-full">
+              <main class="block" id="content">
+                {{ content | safe }}
+              </main>
+            </div>
           </div>
         </div>
       </div>  

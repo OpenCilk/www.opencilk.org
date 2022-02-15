@@ -8,7 +8,8 @@ module.exports = {
       colors: {
         'cilk-pink': '#fc3dc2',
         'cilk-blue': 'blue-600',
-        'header-blue': '#001c7b'
+        'header-blue': '#001c7b',
+        'silk-grey': '#eceae9'
       },
     },
   },

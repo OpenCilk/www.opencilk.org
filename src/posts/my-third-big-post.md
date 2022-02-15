@@ -1,6 +1,6 @@
 ---
 title: This is my third post
-description: Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
+excerpt: Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.
 date: 2020-09-03
 author: Surjith S M
 tags:

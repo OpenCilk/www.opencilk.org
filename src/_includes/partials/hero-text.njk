@@ -1,10 +1,10 @@
 {% if hero.title == 'logo' %}
-  <img class="mt-16 mb-8 h-36 mx-auto" src="static/img/open-logo-35c-cilk.png">
+  <img class="mt-12 mb-8 h-36 mx-auto" src="static/img/open-logo-35c-cilk.png">
 {% else %}
-  <h1 class="font-bold bg-clip-text text-transparent bg-gradient-to-tr from-blue-700 to-cilk-pink">{{ hero.title or title }}</h1>
+  <h1 class="text-center">{{ hero.title or title }}</h1>
 {% endif %}
 {% if hero.subtitle %}
-  <p class="mb-16 text-center">{{ hero.subtitle }}</p>
+  <p class="mb-8 text-center">{{ hero.subtitle }}</p>
 {% endif %}
 
 {% if hero.links %}

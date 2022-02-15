@@ -1,6 +1,9 @@
 {
     "layout": "pages",
     "permalink": "/doc/tutorials/{{ page.fileSlug }}/", 
+    "eleventyNavigation": {
+        "parent": "Tutorial"
+    },
     "tags": [
         "tutorial"
     ]
