@@ -1,6 +1,6 @@
 {% set navPages = collections.all | eleventyNavigation("home") %}
-<nav x-data="{ open: false }" class="{{ colors.navCustom.barBg or colors.navDefault.barBg }} shadow relative">
-  <div class="flex {{ structure.g_pageWidth }} py-2 justify-between flex-wrap container">
+<nav x-data="{ open: false }" class="bg-fixed bg-no-repeat bg-cover bg-center" style="background-image: url(/static/img/grey-silk-bg.jpg );"> 
+  <div class="flex {{ structure.g_pageWidth }} py-4 justify-between flex-wrap container">
     <!--Logo etc-->
     <div class="flex items-center">
       <a href="/">
@@ -12,7 +12,7 @@
       {# 11ty Nav Plugin loop  #}
       {% for entry in navPages %}
         <a {% if page.url != entry.url %}href="{{ entry.url | url }}"{% endif %} alt="Link to {{ entry.title }}" 
-            class=" px-3 py-2 font-medium rounded-md items-center {% if page.url == entry.url %} {{ colors.navCustom.textActiveBg or colors.navDefault.textActiveBg }} {{ colors.navCustom.textActive or colors.navDefault.textActive }} {% else %} {{ colors.navCustom.text or colors.navDefault.text }} hover:{{ colors.navCustom.textHover or colors.navDefault.textHover }} {% endif %} focus:outline-none focus:{{ colors.navCustom.textFocus or colors.navDefault.textFocus }} transition duration-150 ease-in-out">
+            class=" px-3 py-2 font-medium rounded-lg items-center {% if page.url == entry.url %} border border-cilk-pink bg-cilk-pink bg-opacity-5 {{ colors.navCustom.textActive or colors.navDefault.textActive }} {% else %} {{ colors.navCustom.text or colors.navDefault.text }} hover:{{ colors.navCustom.textHover or colors.navDefault.textHover }} {% endif %} focus:outline-none focus:{{ colors.navCustom.textFocus or colors.navDefault.textFocus }} transition duration-150 ease-in-out">
           {{ entry.title }}
         </a>
       {% endfor %}

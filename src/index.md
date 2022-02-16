@@ -5,27 +5,22 @@ path: home
 sidebar: none
 eleventyNavigation:
   key: home
-images:
-  placement: background # options: feature, background
-  feature: flow-760x400.jpg
-  feature-height: h-1/3 # optional. Default = h-48 md:h-1/3
-  background: grey-silk-bg.jpg
-  thumb: grey-silk-bg.jpg
-  align: object-center # object-center (default) - other options at https://tailwindcss.com/docs/object-position
 hero:
+  image: grey-silk-bg.jpg
+  height: 
   title: logo
   subtitle: The language of performance engineering
   links:
-    - title: Get started
+    - title: Get started →
       url: "/doc/howto/install/"
       desc: OpenCilk makes it easy to write fast parallel programs.
-    - title: Beyond runtime
+    - title: Beyond runtime →
       url: "/blog/"
       desc: What is performance engineering?
-    - title: In the classroom
+    - title: In the classroom →
       url: "/learn/"
       desc: Teach with OpenCilk.
-    - title: How to
+    - title: How to →
       url: "/doc/"
       desc: Easily translate existing apps to OpenCilk.
 pagination:

@@ -5,10 +5,17 @@ sidebar: Documentation
 eleventyNavigation:
   key: Install OpenCilk
   parent: How to
-images:
-  placement:  # options: feature, background
-  feature: flow-colorized-1800.jpg
-  featureheight: h-36
+hero:
+  image:
+  title: Install OpenCilk
+  subtitle: It's easy
+  links:
+    - title: Get started
+      url: "/doc/howto/install/"
+      desc: OpenCilk makes it easy to write fast parallel programs.
+    - title: Beyond runtime
+      url: "/blog/"
+      desc: What is performance engineering?
 ---
 
 ## Requirements

@@ -24,6 +24,17 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff00e7">
     <meta name="msapplication-TileColor" content="#9f00a7">
     <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js"></script>
+    <script type="text/javascript">
+      algoliasearchNetlify({
+        appId: 'ZXFQTD503J',
+        apiKey: 'e59239027e233dc2c36cf72538857de0',
+        siteId: '5002b68e-552c-4f2d-9943-12777479a01f',
+        branch: 'master',
+        selector: 'div#search',
+      });
+    </script>
     {% if prism == true %}
       <link rel="stylesheet" type="text/css" href="/static/css/prism-tomorrow.css">
     {% endif %}
@@ -34,22 +45,24 @@
       {% include "./partials/masthead.njk" %}
 
       {% set navPages = collections.all | eleventyNavigationBreadcrumb( eleventyNavigation.key ) %}
-      {% if navPages.length > 0 %}
-      <div class="bg-no-repeat bg-cover bg-center" style="background-image: url(/static/img/grey-silk-bg.jpg );">
-          <div class="my-3 {{ structure.g_pageWidth }}">
-                {% include "partials/breadcrumb.njk" %}
+      
+      <div class="bg-fixed bg-no-repeat bg-cover bg-center w-full" style="background-image: url(/static/img/grey-silk-bg.jpg );">
+        <div class="flex flex-wrap {{ structure.g_pageWidth }} py-4 justify-between items-center">
+          <div class="flex">
+            {% if navPages.length > 0 %}
+              {% include "partials/breadcrumb.njk" %}
+            {% endif %}
           </div>
+          <div class="w-64">
+            <div id="search"></div>
+          </div>
+        </div>
       </div>
-      {% endif %}
+      
 
-      {% if images.placement == 'feature' %}
-        <figure class="{{ images.featureheight }}">
-          <img class="object-cover {{ images.featureheight }} {{ images.align }} w-full" src="{{ images.feature if 'http' in images.feature else "/static/img/" + images.feature }}" alt="{{ title }}">
-        </figure>
-
-      {% elif images.placement == 'background' %}
-        <div class="bg-fixed bg-no-repeat bg-cover bg-center" style="background-image: url(/static/img/{{ images.background }} );">
-          <div class="flex-grow max-w-full">
+      {% if hero.image %}
+        <div class="bg-fixed bg-no-repeat bg-cover bg-center {{ hero.height }}" style="background-image: url(/static/img/{{ hero.image }} );">
+          <div class="flex-grow max-w-full {{ hero.height }}">
             <div class="flex {{ structure.g_pageWidth }}" id="content">
               <div class="flex-grow w-3/4 max-w-full">
                 <main class="block {{ structure.g_pageWidth }}" id="content">
