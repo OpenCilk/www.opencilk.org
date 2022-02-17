@@ -11,7 +11,12 @@
 <nav class="h-screen sticky top-0 mt-6 w-1/4">
 <h3 class="ml-4">{{ sideTitle }}</h3>
 {% macro renderNavListItem(entry) -%}
-    <li{% if entry.url == page.url %} class="my-2 {{ colors.navCustom.textActiveBg or colors.navDefault.textActiveBg }} {{ colors.navCustom.textActive or colors.navDefault.textActive }}"{% else %} class="my-2"{% endif %}>
+    <li
+    {% if entry.url == page.url %} 
+        class="p-2 border rounded-lg border-cilk-pink bg-cilk-pink bg-opacity-5 my-2 {{ colors.navCustom.textActive or colors.navDefault.textActive }}"
+    {% else %} 
+        class="my-2 hover:{{ colors.navCustom.textHover or colors.navDefault.textHover }}"
+    {% endif %}>
     <a href="{{ entry.url | url }}">{% if sideBlog == 'true' %}{{ entry.data.title }}{% else %}{{ entry.title }}{% endif %}</a>
     {%- if entry.children.length -%}
     <ul class="list-none ml-4">

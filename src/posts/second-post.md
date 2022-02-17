@@ -3,6 +3,7 @@ title: This is my second post
 excerpt: Bring to the table win-win survival strategies to ensure proactive domination.
 date: 2020-09-02
 author: Surjith S M
+thumbnail: work-span-dag.png
 tags:
   - number-2
 ---

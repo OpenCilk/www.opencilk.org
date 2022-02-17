@@ -2,50 +2,11 @@
 ---
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-      {{title}}
-    </title>
-    {% if description %}
-      <meta name="description" content="{{description}}"/>
-    {% endif %}
-    {% block head %}{% endblock %}
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff00e7">
-    <meta name="msapplication-TileColor" content="#9f00a7">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js"></script>
-    <script type="text/javascript">
-      algoliasearchNetlify({
-        appId: 'ZXFQTD503J',
-        apiKey: 'e59239027e233dc2c36cf72538857de0',
-        siteId: '5002b68e-552c-4f2d-9943-12777479a01f',
-        branch: 'master',
-        selector: 'div#search',
-      });
-    </script>
-    {% if prism == true %}
-      <link rel="stylesheet" type="text/css" href="/static/css/prism-tomorrow.css">
-    {% endif %}
-    <!-- RSS from 11ta-template not yet implemented <link rel="alternate" type="application/atom+xml" title="RSS Feed for {{ meta.siteName }}" href="/feed.xml"/> -->
-  </head>
+  {% include "partials/header.html" %}
   <body>
     <div class="flex flex-col min-h-screen">
       {% include "./partials/masthead.njk" %}
-
       {% set navPages = collections.all | eleventyNavigationBreadcrumb( eleventyNavigation.key ) %}
-      
       <div class="bg-fixed bg-no-repeat bg-cover bg-center w-full" style="background-image: url(/static/img/grey-silk-bg.jpg );">
         <div class="flex flex-wrap {{ structure.g_pageWidth }} py-4 justify-between items-center">
           <div class="flex">
@@ -58,7 +19,6 @@
           </div>
         </div>
       </div>
-      
 
       {% if hero.image %}
         <div class="bg-fixed bg-no-repeat bg-cover bg-center {{ hero.height }}" style="background-image: url(/static/img/{{ hero.image }} );">
@@ -72,20 +32,17 @@
             </div>
           </div>  
         </div>
-
       {% endif %}
 
       <div class="flex-grow max-w-full">
-        <div>
-          <div class="flex {{ structure.g_pageWidth }}" id="content">
-            {% if (sidebar | lower) != "none" %}
-              {% include "partials/sidebar.njk" %}
-            {% endif %}
-            <div class="flex-grow w-3/4 max-w-full">
-              <main class="block" id="content">
-                {{ content | safe }}
-              </main>
-            </div>
+        <div class="flex {{ structure.g_pageWidth }}">
+          {% if (sidebar | lower) != "none" %}
+            {% include "partials/sidebar.njk" %}
+          {% endif %}
+          <div class="flex-grow w-3/4 max-w-full">
+            <main class="block" id="content">
+              {{ content | safe }}
+            </main>
           </div>
         </div>
       </div>  

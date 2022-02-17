@@ -4,13 +4,13 @@
       <div class="grid gap-8 mx-auto mt-12 md:grid-cols-2 lg:max-w-none">
         {% for post in postslist %}
 
-          <div class="flex flex-col overflow-hidden rounded-lg shadow-lg">
+          <div class="flex flex-col p-4 border border-grey-200 overflow-hidden rounded-lg shadow-lg hover:border-cilk-pink hover:bg-cilk-pink hover:bg-opacity-5">
             <div class="flex-shrink-0">
-              <a href="{{ post.url | url }}">
-                <img class="object-cover {{ post.data.images.align }} w-full h-48" src={% if post.data.images.thumb %}"/static/img/{{ post.data.images.thumb }}"{% else %}"/static/img/david-kovalenko-G85VuTpw6jg-unsplash.jpg"{% endif %} alt="{{ title }} Thumbnail">
+              <a class="flex place-content-center" href="{{ post.url | url }}">
+                <img class="{{ post.data.images.align }} h-20" src={% if post.data.thumbnail %}"/static/img/{{ post.data.thumbnail }}"{% else %}"/static/img/trace-dag.png"{% endif %} alt="{{ title }} Thumbnail">
               </a>
             </div>
-            <div class="flex flex-col justify-between flex-1 p-6 bg-white">
+            <div class="flex flex-col justify-between flex-1">
               <div class="flex-1">
                 <a href="{{ post.url | url }}" class="block">
                   <h3 class="mt-2 text-xl font-semibold leading-7 {{ colors.headingsCustom or colors.headingsDefault }}">
@@ -35,12 +35,12 @@
                 {% endif %}
               </div> #}
 
-              {% if structure.g_showAuthors %}
-                {% if post.data.author %}
-                  <p class="mt-2 text-sm">{{ post.date | readableDate }}</p>
-                  <p class="text-sm">By {{ post.data.author }}</p>
-                {% endif %}
-              {% endif %}
+            
+                <div class="mt-2 flex flex-wrap justify-between">
+                  <div class="flex text-sm">By {{ post.data.author }}</div>
+                  <div class="flex text-sm">{{ post.date | readableDate }}</div>
+                </div>
+              
 
             </div>
           </div>

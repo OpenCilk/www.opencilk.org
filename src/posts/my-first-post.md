@@ -4,6 +4,7 @@ excerpt: Capitalize on low hanging fruit to identify a ballpark value added
   activity to beta test.
 author: Bruce Hoppe
 date: 2020-09-01
+thumbnail: views-of-stack.png
 tags:
   - left
   - center

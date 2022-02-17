@@ -1,14 +1,10 @@
 ---
 title: This is my fourth & latest post
-excerpt: Bring to the table win-win survival strategies to ensure proactive
-  domination. At the end of the day, going forward.
+excerpt: Bring to the table win-win survival
 date: 2020-09-23T15:13:13.021Z
 author: Bruce Hoppe
 tags: second-tag
-images: # relative to /src/static/img/
-  feature:
-  thumb: logo-6.png
-  slide:
+thumbnail: super-mario.png # relative to /src/static/img/
 ---
 
 Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
