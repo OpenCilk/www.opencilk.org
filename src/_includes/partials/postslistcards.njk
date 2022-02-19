@@ -4,7 +4,7 @@
       <div class="grid gap-8 mx-auto mt-12 md:grid-cols-2 lg:max-w-none">
         {% for post in postslist %}
 
-          <div class="flex flex-col p-4 border border-grey-200 overflow-hidden rounded-lg shadow-lg hover:border-cilk-pink hover:bg-cilk-pink hover:bg-opacity-5">
+          <div class="flex flex-col p-4 border border-grey-600 overflow-hidden rounded-lg shadow-lg hover:border-cilk-pink hover:bg-cilk-pink hover:bg-opacity-5">
             <div class="flex-shrink-0">
               <a class="flex place-content-center" href="{{ post.url | url }}">
                 <img class="{{ post.data.images.align }} h-20" src={% if post.data.thumbnail %}"/static/img/{{ post.data.thumbnail }}"{% else %}"/static/img/trace-dag.png"{% endif %} alt="{{ title }} Thumbnail">
@@ -13,13 +13,13 @@
             <div class="flex flex-col justify-between flex-1">
               <div class="flex-1">
                 <a href="{{ post.url | url }}" class="block">
-                  <h3 class="mt-2 text-xl font-semibold leading-7 {{ colors.headingsCustom or colors.headingsDefault }}">
+                  <h3 class="mt-2 text-xl font-semibold leading-7 {{ colors.headingsDefault }}">
                     {{ post.data.title }}
                   </h3>
 
                   {# Display Post Excerpt if set 'true' in /src/_data/structure.js:g_showExcerpt  #}
                   {% if structure.g_showExcerpt %}
-                    <div class="{{ colors.excerptCustom or colors.excerptDefault }}">
+                    <div class="{{ colors.excerptDefault }}">
                       {{ post.data.excerpt }}
                     </div>
                   {% endif %}
@@ -27,20 +27,13 @@
                 </a>
               </div>
 
-              {# Found the TagPills are too much for this layout. Uncomment them below if you want to display them. #}
-              {# <div class="flex-1 bg-gray-100">
-                {% if structure.g_showTagPills %}
-                  {% set tags = post.data.tags %}
-                  {% include "partials/tags.njk" %}
-                {% endif %}
-              </div> #}
-
+              <div class="mt-2 flex flex-wrap justify-between">
+                <div class="flex text-sm">By {{ post.data.author }}</div>
+                <div class="flex text-sm">{{ post.date | readableDate }}</div>
+              </div>
             
-                <div class="mt-2 flex flex-wrap justify-between">
-                  <div class="flex text-sm">By {{ post.data.author }}</div>
-                  <div class="flex text-sm">{{ post.date | readableDate }}</div>
-                </div>
-              
+              {% set tags = post.data.tags %}
+              {% include "partials/tags.njk" %}
 
             </div>
           </div>

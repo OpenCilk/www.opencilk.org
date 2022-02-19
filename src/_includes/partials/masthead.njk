@@ -12,7 +12,7 @@
       {# 11ty Nav Plugin loop  #}
       {% for entry in navPages %}
         <a {% if page.url != entry.url %}href="{{ entry.url | url }}"{% endif %} alt="Link to {{ entry.title }}" 
-            class=" px-3 py-2 font-medium rounded-lg items-center {% if page.url == entry.url %} border border-cilk-pink bg-cilk-pink bg-opacity-5 {{ colors.navCustom.textActive or colors.navDefault.textActive }} {% else %} {{ colors.navCustom.text or colors.navDefault.text }} hover:{{ colors.navCustom.textHover or colors.navDefault.textHover }} {% endif %} focus:outline-none focus:{{ colors.navCustom.textFocus or colors.navDefault.textFocus }} transition duration-150 ease-in-out">
+            class=" px-3 py-2 font-medium rounded-lg items-center {% if page.url == entry.url %} border border-cilk-pink bg-cilk-pink bg-opacity-5 {{ colors.navDefault.textActive }} {% else %} {{ colors.navDefault.text }} hover:{{ colors.navDefault.textHover }} {% endif %} focus:outline-none focus:{{ colors.navDefault.textFocus }} transition duration-150 ease-in-out">
           {{ entry.title }}
         </a>
       {% endfor %}
@@ -23,7 +23,7 @@
     {# MOBILE MENU  #}
     <div class="flex items-center -mr-2 sm:hidden">
       {# Mobile menu button #}
-      <button @click="open = !open" class="inline-flex items-center justify-center p-2 {{ colors.navCustom.mobileButton or colors.navDefault.mobileButton }} transition duration-150 ease-in-out rounded-md hover:{{ colors.navCustom.mobileButton or colors.navDefault.mobileButton }} hover:{{ colors.navCustom.mobileButtonBgover or colors.navDefault.mobileButtonBgHover }} focus:outline-none focus:{{ colors.navCustom.mobileButton or colors.navDefault.mobileButton }} focus:{{ colors.navCustom.mobileButton or colors.navDefault.mobileButton }}" x-bind:aria-label="open ? 'Close main menu' : 'Main menu'" aria-label="Main menu" x-bind:aria-expanded="open">
+      <button @click="open = !open" class="inline-flex items-center justify-center p-2 {{ colors.navDefault.mobileButton }} transition duration-150 ease-in-out rounded-md hover:{{ colors.navDefault.mobileButton }} hover:{{ colors.navDefault.mobileButtonBgHover }} focus:outline-none focus:{{ colors.navDefault.mobileButton }} focus:{{ colors.navDefault.mobileButton }}" x-bind:aria-label="open ? 'Close main menu' : 'Main menu'" aria-label="Main menu" x-bind:aria-expanded="open">
         {# Icon when menu is closed.  #}
         <svg x-state:on="Menu open" x-state:off="Menu closed" :class="{ 'hidden': open, 'block': !open }" class="block w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -40,7 +40,7 @@
     <div class="pt-2 pb-3">
       {# 11ty Nav Plugin loop  #}
       {% for entry in navPages %}
-        <a {% if page.url != entry.url %}href="{{ entry.url | url }}"{% endif %} alt="Link to {{ entry.title }}" class="block pl-4 pr-4 py-2 {% if page.url == entry.url %}{{ colors.navCustom.mobileBgActive or colors.navDefault.mobileBgActive }} {{ colors.navCustom.mobileTextActive or colors.navDefault.mobileTextActive }}{% else %}{{ colors.navCustom.mobileBg or colors.navDefault.mobileBg }} hover:{{ colors.navCustom.mobileTextHover or colors.navDefault.mobileTextHover }} hover:{{ colors.navCustom.mobileBgHover or colors.navDefault.mobileBgHover }}  {% endif %} text-base font-medium  {{ colors.navCustom.mobileText or colors.navDefault.mobileText }}  focus:outline-none focus:{{ colors.navCustom.mobileTextFocus or colors.navDefault.mobileTextFocus }} focus:{{ colors.navCustom.mobileBgFocus or colors.navDefault.mobileBgFocus }} transition duration-150 ease-in-out">
+        <a {% if page.url != entry.url %}href="{{ entry.url | url }}"{% endif %} alt="Link to {{ entry.title }}" class="block pl-4 pr-4 py-2 {% if page.url == entry.url %}{{ colors.navDefault.mobileBgActive }} {{ colors.navDefault.mobileTextActive }}{% else %}{{ colors.navDefault.mobileBg }} hover:{{ colors.navDefault.mobileTextHover }} hover:{{ colors.navDefault.mobileBgHover }}  {% endif %} text-base font-medium  {{ colors.navDefault.mobileText }}  focus:outline-none focus:{{ colors.navDefault.mobileTextFocus }} focus:{{ colors.navDefault.mobileBgFocus }} transition duration-150 ease-in-out">
           {{ entry.title }}
         </a>
       {% endfor %}

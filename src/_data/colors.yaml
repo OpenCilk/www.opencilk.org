@@ -1,23 +1,5 @@
 siteTextDefault: 'text-blue-800'
 navDefault:
-  barBg: 'bg-white'
-  text: 'text-gray-700'
-  textActive: 'text-cilk-blue'
-  textHover: 'text-cilk-pink'
-  textActiveBg: 'bg-pink-200'
-  textFocus: 'text-teal-500'
-  mobileBg: ''
-  mobileBgActive: 'bg-teal-700'
-  mobileBgHover: 'bg-teal-100'
-  mobileBgFocus: 'bg-teal-300'
-  mobileText: 'text-teal-500'
-  mobileTextActive: 'text-teal-300'
-  mobileTextHover: 'text-teal-600'
-  mobileTextFocus: 'text-teal-700'
-  mobileButton: 'text-teal-500'
-  mobileButtonHover: 'text-teal-600'
-  mobileButtonBgHover: 'bg-teal-100'
-navCustom:
   barBg: ''
   text: 'text-gray-700'
   textActive: 'text-blue-600'
@@ -36,27 +18,16 @@ navCustom:
   mobileButtonHover: 'text-gray-600'
   mobileButtonBgHover: 'bg-gray-100'
 logoDefault:
-  desktop: 'text-teal-500'
-  mobile: 'text-teal-500'
-  hover: 'text-teal-600'
-logoCustom: 
   desktop: 'text-gray-700'
   mobile: 'text-gray-700'
   hover: 'text-gray-800'
-headingsDefault: 'text-teal-500'
-headingsCustom: 'text-gray-700'
-excerptDefault: 'text-gray-700'
-excerptCustom: 'text-sm leading-relaxed italic text-gray-700'
+headingsDefault: 'text-header-blue'
+excerptDefault: 'text-sm leading-relaxed italic text-gray-700'
 authorDefault: 
   name: 'text-gray-700'
   date: 'text-gray-700'
   socialIcons: 'text-gray-500'
   socialIconsHover: 'text-gray-600'
-authorCustom: 
-  name: ''
-  date: ''
-  socialIcons: ''
-  socialIconsHover: ''
 socialShareDefault:
   color: 'text-gray-700'
   hover: 'text-gray-800'
@@ -69,12 +40,6 @@ buttonDefault:
   bg: 'bg-teal-700'
   bgHover: 'bg-teal-700'
   border: 'border-teal-900'
-buttonCustom: 
-  text: ''
-  textHover: ''
-  bg: ''
-  bgHover: ''
-  border: ''
 paginateDefault: 
   blockBg: ''
   blockBorder: 'border-gray-200'
@@ -86,25 +51,9 @@ paginateDefault:
   linkBgHover: 'bg-gray-200'
   linkBorder: 'border-gray-300'
   linkFocusBorder: 'border-blue-300'
-paginateCustom:
-  blockBg: ''
-  blockBorder: ''
-  linkText: ''
-  linkTextActive: ''
-  linkTextHover: ''
-  linkBg: ''
-  linkBgActive: ''
-  linkBgHover: ''
-  linkBorder: ''
-  linkFocusBorder: ''
 prevNextDefault: 
   text: 'text-gray-700'
   textHover: 'text-gray-800'
-  bg: ''
-  bgHover: ''
-prevNextCustom: 
-  text: ''
-  textHover: ''
   bg: ''
   bgHover: ''
 tagPillDefault: 
@@ -112,15 +61,7 @@ tagPillDefault:
   textHover: 'text-gray-800'
   bg: 'bg-gray-200'
   bgHover: 'bg-gray-300'
-tagPillCustom: 
-  text: ''
-  textHover: ''
-  bg: ''
-  bgHover: ''
 footerDefault: 
-  barBg: 'bg-white'
-  text: 'text-teal-500'
-footerCustom: 
   barBg: 'bg-gray-900'
   text: 'text-gray-100'
 socialIconsDefault: 'text-teal-400'
@@ -130,6 +71,3 @@ socialIconsHoverCustom: 'text-gray-200'
 borderDefault: 
   borders: 'border-b'
   color: 'border-gray-300'
-borderCustom: 
-  border: ''
-  color: ''

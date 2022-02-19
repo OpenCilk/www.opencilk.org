@@ -1,4 +1,4 @@
-<ul class="ml-3 text-sm {{ colors.navCustom.textActive or colors.navDefault.textActive }} inline list-none">
+<ul class="ml-3 text-sm {{ colors.navDefault.textActive }} inline list-none">
 {%- for entry in navPages %}
     <li class="inline mx-1">
         <a href="{{ entry.url | url }}">{{ entry.title | title }}</a> >

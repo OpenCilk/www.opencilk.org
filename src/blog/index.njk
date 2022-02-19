@@ -25,6 +25,11 @@ pagination:
 
     {% include 'partials/postslistcards.njk' %}
 
+    {% for tag in collections.tagList %}
+      {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
+      <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
+    {% endfor %}
+
     {% if collections.post.length > pagination.size %}
         {% include "partials/pagination.njk" %}
     {% endif %}

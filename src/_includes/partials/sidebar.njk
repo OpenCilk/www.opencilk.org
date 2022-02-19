@@ -1,10 +1,10 @@
 {% if (sidebar | lower) == "blog" %}
     {% set sideBlog = 'true' %}
-    {% set sideTitle = "Blog Archive" %}
+    {% set sideTitle = "Archive" %}
     {% set navPages = collections.post | reverse %}
 {% else %}
     {% set sideBlog = 'false' %}
-    {% set sideTitle = "Documentation" %}
+    {% set sideTitle = "Contents" %}
     {% set navPages = collections.all | eleventyNavigation("Documentation") %}    
 {% endif %}
 
@@ -13,9 +13,9 @@
 {% macro renderNavListItem(entry) -%}
     <li
     {% if entry.url == page.url %} 
-        class="p-2 border rounded-lg border-cilk-pink bg-cilk-pink bg-opacity-5 my-2 {{ colors.navCustom.textActive or colors.navDefault.textActive }}"
+        class="p-2 border rounded-lg border-cilk-pink bg-cilk-pink bg-opacity-5 my-2 {{ colors.navDefault.textActive }}"
     {% else %} 
-        class="my-2 hover:{{ colors.navCustom.textHover or colors.navDefault.textHover }}"
+        class="my-2 hover:{{ colors.navDefault.textHover }}"
     {% endif %}>
     <a href="{{ entry.url | url }}">{% if sideBlog == 'true' %}{{ entry.data.title }}{% else %}{{ entry.title }}{% endif %}</a>
     {%- if entry.children.length -%}

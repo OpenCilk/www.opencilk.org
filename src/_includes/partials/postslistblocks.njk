@@ -8,12 +8,12 @@
             <div class="flex flex-col justify-between flex-1 p-6 bg-white">
               <div class="flex-1">
                 <a href="{{ post.url | url }}" class="block">
-                  <h3 class="mt-2 text-xl font-semibold leading-7 {{ colors.headingsCustom or colors.headingsDefault }}">
+                  <h3 class="mt-2 text-xl font-semibold leading-7 {{ colors.headingsDefault }}">
                     {{ post.data.title }}
                   </h3>
                   {# Display Post Excerpt if set 'true' in /src/_data/structure.js:g_showExcerpt  #}
                   {% if structure.g_showExcerpt %}
-                    <div class="{{ colors.excerptCustom or colors.excerptDefault }}">
+                    <div class="{{ colors.excerptDefault }}">
                       {{ post.data.excerpt }}
                     </div>
                   {% endif %}
