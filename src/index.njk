@@ -1,6 +1,6 @@
 ---
 layout: pages
-title: 
+title: Writing fast code is easy with C/C++ and OpenCilk.
 path: home
 sidebar: none
 eleventyNavigation:
@@ -10,8 +10,9 @@ hero:
   height: 
   title: logo
   subtitle: The language of performance engineering
+  linkStyle: h3
   links:
-    - title: Get started →
+    - title: Install →
       url: "/doc/howto/install/"
       desc: OpenCilk makes it easy to write fast parallel programs.
     - title: Beyond runtime →
@@ -29,14 +30,19 @@ pagination:
   reverse: true
 ---
 
-# Writing fast code is easy with C/C++ and OpenCilk.
+<p>OpenCilk is an open-source platform that makes parallel programming a simple extension of serial programming.</p>
+<ul>
+  <li>Efficient compiling makes your OpenCilk program faster.</li>
+  <li>Provably efficient scheduling tunes each execution of your OpenCilk program to its host environment.</li>
+  <li>Provable race-detection guarantees that your OpenCilk program has a deterministic result.</li>
+ </ul>
 
-OpenCilk is an open-source platform that makes parallel programming a simple extension of serial programming.
- - Efficient compiling makes your OpenCilk program faster.
- - Provably efficient scheduling tunes each execution of your OpenCilk program to its host environment.
- - Provable race-detection guarantees that your OpenCilk program has a deterministic result.
+<h2>Featured news from <a href="/blog/">our blog</a>:</h2>
 
-## Welcome to the test site
+{% set postslist = collections.post | head(-2) %}
+{% include "partials/postslistcards.njk" %}
+
+<h2>Other stuff</h2>
 
 Some things are missing:
  * 99% of the content

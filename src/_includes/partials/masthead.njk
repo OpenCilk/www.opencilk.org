@@ -1,5 +1,6 @@
 {% set navPages = collections.all | eleventyNavigation("home") %}
-<nav x-data="{ open: false }" class="bg-fixed bg-no-repeat bg-cover bg-center" style="background-image: url(/static/img/grey-silk-bg.jpg );"> 
+<nav x-data="{ open: false }" class="fixed top-0 inset-x-0 z-50">
+<div class="bg-fixed bg-no-repeat bg-cover bg-center" style="background-image: url(/static/img/grey-silk-bg.jpg );"> 
   <div class="flex {{ structure.g_pageWidth }} py-4 justify-between flex-wrap container">
     <!--Logo etc-->
     <div class="flex items-center">
@@ -47,4 +48,5 @@
 
     </div>
   </div>
+</div>
 </nav>

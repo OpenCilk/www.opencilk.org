@@ -3,8 +3,7 @@ title: Install OpenCilk v1.1
 tags: install
 sidebar: Documentation
 eleventyNavigation:
-  key: Install OpenCilk
-  parent: How to
+  order: 1
 hero:
   image:
   title: Install OpenCilk

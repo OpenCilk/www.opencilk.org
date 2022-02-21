@@ -2,7 +2,7 @@
     "layout": "pages",
     "permalink": "/doc/howto/{{ page.fileSlug }}/", 
     "eleventyNavigation": {
-        "parent": "How to"
+        "parent": "User's guide"
     },
     "tags": [
         "howto"

@@ -2,7 +2,7 @@
     "layout": "pages",
     "permalink": "/doc/tutorials/{{ page.fileSlug }}/", 
     "eleventyNavigation": {
-        "parent": "Tutorial"
+        "parent": "Tutorials"
     },
     "tags": [
         "tutorial"

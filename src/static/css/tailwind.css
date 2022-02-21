@@ -9,15 +9,17 @@ html {
 }
 
 h1 {
-  @apply text-4xl mt-6 lg:text-5xl font-bold text-header-blue;
+  @apply text-3xl mt-6 lg:text-4xl font-bold text-header-blue;
 }
 h2 {
-  @apply text-3xl mb-3 lg:text-4xl;
+  @apply text-2xl mb-3 font-bold lg:text-3xl;
 }
 h3 {
-  @apply text-2xl font-bold mb-3;
+  @apply text-xl font-bold lg:text-2xl mb-3;
 }
-
+h4 {
+  @apply text-xl font-bold mb-3;
+}
 /* Syntax Highlighting*/
 
 body :not(pre) > code[class*="language-"],

@@ -1,9 +1,10 @@
 ---
-title: Tutorial
+title: Tutorials
 eleventyNavigation:
-  key: Tutorial
+  key: Tutorials
   parent: Documentation
   order: 1
+permalink: /doc/tutorials/
 ---
 
 ## Tutorial homepage

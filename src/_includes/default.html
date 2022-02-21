@@ -7,8 +7,8 @@
     <div class="flex flex-col min-h-screen">
       {% include "./partials/masthead.njk" %}
       {% set navPages = collections.all | eleventyNavigationBreadcrumb( eleventyNavigation.key ) %}
-      <div class="bg-fixed bg-no-repeat bg-cover bg-center w-full" style="background-image: url(/static/img/grey-silk-bg.jpg );">
-        <div class="flex flex-wrap {{ structure.g_pageWidth }} py-4 justify-between items-center">
+      <div class="container pt-20 bg-fixed bg-no-repeat bg-cover bg-center w-full" style="background-image: url(/static/img/grey-silk-bg.jpg );">
+        <div class="flex flex-wrap py-4 {{ structure.g_pageWidth }} justify-between items-center">
           <div class="flex">
             {% if navPages.length > 0 %}
               {% include "partials/breadcrumb.njk" %}
@@ -23,9 +23,9 @@
       {% if hero.image %}
         <div class="bg-fixed bg-no-repeat bg-cover bg-center {{ hero.height }}" style="background-image: url(/static/img/{{ hero.image }} );">
           <div class="flex-grow max-w-full {{ hero.height }}">
-            <div class="flex {{ structure.g_pageWidth }}" id="content">
+            <div class="flex " id="content">
               <div class="flex-grow w-3/4 max-w-full">
-                <main class="block {{ structure.g_pageWidth }}" id="content">
+                <main class="block " id="content">
                   {% include "partials/hero-text.njk" %}
                 </main>
               </div>

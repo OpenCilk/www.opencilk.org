@@ -2,6 +2,8 @@
 title: Build OpenCilk from Source
 sidebar: Documentation
 tags: install
+eleventyNavigation:
+  parent: Install OpenCilk v1.1
 ---
 
 If you want to build from source, our welcome message and build

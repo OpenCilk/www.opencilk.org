@@ -1,9 +1,10 @@
 ---
-title: How to
+title: User's guide
 eleventyNavigation:
-  key: How to
+  key: User's guide
   parent: Documentation
   order: 2
+permalink: /doc/howto/
 ---
 
-## How to homepage
+## Key tasks and how to do them
