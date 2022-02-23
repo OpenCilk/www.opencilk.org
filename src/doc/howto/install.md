@@ -1,6 +1,7 @@
 ---
 title: Install OpenCilk v1.1
 tags: install
+excerpt: It's as easy as one, two three.
 sidebar: Documentation
 eleventyNavigation:
   order: 1

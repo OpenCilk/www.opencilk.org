@@ -1,5 +1,5 @@
-{% if hero.title == 'logo' %}
-  <img class="mt-2 mb-4 h-20 md:h-24 lg:h-28 mx-auto" src="static/img/open-logo-35c-cilk.png">
+{% if hero.titleImage %}
+  <img class="mt-2 mb-4 {{ hero.titleImageSize }} mx-auto" src="/static/img/{{ hero.titleImage }}">
 {% else %}
   <h1 class="mt-8 mb-4 text-center">{{ hero.title }}</h1>
 {% endif %}
@@ -8,13 +8,13 @@
 {% endif %}
 
 {% if hero.links %}
-  <div class="items-center justify-center mx-auto w-full  max-w-2xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-8 px-4">
+  <div class="items-center justify-center mx-auto {{ hero.linkGrid or 'max-w-xl md:max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4' }} my-8 px-4">
     {% for item in hero.links %}
         <a href="{{item.url}}" class="p-5 h-full border bg-indigo-500 bg-opacity-5 hover:bg-cilk-pink hover:bg-opacity-5 rounded-xl border-indigo-500 hover:border-cilk-pink">
             <{{ hero.linkStyle or 'h3'}} class="text-header-blue">
               {{item.title}}
             </{{ hero.linkStyle or 'h3'}}>
-            <p>{{item.desc}}</p>
+            <p class="{{ hero.descStyle }}">{{item.desc}}</p>
         </a>
     {% endfor %}
   </div>

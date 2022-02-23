@@ -7,7 +7,7 @@
     <div class="flex flex-col min-h-screen">
       {% include "./partials/masthead.njk" %}
       {% set navPages = collections.all | eleventyNavigationBreadcrumb( eleventyNavigation.key ) %}
-      <div class="container pt-20 bg-fixed bg-no-repeat bg-cover bg-center w-full" style="background-image: url(/static/img/grey-silk-bg.jpg );">
+      <div class="static mt-16 bg-fixed bg-no-repeat bg-cover bg-center w-full" style="background-image: url(/static/img/grey-silk-bg.jpg );">
         <div class="flex flex-wrap py-4 {{ structure.g_pageWidth }} justify-between items-center">
           <div class="flex">
             {% if navPages.length > 0 %}

@@ -1,15 +1,28 @@
 ---
-title: This is my fourth & latest post
-excerpt: Bring to the table win-win survival
-date: 2020-09-23T15:13:13.021Z
-author: Bruce Hoppe
-tags: second-tag
+title: Announcing the release of OpenCilk v1.1
+excerpt: The latest release features x and y.
+date: 2021-10-22
+author: TB Schardl
+tags: 
+ - news
+ - release
 thumbnail: super-mario.png # relative to /src/static/img/
 ---
 
-Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
+The latest release of OpenCilk includes numerous features and fixes.
+Go to [Install](/doc/howto/install/) to download the right package for your system.
 
-Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.
+## Features
+- Vanilla and chocolate parse semantics
+- Deterministic multi-headed hydras
+
+## Fixes
+- No more pesky link-time errors
+- If you get too frustrated, n-queens lets you win
+
+## Lorem Ips
+
+Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
 
 ## Section Header
 
