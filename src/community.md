@@ -6,6 +6,11 @@ eleventyNavigation:
   key: Community
   parent: home
   order: 5
+hero:
+  image: flow-colorized-1800.jpg
+  position: bg-norepeat bg-center
+  height: h-20
+  title: 
 ---
 
 OpenCilk is a community-driven open source project developed by a diverse group of contributors. Please read the OpenCilk Code of Conduct for guidance on how to interact with others in a way that makes the community thrive.
