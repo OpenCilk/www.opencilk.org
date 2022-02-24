@@ -1,7 +1,11 @@
 ---
 title: What the $#@! is Parallelism, Anyhow?
-date: 2008-05-27
+excerpt: An introduction to the OpenCilk runtime system.
+date: 2022-01-27
 author: Charles Leiserson
+tags:
+ - featured
+ - parallelism
 ---
 
 I’m constantly amazed how many seemingly well-educated computer technologists bandy about the word parallelism without really knowing what they’re talking about. I can’t tell you how many articles and books I’ve read on parallel computing that use the term over and over without ever defining it. Many of these “authoritative” sources cite Amdahl’s Law (1), originally proffered by Gene Amdahl in 1967, but they seem blissfully unaware of the more general and precise quantification of parallelism provided by theoretical computer science. Since the theory really isn’t all that hard, it curious that it isn’t better known. Maybe it needs a better name — “Law” sounds so authoritative. In this blog, I’ll give a brief introduction to this theory, which incidentally provides a foundation for the efficiency of the Cilk++ runtime system.

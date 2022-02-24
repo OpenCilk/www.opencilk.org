@@ -7,7 +7,7 @@ eleventyNavigation:
   parent: home
   order: 5
 hero:
-  image: flow-colorized-1800.jpg
+  image: 
   position: bg-norepeat bg-center
   height: h-20
   title: 

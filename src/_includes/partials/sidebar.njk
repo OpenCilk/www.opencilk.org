@@ -8,16 +8,17 @@
     {% set navPages = collections.all | eleventyNavigation("Documentation") %}    
 {% endif %}
 
-<nav class="h-screen sticky top-0 mt-6 w-1/4">
+<nav class="h-screen sticky top-0 mt-6 w-auto pr-8 border-r">
 <h3 class="ml-4">{{ sideTitle }}</h3>
 {% macro renderNavListItem(entry) -%}
-    <li
+    <li class="my-2">
+    <a
     {% if entry.url == page.url %} 
-        class="p-2 border rounded-lg border-cilk-pink bg-cilk-pink bg-opacity-5 my-2 {{ colors.navDefault.textActive }}"
+        class="py-2 rounded-lg bg-cilk-pink bg-opacity-5 {{ colors.navDefault.textActive }}"
     {% else %} 
-        class="my-2 hover:{{ colors.navDefault.textHover }}"
-    {% endif %}>
-    <a href="{{ entry.url | url }}">{% if sideBlog == 'true' %}{{ entry.data.title }}{% else %}{{ entry.title }}{% endif %}</a>
+        class="hover:{{ colors.navDefault.textHover }}"
+    {% endif %}
+    href="{{ entry.url | url }}">{% if sideBlog == 'true' %}{{ entry.data.title }}{% else %}{{ entry.title }}{% endif %}</a>
     {%- if entry.children.length -%}
     <ul class="list-none ml-4">
         {%- for child in entry.children %}{{ renderNavListItem(child) }}{% endfor -%}

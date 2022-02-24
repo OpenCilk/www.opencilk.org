@@ -1,7 +1,6 @@
 ---
-mastheadLogoUrl: /logob
 layout: pages
-title: Writing fast code is easy with C/C++ and OpenCilk.
+title: Write fast code with C/C++ and OpenCilk.
 path: home
 sidebar: none
 eleventyNavigation:
@@ -9,14 +8,14 @@ eleventyNavigation:
 hero:
   image: grey-silk-bg.jpg
   height: 
-  titleImage: open-cilk-logo-a.png
-  titleImageSize: h-20 md:h-24 lg:h-28
+  titleImage: OpenCilkLogo-Web-1000.png
+  titleImageSize: h-12 md:h-16 lg:h-20
   subtitle: The language of performance engineering
   linkStyle: h3
   links:
     - title: Install →
       url: "/doc/howto/install/"
-      desc: OpenCilk makes it easy to write fast parallel programs.
+      desc: Write fast code with OpenCilk.
     - title: Beyond runtime →
       url: "/blog/"
       desc: What is performance engineering?
@@ -25,7 +24,7 @@ hero:
       desc: Teach with OpenCilk.
     - title: How to →
       url: "/doc/"
-      desc: Easily translate existing apps to OpenCilk.
+      desc: Translate existing apps to OpenCilk.
 pagination:
   data: collections.post 
   size: 3
@@ -39,25 +38,7 @@ pagination:
   <li>Provable race-detection guarantees that your OpenCilk program has a deterministic result.</li>
  </ul>
 
-<h2>Featured news from <a href="/blog/">our blog</a>:</h2>
+<h2>Featured posts from <a href="/blog/">our blog</a>:</h2>
 
-{% set postslist = collections.post | head(-2) %}
+{% set postslist = collections['featured'] %}
 {% include "partials/postslistcards.njk" %}
-
-<h2>Other stuff</h2>
-
-Some things are missing:
- * 99% of the content
- * Featured list of blog posts (at bottom of home page)
- * Search
- * Sidebar styling
- * LaTex
- * Inline images
- * Analytics
- * Tag pages
- * And more!
-
-And some things are not yet working:
- * Lots of issues with text styling (e.g. line spacing and bullets)
- * Featured images
- * Blog page

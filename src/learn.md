@@ -6,7 +6,7 @@ eleventyNavigation:
   parent: home
   order: 2
 hero:
-  image: grey-silk-bg.jpg
+  image: 
   height: 
   title: 
   linkStyle: h5

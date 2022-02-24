@@ -1,10 +1,10 @@
 <ul class="ml-3 text-sm {{ colors.navDefault.textActive }} inline list-none">
 {%- for entry in navPages %}
     <li class="inline mx-1">
-        <a href="{{ entry.url | url }}">{{ entry.title | title }}</a> >
+        <a href="{{ entry.url | url }}">{{ entry.title }}</a> >
     </li>
 {%- endfor %}
 <li class="inline mx-1">
-    <a href="{{ page.url | url }}">{{ title | title }}</a>
+    <a href="{{ page.url | url }}">{{ title }}</a>
 </li>
 </ul>

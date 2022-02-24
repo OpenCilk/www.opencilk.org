@@ -4,6 +4,7 @@ excerpt: The latest release features x and y.
 date: 2021-10-22
 author: TB Schardl
 tags: 
+ - featured
  - news
  - release
 thumbnail: super-mario.png # relative to /src/static/img/

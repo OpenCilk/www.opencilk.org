@@ -1,21 +1,14 @@
 ---
 title: Install OpenCilk v1.1
 tags: install
-excerpt: It's as easy as one, two three.
+excerpt: It's as easy as one, two, three.
 sidebar: Documentation
 eleventyNavigation:
   order: 1
 hero:
-  image:
-  title: Install OpenCilk
-  subtitle: It's easy
-  links:
-    - title: Get started
-      url: "/doc/howto/install/"
-      desc: OpenCilk makes it easy to write fast parallel programs.
-    - title: Beyond runtime
-      url: "/blog/"
-      desc: What is performance engineering?
+  image: 
+  height: h-20
+  title: 
 ---
 
 ## Requirements
