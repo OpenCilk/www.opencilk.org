@@ -3,7 +3,7 @@ title: User's guide
 eleventyNavigation:
   key: User's guide
   parent: Documentation
-  order: 2
+  order: 1
 permalink: /doc/howto/
 ---
 

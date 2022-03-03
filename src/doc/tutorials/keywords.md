@@ -1,6 +1,5 @@
 ---
 title: OpenCilk keywords
-layout: test
 ---
 
 The Cilk programming language provides a simple extension to the C and

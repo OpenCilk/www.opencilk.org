@@ -3,7 +3,7 @@ title: Learn with OpenCilk
 layout: pages
 eleventyNavigation:
   key: Learn
-  parent: home
+  parent: # Home
   order: 2
 hero:
   image: 

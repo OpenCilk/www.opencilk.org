@@ -3,7 +3,7 @@ title: Documentation
 layout: pages
 eleventyNavigation:
   key: Documentation
-  parent: home
+  parent: Home
   order: 4
 hero:
   image: 

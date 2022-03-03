@@ -3,7 +3,7 @@ title: Tutorials
 eleventyNavigation:
   key: Tutorials
   parent: Documentation
-  order: 1
+  order: 2
 permalink: /doc/tutorials/
 ---
 

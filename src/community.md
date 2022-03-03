@@ -4,7 +4,7 @@ title: Community
 sidebar: none
 eleventyNavigation:
   key: Community
-  parent: home
+  parent: Home
   order: 5
 hero:
   image: 

@@ -1,7 +1,5 @@
 ---
-title: Compile and run an OpenCilk program title
-eleventyNavigation:
-  key: Compile and runkey
+title: Compile and run
 ---
 
 To compile and run a program using OpenCilk, follow these two

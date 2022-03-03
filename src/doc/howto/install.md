@@ -1,10 +1,10 @@
 ---
-title: Install OpenCilk v1.1
+title: Install OpenCilk
 tags: install
 excerpt: It's as easy as one, two, three.
 sidebar: Documentation
 eleventyNavigation:
-  order: -1
+  order: -2
 hero:
   image: 
   height: h-20
@@ -51,29 +51,8 @@ Your OpenCilk installation includes the following components:
  - Race detector
  - Scalability analyzer
 
-### Test the compiler
+See [Getting started](/doc/howto/getting-started) to verify that your installation is working.
 
-```bash
-> do compiler thing
-```
-
-### Test the runtime scheduler
-
-```bash
-> do runtime thing
-```
-
-### Test the race detector
-
-```bash
-> do race detector thing
-```
-
-### Test the scalability analyzer
-
-```bash
-> do scalability thing
-```
 
 ## Next Steps
 

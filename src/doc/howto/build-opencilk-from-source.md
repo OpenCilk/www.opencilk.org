@@ -1,9 +1,10 @@
 ---
-title: Build OpenCilk from Source
+title: Build OpenCilk from source
 sidebar: Documentation
 tags: install
 eleventyNavigation:
-  parent: Install OpenCilk v1.1
+  key: Build from source
+  parent: Install OpenCilk
 ---
 
 OpenCilk is available as source code in [three Git repositories](https://github.com/OpenCilk), plus

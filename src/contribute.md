@@ -4,7 +4,7 @@ sidebar: none
 title: Contribute to OpenCilk
 eleventyNavigation:
   key: Contribute
-  parent: home
+  parent: Home
   order: 6
 ---
 
