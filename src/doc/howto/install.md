@@ -4,7 +4,7 @@ tags: install
 excerpt: It's as easy as one, two, three.
 sidebar: Documentation
 eleventyNavigation:
-  order: 1
+  order: -1
 hero:
   image: 
   height: h-20
@@ -21,7 +21,7 @@ OpenCilk v1.1 runs on Intel x86 64-bit processors (Haswell and newer), AMD x86 6
 
 ## Download
 
-Use the links below to download the appropriate OpenCilk installation script (<code>.sh</code>) and binary files (<code>.tar.gz</code>).
+Use the links below to download the appropriate OpenCilk shell archive (<code>.sh</code>) and precompiled binaries (<code>.tar.gz</code>).
 
 **Linux**
  - [OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh)

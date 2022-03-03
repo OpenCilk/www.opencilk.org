@@ -1,5 +1,10 @@
 ---
 title: Race conditions
+excerpt: The lure of nonlocal
+date: 2021-11-03
+author: Charles Leiserson
+tags:
+- race
 ---
 
 In a widely applauded article published in 1973 and entitled, “Global variable considered

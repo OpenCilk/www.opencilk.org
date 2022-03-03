@@ -3,6 +3,7 @@
 # For example, "g_pageWidth" manages both the Nav and the Page content
 # across the entire site so there is consistency on margins, padding, max width
 # at all screen sizes.
+g_headerImage: 'grey-silk-bg.jpg' # 'home-background.jpg'
 g_pageWidth: 'max-w-5xl mx-auto'
 
 # Globally disable display of Tag pills/links

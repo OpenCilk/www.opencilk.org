@@ -1,0 +1,41 @@
+---
+---
+<!DOCTYPE html>
+<html class="js background-fixed" lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      blah title
+    </title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+  </head>
+  <body class="">
+    <div id="admin" class="fixed top-0 left-0 w-full bg-black text-white opacity-100">
+        blahh blah blah masthad
+    </div>
+    <div id="page" class="relative">
+      <header id="masthead" class="relative h-1/3">
+        <div id="custom-header" class="relative h-auto">
+          <div id="custom-header-media" class="absolute bottom-0 left-0 right-0">
+            
+            <div id="my-custom-header">
+              <img class="fixed h-1/3 w-full top-0 left-0 object-cover transform-none -z-50" src="/static/img/grey-silk-bg.jpg">
+            </div>  
+          </div>
+          <div id="site-branding" class="block absolute bottom-0">
+            <div>  
+              <h1>H1 Title of this Page</h1>
+            </div>
+            <div class="flex-grow w-3/4 max-w-full">
+              <main class="block" id="content">
+                {{ content | safe }}
+              </main>
+            </div>
+          </div>
+        </div>  
+      </header>  
+    </div>
+  </body>
+</html>

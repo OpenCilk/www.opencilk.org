@@ -1,6 +1,6 @@
 {
     "layout": "pages",
-    "permalink": "/doc/reference/{{ page.fileSlug }}/", 
+    "permalink": "/doc/reference/{{ page.fileSlug | slugify }}/", 
     "eleventyNavigation": {
         "parent": "Reference"
     },

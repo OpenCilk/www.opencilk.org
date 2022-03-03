@@ -1,11 +1,15 @@
-{% if hero.titleImage %}
-  <img class="mt-2 mb-4 {{ hero.titleImageSize }} mx-auto" src="/static/img/{{ hero.titleImage }}">
-{% else %}
-  <h1 class="mt-8 mb-4 text-center">{{ hero.title }}</h1>
-{% endif %}
-{% if hero.subtitle %}
-  <p class="mb-8 text-center">{{ hero.subtitle }}</p>
-{% endif %}
+  <div>
+  {% if hero.titleImage %}
+    <img class="mx-auto mt-8 {{ hero.titleImageSize }}" src="/static/img/{{ hero.titleImage }}">
+  {% else %}
+    <h1 class="mt-8 mb-4 text-center">{{ hero.title }}</h1>
+  {% endif %}
+  </div>
+  <div>
+  {% if hero.subtitle %}
+    <p class="text-center mt-4 ml-12 text-dark-blue">{{ hero.subtitle }}</p>
+  {% endif %}
+  </div>
 
 {% if hero.links %}
   <div class="items-center justify-center mx-auto {{ hero.linkGrid or 'max-w-xl md:max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4' }} my-8 px-4">

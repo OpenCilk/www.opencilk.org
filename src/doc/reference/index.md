@@ -7,4 +7,6 @@ eleventyNavigation:
 permalink: /doc/reference/
 ---
 
-## Reference homepage
+OpenCilk reference documentation provides technical specifications describing the OpenCilk language and the run-time support for the language. Together, these documents provide the detail needed to implement a compliant compiler. At this time the following specifications are available:
+- [The OpenCilk Language Specification](/doc/reference/language-reference/)
+- The OpenCilk Application Binary Interface (XXX Add link)

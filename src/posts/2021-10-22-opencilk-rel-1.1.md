@@ -1,5 +1,5 @@
 ---
-title: Announcing the release of OpenCilk v1.1
+title: OpenCilk 1.1 released
 excerpt: The latest release features x and y.
 date: 2021-10-22
 author: TB Schardl

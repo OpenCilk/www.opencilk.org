@@ -5,19 +5,23 @@
 /* Your Custom CSS Goes here? OR somehow into Tailwind Typography */
 
 html {
-  font-family: Ubuntu, sans-serif;
+  font-family: Roboto, Ubuntu, sans-serif;
 }
 
 h1 {
-  @apply text-3xl mt-6 lg:text-4xl font-bold text-header-blue;
+  font-family: Ubuntu, sans-serif;
+  @apply text-3xl mt-6 lg:text-4xl font-bold text-dark-blue;
 }
 h2 {
+  font-family: Ubuntu, sans-serif;
   @apply text-2xl mb-3 font-bold lg:text-3xl;
 }
 h3 {
+  font-family: Ubuntu, sans-serif;
   @apply text-xl font-bold lg:text-2xl mb-3;
 }
 h4 {
+  font-family: Ubuntu, sans-serif;
   @apply text-xl font-bold mb-3;
 }
 /* Syntax Highlighting*/
