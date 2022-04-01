@@ -1,5 +1,5 @@
 {
-    "layout": "pages",
+    "layout": "layouts/home.njk",
     "permalink": "/doc/reference/{{ page.fileSlug | slugify }}/", 
     "eleventyNavigation": {
         "parent": "Reference"

@@ -1,6 +1,6 @@
 ---
-layout: pages
-sidebar: none
+layout: layouts/home.njk
+sidebar: toc
 title: Contribute to OpenCilk
 eleventyNavigation:
   key: Contribute

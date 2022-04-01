@@ -1,9 +1,8 @@
 module.exports = {
     eleventyComputed: {
       eleventyNavigation: {
-        key: data => data.title,
-        parent: 'Blog'
+        key: data => data.title
       },
-      sidebar: 'Blog'
+      sidebar: 'toc'
     }
   };

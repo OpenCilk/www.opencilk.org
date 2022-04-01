@@ -1,9 +1,0 @@
-<div>
-  {% for tag in tags %}
-    {% if tag != 'post' %}
-      <div class="inline-block mr-1">
-        <a href="/tags/{{ tag | slug }}/" class="text-sm {{ colors.navDefault.textActive }} hover:{{ colors.navDefault.textHover }}">#{{ tag }}</a>
-      </div>
-    {% endif %}
-  {% endfor %}
-</div>

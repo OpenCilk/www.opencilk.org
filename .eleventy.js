@@ -13,6 +13,7 @@ module.exports = function (eleventyConfig) {
       "./static/css/prism-tomorrow.css",
   });
   eleventyConfig.addPassthroughCopy("./src/static/img");
+  eleventyConfig.addPassthroughCopy("./src/static/*.pdf");
   eleventyConfig.addPassthroughCopy("./src/favicon.ico");
   eleventyConfig.addPassthroughCopy("./src/*.png");
   eleventyConfig.addPassthroughCopy("./src/browserconfig.xml");

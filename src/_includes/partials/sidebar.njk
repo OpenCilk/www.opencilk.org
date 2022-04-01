@@ -1,33 +1,20 @@
-{% if (sidebar | lower) == "blog" %}
-    {% set sideBlog = 'true' %}
-    {% set sideTitle = "Archive" %}
-    {% set navPages = collections.post | reverse %}
-{% else %}
-    {% set sideBlog = 'false' %}
-    {% set sideTitle = "Contents" %}
-    {% set navPages = collections.all | eleventyNavigation("Documentation") %}    
-{% endif %}
+{% set navPages = collections.all | eleventyNavigation("Documentation") %}    
+<div id="sidebar" class="w-25 col-2 border-end">
+    {% macro renderNavListItem(entry) -%}
+        <li class="nav-item pt-2 mx-0">
+            <a href="{{ entry.url | url }}">
+            <span>{{ entry.title }}</span>
+            </a>
+        {%- if entry.children.length -%}
+        <ul class="list-group ps-3">
+            {%- for child in entry.children %}{{ renderNavListItem(child) }}{% endfor -%}
+        </ul>
+        {%- endif -%}
+        </li>
+    {%- endmacro -%}
 
-<nav class="h-screen sticky top-0 mt-6 w-auto pr-8 border-r">
-<h3 class="ml-4">{{ sideTitle }}</h3>
-{% macro renderNavListItem(entry) -%}
-    <li class="my-2">
-    <a
-    {% if entry.url == page.url %} 
-        class="py-2 rounded-lg bg-cilk-pink bg-opacity-5 {{ colors.navDefault.textActive }}"
-    {% else %} 
-        class="hover:{{ colors.navDefault.textHover }}"
-    {% endif %}
-    href="{{ entry.url | url }}">{% if sideBlog == 'true' %}{{ entry.data.title }}{% else %}{{ entry.title }}{% endif %}</a>
-    {%- if entry.children.length -%}
-    <ul class="list-none ml-4">
-        {%- for child in entry.children %}{{ renderNavListItem(child) }}{% endfor -%}
+    <ul class="list-group ps-3 sticky-top sticky-offset">
+    {%- for entry in navPages %}{{ renderNavListItem(entry) }}{%- endfor -%}
     </ul>
-    {%- endif -%}
-    </li>
-{%- endmacro -%}
 
-<ul class="list-none ml-4">
-{%- for entry in navPages %}{{ renderNavListItem(entry) }}{%- endfor -%}
-</ul>
-</nav>
+</div>

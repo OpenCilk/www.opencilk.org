@@ -1,0 +1,16 @@
+<div class="row">
+  {% for post in postslist | reverse %}
+  <div class="col-sm-6 col-lg-4 mb-4">
+    <a class="col mb-3 text-decoration-none" href="{{ post.url | url }}">
+      <div class="card">
+        <img class="card-img-top p-4" src="{% if post.data.thumbnail %} {{ ['/img/', post.data.thumbnail] | join }} {% else %} /img/trace-dag.png {% endif %}">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.data.title }}</h5>
+          <p class="card-text">{{ post.data.excerpt }}</p>
+          <p class="card-text">Last updated 3 mins ago</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>

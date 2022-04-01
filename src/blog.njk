@@ -1,0 +1,19 @@
+---
+layout: layouts/home.njk
+sidebar: Blog
+permalink: /posts/
+eleventyNavigation:
+  key: Blog
+  order: 2
+  parent: Home
+---
+
+<div class="container col-xxl-8 px-4 py-5 justify-content-center g-5">
+  <h1>Blog</h1>
+
+
+{% set postslist = collections.posts %}
+{% include "posts_cards.njk" %}
+
+</div>
+

@@ -1,10 +1,7 @@
 {
-    "layout": "posts",
-    "sidebar": "Blog",
-    "eleventyNavigation": {
-        "parent": "Blog"
-    },
-    "tags": [
-        "post"
-    ]
+  "layout": "layouts/post.njk",
+  "sidebar": "toc",
+  "tags": [
+    "posts"
+  ]
 }

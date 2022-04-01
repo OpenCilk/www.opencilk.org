@@ -1,0 +1,9 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-home
+---
+{% if not hero.image %}
+  <h1>{{ title }}</h1>
+{% endif %}
+
+{{ content | safe }}

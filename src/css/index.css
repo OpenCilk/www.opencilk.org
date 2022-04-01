@@ -1,0 +1,76 @@
+/* Colors */
+:root {
+  --lightgray: #e0e0e0;
+  --gray: #C0C0C0;
+  --darkgray: #333;
+  --midnight: #001630;
+  --blue: #043065;
+  --white: #fff;
+  --lime: #91b301;
+  --teal: #11a5a1;
+  --sky: #0cb3e1;
+  --tangelo: #f44500;
+  --americanyellow: #f4b200;
+  --safetyyellow: #f4d400;
+}
+
+html,
+body {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 35px;
+  margin: 0;
+  font-family: -apple-system, system-ui, sans-serif;
+  color: var(--darkgray);
+  background: url('/img/grey-silk-bg.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover; 
+}
+img.icon {
+  height: 2em;
+}
+
+.breadcrumb ul, .breadcrumb li {
+  list-style: none;
+  display: inline;
+  text-size-adjust: 50%;
+}
+.breadcrumb ul {
+  padding: 0
+}
+.nav-link.active {
+  background-color: var(--blue);
+  border-radius: 0.5em;
+}
+
+pre,
+code {
+  font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+  line-height: 1.5;
+}
+pre {
+  font-size: 14px;
+  line-height: 1.375;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  padding: 1em;
+  margin: .5em 0;
+  color: var(--sky);
+  background-color: var(--blue);
+}
+code {
+  color: var(--tangelo);
+  word-break: break-all;
+}

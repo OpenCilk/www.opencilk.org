@@ -1,0 +1,10 @@
+{
+    "layout": "layouts/home.njk",
+    "permalink": "/doc/users_guide/{{ page.fileSlug | slugify }}/", 
+    "eleventyNavigation": {
+        "parent": "User's guide"
+    },
+    "tags": [
+        "users guide"
+    ]
+}

@@ -1,5 +1,5 @@
 {
-    "layout": "pages",
+    "layout": "layouts/base.njk",
     "permalink": "/doc/tutorials/{{ page.fileSlug }}/", 
     "eleventyNavigation": {
         "parent": "Tutorials"
