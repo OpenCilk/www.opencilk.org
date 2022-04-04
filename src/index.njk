@@ -7,19 +7,23 @@ eleventyNavigation:
 hero:
   image: /img/OpenCilk-Logo-1001.png
   subtitle: The language of performance engineering
-links:
-  - title: Install
-    url: "/doc/users_guide/install/"
-    desc: Write fast code with OpenCilk.
-  - title: Learn
-    url: "/posts/"
-    desc: What is performance engineering?
-  - title: Teach
-    url: "/learn/"
-    desc: Use OpenCilk in the classroom.
-  - title: Go multicore
-    url: "/doc/"
-    desc: Translate existing apps to OpenCilk.
+cards:
+- title: Write fast code
+  width: 
+  description: Parallelize C/C++ with OpenCilk.
+  image: img/n-queens-code.png
+  button: Install
+  url: /doc/users_guide/install/
+- title: Performance engineering
+  description: What is it and why does it matter?
+  image: img/plenty-of-room-at-the-top.png
+  button: Learn
+  url: /posts/
+- title: Teach with OpenCilk
+  description: OpenCilk provides an ideal introduction to parallel programming.
+  image: img/fib-code-trace-dag.png
+  button: Discover
+  url: "/doc/"
 ---
 
 <img class="d-block pt-5 pb-4 mx-auto" src="{{ hero.image }}" width="390">
@@ -27,16 +31,15 @@ links:
   <p class="mb-4 mx-auto">The language of performance engineering</p>
 </div>
 
-<div class="container col-xxl-8 px-4 py-5">
-  <div class="row justify-content-center g-5">
-
-    <div class="col-lg-6">
-      <div class="row flex-md-row-reverse align-items-center g-4 pb-4 rounded-3 border bg-white shadow-lg">
-        <div class="col-12 col-md-7 overflow-hidden m-0 p-0">
-          <img src="img/n-queens-code.png" width="340" loading="lazy">
+<div class="hero container px-4">
+  <div class="row justify-content-center g-5 ">
+    <div class="col-lg-6  rounded">
+      <div class="row h-100 flex-md-row-reverse align-items-center rounded border bg-white shadow-lg">
+        <div class="col-12 col-md-7 h-100 rounded m-0 p-0"
+          style="background-image: url('img/n-queens-code.png'); background-size: cover;">
         </div>
-        <div class="col-md-5">
-          <h3 class="display-8 fw-bold lh-1 mb-3">Write fast code</h2>
+        <div class="col-md-5 py-2 rounded">
+          <h4 class="display-8 fw-bold lh-1 mb-3">Write fast code</h2>
           <p class="lead">Parallelize C/C++ with OpenCilk.</p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
           <a href="/doc/users_guide/install" class="btn btn-primary btn-lg px-4 me-md-2 ">Install</a>
@@ -45,13 +48,13 @@ links:
       </div>
     </div>
 
-    <div class="col-lg-6">
-      <div class="row flex-md-row-reverse align-items-center g-4 pb-4 rounded-3 border bg-white shadow-lg">
-        <div class="col-12 col-md-7 overflow-hidden m-0 p-0">
-          <img src="img/plenty-of-room-at-the-top.png" width="340" loading="lazy">
+    <div class="col-lg-6 rounded">
+      <div class="row h-100 flex-md-row-reverse align-items-center rounded border bg-white shadow-lg">
+        <div class="col-12 col-md-7 h-100 rounded m-0 p-0"
+          style="background-image: url('img/plenty-of-room-at-the-top.png'); background-size: cover;">
         </div>
-        <div class="col-md-5">
-          <h3 class="display-8 fw-bold lh-1 mb-3">Performance engineering</h2>
+        <div class="col-md-5 py-2 rounded">
+          <h4 class="display-8 fw-bold lh-1 mb-3">Performance engineering</h2>
           <p class="lead">What is it and why does it matter?</p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
           <a href="/posts/" class="btn btn-primary btn-lg px-4 me-md-2 ">Learn</a>
@@ -62,38 +65,64 @@ links:
 
   </div>
     
-  <div class="row pb-0 pe-lg-0 align-items-center rounded-3 border shadow-lg">
-      <div class="row flex-md-row-reverse align-items-center g-4 pb-4 rounded-3 border bg-white shadow-lg">
-        <div class="col-12 col-md-7">
-          <img src="img/fib-code-trace-dag.png" class="d-block mx-lg-auto img-fluid" loading="lazy">
+  <div class="row justify-content-center g-5 py-3">
+
+    <div class="col-lg-6 rounded">
+      <div class="row h-100 flex-md-row-reverse align-items-center rounded border bg-white shadow-lg">
+        <div class="col-12 col-md-7 h-100 rounded m-0 p-0"
+          style="background-image: url('img/fib-code-trace-dag.png'); background-size: cover;">
         </div>
-        <div class="col-md-5">
-          <h3 class="display-8 fw-bold lh-1 mb-3">Teach with OpenCilk</h2>
-          <p class="lead">OpenCilk provides an ideal introduction to parallel programming.</p>
+        <div class="col-md-5 rounded">
+          <h4 class="display-8 fw-bold lh-1 mb-3">Teach parallelism</h4>
+          <p class="lead">OpenCilk provides an ideal introduction.</p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
           <a href="/doc/" class="btn btn-primary btn-lg px-4 me-md-2 ">Discover</a>
           </div>
         </div>
       </div>
+    </div>
+
+
+
+
+    <div class="col-lg-6 rounded">
+      <div class="row h-100 flex-md-row-reverse align-items-center rounded border bg-white shadow-lg">
+        <div class="col-12 col-md-6 overflow-hidden rounded m-0 p-0">
+          <img src="img/adjacency-matrix-and-graph.png" width="260" loading="lazy">
+        </div>
+        <div class="col-md-6 rounded">
+          <h4 class="display-8 fw-bold lh-1 mb-3">Go multicore</h2>
+          <p class="lead">Convert your code to OpenCilk.</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <a href="/posts/" class="btn btn-primary btn-lg px-4 me-md-2 ">Here's how</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>
 
-<div class="container rounded-3 border bg-white shadow-lg">
-  <div class="bodytext">
-    <h1>{{ title }}</h1>
-    <p>OpenCilk is an open-source platform that makes parallel programming a simple extension of serial programming.</p>
-    <ul>
-      <li>Efficient compiling makes your OpenCilk program faster.</li>
-      <li>Provably efficient scheduling tunes each execution of your OpenCilk program to its host environment.</li>
-      <li>Provable race-detection guarantees that your OpenCilk program has a deterministic result.</li>
-    </ul>
 
-    {% set maxPosts = collections.posts.length | min(3) %}
-    <h3>Featured {% if maxPosts == 1 %}Post{% else %}{{ maxPosts }} Posts{% endif %}</h3>
+<div class="container-fluid justify-content-center bg-white mt-4 pt-3">
+  <div class="container px-4 ">
 
-    <p>From our <a href="{{ '/posts/' | url }}">blog</a>.</p>
-    {% set postslist = collections['featured'] %}
-    {% include "posts_cards.njk" %}
+    <div class="bodytext p-4">
+      <h1>{{ title }}</h1>
+      <p>OpenCilk is an open-source platform that makes parallel programming a simple extension of serial programming.</p>
+      <ul>
+        <li>Efficient compiling makes your OpenCilk program faster.</li>
+        <li>Provably efficient scheduling tunes each execution of your OpenCilk program to its host environment.</li>
+        <li>Provable race-detection guarantees that your OpenCilk program has a deterministic result.</li>
+      </ul>
+
+      <h3>Featured posts</h3>
+      <p>From our <a href="{{ '/posts/' | url }}">blog</a>.</p>
+      {% set postslist = collections['featured'] %}
+      {% include "posts_cards.njk" %}
+    </div>
+    
   </div>
 </div>
+

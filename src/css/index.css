@@ -32,19 +32,6 @@ img.icon {
   height: 2em;
 }
 
-.breadcrumb ul, .breadcrumb li {
-  list-style: none;
-  display: inline;
-  text-size-adjust: 50%;
-}
-.breadcrumb ul {
-  padding: 0
-}
-.nav-link.active {
-  background-color: var(--blue);
-  border-radius: 0.5em;
-}
-
 pre,
 code {
   font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
