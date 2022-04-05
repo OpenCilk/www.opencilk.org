@@ -11,26 +11,33 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ '/css/index.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/prism-base16-monokai.dark.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/prism-diff.css' | url }}">
+    <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
+    <link rel="alternate" href="{{ metadata.jsonfeed.path | url }}" type="application/json" title="{{ metadata.title }}">
   </head>
   <body class="thumb d-flex flex-column vh-100">
 
     {% include 'partials/navbar.njk' %}
+    {% set mainWhite = false %}
     <div class="row">
       {% if sidebar == 'toc' %}
-        <div id="sidebar" class="w-25 col-2 border-end">
+        {% set mainWhite = true %}
+        <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
           <div class="list-group ps-3 sticky-top sticky-offset">
             {{ content | toc | safe }}
           </div>
         </div>
       {% elif sidebar %}
-        <div id="sidebar" class="w-25 col-2 border-end">
+        {% set mainWhite = true %}
+        <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
           <div class="list-group ps-3 sticky-top sticky-offset">
             {{ collections.all | eleventyNavigation(sidebar) | eleventyNavigationToHtml | safe }}
           </div>
         </div>      
       {% endif %}
-      <div class="col">
-        <main>
+      <div class="col mx-0 px-0">
+        <main class="pt-3 px-4 {% if mainWhite %} bg-white {% endif %}">
           {% if page.url != "/" %}
             <small>
               {% if eleventyNavigation.key %}

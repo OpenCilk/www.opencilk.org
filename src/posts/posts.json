@@ -1,6 +1,5 @@
 {
   "layout": "layouts/post.njk",
-  "sidebar": "toc",
   "tags": [
     "posts"
   ]
