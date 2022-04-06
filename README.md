@@ -1,78 +1,66 @@
-# eleventy-base-blog
+# README
 
-A starter repository showing how to build a blog with the [Eleventy](https://github.com/11ty/eleventy) static site generator.
+This is the GitHub repository for OpenCilk's new in-development website.
+Right now the site is hosted [here](https://inspiring-feynman-7b1a58.netlify.app/).
+We will deploy the site to [opencilk.org](https://opencilk.org/) soon.
 
-[![Build Status](https://travis-ci.org/11ty/eleventy-base-blog.svg?branch=master)](https://travis-ci.org/11ty/eleventy-base-blog)
+If you want to install OpenCilk, see [github.com/OpenCilk/infrastructure](https://github.com/OpenCilk/infrastructure).
 
-## Demos
+The OpenCilk website is generated using [Eleventy](https://www.11ty.dev/), a Node.js package for building static websites.
 
-* [Netlify](https://eleventy-base-blog.netlify.com/)
-* [GitHub Pages](https://11ty.github.io/eleventy-base-blog/)
-* [Remix on Glitch](https://glitch.com/~11ty-eleventy-base-blog)
+## Making Simple Changes
 
-## Deploy this to your own site
+To suggest a change to the website, you can simply navigate to the page with the content you think should be changed, and edit it.
+You will be prompted to fork the repo (if you haven't already) and then open a Pull Request.
+Once your Pull Request is merged, you should see your changes show up on the website in a few minutes or less.
 
-These builders are amazing—try them out to get your own Eleventy site in a few clicks!
+Build previews for each Pull Request will be linked in the comment section of the PR once the site has been successfully build.
 
-* [Get your own Eleventy web site on Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/11ty/eleventy-base-blog)
-* [Get your own Eleventy web site on Vercel](https://vercel.com/import/project?template=11ty%2Feleventy-base-blog)
+## Making More Complex Changes
 
-## Getting Started
+To suggest a change to the website that is more significant, it is suggested that you make said changes and test them locally on your device.
+You can do this by simply forking the base repo, cloning it locally onto your device, making the changes you want, and then following the "Installing locally" instructions below.
 
-### 1. Clone this Repository
+Once you have validated that everything looks good, you can open a Pull Request and check the Deploy Preview from Netlify as a final sanity check.
 
+Build previews for each Pull Request are available at: https://julialang.netlify.app (note that given the GitHub Actions design, build previews are only available for those who have write access to the repo).
+
+## Deploying locally
+
+Clone the repository and `cd` to it. With Node.js installed, execute the following to install dependences.
+
+```bash
+> npm install
+
+> npm run build
 ```
-git clone https://github.com/11ty/eleventy-base-blog.git my-blog-name
-```
-
-
-### 2. Navigate to the directory
-
-```
-cd my-blog-name
-```
-
-Specifically have a look at `.eleventy.js` to see if you want to configure any Eleventy options differently.
-
-### 3. Install dependencies
-
-```
-npm install
-```
-
-### 4. Edit _data/metadata.json
-
-### 5. Run Eleventy
-
-```
-npx eleventy
+Then to launch the website, execute the following:
+```bash
+npm run start
 ```
 
-Or build and host locally for local development
-```
-npx eleventy --serve
-```
+Navigate to `localhost:8080` (or sometimes `localhost:8081`) in a browser and you should your local instance of the site.
 
-Or build automatically when a template changes:
-```
-npx eleventy --watch
-```
+All the content used to generate the site is in the `src/` folder.
 
-Or in debug mode:
-```
-DEBUG=* npx eleventy
-```
+**Adding images**: add the relevant files to `src/img/`.
 
-### Implementation Notes
+**Modifying CSS**: modify the relevant files in `src/css/`.
 
-* `about/index.md` shows how to add a content page.
-* `posts/` has the blog posts but really they can live in any directory. They need only the `post` tag to be added to this collection.
-* Add the `nav` tag to add a template to the top level site navigation. For example, this is in use on `index.njk` and `about/index.md`.
-* Content can be any template format (blog posts needn’t be markdown, for example). Configure your supported templates in `.eleventy.js` -> `templateFormats`.
-	* Because `css` and `png` are listed in `templateFormats` but are not supported template types, any files with these extensions will be copied without modification to the output (while keeping the same directory structure).
-* The blog post feed template is in `feed/feed.njk`. This is also a good example of using a global data files in that it uses `_data/metadata.json`.
-* This example uses three layouts:
-  * `_includes/layouts/base.njk`: the top level HTML structure
-  * `_includes/layouts/home.njk`: the home page template (wrapped into `base.njk`)
-  * `_includes/layouts/post.njk`: the blog post template (wrapped into `base.njk`)
-* `_includes/postlist.njk` is a Nunjucks include and is a reusable component used to display a list of all the posts. `index.njk` has an example of how to use it.
+**Modifying the HTML structure**: if you want to modify the navbar or the sidebar, go to `src/_includes/` and modify the relevant template fragment.
+
+## Adding documentation or a blog post
+
+Follow the blueprint of the other files in terms of folder and file structure.
+Each file of documentation is categorized uniquely by the `src/doc` folder that contains it: 
+
+- `src/doc/users_guide`: how-to's on **doing tasks with OpenCilk**
+- `src/doc/tutorials`: introductions for **learning about OpenCilk**
+- `src/doc/reference`: information about **OpenCilk technical specifications**.
+
+There is a separate folder for blog posts:
+
+- `src/posts/`: explanations for **understanding OpenCilk** as a tool for performance engineering.
+
+(Probably we will create subfolders for years, and perhaps for months.)
+
