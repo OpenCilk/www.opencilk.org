@@ -2,13 +2,6 @@
 title: Install OpenCilk
 tags: install
 excerpt: It's as easy as one, two, three.
-sidebar: Documentation
-eleventyNavigation:
-  order: -2
-hero:
-  image: 
-  height: h-20
-  title: 
 ---
 
 ## Requirements

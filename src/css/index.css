@@ -20,13 +20,16 @@ body {
   padding-right: 0;
   padding-top: 35px;
   margin: 0;
-  font-family: -apple-system, system-ui, sans-serif;
+  font-family: Roboto, sans-serif;
   color: var(--darkgray);
   background: url('/img/grey-silk-bg.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover; 
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: Ubuntu, sans-serif;
 }
 img.icon {
   height: 2em;

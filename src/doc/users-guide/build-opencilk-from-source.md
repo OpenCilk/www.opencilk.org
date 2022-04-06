@@ -1,10 +1,6 @@
 ---
 title: Build OpenCilk from source
-sidebar: Documentation
 tags: install
-eleventyNavigation:
-  key: Build from source
-  parent: Install OpenCilk
 ---
 
 OpenCilk is available as source code in [three Git repositories](https://github.com/OpenCilk), plus

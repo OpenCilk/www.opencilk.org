@@ -21,7 +21,7 @@ All the content used to generate the site is in the `src/` folder.
 Follow the blueprint of the other files in terms of folder and file structure.
 Each file of documentation is categorized uniquely by the `src/doc/` folder that contains it: 
 
-- `src/doc/users_guide/`: how-to's on **doing tasks with OpenCilk**
+- `src/doc/users-guide/`: how-to's on **doing tasks with OpenCilk**
 - `src/doc/tutorials/`: introductions for **learning about OpenCilk**
 - `src/doc/reference/`: information about **OpenCilk technical specifications**.
 
@@ -47,7 +47,7 @@ Clone the repository and `cd` to it. With Node.js installed, execute the followi
 ```
 Then to launch the website, execute the following:
 ```bash
-npm run start
+> npm run start
 ```
 
 Navigate to `localhost:8080` (or sometimes `localhost:8081`) in a browser and you should see your local instance of the site.

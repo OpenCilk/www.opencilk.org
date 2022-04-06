@@ -13,6 +13,9 @@ pagination:
 layout: layouts/home.njk
 eleventyComputed:
   title: Tagged “{{ tag }}”
+  eleventyNavigation:
+    key: "{{ tag }}"
+    parent: Tags
 permalink: /tags/{{ tag | slug }}/
 ---
 

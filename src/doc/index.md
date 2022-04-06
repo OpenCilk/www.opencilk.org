@@ -9,9 +9,9 @@ eleventyNavigation:
 
 To help you find the information you need, we have organized OpenCilk documention into three categories:
 
-- A [user's guide](#users-guide) that shows you how to do important tasks with OpenCilk,
-- [Tutorials](#tutorials) that help you learn the fundamentals of OpenCilk, and
-- A [reference manual](#reference-manual) that describes the technical design of OpenCilk, both as a language (for application programming) and as an environment (for parallel systems research).
+- A [user's guide](/doc/users-guide) that shows you how to do important tasks with OpenCilk,
+- [Tutorials](/doc/tutorials) that help you learn the fundamentals of OpenCilk, and
+- A [reference manual](/doc/reference) that describes the technical design of OpenCilk, both as a language (for application programming) and as an environment (for parallel systems research).
 
 Finally, our [blog](/posts) puts the documentation in context with stories about the latest developments in performance engineering.
 

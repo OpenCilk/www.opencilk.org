@@ -6,4 +6,9 @@ templateClass: tmpl-home
   <h1>{{ title }}</h1>
 {% endif %}
 
+{%- for tag in tags | filterTagList -%}
+  {%- set tagUrl %}/tags/{{ tag | slug }}/{% endset -%}
+  <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
+{%- endfor %}
+
 {{ content | safe }}
