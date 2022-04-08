@@ -1,7 +1,7 @@
 # README
 
 This is the GitHub repository for OpenCilk's new in-development website.
-Right now the site is hosted [here](https://inspiring-feynman-7b1a58.netlify.app/).
+Right now the site is hosted [here](https://sage-licorice-6da44d.netlify.app/).
 We will deploy the site to [opencilk.org](https://opencilk.org/) soon.
 
 If you want to install OpenCilk, see [github.com/OpenCilk/infrastructure](https://github.com/OpenCilk/infrastructure).
