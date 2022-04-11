@@ -1,0 +1,128 @@
+# Online resources
+- name: Agner Fog’s website and blog on software optimization resources
+  description: # TODO
+  url: https://www.agner.org/optimize/
+  tags: [external]
+- name: Bit hack collection
+  description: Collected by Sean Eron Anderson
+  url: https://graphics.stanford.edu/~seander/bithacks.html
+  tags: [external, bithacks]
+
+# Debugging/profiling tools
+- name: Cilksan
+  description: OpenCilk race detector
+  url: # TODO
+  tags: [opencilk, debugging, parallel, tool]
+- name: rr
+  description: C/C++ debugger with rewind capability
+  url: https://rr-project.org/
+  tags: [debugging, tool]
+- name: rr + Cilksan
+  description: rr fork with Cilksan integration for navigating across race sites
+  url: # TODO
+  tags: [opencilk, debugging, parallel, tool]
+- name: Cilkscale
+  description: OpenCilk scalability analyzer and benchmarking tool
+  url: # TODO
+  tags: [debugging, opencilk, tool, benchmarking, profiling, parallel]
+- name: valgrind suite
+  description: # TODO
+  url: https://valgrind.org/
+  tags: [debugging, profiling, tool, memory]
+- name: gperftools
+  description: C/C++ CPU and heap profilers
+  url: https://github.com/gperftools/gperftools
+  tags: [profiling, tool, cpu, memory]
+- name: google-pprof
+  description: gperftools profile visualization tool
+  url: https://github.com/google/pprof
+  tags: [profiling, tool]
+- name: Linux perf
+  description: # TODO
+  url: # TODO
+  tags: [profiling, tool]
+- name: Tracy
+  description: # TODO
+  url: https://github.com/wolfpld/tracy/
+  tags: [profiling, tool, cpu, memory]
+- name: Perf C2C
+  description: False sharing detection tool
+  url: https://man7.org/linux/man-pages/man1/perf-c2c.1.html
+  URL-blog: https://joemario.github.io/blog/2016/09/01/c2c-blog/
+  tags: [profiling, tool, parallel]
+
+# Memory allocators
+- name: mimalloc
+  description: # TODO
+  url: https://microsoft.github.io/mimalloc/
+  tags: [malloc]
+- name: jemalloc
+  description: # TODO
+  url: http://jemalloc.net/
+  tags: [malloc]
+- name: TBB scalable allocator
+  description: # TODO
+  url: # TODO
+  tags: [malloc]
+
+# 
+- name: Godbolt compiler explorer
+  description: # TODO
+  url: https://godbolt.org/
+  tags: [compiler]
+
+# Interesting stories about performance engineering
+- name: Roblox outage traced back to performance engineering issues
+  url: https://blog.roblox.com/2022/01/roblox-return-to-service-10-28-10-31-2021/
+  tags: [story, external]
+- name: Performance-engineering bracket pair colorization in VS Code
+  url: https://code.visualstudio.com/blogs/2021/09/29/bracket-pair-colorization
+  tags: [story, external]
+
+# Task-parallel systems
+- name: OpenCilk!
+- name: Intel oneAPI Threading Building Blocks
+  description: # TODO
+  url: https://www.intel.com/content/www/us/en/developer/tools/oneapi/onetbb.html
+  tags: [external, parallel-platform]
+
+# Conferences
+- name: PACT
+  url: https://pact22.cs.illinois.edu/
+  tags: [conference]
+- name: SPAA
+  url: https://spaa.acm.org/
+  tags: [conference]
+- name: PPoPP
+  url: https://ppopp22.sigplan.org/
+  tags: [conference]
+- name: IPDPS
+  url: https://www.ipdps.org/
+  tags: [conference]
+- name: SODA
+  url: https://www.siam.org/conferences/cm/conference/soda22
+  tags: [conference]
+- name: APOCS
+  url: https://www.siam.org/conferences/cm/conference/apocs22
+  tags: [conference]
+- name: ALENEX
+  url: https://www.siam.org/conferences/cm/conference/alenex22
+  tags: [conference]
+- name: PLDI
+  url: https://conf.researchr.org/home/pldi-2022
+  tags: [conference]
+
+# ----------- TODO ------------
+
+# Research papers
+# Look at 6.172 materials
+
+# ----------- TODO (probably different file) ------------
+
+- name: cilk-mode (Emacs)
+  description: Emacs minor mode for Cilk source code editing
+  url: https://github.com/ailiop/cilk-mode/
+  tags: [ide, goodies, opencilk]
+
+# Cilk libraries
+# Development projects

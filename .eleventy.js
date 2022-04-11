@@ -1,3 +1,4 @@
+const yaml = require("js-yaml");
 const { DateTime } = require("luxon");
 const fs = require("fs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
@@ -8,6 +9,9 @@ const markdownItAnchor = require("markdown-it-anchor");
 const pluginTOC = require("eleventy-plugin-toc");
 
 module.exports = function(eleventyConfig) {
+  // Support .yaml extension in _data
+  eleventyConfig.addDataExtension("yaml", contents => yaml.load(contents));
+
   // Copy the `img` and `css` folders to the output
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/css");
