@@ -1,0 +1,115 @@
+.editornote
+		{
+			background-color: Yellow;
+			font-family: Cursive;
+		}
+		h1.title:before
+		{
+			content: none;
+		}
+		h1.title
+		{
+			text-align: center;
+			counter-reset: h1 -2;
+		}
+		.note
+		{
+			font-style: italic;
+		}
+		/*
+		h1:before
+		{
+			content: "[" counter(h1) "]\A0\A0\A0";
+		}
+		h2:before
+		{
+			content: "[" counter(h1) "." counter(h2) "]\A0\A0\A0";
+		}
+		h3:before
+		{
+			content: "[" counter(h1) "." counter(h2) "." counter(h3) "]\A0\A0\A0";
+		}
+		*/
+		h1
+		{
+			page-break-after: avoid;
+			counter-increment: h1;
+			counter-reset: h2 h3 h4 p;
+		}
+		h2
+		{
+			page-break-after: avoid;
+			counter-increment: h2;
+			counter-reset: h3 h4 p;
+		}
+		h3
+		{
+			page-break-after: avoid;
+			counter-increment: h3;
+			counter-reset: h4 p;
+		}
+		p
+		{
+			background-color: inherit;
+		}
+		/*
+		body > p:before, body > ins > p:before
+		{
+			content: "[" counter(p) "]\A0\A0\A0";
+		}
+		*/
+		body > p, body > ins > p
+		{
+			counter-increment: p;
+		}
+		.keep, dl.bnf, pre, table
+		{
+			page-break-inside: avoid;
+		}
+		pre, dl, ol, table
+		{
+			background-color: inherit;
+			text-decoration: inherit;
+		}
+		pre.noncode
+		{
+			font-family: inherit;
+		}
+		tbody.annotated_grammar td
+		{
+			padding-left: 4ex;
+		}
+		th, td
+		{
+			padding-left: 1ex;
+			padding-right: 1ex;
+		}
+		code
+		{
+			/* background-color: #CCC; temporary, for recognition */
+			font-family: monospace;
+			font-size: larger;
+		}
+		dfn
+		{
+			/* background-color: #CCF; temporary, for recognition */
+		}
+		var
+		{
+			/* background-color: #FFC; temporary, for recognition */
+		}
+		b, i, tt
+		{
+			background-color: Red; /* temporary, for recognition */
+		}
+		del
+		{
+			display: none;
+		}
+		ins
+		{
+			text-decoration: inherit;
+			background-color: inherit;
+		}
+
+		/* Comment out the previous two styles to show insertions & deletions. */

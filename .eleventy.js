@@ -21,7 +21,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
   eleventyConfig.addPlugin(pluginNavigation);
   eleventyConfig.addPlugin(pluginTOC, {
-    tags: ['h1', 'h2', 'h3']
+    tags: ['h1', 'h2'],
+    ul: true
   });
 
   eleventyConfig.addFilter("readableDate", dateObj => {
