@@ -58,4 +58,4 @@ Something about code libraries and development resources?
 Link to getting started with OpenCilk.
 
 
-See also: **[Building OpenCilk from source](../building-opencilk-from-source)**
+See also: **[Build OpenCilk from source](../build-opencilk-from-source)**
