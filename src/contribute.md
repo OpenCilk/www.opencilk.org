@@ -1,5 +1,5 @@
 ---
-layout: layouts/home.njk
+layout: layouts/page.njk
 sidebar: toc
 title: Contribute to OpenCilk
 eleventyNavigation:
