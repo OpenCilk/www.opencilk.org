@@ -1,5 +1,5 @@
 ---
-layout: layouts/home.njk
+layout: layouts/page.njk
 title: Community
 sidebar: toc
 eleventyNavigation:

@@ -3,19 +3,19 @@
   <body class="thumb d-flex flex-column vh-100">
     {% include 'partials/navbar.njk' %}
     {% set mainWhite = false %}
-    <div class="row">
-      {% if sidebar == 'toc' %}
+    <div class="row justify-content-between">
+      {% if sidebar != 'none' %}
         {% set mainWhite = true %}
-        <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
-          <div class="list-group ps-3 sticky-top sticky-offset">
-            {{ content | toc | safe }}
-          </div>
-        </div>
-      {% elif sidebar %}
-        {% set mainWhite = true %}
-        <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
-          <div class="list-group ps-3 sticky-top sticky-offset">
-            {{ collections.all | eleventyNavigation(sidebar) | eleventyNavigationToHtml | safe }}
+        <div id="sidebar" class="d-flex flex-column overflow-auto flex-shrink-0 p-3" style="margin-left: 1em; width: 280px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
+          {% set navPages = ['Blog', 'Documentation', 'Community', 'Contribute'] %}
+          {% if eleventyNavigation.key in navPages %}
+            {% set context = eleventyNavigation.key %}
+          {% else %}
+            {% set context = eleventyNavigation.parent %}
+          {% endif %}
+          <h5>{{ context }}</h5>
+          <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
+            {{ collections.all | eleventyNavigation(context) | eleventyNavigationToHtml | safe }}
           </div>
         </div>      
       {% endif %}
@@ -43,6 +43,14 @@
           {{ content | safe }}
         </main>
       </div>
+      {% if sidebar != 'none' %}
+      <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px; border-left-width: 2; border-left-style: solid; border-color: var(--lime);">
+        <h5>On this page</h5>
+        <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
+          {{ content | toc | safe }}
+        </div>
+      </div>
+      {% endif %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

@@ -3,7 +3,7 @@ title: Community resource list
 excerpt: Check it out and add your favorites
 date: 2022-04-11
 author: Bruce Hoppe
-tags: [resources]
+tags: [resources, featured]
 ---
 
 ## Explore the OpenCilk ecosystem

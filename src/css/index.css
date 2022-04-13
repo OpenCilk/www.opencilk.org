@@ -38,7 +38,11 @@ h1, h2, h3 {
 img.icon {
   height: 2em;
 }
-
+a.card-tag {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: smaller;
+}
 pre,
 code {
   font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
@@ -107,7 +111,7 @@ code {
 .postlist-item-active .postlist-link {
   font-weight: bold;
 }
-.tmpl-home .postlist-link {
+.tmpl-home .postlist-link, .tmpl-page .postlist-link {
   font-size: 1.1875em; /* 19px /16 */
   font-weight: 700;
 }
