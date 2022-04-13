@@ -16,5 +16,5 @@ The content below comes from [`src/_data/resources.yaml`](https://github.com/Ope
 ## Community resource list
 
 {% for entry in resources %}
- - [{{ entry.name }}]({{ entry.url }}) {%if entry.tags %} {% for tag in entry.tags | filterTagList %} {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %} <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a> {% endfor %} {% endif %} {% if entry.description %}: {{ entry.description }} {% endif %}
+ - [{{ entry.name }}]({{ entry.url }}) {%if entry.tags %} {% for tag in entry.tags | filterTagList %} {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %} <a href="#" class="post-tag">{{ tag }}</a> {% endfor %} {% endif %} {% if entry.description %}: {{ entry.description }} {% endif %}
 {% endfor %}
