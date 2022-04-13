@@ -6,7 +6,7 @@
     <div class="row justify-content-between">
       {% if sidebar != 'none' %}
         {% set mainWhite = true %}
-        <div id="sidebar" class="d-flex flex-column overflow-auto flex-shrink-0 p-3" style="margin-left: 1em; width: 280px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
+        <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3" style="margin-left: 1em; width: 280px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
           {% set navPages = ['Blog', 'Documentation', 'Community', 'Contribute'] %}
           {% if eleventyNavigation.key in navPages %}
             {% set context = eleventyNavigation.key %}
@@ -19,7 +19,7 @@
           </div>
         </div>      
       {% endif %}
-      <div class="col mx-0 px-0">
+      <div class="col mx-0 px-0" style="overflow: scroll border-right-width: 1; border-right-style: solid; border-color: var(--lime);">
         <main class="pt-3 px-4 {% if mainWhite %} bg-white {% endif %}">
           {% if page.url != "/" %}
             <small>
@@ -44,7 +44,7 @@
         </main>
       </div>
       {% if sidebar != 'none' %}
-      <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px; border-left-width: 2; border-left-style: solid; border-color: var(--lime);">
+      <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
         <h5>On this page</h5>
         <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
           {{ content | toc | safe }}

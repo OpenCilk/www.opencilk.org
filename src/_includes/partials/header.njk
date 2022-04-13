@@ -15,6 +15,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ '/css/index.css' | url }}">
+    {% if title == 'OpenCilk language specification' %}
+      <link rel="stylesheet" href="{{ '/css/language-specification.css' | url }}">
+    {% endif %}
     <link rel="stylesheet" href="{{ '/css/prism-base16-monokai.dark.css' | url }}">
     <link rel="stylesheet" href="{{ '/css/prism-diff.css' | url }}">
     <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
