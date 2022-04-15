@@ -53,7 +53,7 @@
 
 # Memory allocators
 - name: mimalloc
-  description: Microsoft's versionn of malloc for parallel applications.
+  description: Microsoft's version of malloc for parallel applications.
   url: https://microsoft.github.io/mimalloc/
   tags: [malloc]
 - name: jemalloc
