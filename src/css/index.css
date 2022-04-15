@@ -35,6 +35,30 @@ h1, h2, h3, h4, h5, h6 {
 h1, h2, h3 {
   color: var(--blue);
 }
+a {
+  color: var(--blue);
+}
+a:hover {
+  color: var(--lime);
+}
+.blog.card-body {
+  color: white;
+}
+.blog.card-body time {
+  color: var(--teal);
+}
+.blog.card-body a {
+  color: var(--sky);
+}
+.blog.card-body a:hover {
+  color: var(--lime);
+}
+.blog.card-body a.card-tag {
+  color: var(--yellow);
+}
+.blog.card-body a.card-tag:hover {
+  color: var(--tangelo);
+}
 img.icon {
   height: 2em;
 }

@@ -3,6 +3,7 @@ module.exports = {
       eleventyNavigation: {
         key: data => data.title
       },
-      sidebar: 'toc'
+      sidebar: 'toc',
+      background: 'bg-white'
     }
   };

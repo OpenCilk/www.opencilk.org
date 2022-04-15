@@ -1,11 +1,11 @@
 {
     "layout": "layouts/page.njk",
     "background": "bg-white",
-    "permalink": "/doc/reference/{{ page.fileSlug | slugify }}/", 
+    "permalink": "/community/{{ page.fileSlug | slugify }}/", 
     "eleventyNavigation": {
-        "parent": "Reference"
+        "parent": "Community"
     },
     "tags": [
-        "reference"
+        "community"
     ]
 }

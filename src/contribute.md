@@ -1,5 +1,6 @@
 ---
 layout: layouts/page.njk
+background: bg-white
 sidebar: toc
 title: Contribute to OpenCilk
 eleventyNavigation:

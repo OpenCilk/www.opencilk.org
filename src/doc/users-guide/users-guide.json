@@ -1,5 +1,6 @@
 {
     "layout": "layouts/page.njk",
+    "background": "bg-white",
     "permalink": "/doc/users-guide/{{ page.fileSlug | slugify }}/", 
     "eleventyNavigation": {
         "parent": "User's guide"

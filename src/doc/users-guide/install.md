@@ -12,10 +12,6 @@ OpenCilk v1.1 runs on Intel x86 64-bit processors (Haswell and newer), AMD x86 6
  - Fedora (32)
  - macOS (10.15, 11.2)
 
-### blah
-
-asdf
-
 ## Download
 
 Use the links below to download the appropriate OpenCilk shell archive (<code>.sh</code>) and precompiled binaries (<code>.tar.gz</code>).
