@@ -4,6 +4,5 @@ module.exports = {
         key: data => data.title,
         parent: 'Blog'
       },
-      sidebar: 'toc'
     }
   };
