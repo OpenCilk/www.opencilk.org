@@ -13,7 +13,14 @@
     </h5>
     <div class="collapse show" id="collapseContext">
     <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
-        {{ collections.all | eleventyNavigation(context) | eleventyNavigationToHtml | safe }}
+        {% set items = collections.all | eleventyNavigation(context) %}
+        <ul>
+        {% for item in items %}
+            <li class="{% if page.url == item.url %} postlist-item-active {% else %} postlist-item {% endif %}">
+                <a href="{{ item.url }}" class="postlist-link" {% if page.url == item.url %} class="aria-current="page" {% endif %}>{{ item.title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
     </div>
     </div>
     <p class="fw-light">

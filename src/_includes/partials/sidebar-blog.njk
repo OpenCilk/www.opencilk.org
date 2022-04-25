@@ -11,8 +11,8 @@
             {% set postslist = collections.posts %}
             <ul>
             {% for post in postslist | reverse %}
-            <li>
-                <a href="{{ post.url | url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
+            <li class="{% if page.url == post.url %} postlist-item-active {% else %} postlist-item {% endif %}">
+                <a href="{{ post.url | url }}" class="postlist-link" {% if page.url == post.url %} aria-current="page" {% endif %}>{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
             </li>
             {% endfor %}
             </ul>

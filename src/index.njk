@@ -7,6 +7,9 @@ eleventyNavigation:
 hero:
   image: /img/OpenCilk-Logo-1001.png
   subtitle: The language of performance engineering
+blogFormat: 
+  row: justify-content-center
+  col: col-sm-6 col-lg-4 mb-4
 cards:
 - title: Write fast code
   width: 
@@ -116,8 +119,7 @@ cards:
     </div>
 
   <div class="container mt-3 border-top p-3" style="max-width: 960px; font-size: large;">
-      <h3>Featured posts</h3>
-      <p>From our <a href="{{ '/posts/' | url }}">blog</a>.</p>
+      <h3 class="my-4">Featured blog posts</h3>
       {% set postslist = collections['featured'] %}
       {% include "posts_cards.njk" %}
   </div>
