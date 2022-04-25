@@ -8,8 +8,8 @@
         {% set sidebarCode = ["partials/sidebar-", sidebar, ".njk"] | join %}
         {% include sidebarCode %}
       {% endif %}
-      <div class="col mx-0 px-0">
-        <main class="pt-3 px-4 {{ background }}">
+      <div class="col mx-0 px-0 min-vh-100">
+        <main class="h-100 pt-3 px-4 {{ background }}">
           {% if page.url != "/" %}
             <small>
               {% if eleventyNavigation.key %}
