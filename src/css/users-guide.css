@@ -1,0 +1,16 @@
+
+main h2 {
+    color: white;
+    background-color: var(--blue);
+    margin-left: -0.25em;
+    padding-left: 0.25em;
+}
+main h3 {
+    background-color: white;
+    font-weight: bold;
+    margin-left: -0.25em;
+    padding-left: 0.25em;
+}
+main ul li {
+    list-style-image: url("/img/caret-right-fill.svg");
+}

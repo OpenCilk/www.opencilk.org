@@ -120,7 +120,11 @@ environment is setup correctly.
 Typically, OpenCilk programs are built with optimized code for best
 performance.
 
-- **Linux* OS:** `clang++ qsort.cpp -o qsort –O3 -fopencilk`
+##### Linux* OS
+
+```bash
+> clang++ qsort.cpp -o qsort –O3 -fopencilk
+```
 
 ## Add parallelism using `cilk_spawn`
 
@@ -175,13 +179,13 @@ the previous example:
 
 ##### Linux* OS:
 ```bash
-clang++ qsort.cpp -o qsort –O3 -fopencilk
+> clang++ qsort.cpp -o qsort –O3 -fopencilk
 ```
 
-##### Run qsort from the command line
+### Run qsort from the command line
 
 ```bash
->qsort
+> qsort
 Sorting 10000000 integers
 5.641 seconds 
 Sort succeeded.
@@ -192,17 +196,17 @@ use all available cores. You can control the number of workers using
 the `cilk_set_worker_count` command line option to any Cilk++ program
 that uses `cilk_main()`.
 
-##### Observe speedup on a multicore system
+### Observe speedup on a multicore system
 
 Run qsort using one and then two cores:
 
 ```bash
->qsort -cilk_set_worker_count=1 
+> qsort -cilk_set_worker_count=1 
 Sorting 10000000 integers
 2.909 seconds
 Sort succeeded.
 
->qsort -cilk_set_worker_count=2 
+> qsort -cilk_set_worker_count=2 
 Sorting 10000000 integers
 1.468 seconds 
 Sort succeeded.

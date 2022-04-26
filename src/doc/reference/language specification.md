@@ -1,5 +1,6 @@
 ---
 title: OpenCilk language specification
+stylesheet: language-specification.css
 eleventyNavigation:
   key: Language specification
 ---
