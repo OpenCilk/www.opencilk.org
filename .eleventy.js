@@ -2,7 +2,7 @@ const yaml = require("js-yaml");
 const { DateTime } = require("luxon");
 const fs = require("fs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
-const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const pluginSyntaxHighlight = require("@pborenstein/eleventy-md-syntax-highlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
@@ -19,7 +19,8 @@ module.exports = function(eleventyConfig) {
 
   // Add plugins
   eleventyConfig.addPlugin(pluginRss);
-  eleventyConfig.addPlugin(pluginSyntaxHighlight);
+  eleventyConfig.addPlugin(pluginSyntaxHighlight,
+    { showLineNumbers: false });
   eleventyConfig.addPlugin(pluginNavigation);
   eleventyConfig.addPlugin(pluginTOC, {
     tags: ['h1', 'h2'],

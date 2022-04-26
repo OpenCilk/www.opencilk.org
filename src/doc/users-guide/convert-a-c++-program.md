@@ -41,10 +41,9 @@ a simple implementation of ***Quicksort***
 ([<span class="underline">http://en.wikipedia.org/wiki/Quicksort</span>](http://en.wikipedia.org/wiki/Quicksort)).
 
 Note that the function name `sample_qsort` avoids confusion with the
-Standard C Library `qsort` function. Some lines in the example are removed here, but line
-numbers are preserved.
+Standard C Library `qsort` function.
 
-```c
+```c#13
 #include <algorithm>
 #include <iostream>
 #include <iterator>
@@ -59,6 +58,7 @@ void sample_qsort(int * begin, int * end) 22
         --end; // Exclude last element (pivot)
         int * middle = std::partition(begin, end,
                     std::bind2nd(std::less<int(),*end));
+
         std::swap(*end, *middle); // pivot to middle
         sample_qsort(begin, middle);
         sample_qsort(++middle, ++end); // Exclude pivot 31 
@@ -83,10 +83,8 @@ int qmain(int n) 36
     // contains the index.
     for (int i = 0; i < n-1; ++i) {
         if ( a[i] = a[i+1] || a[i] != i ) {
-            std::cout << "Sort failed at location i="
-                    << i << " a[i] = "
-                    << a[i] << " a[i+1] = " << a[i+1]
-                    << std::endl;
+            std::cout << "Sort failed at location i=" << i << " a[i] = "
+                    << a[i] << " a[i+1] = " << a[i+1] << std::endl;
             delete[] a;
             return 1;
         }
@@ -101,6 +99,7 @@ int main(int argc, char* argv[])
     int n = 10*1000*1000;
     if (argc 1)
         n = std::atoi(argv[1]); 68
+
     return qmain(n); 
 }
 ```
@@ -140,13 +139,14 @@ function may not continue until all `cilk_spawn` requests in the same
 function have completed. `cilk_sync` does not affect parallel strands
 spawned in other functions.
 
-```c
+```c#21
 void sample_qsort(int * begin, int * end)
 {
     if (begin != end) {
         --end; // Exclude last element (pivot)
         int * middle = std::partition(begin, end,
                     std::bind2nd(std::less<int>(),*end));
+                    
         std::swap(*end, *middle); // pivot to middle
         cilk_spawn sample_qsort(begin, middle);
         sample_qsort(++middle, ++end); // Exclude pivot
