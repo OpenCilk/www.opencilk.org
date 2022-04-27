@@ -8,7 +8,7 @@ Here is the sequence of steps to create a parallel program using OpenCilk.
 
 - Typically, you will start with a serial C or C++ program that implements the basic
 functions or algorithms that you want to parallelize. You will likely
-be most successful if the serial program is correct to begin with\!
+be most successful if the serial program is correct to begin with!
 Any bugs in the serial program will occur in the parallel program, but
 they will be more difficult to identify and fix.
 - Next, identify the program regions that will benefit from parallel
@@ -191,25 +191,26 @@ Sorting 10000000 integers
 Sort succeeded.
 ```
 
-By default, an OpenCilk program will query the operating system and
-use all available cores. You can control the number of workers using
-the `cilk_set_worker_count` command line option to any Cilk++ program
-that uses `cilk_main()`.
+By default, an OpenCilk program will query the operating system and use
+all available cores. You can control the number of workers by setting
+the CILK_NWORKERS environment variable:
+
+```bash
+CILK_NWORKERS=8 ./qsort
+```
 
 ### Observe speedup on a multicore system
 
 Run qsort using one and then two cores:
 
-```bash
-> qsort -cilk_set_worker_count=1 
+```bash 
+> CILK_NWORKERS=1 qsort
 Sorting 10000000 integers
-2.909 seconds
-Sort succeeded.
+2.909 seconds Sort succeeded.
 
-> qsort -cilk_set_worker_count=2 
+> CILK_NWORKERS=2 qsort
 Sorting 10000000 integers
-1.468 seconds 
-Sort succeeded.
+1.468 seconds Sort succeeded.
 ```
 
 Alternately, run cilkscale to get a more detailed performance graph.
