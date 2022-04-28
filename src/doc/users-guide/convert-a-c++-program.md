@@ -43,7 +43,7 @@ a simple implementation of ***Quicksort***
 Note that the function name `sample_qsort` avoids confusion with the
 Standard C Library `qsort` function.
 
-```c#13
+```c
 #include <algorithm>
 #include <iostream>
 #include <iterator>
@@ -52,33 +52,28 @@ Standard C Library `qsort` function.
 // Sort the range between begin and end.
 // "end" is one past the final element in the range.
 // This is pure C++ code before Cilk++ conversion.
-void sample_qsort(int * begin, int * end) 22 
+void sample_qsort(int * begin, int * end)
 {
     if (begin != end) {
         --end; // Exclude last element (pivot)
         int * middle = std::partition(begin, end,
                     std::bind2nd(std::less<int(),*end));
-
         std::swap(*end, *middle); // pivot to middle
         sample_qsort(begin, middle);
-        sample_qsort(++middle, ++end); // Exclude pivot 31 
+        sample_qsort(++middle, ++end); // Exclude pivot
     }
 }
 
 // A simple test harness
-int qmain(int n) 36 
+int qmain(int n)
 {
     int *a = new int[n];
-
     for (int i = 0; i < n; ++i) 
         a[i] = i;
-
     std::random_shuffle(a, a + n);
     std::cout << "Sorting " << n << " integers"
-    << std::endl;
-
-    sample_qsort(a, a + n); 48
-
+            << std::endl;
+    sample_qsort(a, a + n);
     // Confirm that a is sorted and that each element
     // contains the index.
     for (int i = 0; i < n-1; ++i) {
@@ -98,8 +93,7 @@ int main(int argc, char* argv[])
 {
     int n = 10*1000*1000;
     if (argc 1)
-        n = std::atoi(argv[1]); 68
-
+        n = std::atoi(argv[1]);
     return qmain(n); 
 }
 ```
@@ -139,14 +133,13 @@ function may not continue until all `cilk_spawn` requests in the same
 function have completed. `cilk_sync` does not affect parallel strands
 spawned in other functions.
 
-```c#21
+```c#
 void sample_qsort(int * begin, int * end)
 {
     if (begin != end) {
         --end; // Exclude last element (pivot)
         int * middle = std::partition(begin, end,
-                    std::bind2nd(std::less<int>(),*end));
-                    
+                    std::bind2nd(std::less<int>(),*end));        
         std::swap(*end, *middle); // pivot to middle
         cilk_spawn sample_qsort(begin, middle);
         sample_qsort(++middle, ++end); // Exclude pivot
@@ -155,19 +148,17 @@ void sample_qsort(int * begin, int * end)
 }
 ```
 
-In line 29, we spawn a recursive invocation of `sample_qsort` that can
-execute asynchronously. Thus, when we call `sample_qsort` again in line
-30, the call at line 29 might not have completed. The `cilk_sync`
-statement at line 31 indicates that this function will not continue
+In line 8, we spawn a recursive invocation of `sample_qsort` that can
+execute asynchronously. Thus, when we call `sample_qsort` again in line 9, the call at line 8 might not have completed. The `cilk_sync`
+statement at line 10 indicates that this function will not continue
 until all `cilk_spawn` requests in the same function have completed.
 
 There is an implicit `cilk_sync` at the end of every function that waits
-until all tasks spawned in the function have returned, so the `cilk_sync`
-at line 32 is redundant, but written here for clarity.
+until all tasks spawned in the function have returned, so the `cilk_sync` here is redundant, but written explicitly for clarity.
 
 The above change implements a typical divide-and-conquer strategy for
 parallelizing recursive algorithms. At each level of recursion, we have
-two-way parallelism; the parent strand (line 30) continues executing the
+two-way parallelism; the parent strand (line 9) continues executing the
 current function, while a child strand executes the other recursive
 call. This recursion can expose quite a lot of parallelism.
 
