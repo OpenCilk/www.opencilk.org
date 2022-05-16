@@ -6,7 +6,7 @@ title: Contribute to OpenCilk
 eleventyNavigation:
   key: Contribute
   parent: Home
-  order: 6
+  order: 7
 ---
 
 The OpenCilk project welcomes your expertise and enthusiasm.

@@ -101,6 +101,12 @@ code {
   word-break: break-all;
 }
 
+.list-tight p {
+  margin: 0;
+}
+.list-tight li {
+  margin-bottom: 0.4em;
+}
 
 /* Posts list */
 

@@ -1,0 +1,93 @@
+- name: Umut Acar
+  url: http://www.umut-acar.org/
+  organization: Carnegie Mellon University
+- name: Vikram Adve
+  url: http://vikram.cs.illinois.edu/
+  organization: University of Illinois at Urbana-Champaign
+- name: David Bader
+  url: https://www.cc.gatech.edu/~bader/
+  organization: Georgia Institute of Technology
+- name: Pavan Balaji
+  url: http://www.mcs.anl.gov/~balaji/
+  organization: Argonne National Laboratory
+- name: Guy E. Blelloch
+  url: https://www.cs.cmu.edu/~guyb/
+  organization: Carnegie Mellon University
+- name: Aydın Buluç
+  url: http://crd.lbl.gov/departments/computer-science/PAR/staff/ayd-n-buluc/
+  organization: Lawrence Berkeley National Laboratory
+- name: David Bunde
+  url: http://faculty.knox.edu/dbunde/
+  organization: Knox College
+- name: Andrew Chien 
+  url: http://people.cs.uchicago.edu/~aachien/
+  organization: The University of Chicago
+- name: Rezaul Chowdhury
+  url: http://www3.cs.stonybrook.edu/~rezaul/
+  organization: Stony Brook University
+- name: Martin Deneroff
+  organization: Emu Technology
+- name: Chen Ding
+  url: http://www.cs.rochester.edu/~cding/
+  organization: University of Rochester
+- name: Alan Edelman 
+  url: http://math.mit.edu/~edelman/
+  organization: Masssachusetts Institute of Technology
+- name: Jeremy T. Fineman
+  url: http://people.cs.georgetown.edu/~jfineman/
+  organization: Georgetown University
+- name: Philip B. Gibbons
+  url: https://www.cs.cmu.edu/~gibbons/
+  organization: Carnegie Mellon University
+- name: John R. Gilbert
+  url: http://www.cs.ucsb.edu/~gilbert/
+  organization: University of California Santa Barbara
+- name: Shahin Kamali
+  url: http://www.cs.umanitoba.ca/~kamalis/
+  organization: University of Manitoba, Canada
+- name: I-Ting Angelina Lee
+  url: http://www.cse.wustl.edu/~angelee/
+  organization: Washington University in St. Louis 
+- name: Marc Moreno Maza
+  url: http://www.csd.uwo.ca/~moreno/
+  organization: University of Western Ontario, Canada
+- name: John Mellor-Crummey
+  url: https://www.cs.rice.edu/~johnmc/
+  organization: Rice University
+- name: David Padua
+  url: http://polaris.cs.uiuc.edu/~padua/
+  organization: University of Illinois at Urbana-Champaign
+- name: Keshav Pingali
+  url: https://www.cs.utexas.edu/~pingali/
+  organization: University of Texas, Austin
+- name: Nikos Pitsianis
+  url: https://users.cs.duke.edu/~nikos/
+  organization: Duke University
+- name: Jan Prins
+  url: http://www.cs.unc.edu/~prins/
+  organization: University of North Carolina at Chapel Hill
+- name: Lawrence Rauchwerger
+  url: https://parasol.tamu.edu/~rwerger/
+  organization: Texas A & M University
+- name: Vivek Sarkar
+  url: http://gtcomputing2017.cc.gatech.edu/content/vivek-sarkar
+  organization: Georgia Institute of Technology
+- name: Nir Shavit
+  url: https://www.csail.mit.edu/person/nir-shavit
+  organization: Massachusetts Institute of Technology
+- name: Julian Shun
+  url: https://people.csail.mit.edu/jshun/
+  organization: Massachusetts Institute of Technology
+- name: Guy L. Steele, Jr.
+  url: https://labs.oracle.com/pls/apex/f?p=labs:bio:0:120
+  organization: Oracle Labs
+- name: Xiaobai Sun
+  url: http://www.cs.duke.edu/people/faculty/?csid=37
+  organization: Duke University
+- name: Michael Bedford Taylor
+  url: http://cseweb.ucsd.edu/~mbtaylor/
+  organization: University of Washington
+- name: Charles R. Tolle
+  url: http://freya.sdsmt.edu/faculty/tolle/
+  organization: South Dakota School of Mines & Technology
+

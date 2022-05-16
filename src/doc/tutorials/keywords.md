@@ -13,9 +13,9 @@ extension.
 Let us first examine the task-parallel keywords `cilk_spawn` and
 `cilk_sync`.  Consider the following example code for a `fib` routine,
 which uses these keywords to parallelize the computation of the
-$$n$$th Fibonacci number.
+$n$th Fibonacci number.
 
-```c linenos
+```c
 int64_t fib(int64_t n) {
   if (n < 2)
     return n;
@@ -29,11 +29,12 @@ int64_t fib(int64_t n) {
 
 ### "Note to the algorithms police"
 The example `fib` routine is a terribly inefficient code for
-computing Fibonacci numbers.  This `fib` routine computes the $$n$$th
-Fibonacci number using $$\Theta(\phi^n)$$ work, where $$\phi$$ denotes
+computing Fibonacci numbers.  This `fib` routine computes the $n$th
+Fibonacci number using $\Theta(\phi^n)$ work, where $\phi$ denotes
 the golden ratio, while in fact this number can be computed using
-$$\Theta(\lg n)$$ work.  We use this example `fib` code simply for
+$\Theta(\lg n)$ work.  We use this example `fib` code simply for
 didactic purposes.
+
 
 In the simplest usage of `cilk_spawn`, parallel work is created when
 `cilk_spawn` precedes the invocation of a function, thereby causing
@@ -69,10 +70,10 @@ their returns.
 
 A `for` loop can be parallelized by replacing the `for` with the
 `cilk_for` keyword, as demonstrated by the following code to compute
-$$y = ax + y$$ from two given vectors $$x$$ and
-$$y$$ and a given scalar value $$a$$:
+$y = ax + y$ from two given vectors $x$ and
+$y$ and a given scalar value $a$:
 
-```c linenos
+```c
 void daxpy(int64_t n, double a, double *x, double *y) {
   cilk_for (int64_t i = 0; i < n; ++i) {
     y[i] = a * x[i] + y[i];
@@ -89,10 +90,10 @@ The `cilk_for` construct is composable, allowing for simple
 parallelization of nested loops.  The `mm` routine in the following
 code example demonstrates how nested `cilk_for` loops can be used to
 parallelize a simple code to compute the matrix product
-$$C = A\cdot B$$ where $$A$$, $$B$$, and
-$$C$$ are $$n\times n$$ matrices in row-major order:
+$C = A\cdot B$ where $A$, $B$, and
+$C$ are $n\times n$ matrices in row-major order:
 
-```c linenos
+```c
 void mm(const double *restrict A, const double *restrict B,
         double *restrict C, int64_t n) {
   cilk_for (int64_t i = 0; i < n; ++i) {
