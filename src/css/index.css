@@ -107,6 +107,10 @@ code {
 .list-tight li {
   margin-bottom: 0.4em;
 }
+.footer {
+  background-color: var(--gray);
+  padding: 1em;
+}
 
 /* Posts list */
 

@@ -2,6 +2,8 @@
 title: Install OpenCilk
 tags: install
 excerpt: It's as easy as one, two, three.
+eleventyNavigation:
+  order: -2
 ---
 
 ## Requirements
@@ -50,8 +52,5 @@ See [Getting started](/doc/howto/getting-started) to verify that your installati
 ## Next Steps
 
 Something about code libraries and development resources?
-
-Link to getting started with OpenCilk.
-
 
 See also: **[Build OpenCilk from source](../build-opencilk-from-source)**

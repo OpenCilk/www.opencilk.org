@@ -9,7 +9,7 @@ OpenCilk 1.1 is only guaranteed to support 64-bit x86 on Linux and other Unix-li
 operating systems, although prototype support for 64-bit ARM is
 included.
 
-### Requirements
+## Requirements
 
 The build requirements for OpenCilk are largely consistent with those
 for LLVM.  In summary, to build OpenCilk on a modern system running
@@ -25,32 +25,40 @@ installed on a modern multicore system should work.
 More details on build requirements for LLVM can be found here:
 <https://llvm.org/docs/GettingStarted.html#requirements>
 
-### Quick start
+## Quick start
 
 Clone the OpenCilk infrastructure repository:
 
-    git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
+```bash
+> git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
+```
 
 Run the following script to get the OpenCilk source code:
 
-    infrastructure/tools/get $(pwd)/opencilk
+```bash
+> infrastructure/tools/get $(pwd)/opencilk
+```
 
 Then run the following script to build OpenCilk:
 
-    infrastructure/tools/build $(pwd)/opencilk $(pwd)/build
+```bash
+infrastructure/tools/build $(pwd)/opencilk $(pwd)/build
+```
 
 You should now be ready to use OpenCilk.  Skip to [Usage](INSTALLING.md#Usage) now, or read
 on for more explicit directions on building OpenCilk from source.
 
-### Obtaining the OpenCilk source code
+## Obtaining the OpenCilk source code
 
 Clone the OpenCilk compiler, runtime, and productivity tool repositories.  The
 Cheetah runtime and OpenCilk tool repositories must be cloned into
 sub-directories of the OpenCilk project directory:
 
-    git clone -b opencilk/v1.1 https://github.com/OpenCilk/opencilk-project
-    git clone -b opencilk/v1.1 https://github.com/OpenCilk/cheetah opencilk-project/cheetah
-    git clone -b opencilk/v1.1 https://github.com/OpenCilk/productivity-tools opencilk-project/cilktools
+```bash
+git clone -b opencilk/v1.1 https://github.com/OpenCilk/opencilk-project
+git clone -b opencilk/v1.1 https://github.com/OpenCilk/cheetah opencilk-project/cheetah
+git clone -b opencilk/v1.1 https://github.com/OpenCilk/productivity-tools opencilk-project/cilktools
+```
 
 Note that, because these commands clone specific tags of the OpenCilk
 repositories, it is normal for Git to report that each clone is in a
@@ -59,9 +67,11 @@ repositories, it is normal for Git to report that each clone is in a
 Clone the OpenCilk infrastructure repository, which contains the OpenCilk build
 script:
 
-    git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
+```bash
+git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
+```
 
-### Building OpenCilk
+## Building OpenCilk
 
 Run the `infrastructure/tools/build` script with two or three arguments.  The
 1st argument is the absolute pathname to the `opencilk-project` repository
@@ -72,13 +82,17 @@ cores, or 10 if the number of cores is not detected.
 
 For example:
 
-    # ...git clone as above...
-    infrastructure/tools/build $(pwd)/opencilk-project $(pwd)/build
+```bash
+# ...git clone as above...
+> infrastructure/tools/build $(pwd)/opencilk-project $(pwd)/build
+```
 
 Alternatively, to explicitly build OpenCilk using 8 build threads:
 
-    # ...git clone as above...
-    infrastructure/tools/build $(pwd)/opencilk-project $(pwd)/build 8
+```bash
+# ...git clone as above...
+> infrastructure/tools/build $(pwd)/opencilk-project $(pwd)/build 8
+```
 
 OpenCilk takes a few CPU-hours to build on a modern system --- less than 10
 minutes on a 24-core Ryzen with a fast disk.  It might take all day
@@ -86,21 +100,23 @@ single-threaded on an older machine.
 
 To echo the OpenCilk build script call syntax, use the `--help` switch:
 
-    infrastructure/tools/build --help
+```bash
+infrastructure/tools/build --help
+```
 
-> ***Advanced build options:*** If you wish, you can customize your
-> build of OpenCilk beyond what the script provides --- e.g., to build
-> additional LLVM subprojects --- by running the necessary CMake
-> commands yourself.  When run, the `infrastructure/tools/build`
-> script will print out the `cmake` commands it runs to build OpenCilk
-> from source.  OpenCilk supports many of the same CMake build options
-> as standard LLVM, which are documented here:
-> <https://llvm.org/docs/CMake.html>.  If you wish to customize your
-> OpenCilk build with these options, we recommend keeping `clang` in
-> the list passed to `-DLLVM_ENABLE_PROJECTS` and `cheetah;cilktools`
-> in the list passed to `-DLLVM_ENABLE_RUNTIMES`.
+***Advanced build options:*** If you wish, you can customize your
+build of OpenCilk beyond what the script provides --- e.g., to build
+additional LLVM subprojects --- by running the necessary CMake
+commands yourself.  When run, the `infrastructure/tools/build`
+script will print out the `cmake` commands it runs to build OpenCilk
+from source.  OpenCilk supports many of the same CMake build options
+as standard LLVM, which are documented here:
+<https://llvm.org/docs/CMake.html>.  If you wish to customize your
+OpenCilk build with these options, we recommend keeping `clang` in
+the list passed to `-DLLVM_ENABLE_PROJECTS` and `cheetah;cilktools`
+in the list passed to `-DLLVM_ENABLE_RUNTIMES`.
 
-### Usage
+## Usage
 
 You can run the OpenCilk C compiler out of its build tree, adding
 `/bin/clang` to the build directory name.  Similarly, add
@@ -122,25 +138,28 @@ provide standard system libraries and header files for clang.  To run
 clang with those header files and libraries, invoke the clang binary
 with `xcrun`; for example:
 
-    xcrun $(pwd)/build/bin/clang
+```bash
+> xcrun $(pwd)/build/bin/clang
+```
 
-#### Optional: Installing OpenCilk
+## Optional: Installing OpenCilk
 
 You can install OpenCilk into a directory of your choosing by
 running the `cmake_install.cmake` script generated in the build
 directory.  For example, run the following to install OpenCilk into
 the directory `/tmp/llvm`:
 
-    cd $(pwd)/build
-    cmake -DCMAKE_INSTALL_PREFIX=/tmp/llvm -P cmake_install.cmake
-    
-### Troubleshooting
+```bash
+cd $(pwd)/build
+cmake -DCMAKE_INSTALL_PREFIX=/tmp/llvm -P cmake_install.cmake
+```
+
+## Troubleshooting
 
 Here are a few common problems encountered when building from source,
 along with suggested workarounds.
 
-> The build fails with the error message, `collect2: error: ld
-  returned 1 exit status`.
+- The build fails with the error message, `collect2: error: ld returned 1 exit status`.
 
 This error typically occurs when the build process exhausts the
 physical memory available on the system.  Building OpenCilk from
@@ -152,8 +171,7 @@ OpenCilk.  Alternatively, try building OpenCilk from source using
 `clang` and LLVM's linker, `lld`, which tends to consume less physical
 memory than `ld`.
 
-> The build fails with the error message, `unrecognized argument to
-  '-fno-sanitize=' option: 'safe-stack'`.
+- The build fails with the error message, `unrecognized argument to '-fno-sanitize=' option: 'safe-stack'`.
 
 This error typically occurs when the C and C++ compilers on the
 system are mismatched, e.g., if `gcc` and `g++` refer to different
