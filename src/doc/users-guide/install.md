@@ -29,12 +29,16 @@ Use the links below to download the appropriate OpenCilk shell archive (<code>.s
 **Docker**
  - [docker-opencilk-v1.1.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/docker-opencilk-v1.1.tar.gz)
 
+ You can also [build OpenCilk from source](../build-opencilk-from-source).
+
 ## Install
 
 Execute the script to install OpenCilk into the current directory.
 
 ```bash
-> do something
+> run the script
+> accept the license
+> choose installation location
 ```
 
 ## Test
@@ -46,11 +50,9 @@ Your OpenCilk installation includes the following components:
  - Race detector
  - Scalability analyzer
 
-See [Getting started](/doc/howto/getting-started) to verify that your installation is working.
+See [Getting started](/doc/users-guide/getting-started) to verify that your installation is working.
 
 
 ## Next Steps
 
 Something about code libraries and development resources?
-
-See also: **[Build OpenCilk from source](../build-opencilk-from-source)**
