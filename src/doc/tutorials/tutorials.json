@@ -1,5 +1,6 @@
 {
     "layout": "layouts/page.njk",
+    "stylesheet": "users-guide.css",
     "background": "bg-white",
     "permalink": "/doc/tutorials/{{ page.fileSlug }}/", 
     "eleventyNavigation": {
