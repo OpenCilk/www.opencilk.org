@@ -10,23 +10,6 @@ hero:
 blogFormat: 
   row: justify-content-center
   col: col-sm-6 col-lg-4 mb-4
-cards:
-- title: Write fast code
-  width: 
-  description: Parallelize C/C++ with OpenCilk.
-  image: img/n-queens-code.png
-  button: Install
-  url: /doc/users-guide/install/
-- title: Performance engineering
-  description: What is it and why does it matter?
-  image: img/plenty-of-room-at-the-top.png
-  button: Learn
-  url: /posts/
-- title: Teach with OpenCilk
-  description: OpenCilk provides an ideal introduction to parallel programming.
-  image: img/fib-code-trace-dag.png
-  button: Discover
-  url: "/doc/"
 ---
 
 <img class="d-block pt-5 pb-4 mx-auto" src="{{ hero.image }}" width="440">
@@ -108,7 +91,7 @@ cards:
 
 
 <div class="container-fluid bg-white mx-auto mt-4 pt-3" style="border-top-style: solid; border-top-color: var(--lime); padding-left: 10em; padding-right: 10em;">
-  <div class="container" style="max-width: 960px; font-size: large; margin-top: 2em; margin-bottom: 2em;">
+  <div class="container" style="max-width: 960px; font-size: larger; margin-top: 2em; margin-bottom: 2em;">
       <h1>{{ title }}</h1>
       <p>OpenCilk is an open-source platform that makes parallel programming a simple extension of serial programming.</p>
       <ul>
@@ -118,7 +101,7 @@ cards:
       </ul>
     </div>
 
-  <div class="container mt-3 border-top p-3" style="max-width: 960px; font-size: large;">
+  <div class="container mt-3 border-top p-3" style="max-width: 960px; font-size: larger;">
       <h3 class="my-4">Featured blog posts</h3>
       {% set postslist = collections['featured'] %}
       {% include "posts_cards.njk" %}
