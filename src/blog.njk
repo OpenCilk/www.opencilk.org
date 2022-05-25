@@ -10,9 +10,11 @@ eleventyNavigation:
   parent: Home
 ---
 
-<p>Welcome to our blog about performance engineering.</p>
+<p><strong>Performance engineering:</strong> making software run fast or otherwise consume few resources, such as time, storage, energy, network bandwidth, etc.<p>
 
-<div class="d-flex col-8">
+<div class="d-flex col-12">
+
 {% set postslist = collections.posts %}
 {% include "posts_cards.njk" %}
+
 </div>

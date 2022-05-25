@@ -1,6 +1,6 @@
 ---
 title: What the $#@! is Parallelism, Anyhow?
-excerpt: An introduction to work, span, and T1/T∞
+excerpt: An introduction to work, span, and parallelism
 date: 2022-01-27
 author: Charles Leiserson
 thumbnail: multithreaded-dag.jpg
@@ -12,7 +12,7 @@ tags:
  - multithreading
 ---
 
-I’m constantly amazed how many seemingly well-educated computer technologists bandy about the word parallelism without really knowing what they’re talking about. I can’t tell you how many articles and books I’ve read on parallel computing that use the term over and over without ever defining it. Many of these “authoritative” sources cite Amdahl’s Law (1), originally proffered by Gene Amdahl in 1967, but they seem blissfully unaware of the more general and precise quantification of parallelism provided by theoretical computer science. Since the theory really isn’t all that hard, it curious that it isn’t better known. Maybe it needs a better name — “Law” sounds so authoritative. In this blog, I’ll give a brief introduction to this theory, which incidentally provides a foundation for the efficiency of the Cilk++ runtime system.
+I’m constantly amazed how many seemingly well-educated computer technologists bandy about the word parallelism without really knowing what they’re talking about. I can’t tell you how many articles and books I’ve read on parallel computing that use the term over and over without ever defining it. Many of these “authoritative” sources cite Amdahl’s Law<sup>1</sup>, originally proffered by Gene Amdahl in 1967, but they seem blissfully unaware of the more general and precise quantification of parallelism provided by theoretical computer science. Since the theory really isn’t all that hard, it curious that it isn’t better known. Maybe it needs a better name — “Law” sounds so authoritative. In this blog, I’ll give a brief introduction to this theory, which incidentally provides a foundation for the efficiency of the Cilk++ runtime system.
 
 ## Amdahl’s Law
 
@@ -25,7 +25,7 @@ This argument was used in the 1970’s and 1980’s to argue that parallel compu
 As with much of theoretical computer science, we need a model of multithreaded execution in order to give a precise definition of parallelism. We can use the dag model for multithreading, which I talked about in my blog, “Are determinacy-race bugs lurking in your multicore application?” (A dag is a directed acyclic graph.) The dag model views the execution of a multithreaded program as a set of instructions (the vertices of the dag) with graph edges indicating dependences between instructions. We say that an instruction x precedes an instruction y, sometimes denoted x ≺ y, if x must complete before y can begin. In a diagram for the dag, x ≺ y means that there is a positive-length path from x to y. If neither x ≺ y nor y ≺ x, we say the instructions are in parallel, denoted x ∥ y. The figure below illustrates a multithreaded dag:
 
  
-![dag](/static/img/multithreaded-dag.jpg)
+![dag](/img/multithreaded-dag.jpg)
  
 
 In the figure, we have, for example, 1 ≺ 2, 6 ≺ 12, and 4 ∥ 9.
@@ -38,7 +38,7 @@ The first important measure is work, which is what you get when you add up the t
 
 Let’s adopt a simple notation. Let TP be the fastest possible execution time of the application on P processors. Since the work corresponds to the execution time on 1 processor, we denote it by T1. Among the reasons that work is an important measure is because it provides a bound — Oops, I mean Law — on any P-processor execution time:
 
-![work](/static/img/work-law.jpg) 
+![work](/img/work-law.jpg) 
 
 The Work Law holds, because in our model, each processor executes at most 1 instruction per unit time, and hence P processors can execute at most P instructions per unit time. Thus, to do all the work on P processors, it must take at least T1/P time.
 
@@ -50,7 +50,7 @@ The second important measure is span, which is the longest path of dependences i
 
 Like work, span also provides a bou…, uhhh, Law on P-processor execution time:
 
-![span](/static/img/span-law.jpg) 
+![span](/img/span-law.jpg) 
 
 The Span Law holds for the simple reason that a finite number of processors cannot outperform an infinite number of processors, because the infinite-processor machine could just ignore all but P of its processors and mimic a P-processor machine exactly.
 
@@ -69,4 +69,4 @@ Amdahl’s Law for the case where a fraction p of the application is parallel an
 
 In particular, the theory of work and span has led to an excellent understanding of multithreaded scheduling, at least for those who know the theory. As it turns out, scheduling a multithreaded computation to achieve optimal performance is NP-complete, which in lay terms means that it is computationally intractable. Nevertheless, practical scheduling algorithms exist based on work and span that can schedule any multithreaded computation near optimally. The Cilk++ runtime system contains such a near-optimal scheduler. I’ll talk about multithreaded scheduling in another blog, where I’ll show how the Work and Span Laws really come into play.
 
-1. Amdahl, Gene. The validity of the single processor approach to achieving large-scale computing capabilities. Proceedings of the AFIPS Spring Joint Computer Conference. April 1967, pp. 483-485.
+<sup>1</sup>Amdahl, Gene. The validity of the single processor approach to achieving large-scale computing capabilities. Proceedings of the AFIPS Spring Joint Computer Conference. April 1967, pp. 483-485.

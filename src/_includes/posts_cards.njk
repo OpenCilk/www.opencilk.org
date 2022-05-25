@@ -1,6 +1,6 @@
 <div class="row {% if blogFormat.row %} {{ blogFormat.row }} {% endif %}">
   {% for post in postslist | reverse %}
-  <div class="{% if blogFormat.col %} {{ blogFormat.col }} {% else %} col-sm-6 col-lg-3 mb-4 {% endif %}">
+  <div class="{% if blogFormat.col %} {{ blogFormat.col }} {% else %} col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4 {% endif %}">
     <div class="card" style="border-color: var(--blue);">
       <div class="overflow-hidden" style="height: 9em">
       <img class="img-fluid p-3" src="{% if post.data.thumbnail %} {{ ['/img/', post.data.thumbnail] | join }} {% else %} /img/fib-nocode-trace-dag.png {% endif %}">
