@@ -1,0 +1,42 @@
+---
+title: Documentation
+layout: layouts/page.njk
+eleventyNavigation:
+  key: Documentation
+  parent: Home
+  order: 4
+blogFormat: 
+  row: justify-content-center
+  col: col-sm-6 col-lg-4 mb-4
+---
+
+See also our <a href="/posts/">Fast code blog</a>, which puts the documentation in context with stories about the latest developments in performance engineering.
+
+<div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+  <div class="flex-shrink-0 me-md-3 pt-3 px-3 overflow-hidden" style="background-color: var(--yellow);">
+    <div class="text-center">
+      <h2 class="display-5 mt-0 mb-1">User's guide</h2>
+      <p class="lead">Doing things with OpenCilk</p>
+    </div>
+    {% set postslist = collections['users guide'] %}
+    {% include "posts_list_tagless.njk" %}
+  </div>
+
+  <div class="me-md-3 pt-3 px-3 overflow-hidden" style="background-color: var(--lime);">
+    <div class="text-center">
+      <h2 class="display-5 mt-0 mb-1">Tutorials</h2>
+      <p class="lead">Learning OpenCilk concepts</p>
+    </div>
+    {% set postslist = collections['tutorial'] %}
+    {% include "posts_list_tagless.njk" %}
+  </div>
+  <div class="me-md-3 pt-3 px-3 overflow-hidden" style="background-color: var(--safetyyellow);">
+    <div class="text-center">
+      <h2 class="display-5 mt-0 mb-1">Reference</h2>
+      <p class="lead">Defining OpenCilk specifications</p>
+    </div>
+    {% set postslist = collections['reference'] %}
+    {% include "posts_list_tagless.njk" %}
+  </div>
+</div>
+

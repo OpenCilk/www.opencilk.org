@@ -49,3 +49,7 @@ eleventyNavigation:
  - [{{ person.name }}]({{ person.url }}), {{ person.organization }}
 {% endfor %}
 </div>
+
+## Acknowledgments
+
+This material is based on work supported by the National Science Foundation under Grant No. 1925609. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.

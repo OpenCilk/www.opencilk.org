@@ -16,7 +16,7 @@ I’m constantly amazed how many seemingly well-educated computer technologists 
 
 ## Amdahl’s Law
 
-First, let’s look at Amdahl’s Law and see what it says and what it doesn’t say. Amdahl made what amounts to the following observation. Suppose that 50% of a computation can be parallelized and 50% can’t. Then, even if the 50% that is parallel took no time at all to execute, the total time is cut at most in half, leaving a speedup of less than 2. In general, if a fraction p of a computation can be run in parallel and the rest must run serially, Amdahl’s Law upper-bounds the speedup by 1/(1–p).
+First, let’s look at Amdahl’s Law and see what it says and what it doesn’t say. Amdahl made what amounts to the following observation. Suppose that 50% of a computation can be parallelized and 50% can’t. Then, even if the 50% that is parallel took no time at all to execute, the total time is cut at most in half, leaving a speedup of less than 2. In general, if a fraction $p$ of a computation can be run in parallel and the rest must run serially, Amdahl’s Law upper-bounds the speedup by $1/(1–p)$.
 
 This argument was used in the 1970’s and 1980’s to argue that parallel computing, which was in its infancy back then, was a bad idea — the implication being that most applications have long, inherently serial subcomputations that limit speedup. We now know from numerous examples that there are plenty of applications that can be effectively sped up by parallel computers, but Amdahl’s Law doesn’t really help in understanding how much speedup you can expect from your application. After all, few applications can be decomposed so simply into just a serial part and a parallel part. Theory to the rescue!
 
