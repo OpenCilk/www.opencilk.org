@@ -90,9 +90,13 @@ blogFormat:
 </div>
 
 
-<div class="container-fluid bg-white mx-auto mt-4 pt-3" style="border-top-style: solid; border-top-color: var(--lime); padding-left: 10em; padding-right: 10em;">
-  <div class="container" style="max-width: 960px; font-size: larger; margin-top: 2em; margin-bottom: 2em;">
+<div class="mx-0 bg-white" style="border-top-style: solid; border-top-color: var(--lime);">
+<div class="container py-4 px-4" style="max-width: 1120px;">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="text-center">
       <h1>{{ title }}</h1>
+      </div>
       <p>OpenCilk is an open-source platform that makes parallel programming a simple extension of serial programming.</p>
       <ul>
         <li>Efficient compiling makes your OpenCilk program faster.</li>
@@ -101,10 +105,15 @@ blogFormat:
       </ul>
     </div>
 
-  <div class="container mt-3 border-top p-3" style="max-width: 960px; font-size: larger;">
-      <h3 class="my-4">Featured blog posts</h3>
-      {% set postslist = collections['featured'] %}
-      {% include "posts_cards.njk" %}
+
+    <h3 class="my-4">Featured blog posts</h3>
+    <div class="container" id="featured-3">
+      <div class="row g-2">
+        {% set postslist = collections['featured'] %}
+        {% include "posts_cards.njk" %}
+      </div>
+    </div>
+
   </div>
 </div>
-
+</div>

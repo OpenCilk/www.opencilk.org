@@ -1,7 +1,7 @@
 ---
 title: OpenCilk tutorial at SPAA 2022
 excerpt: Come to our half-day session, July 11 in Philadelphia, PA.
-date: 2022-02-03
+date: 2022-05-31
 author: Dorothy Curtis
 thumbnail: shared-memory.png
 tags:

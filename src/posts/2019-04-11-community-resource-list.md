@@ -1,7 +1,7 @@
 ---
 title: Community resource list
 excerpt: Check it out and add your favorites
-date: 2022-04-11
+date: 2019-04-11
 author: Bruce Hoppe
 tags: [resources, featured]
 ---

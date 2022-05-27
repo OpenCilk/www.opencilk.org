@@ -1,24 +1,22 @@
-<div class="row {% if blogFormat.row %} {{ blogFormat.row }} {% endif %}">
-  {% for post in postslist | reverse %}
-  <div class="{% if blogFormat.col %} {{ blogFormat.col }} {% else %} col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4 {% endif %}">
-    <div class="card" style="border-color: var(--blue);">
-      <div class="overflow-hidden" style="height: 9em">
-      <img class="img-fluid p-3" src="{% if post.data.thumbnail %} {{ ['/img/', post.data.thumbnail] | join }} {% else %} /img/fib-nocode-trace-dag.png {% endif %}">
-      </div>
-      <div class="blog card-body" style="background-color: var(--blue);">
+{% for post in postslist | reverse %}
+  <div class="col col-12 col-lg-6 g-2">
+    <div class="row g-0 p-2 h-100 align-items-center rounded border shadow overflow-hidden">
+      <div class="col-9 g-0 h-100 rounded">
         <a class="col mb-2 text-decoration-none" href="{{ post.url | url }}">
-          <h6 class="fw-bold card-title">{{ post.data.title }}</h5>
+          <h4 class="display-8 fw-bold lh-1 mb-3">{{ post.data.title }}</h4>
         </a>
+        <p class="lead">{{ post.data.excerpt }}</p>
         <small>
-        <p class="mb-0 card-text">{{ post.data.excerpt }}</p>
-        <time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-        {% for tag in post.data.tags | filterTagList %}
+          {% for tag in post.data.tags | filterTagList %}
           {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
-          <a href="{{ tagUrl | url }}" class="card-tag">{{ tag }}</a>{{ ", " if not loop.last else "" }}
-        {% endfor %}
+            <a href="{{ tagUrl | url }}" class="card-tag">{{ tag }}</a>{{ ", " if not loop.last else "" }}
+          {% endfor %}
         </small>
+      </div>
+      <div class="col-3 g-0 h-100 rounded m-0 p-0 overflow-hidden">
+        <img class="img-fluid" src="{% if post.data.thumbnail %} {{ ['/img/', post.data.thumbnail] | join }} {% else %} /img/fib-nocode-trace-dag.png {% endif %}">
       </div>
     </div>
   </div>
-  {% endfor %}
-</div>
+{% endfor %}
+
