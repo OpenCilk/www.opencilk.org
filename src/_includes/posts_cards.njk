@@ -3,9 +3,10 @@
     <div class="row g-0 p-2 h-100 align-items-center rounded border shadow overflow-hidden">
       <div class="col-9 g-0 h-100 rounded">
         <a class="col mb-2 text-decoration-none" href="{{ post.url | url }}">
-          <h4 class="display-8 fw-bold lh-1 mb-3">{{ post.data.title }}</h4>
+          <h4 class="display-8 fw-bold lh-1 mb-2">{{ post.data.title }}</h4>
         </a>
-        <p class="lead">{{ post.data.excerpt }}</p>
+        <small><p class="fw-light my-0 py-0"><span>{{ page.date | readableDate }}</span> &mdash; By {{ post.data.author }}</p></small>
+        <p class="lead" style="line-height: 1.3;">{{ post.data.excerpt }}</p>
         <small>
           {% for tag in post.data.tags | filterTagList %}
           {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}

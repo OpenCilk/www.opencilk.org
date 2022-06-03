@@ -4,8 +4,5 @@
     "permalink": "/community/{{ page.fileSlug | slugify }}/", 
     "eleventyNavigation": {
         "parent": "Community"
-    },
-    "tags": [
-        "community"
-    ]
+    }
 }

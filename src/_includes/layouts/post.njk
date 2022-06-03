@@ -4,16 +4,19 @@ templateClass: tmpl-post
 ---
 <h1>{{ title }}</h1>
 
-{% if excerpt %}
-<p><em>{{ excerpt | safe }}</em></p>
-{% endif %}
+<div style="font-size: larger;">
+    {% if excerpt %}
+    <p><em>{{ excerpt | safe }}</em></p>
+    {% endif %}
 
-<time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
-{%- for tag in tags | filterTagList -%}
-{%- set tagUrl %}/tags/{{ tag | slug }}/{% endset -%}
-<a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
-{%- endfor %}
+    <p class="my-0 py-0"><span>{{ page.date | readableDate }}</span> &mdash; By {{ author }}
+    {%- for tag in tags | filterTagList -%}
+    {%- set tagUrl %}/tags/{{ tag | slug }}/{% endset -%}
+    <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
+    {%- endfor %}
+    </p>
 
-<div style="font-size: larger; margin-top: 0.5em;">
-{{ content | safe }}
+    <div style="margin-top: 0.5em;">
+        {{ content | safe }}
+    </div>
 </div>

@@ -9,6 +9,10 @@ const markdownItAnchor = require("markdown-it-anchor");
 const pluginTOC = require("eleventy-plugin-toc");
 const mathjax3 = require('markdown-it-mathjax3');
 
+const now = new Date();
+const publishedPosts = (post) => post.date <= now && !post.data.draft;
+const featuredPosts = (post) => post.date <= now && !post.data.draft && post.data.featured;
+
 module.exports = function(eleventyConfig) {
   // Support .yaml extension in _data
   eleventyConfig.addDataExtension("yaml", contents => yaml.load(contents));
@@ -28,7 +32,7 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addFilter("readableDate", dateObj => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("yyyy LLL dd");
   });
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
@@ -51,6 +55,18 @@ module.exports = function(eleventyConfig) {
   // Return the smallest number argument
   eleventyConfig.addFilter("min", (...numbers) => {
     return Math.min.apply(null, numbers);
+  });
+
+  eleventyConfig.addCollection("publishedPosts", (collection) => {
+    return collection
+        .getFilteredByGlob("./src/posts/*.md")
+        .filter(publishedPosts);
+  });
+
+  eleventyConfig.addCollection("featuredPosts", (collection) => {
+    return collection
+        .getFilteredByGlob("./src/posts/*.md") 
+        .filter(featuredPosts);
   });
 
   function filterTagList(tags) {

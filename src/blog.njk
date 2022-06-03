@@ -5,17 +5,17 @@ background: bg-white
 sidebar: blog
 permalink: /posts/
 eleventyNavigation:
-  key: Blog
+  key: Fast code
   order: 2
   parent: Home
 ---
 
-<p><strong>Performance engineering:</strong> making software run fast or otherwise consume few resources, such as time, storage, energy, network bandwidth, etc.<p>
+<p><strong class="codefont">Performance engineering:</strong> making software run fast or otherwise consume few resources, such as time, storage, energy, network bandwidth, etc.</p>
 
 <div class="container py-3" id="featured-3">
   <div class="row g-2">
 
-    {% set postslist = collections.posts %}
+    {% set postslist = collections.publishedPosts %}
     {% include "posts_cards.njk" %}
 
   </div>

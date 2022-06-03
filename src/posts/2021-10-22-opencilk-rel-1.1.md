@@ -3,8 +3,8 @@ title: OpenCilk 1.1 released
 excerpt: The latest release features x and y.
 date: 2021-10-22
 author: TB Schardl
+featured: true
 tags: 
- - featured
  - news
  - release
 thumbnail: super-mario.png # relative to /src/static/img/
