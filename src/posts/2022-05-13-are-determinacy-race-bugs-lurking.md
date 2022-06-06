@@ -3,6 +3,7 @@ title: Are determinacy-race bugs lurking in YOUR multicore application?
 excerpt: The bane of concurrency, race conditions are notoriously hard to find. If you're going to multicore-enable your application, you need a reliable way to find them and eliminate them.
 author: Charles Leiserson
 date: 2022-05-13
+draft: true
 tags: [determinacy race, data race]
 ---
 

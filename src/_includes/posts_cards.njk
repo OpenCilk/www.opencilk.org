@@ -5,7 +5,7 @@
         <a class="col mb-2 text-decoration-none" href="{{ post.url | url }}">
           <h4 class="display-8 fw-bold lh-1 mb-2">{{ post.data.title }}</h4>
         </a>
-        <small><p class="fw-light my-0 py-0"><span>{{ page.date | readableDate }}</span> &mdash; By {{ post.data.author }}</p></small>
+        <small><p class="fw-light my-0 py-0"><span>{{ post.data.date | readableDate }}</span> &mdash; By {{ post.data.author }}</p></small>
         <p class="lead" style="line-height: 1.3;">{{ post.data.excerpt }}</p>
         <small>
           {% for tag in post.data.tags | filterTagList %}

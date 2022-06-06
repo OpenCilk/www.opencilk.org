@@ -57,7 +57,7 @@ module.exports = function(eleventyConfig) {
     return Math.min.apply(null, numbers);
   });
 
-  eleventyConfig.addCollection("publishedPosts", (collection) => {
+  eleventyConfig.addCollection("posts", (collection) => {
     return collection
         .getFilteredByGlob("./src/posts/*.md")
         .filter(publishedPosts);
