@@ -10,6 +10,48 @@ hero:
 blogFormat: 
   row: justify-content-center
   col: col-sm-6 col-lg-4 mb-4
+features:
+- call: Write fast code
+  call_description: Parallelize C/C++ with OpenCilk.
+  call_color: var(--midnight)
+  call_bg: var(--lime)
+  button: Install
+  button_link: /doc/users-guide/install/
+  button_color: var(--yellow)
+  button_bg: var(--blue)
+  image_bg: var(--yellow)
+  image: qsort-code-light.png
+- call: Performance engineering
+  call_description: What is it and why does it matter?
+  call_color: var(--yellow)
+  call_bg: var(--midnight)
+  button: Learn
+  button_link: /posts/
+  button_color: var(--yellow)
+  button_bg: var(--blue)
+  image_bg: var(--midnight)
+  image: plenty-of-room-at-the-top.png
+- call: Teach performance
+  call_description: OpenCilk provides an ideal introduction.
+  call_color: var(--safetyyellow)
+  call_bg: var(--darkteal)
+  button: Discover
+  button_link: /doc/
+  button_color: var(--midnight)
+  button_bg: var(--yellow)
+  image_bg: var(--teal)
+  image: fib-code-multicore.png
+- call: Go multicore
+  call_description: Convert your code to OpenCilk
+  call_color: var(--midnight)
+  call_bg: var(--yellow)
+  button: Here's how
+  button_link: /doc/users-guide/convert-a-c-program/
+  button_color: var(--yellow)
+  button_bg: var(--blue)
+  image_bg: var(--safetyyellow)
+  image: fib-nocode-trace-dag.png
+
 ---
 
 <img class="d-block pt-4 pb-4 mx-auto" src="{{ hero.image }}" width="440">
@@ -19,76 +61,24 @@ blogFormat:
 
 <div class="container px-4 mb-3" style="max-width: 1120px;">
   <div class="row justify-content-center g-5 ">
-    <div class="col-md-6  rounded">
-      <div class="row h-100 flex-row-reverse align-items-center rounded border shadow-lg" style="background-color: var(--yellow);">
-        <div class="col-7 h-100 rounded m-0 p-0"
-          style="background-image: url('img/qsort-code-light.png'); background-size: cover;">
-        </div>
-        <div class="col-5 h-100 py-2 rounded" style="color: var(--midnight); background-color: var(--lime);">
-          <h4 class="display-8 fw-bold lh-1 mb-3">Write fast code</h2>
-          <p class="lead">Parallelize C/C++ with OpenCilk.</p>
-          
-          <a href="/doc/users-guide/install" class="btn border btn-lg px-4 me-md-2" style="color: var(--yellow); background-color: var(--blue);">Install</a>
-          
-        </div>
-      </div>
-    </div>
 
+  {% for item in features %}
     <div class="col-md-6 rounded">
-      <div class="row h-100 flex-row-reverse align-items-center rounded border shadow-lg" style="background-color: var(--midnight);">
+      <div class="row h-100 flex-row-reverse align-items-center rounded border shadow-lg" style="background-color: {{ item.image_bg }};">
         <div class="col-7 h-100 rounded m-0 p-0"
-          style="background-image: url('img/plenty-of-room-at-the-top.png'); background-size: cover;">
+          style="background-image: url('img/{{ item.image }}'); background-size: cover;">
         </div>
-        <div class="col-5 h-100 py-2 rounded" style="color: var(--yellow);">
-          <h4 class="display-8 fw-bold lh-1 mb-3">Performance engineering</h2>
-          <p class="lead">What is it and why does it matter?</p>
-          
-          <a href="/posts/" class="btn border btn-lg px-4 me-md-2" style="color: var(--yellow); background-color: var(--blue);">Learn</a>
-          
+        <div class="d-flex align-content-between flex-wrap  col-5 h-100 py-3 rounded" style="color: {{ item.call_color }}; background-color: {{ item.call_bg }};">
+          <div class="d-flex"><h4 class="display-8 fw-bold lh-1 mt-0 mb-3">{{ item.call }}</h4></div>
+          <div class="d-flex"><p class="lead">{{ item.call_description }}</p></div>
+          <div class="d-flex"><a href="{{ item.button_link }}" class="btn border btn-lg px-4 me-md-2" style="color: {{ item.button_color }}; background-color: {{ item.button_bg }};">{{ item.button }}</a></div>
         </div>
       </div>
     </div>
+  {% endfor %}
 
   </div>
-    
-  <div class="row justify-content-center g-5 py-3">
-
-    <div class="col-md-6 rounded">
-      <div class="row h-100 flex-row-reverse align-items-center rounded border shadow-lg" style="background-color: var(--teal);">
-        <div class="col-7 h-100 rounded m-0 p-0"
-          style="background-image: url('img/fib-code-multicore.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
-        </div>
-        <div class="col-5 h-100 py-2 rounded" style="color: var(--safetyyellow); background-color: rgba(0,0,0,0.2);">
-          <h4 class="display-8 fw-bold lh-1 mb-3">Teach parallelism</h4>
-          <p class="lead">OpenCilk provides an ideal introduction.</p>
-          
-          <a href="/doc/" class="btn border btn-lg px-4 me-md-2" style="background-color: var(--yellow);">Discover</a>
-          
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 rounded">
-      <div class="row h-100 flex-row-reverse align-items-center rounded border shadow-lg" style="background-color: var(--safetyyellow);">
-        <div class="col-7 h-100 rounded m-0 p-0"
-          style="background-image: url('img/fib-nocode-trace-dag.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
-        </div>
-        <div class="col-5 h-100 py-2 rounded" style="color: var(--midnight); background-color: var(--yellow);">
-          <div class="row flex-grow-1">
-          <h4 class="display-8 fw-bold lh-1 mb-3">Go multicore</h2>
-          <p class="lead flex-grow-1">Convert your code to OpenCilk.</p>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <a href="/doc/users-guide/convert-a-c-program/" class="btn border btn-lg px-4 me-md-2" style="color: var(--yellow); background-color: var(--blue);">Here's how</a>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
 </div>
-
 
 <div class="mx-0 bg-white" style="border-top-style: solid; border-top-color: var(--lime);">
 <div class="container py-4 px-4" style="max-width: 1120px;">
@@ -104,7 +94,6 @@ blogFormat:
         <li>Provable race-detection guarantees that your OpenCilk program has a deterministic result.</li>
       </ul>
     </div>
-
 
     <h3 class="my-4">Featured blog posts</h3>
     <div class="container" id="featured-3">
