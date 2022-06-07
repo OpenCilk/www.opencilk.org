@@ -16,6 +16,10 @@ $ cd tutorial
 Let us walk through the steps of building, running, and testing a program with
 OpenCilk.
 
+> ***Note:*** The rest of this guide assumes that OpenCilk is installed within
+> `/opt/opencilk/` and that `clang` points to the OpenCilk C compiler at
+> `/opt/opencilk/bin/clang`.
+
 ## Using the compiler
 
 To compile a Cilk program with OpenCilk, pass the `-fopencilk` flag to Clang
@@ -218,7 +222,7 @@ script, which is found at `share/Cilkscale_vis/cilkscale.py` within the
 OpenCilk installation directory: 
 
 ```bash
-$ python3 /path/to/opencilk/share/Cilkscale_vis/cilkscale.py \
+$ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py \
     -c qsort -b qsort-bench --args 10000000
 ```
 
@@ -228,7 +232,7 @@ cores) and time the execution; and output the results as a CSV table (`out.csv`)
 plots in a PDF document (`plot.pdf`):
 
 ```
-$ python3 /path/to/opencilk/share/Cilkscale_vis/cilkscale.py -c qsort -b qsort-bench --args 10000000
+$ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py -c qsort -b qsort-bench --args 10000000
 Namespace(args=['10000000'], cilkscale='./qsort', cilkscale_benchmark='./qsort_bench',
 cpu_counts=None, output_csv='out.csv', output_plot='plot.pdf', rows_to_plot='all')
 
@@ -256,5 +260,5 @@ To see all options of the Cilkscale `cilkscale.py` script, pass it the `--help`
 argument:
 
 ```bash
-$ python3 /path/to/opencilk/share/Cilkscale_vis/cilkscale.py --help
+$ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py --help
 ```
