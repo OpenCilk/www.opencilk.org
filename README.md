@@ -11,6 +11,7 @@ The OpenCilk website is generated using [Eleventy](https://www.11ty.dev/), a Nod
 ## Making Simple Changes
 
 To suggest a change to the website, you can simply navigate to the page with the content you think should be changed, and edit it.
+(Here are [instructions for editing on GitHub](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files).)
 You will be prompted to fork the repo (if you haven't already) and then open a Pull Request.
 Once your Pull Request is merged, you should see your changes show up on the website in a few minutes.
 
