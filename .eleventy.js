@@ -21,6 +21,13 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/css");
 
+  // Copy the favicon materials to the output
+  eleventyConfig.addPassthroughCopy("src/*.png");
+  eleventyConfig.addPassthroughCopy("src/*.svg");
+  eleventyConfig.addPassthroughCopy("src/*.ico");
+  eleventyConfig.addPassthroughCopy("src/site.webmanifest");
+  eleventyConfig.addPassthroughCopy("src/browserconfig.xml");
+
   // Add plugins
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight,
