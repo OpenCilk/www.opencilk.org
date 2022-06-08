@@ -46,7 +46,7 @@ We can interpret the Work Law in terms of speedup. Using our notation, the speed
 
 ## Span
 
-The second important measure is span, which is the longest path of dependences in the dag. The span of the dag in the figure is 9, which corresponds to the path 1→ 2 → 3→ 6 → 7 → 8 → 11→ 12 → 18. This path is sometimes called the critical path of the dag, and span is sometimes referred to in the literature as critical-path length. Since the span is the theoretically fastest time the dag could be executed on a computer with an infinite number of processors (assuming no overheads for communication, scheduling, etc.), we denote it by T∞.
+The second important measure is span, which is the longest path of dependences in the dag. The span of the dag in the figure is 9, which corresponds to the path 1→ 2 → 3→ 6 → 7 → 8 → 11→ 12 → 18. This path is sometimes called the critical path of the dag, and span is sometimes referred to in the literature as critical-path length. Since the span is the theoretically fastest time the dag could be executed on a computer with an infinite number of processors (assuming no overheads for communication, scheduling, etc.), we denote it by T<sub>∞</sub>.
 
 Like work, span also provides a bou…, uhhh, Law on P-processor execution time:
 
@@ -56,16 +56,16 @@ The Span Law holds for the simple reason that a finite number of processors cann
 
 ## Parallelism
 
-Parallelism is defined as the ratio of work to span, or T1/T∞. Why does this definition make sense? There are several ways to understand it:
+Parallelism is defined as the ratio of work to span, or T1/T<sub>∞</sub>. Why does this definition make sense? There are several ways to understand it:
 
- 1. The parallelism T1/T∞ is the average amount of work along each step of the critical path.
- 1. The parallelism T1/T∞ is the maximum possible speedup that can be obtained by any number of processors.
- 1. Perfect linear speedup cannot be obtained for any number of processors greater than the parallelism T1/T∞. To see this third point, suppose that P> T1/T∞, in which case the Span Law TP ≥ T∞ implies that the speedup T1/TP satisfies T1/TP ≤ T1/T∞ < P. Since the speedup is strictly less than P, it cannot be perfect linear speedup. Note also that if P ≫ T1/T∞, then T1/TP ≪ P — the more processors you have beyond the parallelism, the less “perfect” the speedup.
+ 1. The parallelism T1/T<sub>∞</sub> is the average amount of work along each step of the critical path.
+ 1. The parallelism T1/T<sub>∞</sub> is the maximum possible speedup that can be obtained by any number of processors.
+ 1. Perfect linear speedup cannot be obtained for any number of processors greater than the parallelism T1/T<sub>∞</sub>. To see this third point, suppose that P> T1/T<sub>∞</sub>, in which case the Span Law TP ≥ T<sub>∞</sub> implies that the speedup T1/TP satisfies T1/TP ≤ T1/T<sub>∞</sub> < P. Since the speedup is strictly less than P, it cannot be perfect linear speedup. Note also that if P ≫ T1/T<sub>∞</sub>, then T1/TP ≪ P — the more processors you have beyond the parallelism, the less “perfect” the speedup.
 
 For our example, the parallelism is 18/9 = 2. Thus, no matter how many processors execute the program, the greatest speedup that can be attained is only 2, which frankly isn’t much. Somehow, to my eye, it looks like more, but the math doesn’t lie.
 Amdahl’s Law Redux
 
-Amdahl’s Law for the case where a fraction p of the application is parallel and a fraction 1–p is serial simply amounts to the special case where T∞ > (1–p) T1. In this case, the maximum possible speedup is T1/T∞ < 1/(1–p). Amdahl’s Law is simple, but the Work and Span Laws are far more powerful.
+Amdahl’s Law for the case where a fraction p of the application is parallel and a fraction 1–p is serial simply amounts to the special case where T<sub>∞</sub> > (1–p) T1. In this case, the maximum possible speedup is T1/T<sub>∞</sub> < 1/(1–p). Amdahl’s Law is simple, but the Work and Span Laws are far more powerful.
 
 In particular, the theory of work and span has led to an excellent understanding of multithreaded scheduling, at least for those who know the theory. As it turns out, scheduling a multithreaded computation to achieve optimal performance is NP-complete, which in lay terms means that it is computationally intractable. Nevertheless, practical scheduling algorithms exist based on work and span that can schedule any multithreaded computation near optimally. The Cilk++ runtime system contains such a near-optimal scheduler. I’ll talk about multithreaded scheduling in another blog, where I’ll show how the Work and Span Laws really come into play.
 
