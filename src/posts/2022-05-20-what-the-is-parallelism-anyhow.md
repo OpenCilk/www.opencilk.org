@@ -1,9 +1,9 @@
 ---
 title: What the $#@! is parallelism, anyhow?
-excerpt: We take inspiration from Amdahl's Law to give a more "authoritative" introduction to the basic concepts of multithreaded execution -- work, span, and parallelism.
+excerpt: We take inspiration from Amdahl's Law to give a more "authoritative" introduction to the basic concepts of multithreaded execution — work, span, and parallelism.
 date: 2022-05-20
 author: Charles Leiserson
-thumbnail: multithreaded-dag.jpg
+thumbnail: multithreaded-dag.png
 featured: true
 tags:
  - parallelism
@@ -24,9 +24,9 @@ This argument was used in the 1970’s and 1980’s to argue that parallel compu
 
 As with much of theoretical computer science, we need a model of multithreaded execution in order to give a precise definition of parallelism. We can use the dag model for multithreading, which I talked about in my blog, “Are determinacy-race bugs lurking in your multicore application?” (A dag is a directed acyclic graph.) The dag model views the execution of a multithreaded program as a set of instructions (the vertices of the dag) with graph edges indicating dependences between instructions. We say that an instruction x precedes an instruction y, sometimes denoted x ≺ y, if x must complete before y can begin. In a diagram for the dag, x ≺ y means that there is a positive-length path from x to y. If neither x ≺ y nor y ≺ x, we say the instructions are in parallel, denoted x ∥ y. The figure below illustrates a multithreaded dag:
 
- 
-![dag](/img/multithreaded-dag.jpg)
- 
+<img src="/img/multithreaded-dag.png"
+    alt="Example multithreaded dag" 
+    width="400"/>
 
 In the figure, we have, for example, 1 ≺ 2, 6 ≺ 12, and 4 ∥ 9.
 
@@ -38,7 +38,7 @@ The first important measure is work, which is what you get when you add up the t
 
 Let’s adopt a simple notation. Let TP be the fastest possible execution time of the application on P processors. Since the work corresponds to the execution time on 1 processor, we denote it by T1. Among the reasons that work is an important measure is because it provides a bound — Oops, I mean Law — on any P-processor execution time:
 
-![work](/img/work-law.jpg) 
+![work](/img/work-law.jpg "Work law") 
 
 The Work Law holds, because in our model, each processor executes at most 1 instruction per unit time, and hence P processors can execute at most P instructions per unit time. Thus, to do all the work on P processors, it must take at least T1/P time.
 
@@ -50,7 +50,7 @@ The second important measure is span, which is the longest path of dependences i
 
 Like work, span also provides a bou…, uhhh, Law on P-processor execution time:
 
-![span](/img/span-law.jpg) 
+![span](/img/span-law.jpg "Span law"") 
 
 The Span Law holds for the simple reason that a finite number of processors cannot outperform an infinite number of processors, because the infinite-processor machine could just ignore all but P of its processors and mimic a P-processor machine exactly.
 
