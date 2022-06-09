@@ -25,10 +25,10 @@ also build OpenCilk from source.
 
 | Format        | Download                                     | Instructions                  |
 |:--------------|:---------------------------------------------|:------------------------------|
-| Shell archive | [Linux](dl-sh-linux), [macOS](dl-sh-macos)   | [(jump)](#shell-archive)      |
-| Tarball       | [Linux](dl-tar-linux), [macOS](dl-tar-macos) | [(jump)](#tarball)            |
-| Docker image  | [Docker](dl-docker)                          | [(jump)](#docker)             |
-| Source        | [GitHub](source-repo)                        | [(link)](source-install-help) |
+| Shell archive | [Linux][dl-sh-linux], [macOS][dl-sh-macos]   | [(jump)](#shell-archive)      |
+| Tarball       | [Linux][dl-tar-linux], [macOS][dl-tar-macos] | [(jump)](#tarball)            |
+| Docker image  | [Docker][dl-docker]                          | [(jump)](#docker)             |
+| Source        | [GitHub][source-repo]                        | [(link)][source-install-help] |
 
 [dl-sh-linux]: https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh
 [dl-sh-macos]: https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.sh
