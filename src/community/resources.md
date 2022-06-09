@@ -5,6 +5,7 @@ title: Resources
 eleventyNavigation:
   key: Resources
   parent: Community
+  order: 99
 ---
 
 **The goal of this draft page** is to encourage the core OpenCilk team to start contibuting content to this site. As we curate our collection of content (on the [website repository](https://github.com/OpenCilk/www.opencilk.org/)) over the coming weeks/months/years, we can change and adapt how we present it on the generated pages of this website. For example, whenever we notice a interesting slice of content emerging behind the scenes, we can present it on the website with a blog post or a new page.
