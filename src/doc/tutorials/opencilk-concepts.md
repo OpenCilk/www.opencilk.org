@@ -1,5 +1,7 @@
 ---
 title: OpenCilk concepts
+eleventyNavigation:
+  order: -1
 tags: [strands, knots, work, span, parallelism]
 ---
 
