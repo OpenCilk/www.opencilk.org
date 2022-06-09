@@ -1,7 +1,7 @@
 ---
 title: Getting started
 eleventyNavigation:
-  order: -1
+  order: -2
 ---
 
 First, [install OpenCilk](/doc/users-guide/install).  Then, download the

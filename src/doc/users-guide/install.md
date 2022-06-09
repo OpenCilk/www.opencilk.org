@@ -3,7 +3,7 @@ title: Install OpenCilk
 tags: install
 excerpt: It's as easy as one, two, three.
 eleventyNavigation:
-  order: -2
+  order: -3
 ---
 
 ## Requirements
