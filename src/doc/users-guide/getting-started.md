@@ -86,21 +86,21 @@ $ ./nqueens 12
 Running Cilksan race detector.
 Running ./nqueens with n = 12.
 Race detected on location 7f515c3f34f6
-*     Read 4994b3 nqueens /home/ailiop/opencilk/tutorial/nqueens.c:62:3
-|        `-to variable a (declared at /home/ailiop/opencilk/tutorial/nqueens.c:48)
-+     Call 499da5 nqueens /home/ailiop/opencilk/tutorial/nqueens.c:67:29
-+    Spawn 4995b3 nqueens /home/ailiop/opencilk/tutorial/nqueens.c:67:29
-|*   Write 499586 nqueens /home/ailiop/opencilk/tutorial/nqueens.c:65:10
-||       `-to variable b (declared at /home/ailiop/opencilk/tutorial/nqueens.c:50)
+*     Read 4994b3 nqueens /home/user/opencilk/tutorial/nqueens.c:62:3
+|        `-to variable a (declared at /home/user/opencilk/tutorial/nqueens.c:48)
++     Call 499da5 nqueens /home/user/opencilk/tutorial/nqueens.c:67:29
++    Spawn 4995b3 nqueens /home/user/opencilk/tutorial/nqueens.c:67:29
+|*   Write 499586 nqueens /home/user/opencilk/tutorial/nqueens.c:65:10
+||       `-to variable b (declared at /home/user/opencilk/tutorial/nqueens.c:50)
 \| Common calling context
- +    Call 499da5 nqueens /home/ailiop/opencilk/tutorial/nqueens.c:67:29
- +   Spawn 4995b3 nqueens /home/ailiop/opencilk/tutorial/nqueens.c:67:29
+ +    Call 499da5 nqueens /home/user/opencilk/tutorial/nqueens.c:67:29
+ +   Spawn 4995b3 nqueens /home/user/opencilk/tutorial/nqueens.c:67:29
 [...output truncated...]
    Allocation context
-    Stack object b (declared at /home/ailiop/opencilk/tutorial/nqueens.c:50)
-     Alloc 499493 in nqueens /home/ailiop/opencilk/tutorial/nqueens.c:61:16
-      Call 499da5 nqueens /home/ailiop/opencilk/tutorial/nqueens.c:67:29
-     Spawn 4995b3 nqueens /home/ailiop/opencilk/tutorial/nqueens.c:67:29
+    Stack object b (declared at /home/user/opencilk/tutorial/nqueens.c:50)
+     Alloc 499493 in nqueens /home/user/opencilk/tutorial/nqueens.c:61:16
+      Call 499da5 nqueens /home/user/opencilk/tutorial/nqueens.c:67:29
+     Spawn 4995b3 nqueens /home/user/opencilk/tutorial/nqueens.c:67:29
 [...output truncated...]
 
 1.137000
