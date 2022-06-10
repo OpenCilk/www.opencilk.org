@@ -15,12 +15,12 @@ eleventyNavigation:
 
 <div class="list-tight">
 
-- [Tao B. Schardl](http://neboat.mit.edu/), Director, Chief Architect
-- [I-Ting Angelina Lee](http://www.cse.wustl.edu/~angelee/), Director, Runtime Architect
+- [Tao B. Schardl](http://neboat.mit.edu/) (MIT), Director, Chief Architect
+- [I-Ting Angelina Lee](http://www.cse.wustl.edu/~angelee/) (WUSTL), Director, Runtime Architect
 - John Carr, Senior Programmer
-- Dorothy Curtis, MIT, Project Manager
-- Bruce Hoppe, Documentation and Outreach Coordinator
-- [Charles E. Leiserson](https://people.csail.mit.edu/cel/), MIT, Executive Director
+- Dorothy Curtis (MIT), Project Manager
+- Bruce Hoppe, Documentation Specialist and Outreach Coordinator
+- [Charles E. Leiserson](https://people.csail.mit.edu/cel/) (MIT), Executive Director
 </div>
 
 ## Contributors
