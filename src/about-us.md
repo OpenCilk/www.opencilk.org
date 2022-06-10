@@ -27,13 +27,14 @@ eleventyNavigation:
 
 <div class="list-tight">
 
-- [Alexandros Iliopoulos](https://www.csail.mit.edu/person/alexandros-stavros-iliopoulos), postdoc, MIT
-- [Timothy Kaler](https://www.csail.mit.edu/person/timothy-kaler), postdoc, MIT
-- Matthew Kilgore, Ph.D. student, MIT
-- Billy Moses, Ph.D. student, MIT
-- Kyle Singer, Ph.D. student, WUSTL
-- Daniele Vettorel, Ph.D. student, MIT→Google
-- Grace Yin, M.Eng. student, MIT→MIT
+- [Alexandros Iliopoulos](https://www.csail.mit.edu/person/alexandros-stavros-iliopoulos) (MIT)
+- [Timothy Kaler](https://www.csail.mit.edu/person/timothy-kaler) (MIT)
+- Matthew Kilgore
+- Billy Moses (MIT)
+- Kyle Singer (WUSTL)
+- Daniele Vettorel (Google)
+- Grace Yin
+  % XXX where is Grace%
 </div>
 
 ## Academic board
