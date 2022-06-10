@@ -35,6 +35,7 @@ eleventyNavigation:
 - Daniele Vettorel (Google)
 - Grace Yin
   % XXX where is Grace%
+- Brian Wheatman (JHU)
 </div>
 
 ## Academic board
