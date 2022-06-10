@@ -28,3 +28,7 @@ Writing scripts to automate release testing.
 Are you doing something with performance engineering that you want people to hear about? Are you writing how-tos or tutorials to help students with OpenCilk? We would love to hear! Have you prepared a presentation, video, or other educational materials about OpenCilk? Let us know! If you’re unsure where to start or how your skills fit in, [reach out](https://github.com/OpenCilk/opencilk-project/discussions)! 
 
 ## Educating
+Are you teaching with OpenCilk?  We welcome your contributions in this area.
+
+## Forums
+Ask or answer questions on the OpenCilk forums.
