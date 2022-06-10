@@ -1,8 +1,6 @@
 # README
 
-This is the GitHub repository for OpenCilk's new in-development website.
-Right now the site is hosted [here](https://sage-licorice-6da44d.netlify.app/).
-We will deploy the site to [opencilk.org](https://opencilk.org/) soon.
+This is the GitHub repository for OpenCilk's new in-development website, https://opencilk.org.
 
 If you want to install OpenCilk, see [github.com/OpenCilk/infrastructure](https://github.com/OpenCilk/infrastructure).
 
