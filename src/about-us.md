@@ -34,7 +34,7 @@ eleventyNavigation:
 - Kyle Singer (WUSTL)
 - Daniele Vettorel (Google)
 - Grace Yin
-  % XXX where is Grace%
+  [comment]: <> (Where is grace)
 - Brian Wheatman (JHU)
 </div>
 
