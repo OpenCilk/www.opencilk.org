@@ -45,12 +45,15 @@ eleventyNavigation:
 {% endfor %}
 </div>
 
+<!--
 ## Advisory board
+
 <div class="list-tight">
 {% for person in advisory_board %}
  - [{{ person.name }}]({{ person.url }}), {{ person.organization }}
 {% endfor %}
 </div>
+->
 
 ## Acknowledgments
 
