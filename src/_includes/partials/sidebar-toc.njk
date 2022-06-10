@@ -6,10 +6,8 @@
     {% else %}
     {% set context = eleventyNavigation.parent %}
     {% endif %}
-    <h5>
-    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseContext" role="button" aria-expanded="false" aria-controls="collapseContext" style="color: var(--midnight); background-color: var(--lime);">
+    <h5 class="w-100 p-2 rounded" style="margin-left: -0.4em; color: var(--midnight); background-color: var(--lime);">
         {{ context }}
-    </a>
     </h5>
     <div class="collapse show" id="collapseContext">
     <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
@@ -23,11 +21,9 @@
         </ul>
     </div>
     </div>
-    <p class="fw-light">
-    <a class="btn btn-primary btn-sm" data-bs-toggle="collapse" href="#collapseToc" role="button" aria-expanded="false" aria-controls="collapseToc" style="color: var(--midnight); background-color: var(--teal);">
+    <h6 class="p-2 rounded" style="margin-left: -0.4em; color: var(--midnight); background-color: var(--teal);">
         On this page
-    </a>
-    </p>
+    </h6>
     <div class="collapse show" id="collapseToc">
     <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
         {{ content | toc | safe }}

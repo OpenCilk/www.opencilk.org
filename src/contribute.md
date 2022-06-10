@@ -19,6 +19,13 @@ We are also interested in collecting performance figures for different computer 
 You can help by porting OpenCilk to other platforms.
 
 ## Coding
+Want to customize your own compiler or runtime environment? Check out OpenCilk code that's maintained in these GitHub repositories:
+
+- [Infrastructure](https://github.com/OpenCilk/infrastructure): OpenCilk build scripts and instructions reside here. (See also the [Build from source](/doc/users-guide/build-opencilk-from-source/) page.)
+- [OpenCilk project](https://github.com/OpenCilk/opencilk-project): Forked from [LLVM](https://github.com/llvm/llvm-project), the compiler code resides here.
+- [Cheetah](https://github.com/OpenCilk/cheetah): Code for the runtime system resides here.
+- [Productivity tools](https://github.com/OpenCilk/productivity-tools): Code for Cilksan, Cilkscale, and other tools lives here.
+
 In addition to developing the OpenCilk codebase, we need your help extending existing code libraries to run in parallel with OpenCilk. Notable opportunities include the C++ Standard Template Library (STL) and the [GraphBLAS](https://graphblas.org/) Graph Linear Algebra API.  Also improving the productivity tools.
 
 ## Scripting

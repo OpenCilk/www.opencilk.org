@@ -11,6 +11,7 @@ pagination:
     - tagList
   addAllPagesToCollections: true
 layout: layouts/page.njk
+sidebar: tags
 eleventyComputed:
   title: Tagged “{{ tag }}”
   eleventyNavigation:
@@ -21,5 +22,3 @@ permalink: /tags/{{ tag | slug }}/
 
 {% set postslist = collections[ tag ] %}
 {% include "posts_list.njk" %}
-
-<p>See <a href="{{ '/tags/' | url }}">all tags</a>.</p>
