@@ -15,7 +15,7 @@ eleventyNavigation:
 
 <div class="list-tight">
 
-- [Tao B. Schardl](http://neboat.mit.edu/) (MIT), Director, Chief Architect
+- [Tao B. Schardl](http://web.mit.edu/neboat/www) (MIT), Director, Chief Architect
 - [I-Ting Angelina Lee](http://www.cse.wustl.edu/~angelee/) (WUSTL), Director, Runtime Architect
 - John Carr, Senior Programmer
 - Dorothy Curtis (MIT), Project Manager
