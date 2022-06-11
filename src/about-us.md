@@ -33,8 +33,7 @@ eleventyNavigation:
 - Billy Moses (MIT)
 - Kyle Singer (WUSTL)
 - Daniele Vettorel (Google)
-- Grace Yin
-<!-- (Where is grace) -->
+- Grace Yin  <!-- (XXX Where is grace) -->
 - Brian Wheatman (JHU)
 </div>
 
@@ -44,9 +43,9 @@ eleventyNavigation:
   
 - I-Ting Angelina Lee (WUSTL)
 - Charles E. Leiserson (MIT)
-- Marc Moreno Maza, University of Western Ontario, Canada
+- Marc Moreno Maza, (UWO)
 - John Owens (UCSD)
-- Vivek Sarkar (GIT)
+- Vivek Sarkar (GT)
 - [Tao B. Schardl](http://neboat.mit.edu/) (MIT)
 </div>
 
