@@ -41,11 +41,11 @@ eleventyNavigation:
 
 <div class="list-tight">
   
-- I-Ting Angelina Lee (WUSTL)
-- Charles E. Leiserson (MIT)
-- Marc Moreno Maza, (UWO)
-- John Owens (UCSD)
-- Vivek Sarkar (GT)
+- [I-Ting Angelina Lee](http://www.cse.wustl.edu/~angelee/) (WUSTL)
+- [Charles E. Leiserson](https://people.csail.mit.edu/cel/) (MIT)
+- [Marc Moreno Maza](http://www.csd.uwo.ca/~moreno/) (UWO)
+- [John Owens](https://www.ece.ucdavis.edu/~jowens/) (UCSD)
+- [Vivek Sarkar](http://gtcomputing2017.cc.gatech.edu/content/vivek-sarkar) (GT)
 - [Tao B. Schardl](http://neboat.mit.edu/) (MIT)
 </div>
 
