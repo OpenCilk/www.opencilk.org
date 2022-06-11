@@ -39,11 +39,24 @@ eleventyNavigation:
 </div>
 
 ## Academic board
+Academic board #
+<div class="list-tight">
+  -  I-Ting Angelina Lee (WUSTL)
+  -  Charles E. Leiserson (MIT)
+  -  Marc Moreno Maza, University of Western Ontario, Canada
+  -  John Owens (UCSD)
+  - Vivek Sarkar (GIT)
+  - [Tao B. Schardl](http://neboat.mit.edu/) (MIT)
+
+</div>
+
+<!--
 <div class="list-tight">
 {% for person in academic_board %}
  - [{{ person.name }}]({{ person.url }}), {{ person.organization }}
 {% endfor %}
 </div>
+-->
 
 <!--
 ## Advisory board
