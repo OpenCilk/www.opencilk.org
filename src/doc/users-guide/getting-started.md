@@ -8,7 +8,7 @@ First, [install OpenCilk](/doc/users-guide/install).  Then, download the
 [tutorial](https://github.com/OpenCilk/tutorial) code examples and enter the
 cloned directory:
 
-```bash
+```shell-session
 $ git clone https://github.com/OpenCilk/tutorial
 $ cd tutorial
 ```
@@ -25,7 +25,7 @@ OpenCilk.
 To compile a Cilk program with OpenCilk, pass the `-fopencilk` flag to Clang
 (or Clang++):
 
-```bash
+```shell-session
 $ clang -fopencilk -O3 fib.c -o fib
 ```
 
@@ -47,7 +47,7 @@ for more information on the command-line arguments.
 
 The program will automatically execute in parallel, using all available cores.
 
-```bash
+```shell-session
 $ ./fib 35
 fib(35) = 9227465
 ```
@@ -55,7 +55,7 @@ fib(35) = 9227465
 To explicitly set the number of parallel Cilk workers for a program execution,
 set the `CILK_NWORKERS` environment variable.  For example:
 
-```bash
+```shell-session
 $ CILK_NWORKERS=2 ./fib 35
 fib(35) = 9227465
 ```
@@ -72,7 +72,7 @@ To check for determinacy races with Cilksan, add the `-fsanitize=cilk` flag
 during compilation and linking.  We also recommend the `-Og -g` flags for
 debugging:
 
-```bash
+```shell-session
 $ clang -fopencilk -fsanitize=cilk -Og -g nqueens.c -o nqueens
 ```
 
@@ -81,7 +81,7 @@ Running the Cilksan-instrumented `nqueens` program produces the following
 output which shows us how two parallel strands attempt to read from and write
 to the same memory address (through variables `a` and `b`, respectively).
 
-```
+```shell-session
 $ ./nqueens 12
 Running Cilksan race detector.
 Running ./nqueens with n = 12.
@@ -119,7 +119,7 @@ counterpart.
 > Cilksan does not currently recognize.  To work around this behavior, add the
 > flag `–D_FORTIFY_SOURCE=0` when compiling:
 >
-> ```bash
+> ```shell-session
 > $ clang -fopencilk -fsanitize=cilk -Og -g -D_FORTIFY_SOURCE=0 nqueens.c -o nqueens
 > ```
 
@@ -134,7 +134,7 @@ benchmark parallel speedup on different numbers of cores.
 To measure work and span with Cilkscale, add the `-fcilktool=cilkscale`
 flag during compilation and linking:
 
-```bash
+```shell-session
 $ clang -fopencilk -fcilktool=cilkscale -O3 qsort.c -o qsort
 ```
 
@@ -142,7 +142,7 @@ Running the Cilkscale-instrumented program will output work, span, and
 parallelism measurements in CSV format at the end of the execution.  For
 example:
 
-```
+```shell-session
 $ ./qsort 10000000
 Sorting 10000000 integers
 All sorts succeeded
@@ -153,7 +153,7 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 To output the Cilkscale measurements to a file, set the `CILKSCALE_OUT`
 environment variable:
 
-```
+```shell-session
 $ CILKSCALE_OUT=qsort_workspan.csv ./qsort 10000000
 Sorting 10000000 integers
 All sorts succeeded
@@ -176,20 +176,20 @@ in the tutorial `qsort.c` code:
 #include <cilk/cilkscale.h>
 …
 int main(int argc, char **argv) {
-  …
+  // …
   wsp_t start, end;
   start = wsp_getworkspan();
   sample_qsort(a, a + n); /* <-- analyze this */
   end = wsp_getworkspan(); 
-  …
+  // …
   wsp_dump(wsp_sub(end, start), "sample_qsort");
-  …
+  // …
 }
 ```
 
 Then, recompile with Cilkscale and rerun:
 
-```
+```shell-session
 $ clang -fopencilk -fcilktool=cilkscale -O3 qsort.c -o qsort
 $ ./qsort 10000000
 Sorting 10000000 integers
@@ -212,7 +212,7 @@ First, build your program twice,
 - once with `-fcilktool=cilkscale`, and
 - once with `-fcilktool=cilkscale-benchmark`:
 
-```bash
+```shell-session
 $ clang -fopencilk -fcilktool=cilkscale -O3 qsort.c -o qsort
 $ clang -fopencilk -fcilktool=cilkscale-benchmark -O3 qsort.c -o qsort-bench
 ```
@@ -221,7 +221,7 @@ Then, run the program with the Cilkscale benchmarking and visualizer Python
 script, which is found at `share/Cilkscale_vis/cilkscale.py` within the
 OpenCilk installation directory: 
 
-```bash
+```shell-session
 $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py \
     -c qsort -b qsort-bench --args 10000000
 ```
@@ -231,7 +231,7 @@ $2$, ..., $P$ Cilk workers (where $P$ is the number of available physical
 cores) and time the execution; and output the results as a CSV table (`out.csv`) and as
 plots in a PDF document (`plot.pdf`):
 
-```
+```shell-session
 $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py -c qsort -b qsort-bench --args 10000000
 Namespace(args=['10000000'], cilkscale='./qsort', cilkscale_benchmark='./qsort_bench',
 cpu_counts=None, output_csv='out.csv', output_plot='plot.pdf', rows_to_plot='all')
@@ -259,6 +259,6 @@ INFO:plotter:Generating plot
 To see all options of the Cilkscale `cilkscale.py` script, pass it the `--help`
 argument:
 
-```bash
+```shell-session
 $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py --help
 ```
