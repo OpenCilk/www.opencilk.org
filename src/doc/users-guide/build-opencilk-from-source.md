@@ -3,8 +3,11 @@ title: Build OpenCilk from source
 tags: install
 ---
 
-OpenCilk is available as source code in [three Git repositories](https://github.com/OpenCilk), plus
-this [infrastructure facilities repository](https://github.com/OpenCilk/infrastructure).
+This page describes how to download and build OpenCilk from source.
+OpenCilk is available as source code in
+[three Git repositories](https://github.com/OpenCilk).  We provide an
+[infrastructure facilities repository](https://github.com/OpenCilk/infrastructure)
+with scripts for downloading and building OpenCilk from source.
 OpenCilk 1.1 is only guaranteed to support 64-bit x86 on Linux and other Unix-like
 operating systems, although prototype support for 64-bit ARM is
 included.
@@ -29,20 +32,20 @@ More details on build requirements for LLVM can be found here:
 
 Clone the OpenCilk infrastructure repository:
 
-```bash
-> git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
+```shell-session
+$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
 ```
 
 Run the following script to get the OpenCilk source code:
 
-```bash
-> infrastructure/tools/get $(pwd)/opencilk
+```shell-session
+$ infrastructure/tools/get $(pwd)/opencilk
 ```
 
 Then run the following script to build OpenCilk:
 
-```bash
-infrastructure/tools/build $(pwd)/opencilk $(pwd)/build
+```shell-session
+$ infrastructure/tools/build $(pwd)/opencilk $(pwd)/build
 ```
 
 You should now be ready to use OpenCilk.  Skip to [Usage](INSTALLING.md#Usage) now, or read
@@ -50,14 +53,14 @@ on for more explicit directions on building OpenCilk from source.
 
 ## Obtaining the OpenCilk source code
 
-Clone the OpenCilk compiler, runtime, and productivity tool repositories.  The
+Clone the OpenCilk compiler, runtime, and productivity-tool repositories.  The
 Cheetah runtime and OpenCilk tool repositories must be cloned into
 sub-directories of the OpenCilk project directory:
 
-```bash
-git clone -b opencilk/v1.1 https://github.com/OpenCilk/opencilk-project
-git clone -b opencilk/v1.1 https://github.com/OpenCilk/cheetah opencilk-project/cheetah
-git clone -b opencilk/v1.1 https://github.com/OpenCilk/productivity-tools opencilk-project/cilktools
+```shell-session
+$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/opencilk-project
+$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/cheetah opencilk-project/cheetah
+$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/productivity-tools opencilk-project/cilktools
 ```
 
 Note that, because these commands clone specific tags of the OpenCilk
@@ -67,8 +70,8 @@ repositories, it is normal for Git to report that each clone is in a
 Clone the OpenCilk infrastructure repository, which contains the OpenCilk build
 script:
 
-```bash
-git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
+```shell-session
+$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
 ```
 
 ## Building OpenCilk
@@ -82,16 +85,16 @@ cores, or 10 if the number of cores is not detected.
 
 For example:
 
-```bash
+```shell-session
 # ...git clone as above...
-> infrastructure/tools/build $(pwd)/opencilk-project $(pwd)/build
+$ infrastructure/tools/build $(pwd)/opencilk-project $(pwd)/build
 ```
 
 Alternatively, to explicitly build OpenCilk using 8 build threads:
 
-```bash
+```shell-session
 # ...git clone as above...
-> infrastructure/tools/build $(pwd)/opencilk-project $(pwd)/build 8
+$ infrastructure/tools/build $(pwd)/opencilk-project $(pwd)/build 8
 ```
 
 OpenCilk takes a few CPU-hours to build on a modern system --- less than 10
@@ -100,8 +103,8 @@ single-threaded on an older machine.
 
 To echo the OpenCilk build script call syntax, use the `--help` switch:
 
-```bash
-infrastructure/tools/build --help
+```shell-session
+$ infrastructure/tools/build --help
 ```
 
 ***Advanced build options:*** If you wish, you can customize your
@@ -138,8 +141,8 @@ provide standard system libraries and header files for clang.  To run
 clang with those header files and libraries, invoke the clang binary
 with `xcrun`; for example:
 
-```bash
-> xcrun $(pwd)/build/bin/clang
+```shell-session
+$ xcrun $(pwd)/build/bin/clang
 ```
 
 ## Optional: Installing OpenCilk
@@ -149,9 +152,9 @@ running the `cmake_install.cmake` script generated in the build
 directory.  For example, run the following to install OpenCilk into
 the directory `/tmp/llvm`:
 
-```bash
-cd $(pwd)/build
-cmake -DCMAKE_INSTALL_PREFIX=/tmp/llvm -P cmake_install.cmake
+```shell-session
+$ cd $(pwd)/build
+$ cmake -DCMAKE_INSTALL_PREFIX=/tmp/llvm -P cmake_install.cmake
 ```
 
 ## Troubleshooting
