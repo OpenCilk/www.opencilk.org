@@ -39,3 +39,18 @@ Are you teaching with OpenCilk?  We welcome your contributions in this area.
 
 ## Forums
 Ask or answer questions on the OpenCilk forums.
+
+## Postdoc Positions
+
+The Supertech research group in the MIT Computer Science and Artificial Intelligence Laboratory seeks multiyear Postdoctoral Associates to join the OpenCilk development team led by Professor Charles E. Leiserson, Dr. Tao B. Schardl, and Research Scientist Dorothy Curtis. The open-source OpenCilk software platform, a new implementation of the Cilk parallelprogramming platform, will feature a superior compiler based on the Tapir/LLVM compiler (Best Paper, PPoPP 2017), a new work-stealing runtime system, and a suite of parallelprogramming productivity tools. Candidates should be recent Ph.D. graduates in computer science and engineering with excellent C/C++ programming skills and publications in one or more of the following areas:
+- parallel computing (particularly multicore);
+- language runtime systems and compilers (especially LLVM);
+- software productivity tools;
+- user interface design and implementation;
+- software performance engineering (writing fast code);
+- lgorithms and data structures;
+- software engineering, testing, benchmarking, and/or release management;
+- cloud environments and operating systems.
+Please see additional details here:
+[PostdocFlyer.pdf](https://github.com/OpenCilk/www.opencilk.org/files/8886546/PostdocFlyer.pdf)
+
