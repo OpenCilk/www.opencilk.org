@@ -17,30 +17,26 @@ ARM processors.  It has been tested on the following operating systems:
  - Fedora (32)
  - macOS (10.15, 11.2)
 
-## Download
-
-Use the links below to download the appropriate OpenCilk precompiled shell
-archive (`.sh`), tarball (`.tar.gz`), or Docker image.
-
-You can also [build OpenCilk from source](../build-opencilk-from-source).
-
-**Linux**
- - [OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh)
-   (749 MB)
- - [OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz)
-   (749 MB)
-
-**macOS**
- - [OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.sh](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.sh)
-   (736 MB)
- - [OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz)
-   (736 MB)
-
-**Docker**
- - [docker-opencilk-v1.1.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/docker-opencilk-v1.1.tar.gz)
-   (814 MB)
-
 ## Install
+
+You can download and install a precompiled release of OpenCilk 1.1 as a
+self-extracting shell archive, tarball, or Docker image.  Advanced users may
+also build OpenCilk from source.
+
+| Format        | Download                                     | Instructions                  |
+|:--------------|:---------------------------------------------|:------------------------------|
+| Shell archive | [Linux][dl-sh-linux], [macOS][dl-sh-macos]   | [(jump)](#shell-archive)      |
+| Tarball       | [Linux][dl-tar-linux], [macOS][dl-tar-macos] | [(jump)](#tarball)            |
+| Docker image  | [Docker][dl-docker]                          | [(jump)](#docker)             |
+| Source        | [GitHub][source-repo]                        | [(link)][source-install-help] |
+
+[dl-sh-linux]: https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh
+[dl-sh-macos]: https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.sh
+[dl-tar-linux]: https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz
+[dl-tar-macos]: https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz
+[dl-docker]: https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz
+[source-repo]: https://github.com/OpenCilk/infrastructure
+[source-install-help]: /doc/users-guide/build-opencilk-from-source
 
 ### Shell archive
 
