@@ -2,6 +2,7 @@
   "layout": "layouts/post.njk",
   "sidebar": "blog",
   "background": "bg-white",
+  "comments": "true",
   "tags": [
     "posts"
   ]
