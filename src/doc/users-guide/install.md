@@ -12,7 +12,7 @@ OpenCilk 1.1 runs on Intel x86 64-bit processors (Haswell and newer), AMD x86
 64-bit processors (Excavator and newer), and Apple M1 and other 64-bit
 ARM processors.  It has been tested on the following operating systems:
 
- - Ubuntu (18.04, 20.04), including via WSL2 (Windows Subsystem for Linux 2)
+ - Ubuntu (20.04), including via WSL2 (Windows Subsystem for Linux 2)
  - FreeBSD (13)
  - Fedora (32)
  - macOS (10.15, 11.2)
@@ -22,7 +22,7 @@ ARM processors.  It has been tested on the following operating systems:
 Use the links below to download the appropriate OpenCilk precompiled shell
 archive (`.sh`), tarball (`.tar.gz`), or Docker image.
 
-You can also [build OpenCilk from source](../build-opencilk-from-source).
+You can also [build OpenCilk from source](../build-opencilk-from-source), which is the recommended approach for Ubuntu 18.04 and other operating systems not listed above.
 
 ### Linux
  
