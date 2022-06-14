@@ -23,7 +23,7 @@ OpenCilk.
 ## Using the compiler
 
 To compile a Cilk program with OpenCilk, pass the `-fopencilk` flag to Clang
-(or Clang++):
+(or Clang++).  For example:
 
 ```shell-session
 $ clang -fopencilk -O3 fib.c -o fib
