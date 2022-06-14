@@ -67,15 +67,15 @@ Optionally, you can select a different installation directory by passing the
 option `--prefix=/path/to/install/dir` to the script.  To see all options, pass
 the `--help` argument to the script.
 
-The OpenCilk C (or C++) compiler can be invoked from `bin/clang` (or
-`bin/clang++`) within the installation directory.
+The OpenCilk C (or C++) compiler can be invoked via `bin/clang` (or
+`bin/clang++`) from within the installation directory.
 
 #### Example
 
 The following shows the process of installing OpenCilk into a version-specific
 subdirectory within `/opt/opencilk/`.
 
-```
+```shell-session
 $ sh OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh --prefix=/opt/opencilk
 OpenCilk Installer Version: 12.0.0, Copyright (c) OpenCilk
 This is a self-extracting archive.
