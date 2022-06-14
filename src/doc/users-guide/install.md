@@ -38,6 +38,12 @@ You can also [build OpenCilk from source](../build-opencilk-from-source).
  - [OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz)
    (736 MB)
 
+> ***Note for macOS users:*** Unless you are using the OpenCilk Docker image,
+> you must also install [XCode](https://developer.apple.com/support/xcode/) or
+> the [XCode Command Line
+> Tools](https://mac.install.guide/commandlinetools/index.html), which provide
+> standard system libraries and header files needed by the OpenCilk compiler.
+
 ### Docker
 
  - [docker-opencilk-v1.1.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/docker-opencilk-v1.1.tar.gz)

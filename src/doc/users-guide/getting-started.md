@@ -43,6 +43,18 @@ target-dependent compilation options. See the [Clang
 documentation](https://releases.llvm.org/12.0.0/tools/clang/docs/ClangCommandLineReference.html)
 for more information on the command-line arguments.
 
+### macOS
+
+On macOS, `clang` needs standard system libraries and headers which are provided by
+[XCode](https://developer.apple.com/support/xcode/) or the [XCode Command Line
+Tools](https://mac.install.guide/commandlinetools/index.html).  To run the
+OpenCilk compiler with those libraries and headers, invoke the `clang` binary
+with `xcrun`.  For example:
+
+```shell-session
+$ xcrun clang -fopencilk -O3 fib.c -o fib
+```
+
 ## Running the program on multiple cores
 
 The program will automatically execute in parallel, using all available cores.
