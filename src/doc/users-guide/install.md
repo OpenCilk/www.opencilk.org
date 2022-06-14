@@ -24,19 +24,22 @@ archive (`.sh`), tarball (`.tar.gz`), or Docker image.
 
 You can also [build OpenCilk from source](../build-opencilk-from-source).
 
-**Linux**
+### Linux
+ 
  - [OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh)
    (749 MB)
  - [OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz)
    (749 MB)
 
-**macOS**
+### macOS
+
  - [OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.sh](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.sh)
    (736 MB)
  - [OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz)
    (736 MB)
 
-**Docker**
+### Docker
+
  - [docker-opencilk-v1.1.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/docker-opencilk-v1.1.tar.gz)
    (814 MB)
 
