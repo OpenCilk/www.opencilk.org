@@ -44,7 +44,7 @@ eleventyNavigation:
 - [I-Ting Angelina Lee](http://www.cse.wustl.edu/~angelee/) (WUSTL)
 - [Charles E. Leiserson](https://people.csail.mit.edu/cel/) (MIT)
 - [Marc Moreno Maza](http://www.csd.uwo.ca/~moreno/) (UWO)
-- [John Owens](https://www.ece.ucdavis.edu/~jowens/) (UCSD)
+- [John Owens, Chair](https://www.ece.ucdavis.edu/~jowens/) (UCD)
 - [Vivek Sarkar](https://vsarkar.cc.gatech.edu) (GATECH)
 - [Tao B. Schardl](http://neboat.mit.edu/) (MIT)
 </div>
