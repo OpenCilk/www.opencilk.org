@@ -14,6 +14,9 @@ The OpenCilk project welcomes your expertise and enthusiasm. A few specific oppo
 ## Testing
 We are interested in your experiences or issues in installing and writing code and running OpenCilk programs.
 We are also interested in collecting performance figures for different computer systems.
+- Please report compiler bugs at https://github.com/OpenCilk/opencilk-project/issues
+- Please report runtime bugs at https://github.com/OpenCilk/cheetah/issues
+- Please report website and documentation bugs at https://github.com/OpenCilk/www.opencilk.org/issues
 
 ## Porting
 You can help by porting OpenCilk to other platforms.
