@@ -17,6 +17,12 @@ module.exports = function(eleventyConfig) {
   // Support .yaml extension in _data
   eleventyConfig.addDataExtension("yaml", contents => yaml.load(contents));
 
+  // Copy Netlify CMS config to the output
+  eleventyConfig.addPassthroughCopy({
+    "./src/admin/index.html": "./admin/index.html",
+    "./src/admin/config.yml": "./admin/config.yml",
+  });
+
   // Copy the `img` and `css` folders to the output
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/css");
