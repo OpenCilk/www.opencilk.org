@@ -3,7 +3,6 @@ title: The folly of do-it-yourself multithreading
 excerpt: For scalability, code simplicity, and modularity, use a concurrency platform.
 date: 2022-03-02
 author: Charles Leiserson
-draft: true
 tags:
  - multicore programming
  - performance

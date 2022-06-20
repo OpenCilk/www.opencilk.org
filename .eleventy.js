@@ -9,9 +9,7 @@ const markdownItAnchor = require("markdown-it-anchor");
 const pluginTOC = require("eleventy-plugin-toc");
 const mathjax3 = require('markdown-it-mathjax3');
 
-const now = new Date();
-const publishedPosts = (post) => post.date <= now && !post.data.draft;
-const featuredPosts = (post) => post.date <= now && !post.data.draft && post.data.featured;
+const featuredPosts = (post) => post.data.featured;
 
 module.exports = function(eleventyConfig) {
   // Support .yaml extension in _data
@@ -68,12 +66,6 @@ module.exports = function(eleventyConfig) {
   // Return the smallest number argument
   eleventyConfig.addFilter("min", (...numbers) => {
     return Math.min.apply(null, numbers);
-  });
-
-  eleventyConfig.addCollection("posts", (collection) => {
-    return collection
-        .getFilteredByGlob("./src/posts/*.md")
-        .filter(publishedPosts);
   });
 
   eleventyConfig.addCollection("featuredPosts", (collection) => {

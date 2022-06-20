@@ -2,7 +2,6 @@
 title: Website issues
 date: 2019-03-08
 author: Bruce Hoppe
-draft: true
 tags:
 - issues
 ---

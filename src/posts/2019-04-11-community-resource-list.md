@@ -3,7 +3,6 @@ title: Community resource list
 excerpt: Check it out and add your favorites
 date: 2019-04-11
 author: Bruce Hoppe
-draft: true
 tags: [resources]
 ---
 
