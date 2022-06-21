@@ -142,7 +142,7 @@ box for parallel execution.
 
 - [SG-t-SNE-Π](https://github.com/fcdimitr/sgtsnepi): Low-dimensional embedding
   of sparse stochastic graphs.
-- [FGLT](https://github.com/ailiop/fglt): Fast graphlet transform.
+- [FGLT](https://github.com/fcdimitr/fglt): Fast graphlet transform.
 - [RecFMM](https://github.com/zhang416/recfmm): Adaptive fast multipole method.
 
 ### Miscellaneous developer tools
