@@ -1,0 +1,11 @@
+{
+    "layout": "layouts/glossary.njk",
+    "background": "bg-white",
+    "permalink": "/doc/reference/glossary/{{ page.fileSlug | slugify }}/", 
+    "eleventyNavigation": {
+        "parent": "Glossary"
+    },
+    "tags": [
+        "glossary"
+    ]
+}

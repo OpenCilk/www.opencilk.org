@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-glossary
+---
+{% if not hero.image %}
+  <h1>{{ title }}</h1>
+{% endif %}
+
+{%- for tag in tags | filterTagList -%}
+  {%- set tagUrl %}/tags/{{ tag | slug }}/{% endset -%}
+  <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
+{%- endfor %}
+
+{% if defn %}
+<div style="font-size: larger;">
+{{ defn | markdownify | safe }}
+</div>
+{% endif %}

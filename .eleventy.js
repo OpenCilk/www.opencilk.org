@@ -74,6 +74,19 @@ module.exports = function(eleventyConfig) {
         .filter(featuredPosts);
   });
 
+  eleventyConfig.addCollection('glossary', (collection) => {
+    return collection
+        .getFilteredByGlob("./src/doc/reference/glossary/*.md")
+        // Sort content alphabetically by title
+        .sort((a, b) => {
+          const titleA = a.data.title.toUpperCase()
+          const titleB = b.data.title.toUpperCase()
+          if (titleA > titleB) return 1
+          if (titleA < titleB) return -1
+          return 0
+        })
+  });
+
   function filterTagList(tags) {
     return (tags || []).filter(tag => ["all", "nav", "post", "posts"].indexOf(tag) === -1);
   }
@@ -104,6 +117,10 @@ module.exports = function(eleventyConfig) {
     slugify: eleventyConfig.getFilter("slug")
   }).use(mathjax3);
   eleventyConfig.setLibrary("md", markdownLibrary);
+
+  eleventyConfig.addNunjucksFilter("markdownify", (markdownString) =>
+  markdownLibrary.render(markdownString)
+  );
 
   // Override Browsersync defaults (used only with --serve)
   eleventyConfig.setBrowserSyncConfig({

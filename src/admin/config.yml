@@ -60,3 +60,12 @@ collections:
       - { label: "Excerpt", name: "excerpt", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list" }
       - { label: "Body", name: "body", widget: "markdown" }
+  - label: "Glossary"
+    name: "glossary"
+    folder: "src/doc/reference/glossary"
+    create: true
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Definition", name: "defn", widget: "markdown" }

@@ -1,0 +1,3 @@
+---
+title: Logically in parallel
+---
