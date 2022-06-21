@@ -1,3 +1,0 @@
----
-title: Task parallel platform
----
