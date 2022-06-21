@@ -30,6 +30,9 @@ You can also [build OpenCilk from source](../build-opencilk-from-source), which 
    (749 MB)
  - [OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz)
    (749 MB)
+   
+> ***Note for non-macOS Linux systems:*** You need to install GCC (or equivalent) to provide
+> necessary system include files and system libraries.
 
 ### macOS
 
