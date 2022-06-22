@@ -1,36 +1,37 @@
 ---
 title: Convert a C++ program
+excerpt: Why is this required?
 ---
-
 ## Overview
 
 Here is the sequence of steps to create a parallel program using OpenCilk.
 
-- Typically, you will start with a serial C or C++ program that implements the basic
-functions or algorithms that you want to parallelize. You will likely
-be most successful if the serial program is correct to begin with!
-Any bugs in the serial program will occur in the parallel program, but
-they will be more difficult to identify and fix.
-- Next, identify the program regions that will benefit from parallel
-operation. Operations that are relatively long-running and which can
-be performed independently are prime candidates.
-- Use the three OpenCilk keywords to identify tasks that can execute in
-parallel:
-    * `cilk_spawn` indicates a call to a function (a "child") that can proceed in parallel with the caller (the "parent").
-    * `cilk_sync` indicates that all spawned children must complete before proceeding.
-    * `cilk_for` identifies a loop for which all iterations can execute in parallel.
-- Build the program:
-    - **Linux* OS:** Use the `clang` or `clang++` compiler command.
-- Run the program. If there are no ***race conditions***, the parallel program will produce the same result
-as the serial program.
-- Even if the parallel and serial program results are the same, there
-may still be race conditions. Run the program under the ***cilksan
-race detector*** to identify possible race
-conditions introduced by parallel operations.
-- ***Correct any race conditions*** with ***reducers***, locks, or recode to resolve
-conflicts.
-- Note that a traditional debugger can debug the *serialization* of a parallel program, which you can create
-easily with OpenCilk.
+* Typically, you will start with a serial C or C++ program that implements the basic
+  functions or algorithms that you want to parallelize. You will likely
+  be most successful if the serial program is correct to begin with!
+  Any bugs in the serial program will occur in the parallel program, but
+  they will be more difficult to identify and fix.
+* Next, identify the program regions that will benefit from parallel
+  operation. Operations that are relatively long-running and which can
+  be performed independently are prime candidates.
+* Use the three OpenCilk keywords to identify tasks that can execute in
+  parallel:
+      * `cilk_spawn` indicates a call to a function (a "child") that can proceed in parallel with the caller (the "parent").*
+       `cilk_sync` indicates that all spawned children must complete before proceeding.
+      * `cilk_for` identifies a loop for which all iterations can execute in parallel.
+* Build the program:
+
+  * **Linux* OS:** Use the `clang` or `clang++` compiler command.
+* Run the program. If there are no ***race conditions***, the parallel program will produce the same result
+  as the serial program.
+* Even if the parallel and serial program results are the same, there
+  may still be race conditions. Run the program under the ***cilksan
+  race detector*** to identify possible race
+  conditions introduced by parallel operations.
+* ***Correct any race conditions*** with ***reducers***, locks, or recode to resolve
+  conflicts.
+* Note that a traditional debugger can debug the *serialization* of a parallel program, which you can create
+  easily with OpenCilk.
 
 We will walk through this process in detail using a sort program as an example.
 
@@ -102,8 +103,8 @@ int main(int argc, char* argv[])
 
 Converting the C++ code to OpenCilk C++ code is very simple.
 
-- Add a "`#include <cilk.h>`" statement to the source. `cilk.h`
-declares all the entry points to the OpenCilk runtime.
+* Add a "`#include <cilk.h>`" statement to the source. `cilk.h`
+  declares all the entry points to the OpenCilk runtime.
 
 The result is an OpenCilk program that has no parallelism yet.
 
@@ -115,7 +116,7 @@ performance.
 
 ##### Linux* OS
 
-```bash
+```shell
 > clang++ qsort.cpp -o qsort –O3 -fopencilk
 ```
 
@@ -133,7 +134,7 @@ function may not continue until all `cilk_spawn` requests in the same
 function have completed. `cilk_sync` does not affect parallel strands
 spawned in other functions.
 
-```c#
+```c
 void sample_qsort(int * begin, int * end)
 {
     if (begin != end) {
@@ -169,13 +170,14 @@ of the qsort program. Build and run the program exactly as we did with
 the previous example:
 
 ##### Linux* OS:
-```bash
+
+```shell
 > clang++ qsort.cpp -o qsort –O3 -fopencilk
 ```
 
 ### Run qsort from the command line
 
-```bash
+```shell
 > qsort
 Sorting 10000000 integers
 5.641 seconds 
@@ -186,7 +188,7 @@ By default, an OpenCilk program will query the operating system and use
 all available cores. You can control the number of workers by setting
 the CILK_NWORKERS environment variable:
 
-```bash
+```shell
 CILK_NWORKERS=8 ./qsort
 ```
 
@@ -194,7 +196,7 @@ CILK_NWORKERS=8 ./qsort
 
 Run qsort using one and then two cores:
 
-```bash 
+```powershell
 > CILK_NWORKERS=1 qsort
 Sorting 10000000 integers
 2.909 seconds Sort succeeded.
