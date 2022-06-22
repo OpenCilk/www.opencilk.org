@@ -33,5 +33,5 @@ Below are the academic conferences traditionally most popular with the OpenCilk 
 
 
 
-See also: **[Contribute](../contribute)**.
+See also: **[Contribute](/contribute)**.
 
