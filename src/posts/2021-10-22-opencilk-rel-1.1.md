@@ -7,7 +7,7 @@ featured: true
 tags: 
  - news
  - release
-thumbnail: super-mario.png # relative to /src/static/img/
+thumbnail: /img/super-mario.png # relative to /src/static/img/
 ---
 
 OpenCilk 1.1, which includes with numerous features, fixes, and performance improvements, is now available.

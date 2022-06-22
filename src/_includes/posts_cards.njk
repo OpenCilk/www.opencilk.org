@@ -15,7 +15,7 @@
         </small>
       </div>
       <div class="col-3 g-0 h-100 rounded m-0 p-0 overflow-hidden">
-        <img class="img-fluid" src="{% if post.data.thumbnail %} {{ ['/img/', post.data.thumbnail] | join }} {% else %} /img/fib-nocode-trace-dag.png {% endif %}">
+        <img class="img-fluid" src="{% if post.data.thumbnail %} {{ post.data.thumbnail }} {% else %} /img/fib-nocode-trace-dag.png {% endif %}">
       </div>
     </div>
   </div>
