@@ -9,6 +9,7 @@ draft: true
 tags:
   - determinacy race
   - data race
+thumbnail: /img/determinacy-races-1.png
 ---
 
 Race conditions are the bane of concurrency.  Famous race bugs include the Therac-25 radiation therapy machine, which killed three people and injured several others, and the North American Blackout of 2003, which left over 50 million people without power.  These pernicious bugs are notoriously hard to find.  You can run regression tests in the lab for days without a failure only to discover that your software crashes in the field with regularity.  If you're going to multicore-enable your application, you need a reliable way to find and eliminate race conditions.
@@ -41,6 +42,8 @@ The `cilk_spawn` keyword calls `incr()` but allows control to continue to the fo
 
 We can view the program execution as being broken into four “strands.”  A *strand* is a sequence of instructions that doesn’t contain any parallel control, such as `cilk_spawn` or `cilk_sync`.  Strand $A$ begins with the start of the program and ends at the cilk_spawn statement.  Two subsequent strands, $B$ and $C$, are created at the `cilk_spawn` statement: $B$ executes the spawned subroutine `incr()`, and $C$ executes the called subroutine `incr()` on the next line.  These two strands join at the cilk_sync statement, where Strand $D$ begins.  Strand $D$ consists of the instructions from the `cilk_sync` to the end of the program.  Here’s a graphical view of the four strands:
 
+<img src='/img/determinacy-races-1.png' width=380>
+
 We say that a strand $S$ *precedes*  a strand $S'$, sometimes denoted $S ≺ S'$, if $S$ must complete before
 $S'$ can begin.  If neither $S ≺ S'$ nor $S′ ≺ S$, we say the strands are parallel, denoted $S ∥ S'$.  In the diagram, we have $A ≺ B$, $A ≺ C$, $B ≺ D$, $C ≺ D$, and by inference, $A ≺ D$.  We also have $B ∥ C$.  This type of diagram is called a *directed acyclic graph*  or *dag*, and it’s a convenient way to visualize the execution of a parallel program.
 
@@ -54,6 +57,7 @@ If $S$ performs the write and $S'$ performs a read, we call the determinacy race
 
 The key reason that the example code exhibits a determinacy race is that the `counter++` statement in the definition of `incr()` is not atomic, meaning that it is made up of smaller operations.  The figure below, we’ve broken the increment of the variable `x` into a load from memory into a register, an increment of the register, and then a store of the result back into memory:
 
+<img src='/img/determinacy-races-2.png' width=360>
 
 (We’ve also eliminated a bunch of instructions that don’t involve computation on `x`.) Strand $A$ executes the instruction with label 1; Strand $B$ executes the code with labels 2, 3, and 4; Strand $C$ executes the code with labels 5, 6, and 7; and Strand $D$ executes the instruction with label 8.
 
