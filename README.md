@@ -6,7 +6,9 @@ If you want to install OpenCilk, see [github.com/OpenCilk/infrastructure](https:
 
 The OpenCilk website is generated using [Eleventy](https://www.11ty.dev/), a Node.js package for building static websites.
 
-## Making Simple Changes
+## Making simple changes
+
+All the content used to generate the site is in the `src/` folder.
 
 To suggest a change to the website, you can simply navigate to the page with the content you think should be changed, and edit it.
 (Here are [instructions for editing on GitHub](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files).)
@@ -15,20 +17,33 @@ Once your Pull Request is merged, you should see your changes show up on the web
 
 ## Adding documentation or a blog post
 
-All the content used to generate the site is in the `src/` folder.
+To add a new blog post or page of documentation, the recommended approach is to use the [dashboard UI](https://www.opencilk.org/admin).
+You will need to log in with your GitHub credentials.
 
-Follow the blueprint of the other files in terms of folder and file structure.
-Each file of documentation is categorized uniquely by the `src/doc/` folder that contains it: 
+OpenCilk.org uses [Netlify CMS](https://www.netlifycms.org) to manage our editorial workflow for documentation, including blog posts.
+Netlify CMS provides a dashboard-like UI that lets you 
+
+- Edit WYSIWYG-style, with rich text, as an alternative to markdown;
+- Manage pre-publication with queues for "draft" content, "in-review" content, and "ready" content; and
+- Manage images and similar files with a Media page.
+
+Netlify CMS configures the necessary front matter for each piece of content (e.g., date, author, etc.)
+and it it stores pre-publication content in GitHub branches. Published content apppears in the following folders:
 
 - `src/doc/users-guide/`: how-to's on **doing tasks with OpenCilk**
 - `src/doc/tutorials/`: introductions for **learning about OpenCilk**
-- `src/doc/reference/`: information about **OpenCilk technical specifications**.
+- `src/doc/reference/`: information about **OpenCilk technical specifications**
 
 There is a separate folder for blog posts:
 
 - `src/posts/`: explanations for **understanding OpenCilk** as a tool for performance engineering. (Probably we will create subfolders for years, and perhaps for months.)
 
 All documentation and blog posts use this folder for images: `src/img/`.
+
+## Changing a landing page (e.g., Documentation, Community, Contribute)
+
+Netlify CMS is not configured to manage the various landing pages on this site.
+In order to edit those pages, please follow the "Making simple changes" instructions above. 
 
 ## Making More Complex Changes
 
