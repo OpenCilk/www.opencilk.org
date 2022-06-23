@@ -8,23 +8,35 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        {% set navPages = collections.all | eleventyNavigation("Home") %}
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          {% for entry in navPages %}
-            <li class="nav-item {{ dropdown }}">
-              {% if page.url == entry.url %}
-                <a class="nav-link active"  aria-current="page" href="{{ entry.url | url }}">{{ entry.title }}</a>
-              {% else %}
-                <a class="nav-link" href="{{ entry.url | url }}">{{ entry.title }}</a>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-        <form class="d-flex">
-          <div class="w-64">
-            <div id="search"></div>
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          {% set navPages = collections.all | eleventyNavigation("Home") %}
+          <div class="d-flex">
+            <ul class="d-flex navbar-nav me-auto mb-2 mb-lg-0" style="font-size: large; font-weight: bold;">
+              {% for entry in navPages %}
+                <li class="nav-item {{ dropdown }}">
+                  {% if page.url == entry.url %}
+                    <a class="nav-link active"  aria-current="page" href="{{ entry.url | url }}">{{ entry.title }}</a>
+                  {% else %}
+                    <a class="nav-link" href="{{ entry.url | url }}">{{ entry.title }}</a>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
           </div>
-        </form>
+
+          <div class="d-flex align-items-center" style="color: white; font-weight: light;">
+            <div style="margin-right: 1em; color: #c0c0c0;">Website work in progress.</div>
+            <img src="/img/under-construction.png" height="70px;"></img>
+          </div>
+          <div class="d-flex">
+            <form>
+              <div class="w-64">
+                <div id="search"></div>
+              </div>
+            </form>
+          </div>
+          
+        </div>
       </div>
     </div>
 
