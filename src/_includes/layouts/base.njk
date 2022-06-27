@@ -18,19 +18,26 @@
           {% if page.url != "/" %}
             <small>
               {% if eleventyNavigation.key %}
-                {% set crumbPages = collections.all | eleventyNavigationBreadcrumb( eleventyNavigation.key ) %}
-                <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                {%- for entry in crumbPages %}
-                    <li class="breadcrumb-item">
-                        <a href="{{ entry.url | url }}">{{ entry.title }}</a>
+                <div class="d-flex w-100 justify-content-between">
+                  <div class="d-flex">
+                    {% set crumbPages = collections.all | eleventyNavigationBreadcrumb( eleventyNavigation.key ) %}
+                    <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                    {%- for entry in crumbPages %}
+                        <li class="breadcrumb-item">
+                            <a href="{{ entry.url | url }}">{{ entry.title }}</a>
+                        </li>
+                    {%- endfor %}
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ title }}
                     </li>
-                {%- endfor %}
-                <li class="breadcrumb-item active" aria-current="page">
-                    {{ title }}
-                </li>
-                </ol>
-                </nav>
+                    </ol>
+                    </nav>
+                  </div>
+                  <div class="d-flex">
+                    <a href="https://github.com/OpenCilk/www.opencilk.org/issues?q=is%3Aissue+{{ page.url }}+in%3Atitle" target="_blank">Website issues / discussion <img src="/img/GitHub-Mark.png" style="margin-left: 0.5em; height:24px;"></img></a>
+                  </div>
+                </div>
               {% endif %}
             </small>
           {% endif %}
