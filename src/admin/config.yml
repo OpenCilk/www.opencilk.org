@@ -1,6 +1,7 @@
 backend:
   # Use netlify identity as backend
   name: git-gateway
+  repo: OpenCilk/www.opencilk.org
   branch: main
 
 # This line should *not* be indented
