@@ -122,6 +122,12 @@ module.exports = function(eleventyConfig) {
   markdownLibrary.render(markdownString)
   );
 
+  // Paired Shortcode for Bootstrap 5 alerts
+	eleventyConfig.addPairedShortcode(
+    "alert",
+    function(content, classes='primary') { return `<div class="alert alert-${classes}">${markdownLibrary.render(content)}</div>` }
+  );
+
   // Override Browsersync defaults (used only with --serve)
   eleventyConfig.setBrowserSyncConfig({
     callbacks: {

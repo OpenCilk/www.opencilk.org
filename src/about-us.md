@@ -9,7 +9,9 @@ eleventyNavigation:
   order: 6
 ---
 
+{% alert "info" %}
 **Our mission:** OpenCilk aims to make it easy for developers to write fast and correct multicore code, for researchers to pioneer technologies to do so, and for educators to teach and students to learn software performance engineering.
+{% endalert %}
 
 ## Leadership
 

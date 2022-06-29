@@ -106,6 +106,10 @@ code {
   word-break: break-all;
 }
 
+.alert p {
+  margin-bottom: 0;
+}
+
 .list-tight p {
   margin: 0;
 }
