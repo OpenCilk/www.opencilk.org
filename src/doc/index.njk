@@ -5,15 +5,12 @@ eleventyNavigation:
   key: Documentation
   parent: Home
   order: 4
-blogFormat: 
-  row: justify-content-center
-  col: col-sm-6 col-lg-4 mb-4
 ---
 
 See also our <a href="/posts/">Fast code</a> blog, which puts the documentation in context with stories about the latest developments in performance engineering.
 
-<div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-  <div class="flex-shrink-0 me-md-3 pt-3 px-3 overflow-hidden" style="background-color: var(--yellow);">
+<div class="d-flex flex-wrap">
+  <div class="flex-fill m-2 p-2 rounded-3" style="background-color: var(--yellow);">
     <div class="text-center">
       <h3 class="mt-0 mb-1">User's guide</h2>
       <p class="lead">Doing things with OpenCilk</p>
@@ -28,7 +25,7 @@ See also our <a href="/posts/">Fast code</a> blog, which puts the documentation 
     </ul>
   </div>
 
-  <div class="me-md-3 pt-3 px-3 overflow-hidden" style="background-color: var(--gray);">
+  <div class="flex-fill m-2 p-2 rounded-3" style="background-color: var(--gray);">
     <div class="text-center">
       <h3 class="mt-0 mb-1">Tutorials</h2>
       <p class="lead">Learning OpenCilk concepts</p>
@@ -42,7 +39,8 @@ See also our <a href="/posts/">Fast code</a> blog, which puts the documentation 
     {% endfor %}
     </ul>
   </div>
-  <div class="me-md-3 pt-3 px-3 overflow-hidden" style="background-color: var(--teal);">
+
+  <div class="flex-fill m-2 p-2 rounded-3" style="background-color: var(--teal);">
     <div class="text-center">
       <h3 class="mt-0 mb-1">Reference</h2>
       <p class="lead">Defining OpenCilk specifications</p>

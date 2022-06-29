@@ -1,5 +1,4 @@
 
-<div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3" style="margin-left: 1em; width: 280px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
     {% set navPages = ['Blog', 'Documentation', 'Community', 'About us', 'Contribute'] %}
     {% if eleventyNavigation.key in navPages %}
     {% set context = eleventyNavigation.key %}
@@ -25,8 +24,7 @@
         On this page
     </h6>
     <div class="collapse show" id="collapseToc">
-    <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
-        {{ content | toc | safe }}
-    </div>
+        <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
+            {{ content | toc | safe }}
+        </div>
     </div> 
-</div>   
