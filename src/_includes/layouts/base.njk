@@ -8,7 +8,7 @@
 
     {% include 'partials/navbar.njk' %}
     {% set mainWhite = false %}
-    <div class="row flex-nowrap justify-content-between">
+    <div class="row flex-nowrap">
       {% if sidebar %}
         <div id="sidebar" class="col p-3" style="margin-left: 1em; max-width: 280px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
           {% set sidebarCode = ["partials/sidebar-", sidebar, ".njk"] | join %}

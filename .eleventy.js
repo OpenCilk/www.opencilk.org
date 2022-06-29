@@ -122,6 +122,20 @@ module.exports = function(eleventyConfig) {
   markdownLibrary.render(markdownString)
   );
 
+  // Shortcodes for Bootstrap 5 images
+	eleventyConfig.addShortcode(
+    "img",
+    function(source='', size='400') { return `<img style="display: block; margin-left: auto; margin-right: auto; max-width:${size}; max-height:${size};" src="${source}" class="img-fluid"></img>` }
+  );
+  eleventyConfig.addShortcode(
+    "imgRight",
+    function(source='', size='400') { return `<img style="margin: 0.2em 2em 0.2em 4em; max-width:${size}; max-height:${size}" src="${source}" class="img-fluid float-end"></img>` }
+  );
+  eleventyConfig.addShortcode(
+    "imgLeft",
+    function(source='', size='400') { return `<img style="margin: 0.2em 4em 0.2em 2em; max-width:${size}; max-height:${size}" src="${source}" class="img-fluid float-start"></img>` }
+  );
+
   // Paired Shortcode for Bootstrap 5 alerts
 	eleventyConfig.addPairedShortcode(
     "alert",

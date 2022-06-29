@@ -46,24 +46,20 @@ simply into just a serial part and a parallel part. Theory to the rescue!
 
 ## A model for multithreaded execution
 
+{% imgRight "/img/multithreaded-dag.png", "360" %}
 As with much of theoretical computer science, we need a model of multithreaded
 execution in order to give a precise definition of parallelism. We can use the
 _dag model for multithreading_, which I talked about in my blog, “Are
 determinacy-race bugs lurking in your multicore application? (A _dag_ is a
-directed acyclic graph.) The dag model views the execution of a multithreaded
+directed acyclic graph.) 
+The dag model views the execution of a multithreaded
 program as a set of instructions (the vertices of the dag) with graph edges
 indicating dependencies between instructions. We say that an instruction $x$
 _precedes_ an instruction $y$, sometimes denoted $x ≺ y$, if $x$ must complete
 before $y$ can begin. In a diagram for the dag, $x ≺ y$ means that there is a
 positive-length path from $x$ to $y$. If neither $x ≺ y$ nor $y ≺ x$, we say
-the instructions are in _parallel_, denoted $x ∥ y$. The figure below
-illustrates a multithreaded dag:
-
-<img src="/img/multithreaded-dag.png"
-    alt="Example multithreaded dag" 
-    width="400"/>
-
-In the figure, we have, for example, $1 ≺ 2$, $6 ≺ 12$, and $4 ∥ 9$.
+the instructions are in _parallel_, denoted $x ∥ y$. The figure at right
+illustrates a multithreaded dag that indicates, for example, $1 ≺ 2$, $6 ≺ 12$, and $4 ∥ 9$.
 
 Just by eyeballing, what would you guess is the parallelism of the dag? About
 $3$? About $5$? It turns out that two measures of the dag, called work and
@@ -88,7 +84,7 @@ execution time on $1$ processor, we denote it by $T_1$. Among the reasons that
 work is an important measure is because it provides a bound — Oops, I mean Law
 — on any $P$-processor execution time:
 
-![work](/img/work-law.jpg "Work law") 
+{% img "/img/work-law.jpg", "280" %}
 
 The Work Law holds, because in our model, each processor executes at most $1$
 instruction per unit time, and hence $P$ processors can execute at most $P$
@@ -121,7 +117,7 @@ scheduling, etc.), we denote it by $T_∞$.
 Like work, span also provides a bou…, uhhh, Law on $P$-processor execution
 time:
 
-![span](/img/span-law.jpg "Span law") 
+{% img "/img/span-law.jpg", "280" %}
 
 The Span Law holds for the simple reason that a finite number of processors
 cannot outperform an infinite number of processors, because the
