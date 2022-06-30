@@ -132,8 +132,6 @@ code {
   word-spacing: -0.5px;
 }
 .postlist-link {
-  padding-left: .25em;
-  padding-right: .25em;
   text-decoration: none;
 }
 .postlist-item-active .postlist-link {
