@@ -2,8 +2,8 @@
 title: Getting started
 eleventyNavigation:
   order: -2
+excerpt: Change note paragraphs to alert boxes
 ---
-
 First, [install OpenCilk](/doc/users-guide/install).  Then, download the
 [tutorial](https://github.com/OpenCilk/tutorial) code examples and enter the
 cloned directory:
@@ -16,9 +16,11 @@ $ cd tutorial
 Let us walk through the steps of building, running, and testing a program with
 OpenCilk.
 
-> ***Note:*** The rest of this guide assumes that OpenCilk is installed within
-> `/opt/opencilk/` and that `clang` points to the OpenCilk C compiler at
-> `/opt/opencilk/bin/clang`.
+{% alert "info" %}
+***Note:*** The rest of this guide assumes that OpenCilk is installed within
+`/opt/opencilk/` and that `clang` points to the OpenCilk C compiler at
+`/opt/opencilk/bin/clang`.
+{% endalert %}
 
 ## Using the compiler
 
@@ -29,12 +31,14 @@ To compile a Cilk program with OpenCilk, pass the `-fopencilk` flag to Clang
 $ clang -fopencilk -O3 fib.c -o fib
 ```
 
-> ***Note:*** Pass the `-fopencilk` flag to the compiler both when compiling
-> and linking the Cilk program.  During compilation, the flag ensures that the
-> Cilk keywords are recognized and compiled.  During linking, the flag links
-> ensures the program is properly linked with the OpenCilk runtime library.
-> (*Former users of Intel Cilk Plus with GCC:* make sure you do *not* include
-> the `-lcilkrts` flag when linking.)
+{% alert "info" %}
+Pass the `-fopencilk` flag to the compiler both when compiling
+and linking the Cilk program.  During compilation, the flag ensures that the
+Cilk keywords are recognized and compiled.  During linking, the flag links
+ensures the program is properly linked with the OpenCilk runtime library.
+(*Former users of Intel Cilk Plus with GCC:* make sure you do *not* include
+the `-lcilkrts` flag when linking.)
+{% endalert %}
 
 The OpenCilk compiler is based on a recent stable version of the LLVM `clang`
 compiler.  It supports all compiler flags and features that LLVM `clang`
@@ -139,8 +143,7 @@ counterpart.
 
 Use the OpenCilk Cilkscale scalability analyzer and benchmarking script to
 measure the [work,
-span, and parallelism](../../../posts/2022-05-20-what-the-is-parallelism-anyhow/  
-"What the \$#@! is parallelism, anyhow?") of your Cilk program, and to
+span, and parallelism](../../../posts/2022-05-20-what-the-is-parallelism-anyhow/ "What the $#@! is parallelism, anyhow?") of your Cilk program, and to
 benchmark parallel speedup on different numbers of cores.
 
 To measure work and span with Cilkscale, add the `-fcilktool=cilkscale`
@@ -221,8 +224,8 @@ program (and each analyzed region) on different numbers of processors.
 
 First, build your program twice,
 
-- once with `-fcilktool=cilkscale`, and
-- once with `-fcilktool=cilkscale-benchmark`:
+* once with `-fcilktool=cilkscale`, and
+* once with `-fcilktool=cilkscale-benchmark`:
 
 ```shell-session
 $ clang -fopencilk -fcilktool=cilkscale -O3 qsort.c -o qsort
