@@ -32,7 +32,7 @@ $ clang -fopencilk -O3 fib.c -o fib
 ```
 
 {% alert "info" %}
-Pass the `-fopencilk` flag to the compiler both when compiling
+***Note:*** Pass the `-fopencilk` flag to the compiler both when compiling
 and linking the Cilk program.  During compilation, the flag ensures that the
 Cilk keywords are recognized and compiled.  During linking, the flag links
 ensures the program is properly linked with the OpenCilk runtime library.
@@ -131,13 +131,15 @@ number of processors that are available or specified.  The instrumented program
 is expected to run up to several times slower than its non-instrumented serial
 counterpart.
 
-> ***Note:*** On macOS, the compiled `nqueens.c` binary uses builtins that
-> Cilksan does not currently recognize.  To work around this behavior, add the
-> flag `–D_FORTIFY_SOURCE=0` when compiling:
->
-> ```shell-session
-> $ clang -fopencilk -fsanitize=cilk -Og -g -D_FORTIFY_SOURCE=0 nqueens.c -o nqueens
-> ```
+{% alert "info" %}
+***Note:*** On macOS, the compiled `nqueens.c` binary uses builtins that
+Cilksan does not currently recognize.  To work around this behavior, add the
+flag `–D_FORTIFY_SOURCE=0` when compiling:
+
+```shell-session
+$ clang -fopencilk -fsanitize=cilk -Og -g -D_FORTIFY_SOURCE=0 nqueens.c -o nqueens
+```
+{% endalert %}
 
 ## Using Cilkscale
 
