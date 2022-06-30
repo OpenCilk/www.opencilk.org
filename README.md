@@ -68,4 +68,4 @@ Navigate to `localhost:8080` (or sometimes `localhost:8081`) in a browser and yo
 
 ## Colors
 
-![colors](/img/color-family.png)
+![colors](/src/img/color-family.png)
