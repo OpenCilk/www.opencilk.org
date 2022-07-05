@@ -3,6 +3,9 @@ backend:
   name: git-gateway
   repo: https://github.com/OpenCilk/www.opencilk.org
   branch: main
+  accept_roles: #optional - accepts all users if left out
+  - admin
+  - editor
 
 # This line should *not* be indented
 publish_mode: editorial_workflow
