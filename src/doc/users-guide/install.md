@@ -4,6 +4,20 @@ tags: install
 excerpt: It's as easy as one, two, three.
 eleventyNavigation:
   order: -3
+download:
+  host: https://github.com/OpenCilk/opencilk-project/
+  release: opencilk/v1.1
+  x86: 
+    shell: OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh
+    binary: OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz
+    size: 749 MB
+  arm:
+    shell: OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.sh
+    binary: OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz
+    size: 736 MB
+  docker: 
+    binary: docker-opencilk-v1.1.tar.gz
+    size: 814 MB
 ---
 
 ## Requirements
@@ -26,31 +40,35 @@ You can also [build OpenCilk from source](../build-opencilk-from-source), which 
 
 ### Linux
  
- - [OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh)
-   (749 MB)
- - [OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz)
-   (749 MB)
+ - [{{ download.x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.x86.shell }})
+   ({{ download.x86.size }})
+ - <a id="{{ download.release }} x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.x86.binary }}">{{ download.x86.binary }}</a>
+   ({{ download.x86.size }})
    
-> ***Note for non-macOS Linux systems:*** You need to install GCC (or equivalent) to provide
-> necessary system include files and system libraries.
+{% alert "info" %}
+***Note for non-macOS Linux systems:*** You need to install GCC (or equivalent) to provide
+necessary system include files and system libraries.
+{% endalert %}
 
 ### macOS
 
- - [OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.sh](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.sh)
-   (736 MB)
- - [OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz)
-   (736 MB)
+ - [{{ download.arm.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.arm.shell }})
+   ({{ download.arm.size }})
+ - <a id="{{ download.release }} arm" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.arm.binary }}">{{ download.arm.binary }}</a>
+   ({{ download.arm.size }})
 
-> ***Note for macOS users:*** Unless you are using the OpenCilk Docker image,
-> you must also install [XCode](https://developer.apple.com/support/xcode/) or
-> the [XCode Command Line
-> Tools](https://mac.install.guide/commandlinetools/index.html), which provide
-> standard system libraries and header files needed by the OpenCilk compiler.
+{% alert "info" %}
+***Note for macOS users:*** Unless you are using the OpenCilk Docker image,
+you must also install [XCode](https://developer.apple.com/support/xcode/) or
+the [XCode Command Line
+Tools](https://mac.install.guide/commandlinetools/index.html), which provide
+standard system libraries and header files needed by the OpenCilk compiler.
+{% endalert %}
 
 ### Docker
 
- - [docker-opencilk-v1.1.tar.gz](https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv1.1/docker-opencilk-v1.1.tar.gz)
-   (814 MB)
+ - <a id="{{ download.release }} docker" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.docker.binary }}">{{ download.docker.binary }}</a>
+   ({{ download.docker.size }})
 
 ## Install
 
