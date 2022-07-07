@@ -1,6 +1,6 @@
 backend:
   # Use netlify identity as backend
-  name: git-gateway
+  name: github
   repo: https://github.com/OpenCilk/www.opencilk.org
   branch: main
 
