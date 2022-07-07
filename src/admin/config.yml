@@ -1,7 +1,7 @@
 backend:
   # Use netlify identity as backend
   name: github
-  repo: https://github.com/OpenCilk/www.opencilk.org
+  repo: OpenCilk/www.opencilk.org
   branch: main
 
 # This line should *not* be indented
