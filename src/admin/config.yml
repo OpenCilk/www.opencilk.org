@@ -51,8 +51,8 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/post.njk" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Professional title", name: "title", widget: "string" }
+      - { label: "Name", name: "title", widget: "string" }
+      - { label: "Professional title", name: "professionalTitle", widget: "string" }
       - { label: "Professional homepage", name: "url", widget: "string" }
       - { label: "Headshot", name: "image", widget: "file" }
   - label: "Blog"

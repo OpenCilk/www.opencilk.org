@@ -1,0 +1,3 @@
+---
+title: Bruce E. Hoppe
+---
