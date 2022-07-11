@@ -1,6 +1,5 @@
 ---
 title: Convert a C++ program
-excerpt: Why is this required?
 ---
 ## Overview
 

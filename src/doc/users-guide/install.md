@@ -1,7 +1,6 @@
 ---
 title: Install OpenCilk
 tags: install
-excerpt: It's as easy as one, two, three.
 eleventyNavigation:
   order: -3
 download:

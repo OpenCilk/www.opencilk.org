@@ -1,9 +1,9 @@
 ---
 title: Research and teaching with OpenCilk
-excerpt: The OpenCilk team presented the following tutorial at the SPAA 2020 tutorial session.
-date: 2020-07-14
+tagline: The OpenCilk team presented the following tutorial at the SPAA 2020 tutorial session.
 author: Bruce Hoppe
-thumbnail: /img/eagle-and-owl.png
+date: 2020-07-14
+image: /img/eagle-and-owl.png
 tags:
  - conference
  - tutorial

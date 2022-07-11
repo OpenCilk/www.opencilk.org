@@ -2,7 +2,6 @@
 title: Getting started
 eleventyNavigation:
   order: -2
-excerpt: Change note paragraphs to alert boxes
 ---
 First, [install OpenCilk](/doc/users-guide/install).  Then, download the
 [tutorial](https://github.com/OpenCilk/tutorial) code examples and enter the
