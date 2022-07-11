@@ -24,7 +24,7 @@ collections:
           - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Publish Date", name: "date", widget: "datetime" }
-          - { label: "Tags", name: "tags", widget: "list" }
+          - { label: "Tags", name: "tags", widget: "list", required: false }
           - { label: "Body", name: "body", widget: "markdown" }
       - label: "About us"
         name: "about-us"
@@ -33,7 +33,7 @@ collections:
           - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Publish Date", name: "date", widget: "datetime" }
-          - { label: "Tags", name: "tags", widget: "list" }
+          - { label: "Tags", name: "tags", widget: "list", required: false }
           - { label: "Body", name: "body", widget: "markdown" }
       - label: "Contribute"
         name: "contribute"
@@ -42,7 +42,7 @@ collections:
           - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Publish Date", name: "date", widget: "datetime" }
-          - { label: "Tags", name: "tags", widget: "list" }
+          - { label: "Tags", name: "tags", widget: "list", required: false }
           - { label: "Body", name: "body", widget: "markdown" }
   - label: "Authors"
     name: "authors"
@@ -52,9 +52,9 @@ collections:
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/post.njk" }
       - { label: "Name", name: "title", widget: "string" }
-      - { label: "Professional title", name: "professionalTitle", widget: "string" }
-      - { label: "Professional homepage", name: "url", widget: "string" }
-      - { label: "Headshot", name: "image", widget: "file" }
+      - { label: "Professional title", name: "professionalTitle", widget: "string", required: false }
+      - { label: "Professional homepage", name: "url", widget: "string", required: false }
+      - { label: "Headshot", name: "image", widget: "image", required: false }
   - label: "Blog"
     name: "blog"
     folder: "src/posts"
@@ -63,11 +63,16 @@ collections:
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/post.njk" }
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Tagline", name: "tagline", widget: "string" }
-      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Tagline", name: "tagline", widget: "text" }
+      - label: Author
+        name: author
+        widget: relation
+        collection: authors
+        searchFields: title
+        valueField: title
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "image", widget: "file" }
-      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Featured Image", name: "image", widget: "file", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - label: "User's guide"
     name: "users-guide"
@@ -77,11 +82,11 @@ collections:
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Tagline", name: "tagline", widget: "string" }
+      - { label: "Tagline", name: "tagline", widget: "text" }
       - { label: "Author", name: "author", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "image", widget: "file" }
-      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Featured Image", name: "image", widget: "file", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - label: "Tutorials"
     name: "tutorials"
@@ -91,11 +96,11 @@ collections:
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Tagline", name: "tagline", widget: "string" }
+      - { label: "Tagline", name: "tagline", widget: "text" }
       - { label: "Author", name: "author", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "image", widget: "file" }
-      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Featured Image", name: "image", widget: "file", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - label: "Reference"
     name: "reference"
@@ -105,11 +110,11 @@ collections:
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Tagline", name: "tagline", widget: "string" }
+      - { label: "Tagline", name: "tagline", widget: "text" }
       - { label: "Author", name: "author", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "image", widget: "file" }
-      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Featured Image", name: "image", widget: "file", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - label: "Glossary"
     name: "glossary"
