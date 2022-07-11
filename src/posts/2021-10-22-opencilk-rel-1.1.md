@@ -1,13 +1,15 @@
 ---
 title: OpenCilk 1.1 released
-tagline: OpenCilk 1.1 features the new `cilk_scope` keyword, interactive debugging of determinacy races, and many bug fixes and performance improvements.
-author: TB Schardl
+tagline: OpenCilk 1.1 features the new `cilk_scope` keyword, interactive
+  debugging of determinacy races, and many bug fixes and performance
+  improvements.
+author: Tao B. Schardl
 date: 2021-10-22
 featured: true
-image: /img/super-mario.png # relative to /src/static/img/
-tags: 
- - news
- - release
+image: /img/super-mario.png
+tags:
+  - news
+  - release
 ---
 
 OpenCilk 1.1, which includes with numerous features, fixes, and performance improvements, is now available.
