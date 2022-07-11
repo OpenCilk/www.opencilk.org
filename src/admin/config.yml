@@ -44,6 +44,17 @@ collections:
           - { label: "Publish Date", name: "date", widget: "datetime" }
           - { label: "Tags", name: "tags", widget: "list" }
           - { label: "Body", name: "body", widget: "markdown" }
+  - label: "Authors"
+    name: "authors"
+    folder: "src/authors"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/post.njk" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Professional title", name: "title", widget: "string" }
+      - { label: "Professional homepage", name: "url", widget: "string" }
+      - { label: "Headshot", name: "image", widget: "file" }
   - label: "Blog"
     name: "blog"
     folder: "src/posts"
