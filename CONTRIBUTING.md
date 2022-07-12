@@ -20,9 +20,9 @@ When you work on a page of the website, please consider carefully the top-level 
 - Featured image: Eye-catching graphic to persuade a visitor to read this page.
   * Don’t worry if you can’t find one.
   * Better if image has no background.
-  * Should be readable when reduced to a thumbnail roughly 150 pixels wide, as you see on the [Fast Code](/src/posts) page. For example </br>![random-work-steal](/src/img/random-work-steal-154px.png)
+  * Should be readable when reduced to a thumbnail roughly 150 pixels wide, as you see on the [Fast Code](https://www.opencilk.org/posts) page. For example </br>![random-work-steal](/src/img/random-work-steal-154px.png)
   * Tags
-    - For existing tags, see [here](/src/tags/news/).
+    - For existing tags, see [here](https://www.opencilk.org/tags/news/).
     - Alternatively, invent your own (try to be conservative).
 
 ## Join the team
