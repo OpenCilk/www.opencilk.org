@@ -1,8 +1,6 @@
 # Contribution guidelines for www.opencilk.org
 
-Thank you for considering contributing to www.opencilk.org. People like you make it simple to build fast and composable software with OpenCilk.
-
-Following these guidelines helps make the OpenCilk website and documentation better for users&mdash;researchers, educators, students, and coders interested in software performance engineering.
+Thank you for considering contributing to www.opencilk.org. People like you make it simple to build fast and composable software with OpenCilk. Following these guidelines helps make the OpenCilk website and documentation better for users&mdash;researchers, educators, students, and coders interested in software performance engineering.
 
 ## Tracking work in progress
 
