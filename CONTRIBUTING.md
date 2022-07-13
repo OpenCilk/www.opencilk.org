@@ -8,7 +8,7 @@ Bigger changes to www.opencilk.org are tracked with GitHub Issues. If you're fix
 edit the repository directly. You will be asked to submit a pull request, and there is no need to use GitHub Issues. For bigger things,
 please use GitHub Issues&mdash;by searching the existing issues, creating a new issue if needed, and adding comments to track progress.
 
-After you submit a pull request, a member of the OpenCilk organization will review your suggestion and get back to you within one business day.
+After you submit a pull request, a member of the OpenCilk organization will review your suggestion and try to get back to you within one business day.
 
 ## Distilling the goals of one page
 
