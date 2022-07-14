@@ -1,6 +1,6 @@
 ---
 layout: layouts/page.njk
-title: Demo copy of language extension spec
+title: OpenCilk language specification
 date: 2022-07-14T21:33:02.786Z
 ---
 <h1 class="title">OpenCilk Language Extension Specification<br />
