@@ -83,7 +83,12 @@ collections:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Tagline", name: "tagline", widget: "string", required: false  }
-      - { label: "Author", name: "author", widget: "string", required: false  }
+      - label: Author
+        name: author
+        widget: relation
+        collection: authors
+        searchFields: title
+        valueField: title
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Featured Image", name: "image", widget: "file", required: false }
       - { label: "Tags", name: "tags", widget: "list", required: false }
@@ -97,7 +102,12 @@ collections:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Tagline", name: "tagline", widget: "string", required: false  }
-      - { label: "Author", name: "author", widget: "string", required: false  }
+      - label: Author
+        name: author
+        widget: relation
+        collection: authors
+        searchFields: title
+        valueField: title
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Featured Image", name: "image", widget: "file", required: false }
       - { label: "Tags", name: "tags", widget: "list", required: false }
@@ -111,7 +121,12 @@ collections:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Tagline", name: "tagline", widget: "string", required: false  }
-      - { label: "Author", name: "author", widget: "string", required: false  }
+      - label: Author
+        name: author
+        widget: relation
+        collection: authors
+        searchFields: title
+        valueField: title
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Featured Image", name: "image", widget: "file", required: false }
       - { label: "Tags", name: "tags", widget: "list", required: false }
