@@ -3,6 +3,7 @@ title: Glossary
 eleventyNavigation:
   key: Glossary
   parent: Reference
+date: 2022-07-14T21:12:31.424Z
 ---
 
 {% for entry in collections.glossary %}
