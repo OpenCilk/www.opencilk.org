@@ -6,7 +6,7 @@ eleventyNavigation:
 download:
   host: https://github.com/OpenCilk/opencilk-project/
   release: opencilk/v1.1
-  x86: 
+  x86:
     shell: OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.sh
     binary: OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz
     size: 749 MB
@@ -14,9 +14,10 @@ download:
     shell: OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.sh
     binary: OpenCilk-1.1-LLVM-12.0.0-Darwin-arm64.tar.gz
     size: 736 MB
-  docker: 
+  docker:
     binary: docker-opencilk-v1.1.tar.gz
     size: 814 MB
+date: 2022-07-14T21:13:25.893Z
 ---
 
 ## Requirements
