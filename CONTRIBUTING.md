@@ -66,7 +66,7 @@ When you edit published content, Netlify CMS will set the page to draft status, 
 
 ### Your author page
 
-For starters, please choose the Authors collection and make sure that there is a complete entry for you. Your author information helps the OpenCilk community of users and contributors to recognize each other, so please fill in all the fields. Thank you!
+If you haven't already done so, please choose the Authors collection and make sure that there is a complete entry for you. Your author information helps the OpenCilk community of users and contributors to recognize each other, so please fill in all the fields. Thank you!
 
 - Name (how you would like your name to appear above pages that you author)
 - Affiliation
