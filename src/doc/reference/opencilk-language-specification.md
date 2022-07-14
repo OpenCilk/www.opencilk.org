@@ -1,8 +1,12 @@
 ---
 layout: layouts/page.njk
+stylesheet: language-specification.css
 title: OpenCilk language specification
 date: 2022-07-14T21:37:03.433Z
+eleventyNavigation:
+  key: Language specification
 ---
+
 <h1 class="title">OpenCilk Language Extension Specification<br />
     Version 1.0 (2021-02-01) </h1>
 <p>Copyright &#xa9; 2020, 2021 Massachusetts Institute of Technology. All rights reserved.</p>
