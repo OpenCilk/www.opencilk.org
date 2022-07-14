@@ -8,9 +8,8 @@ assignees: ''
 
 ---
 
-**Please title your issue with the page URL**
-For example, https://www.opencilk.org/doc/users-guide/install/
-Please check if there is already an issue/discussion about that page; and if there is, add to that issue instead of creating a new one.
+**Please title your issue with the relative page URL**
+For example, `/doc/users-guide/install/`. It is important to include `/` at both the beginning and end, so that issue title-searching works. Please check if there is already an issue/discussion about that page; and if there is, add to that issue instead of creating a new one.
 
 **Issues**
 A clear and concise description of the issue(s).
