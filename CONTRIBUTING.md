@@ -2,11 +2,19 @@
 
 Thank you for considering contributing to www.opencilk.org. People like you make it simple to build fast and composable software with OpenCilk. Following these guidelines helps make the OpenCilk website and documentation better for users&mdash;researchers, educators, students, and coders interested in software performance engineering.
 
+## Making simple changes
+
+The OpenCilk website is generated using [Eleventy](https://www.11ty.dev/), a Node.js package for building static websites.
+All the content used to generate the site is in the `src/` folder.
+
+To suggest a simple change to the website, you can navigate to the page with the content you think should be changed, and edit it.
+(Here are [instructions for editing on GitHub](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files).)
+You will be prompted to fork the repo (if you haven't already) and then open a Pull Request.
+Once your Pull Request is merged, you should see your changes show up on the website in a few minutes.
+
 ## Tracking work in progress
 
-Bigger changes to www.opencilk.org are tracked with GitHub Issues. If you're fixing a small problem (like a typo) then please go ahead and 
-edit the repository directly. You will be asked to submit a pull request, and there is no need to use GitHub Issues. For bigger things,
-please use GitHub Issues&mdash;by searching the existing issues, creating a new issue if needed, and adding comments to track progress.
+For bigger changes please use GitHub Issues&mdash;by [searching the existing issues](https://github.com/OpenCilk/www.opencilk.org/issues), creating a new issue if needed, and adding comments to track progress.
 
 ## Distilling the goals of one page
 
@@ -37,10 +45,9 @@ Netlify CMS provides a dashboard-like UI that lets you
 - Manage pre-publication with queues for "draft" content, "in-review" content, and "ready" content; and
 - Manage images and similar files with a Media page.
 
-### Accessing and authorizing Netlify CMS
+### Logging in
 
-Access Netlify CMS at https://www.opencilk.org/admin. It will ask you to sign in with your GitHub account. The first time, it will also 
-ask you to authorize the OAuth app, "Netlify CMS www.opencilk.org/admin": </br>![authorize-netlify-cms-oath](/src/img/authorize-netlify-cms-oauth.png)
+Access Netlify CMS at https://www.opencilk.org/admin. At the Netlify Identity prompt, choose "Continue with GitHub": </br>![netlify-cms-github](/src/img/netlify-cms-continue-with-github.png)
 
 ### Collections and workflow
 
@@ -62,7 +69,7 @@ When you edit published content, Netlify CMS will set the page to draft status, 
 For starters, please choose the Authors collection and make sure that there is a complete entry for you. Your author information helps the OpenCilk community of users and contributors to recognize each other, so please fill in all the fields. Thank you!
 
 - Name (how you would like your name to appear above pages that you author)
-- Professional Title
+- Affiliation
 - URL of external homepage
 - Headshot (with background removed)
 

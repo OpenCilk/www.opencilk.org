@@ -52,7 +52,7 @@ collections:
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/post.njk" }
       - { label: "Name", name: "title", widget: "string" }
-      - { label: "Professional title", name: "professionalTitle", widget: "string", required: false }
+      - { label: "Affiliation", name: "affiliation", widget: "string", required: false }
       - { label: "Professional homepage", name: "url", widget: "string", required: false }
       - { label: "Headshot", name: "image", widget: "image", required: false }
   - label: "Blog"
