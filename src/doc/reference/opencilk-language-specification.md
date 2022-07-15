@@ -1,8 +1,13 @@
 ---
 layout: layouts/page.njk
+author: Dorothy Curtis
 stylesheet: language-specification.css
 title: OpenCilk language specification
+tagline: For people who need to know grammatical details about how Cilk is
+  integrated with C.
 date: 2022-07-14T21:37:03.433Z
+tags:
+  - Grammar
 eleventyNavigation:
   key: Language specification
 ---
@@ -32,13 +37,13 @@ eleventyNavigation:
     of the task scheduler. The programmer visible parts of the language include the
     following constructs:</p>
 <ol>
-    <li>Four keywords (<code>cilk_scope</code>, <code>cilk_for</code>, <code>cilk_spawn</code> and <code>cilk_sync</code>)
+    <li>Three keywords (<code>_Cilk_spawn</code>, <code>_Cilk_sync</code> and <code>_Cilk_for</code>)
         to express tasking</li>
     <li>Hyperobjects, which provide local views to shared objects</li>
 </ol>
 <p>An implementation of the language may take advantage of all parallelism resources
     available in the hardware. On a typical CPU, these include at least multiple cores
-    and vector units. Some of the language constructs, e.g. <code>cilk_spawn</code>,
+    and vector units. Some of the language constructs, e.g. <code>_Cilk_spawn</code>,
     utilize only core parallelism; some, e.g. SIMD loops, utilize only vector parallelism,
     and some, e.g. SIMD-enabled functions, utilize both. The defined behavior of every
     deterministic Cilk program is the same as the behavior of a similar C or C++ program
@@ -69,41 +74,47 @@ eleventyNavigation:
 
 <p>OpenCilk adds the following new keywords:</p>
 <ul>
-    <li><code>cilk_scope</code></li>
-    <li><code>cilk_for</code></li>
-    <li><code>cilk_sync</code></li>
-    <li><code>cilk_spawn</code></li>
-    
+    <li><code>_Cilk_sync</code></li>
+    <li><code>_Cilk_spawn</code></li>
+    <li><code>_Cilk_for</code></li>
 </ul>
 <p>A program that uses these keywords other than as defined in the grammar extension
     below is ill-formed.</p>
+
+## Keyword Aliases
+
+<p>The header <code>&lt;cilk/cilk.h&gt;</code> defines the following aliases for the
+    Cilk keywords:</p>
+<pre>#define cilk_spawn _Cilk_spawn
+#define cilk_sync  _Cilk_sync
+#define cilk_for   _Cilk_for</pre>
 
 ## Grammar
 
 <p>The three keywords are used in the following new productions:</p>
 <dl class="bnf">
     <dt><dfn>jump-statement</dfn>:</dt>
-    <dd><code>cilk_sync ;</code></dd>
+    <dd><code>_Cilk_sync ;</code></dd>
 </dl>
-<p>The call production of the grammar is modified to permit the keyword <code>cilk_spawn</code>
+<p>The call production of the grammar is modified to permit the keyword <code>_Cilk_spawn</code>
     before the expression denoting the function to be called:</p>
 <dl class="bnf">
     <dt><dfn>postfix-expression</dfn>:</dt>
-    <dd><code>cilk_spawn</code><sub>opt</sub> <var>postfix-expression</var> <code>(</code>
+    <dd><code>_Cilk_spawn</code><sub>opt</sub> <var>postfix-expression</var> <code>(</code>
         <var>expression-list</var><sub>opt</sub> <code>)</code></dd>
 </dl>
-<p>Consecutive <code>cilk_spawn</code> tokens are not permitted. The <var>postfix-expression</var>
-    following <code>cilk_spawn</code> is called a <dfn>spawned function</dfn>. <del>The
+<p>Consecutive <code>_Cilk_spawn</code> tokens are not permitted. The <var>postfix-expression</var>
+    following <code>_Cilk_spawn</code> is called a <dfn>spawned function</dfn>. <del>The
         spawned function may be a normal function call, a member-function call, or the function-call
         (parentheses) operator of a function object (functor) or a call to a lambda expression.</del>
     Overloaded operators other than the parentheses operator may be spawned only by
     using the function-call notation (e.g., <code>operator+(arg1,arg2)</code>). There
-    shall be no more than one <code>cilk_spawn</code> within a full expression. A function
+    shall be no more than one <code>_Cilk_spawn</code> within a full expression. A function
     that contains a spawn statement is called a <dfn>spawning function</dfn>.</p>
 <p class="note">Note: The spawned function <ins>call</ins> may be a normal function
     call, a member-function call, the function-call (parentheses) operator of a function
     object (functor), or a call to a lambda expression.</p>
-<p>A program is <del>considered</del> ill formed if the <code>cilk_spawn</code> form
+<p>A program is <del>considered</del> ill formed if the <code>_Cilk_spawn</code> form
     of this expression appears other than in one of the following contexts:</p>
 <ul>
     <li>as the <del>entire body</del> <ins>full-expression</ins> of an expression statement,</li>
@@ -112,10 +123,10 @@ eleventyNavigation:
     <li>as the entire <var>initializer-clause</var> in a simple declaration <ins>for an
         object with automatic storage duration</ins>.</li>
 </ul>
-<p><del>(A <code>cilk_spawn</code> expression may be permitted in more contexts in
+<p><del>(A <code>_Cilk_spawn</code> expression may be permitted in more contexts in
     the future.)</del> <ins>The rank of a spawned function call shall be zero. (See <a
         href="#array.sect">The section expression</a>.)</ins></p>
-<p>A statement with a <code>cilk_spawn</code> on the right hand side of an assignment
+<p>A statement with a <code>_Cilk_spawn</code> on the right hand side of an assignment
     or declaration is called an <dfn><a id="defassignspawn">assignment spawn</a></dfn>
     or <dfn>initializer spawn</dfn>, respectively and the object assigned or initialized
     by the spawn is called the <dfn>receiver.</dfn></p>
@@ -126,10 +137,10 @@ eleventyNavigation:
 </dl>
 <dl class="bnf">
     <dt><dfn>iteration-statement</dfn>:</dt>
-    <dd><var>grainsize-pragma</var><sub>opt</sub> <code>cilk_for (</code> <var>expression</var>
+    <dd><var>grainsize-pragma</var><sub>opt</sub> <code>_Cilk_for (</code> <var>expression</var>
         <code>;</code> <var>expression</var> <code>;</code> <var>expression</var> <code>)</code>
         <var>statement</var></dd>
-    <dd><var>grainsize-pragma</var><sub>opt</sub> <code>cilk_for (</code> <var>declaration</var>
+    <dd><var>grainsize-pragma</var><sub>opt</sub> <code>_Cilk_for (</code> <var>declaration</var>
         <var>expression</var> <code>;</code> <var>expression</var> <code>)</code> <var>statement</var></dd>
 </dl>
 <p><ins>The three items inside parentheses in the grammar, separated by semicolons,
@@ -178,31 +189,31 @@ eleventyNavigation:
 <p><strong>The serialization of a pure C or C++ program is itself.</strong></p>
 <p>If a C or C++ program has defined behavior and does not use the tasking keywords
     or library functions, it is an OpenCilk with the same defined behavior.</p>
-<p><strong>The serializations of <code>cilk_spawn</code> and <code>cilk_sync</code>
+<p><strong>The serializations of <code>_Cilk_spawn</code> and <code>_Cilk_sync</code>
     are empty.</strong></p>
 <p>If an OpenCilk program has defined deterministic behavior, then that behavior is
     the same as the behavior of the C or C++ program derived from the original by removing
-    all instances of the keywords <code>cilk_spawn</code>, and <code>cilk_sync</code>.</p>
-<p><strong>The serialization of <code>cilk_for</code> is <code>for</code>.</strong></p>
+    all instances of the keywords <code>_Cilk_spawn</code>, and <code>_Cilk_sync</code>.</p>
+<p><strong>The serialization of <code>_Cilk_for</code> is <code>for</code>.</strong></p>
 <p>If an OpenCilk program has defined deterministic behavior, then that behavior is
     the same as the behavior of the C or C++ program derived from the original by replacing
-    each instance of the <code>cilk_for</code> keyword with <code>for</code>.</p>
+    each instance of the <code>_Cilk_for</code> keyword with <code>for</code>.</p>
 
 ## <del>Spawning</del> <ins>Task</ins> blocks
 
 <p>A <del>spawning</del> <ins>task</ins> block is a region of the program subject to
     special rules. Task blocks may be nested. The body of a nested task block is not
     part of the outer task block. Task blocks never partially overlap. The body of a
-    spawning function is a task block. A <code>cilk_for</code> statement is a task
-    block and the body of the <code>cilk_for</code> loop is a (nested) task block.</p>
-<p>Every <del>spawning</del> <ins>task</ins> block includes an implicit <code>cilk_sync</code>
+    spawning function is a task block. A <code>_Cilk_for</code> statement is a task
+    block and the body of the <code>_Cilk_for</code> loop is a (nested) task block.</p>
+<p>Every <del>spawning</del> <ins>task</ins> block includes an implicit <code>_Cilk_sync</code>
     executed on exit from the block, including abnormal exit due to an exception. Destructors
     for automatic objects with scope ending at the end of the task block are invoked
-    before the implicit <code>cilk_sync</code>. The receiver is assigned or initialized
-    to the return value before executing the implicit <code>cilk_sync</code> at the
-    end of a function. An implicit or explicit <code>cilk_sync</code> within a nested
-    task block will synchronize with <code>cilk_spawn</code> statements only within
-    that task block, and not with <code>cilk_spawn</code> statements in the surrounding
+    before the implicit <code>_Cilk_sync</code>. The receiver is assigned or initialized
+    to the return value before executing the implicit <code>_Cilk_sync</code> at the
+    end of a function. An implicit or explicit <code>_Cilk_sync</code> within a nested
+    task block will synchronize with <code>_Cilk_spawn</code> statements only within
+    that task block, and not with <code>_Cilk_spawn</code> statements in the surrounding
     task block.</p>
 <del>
     <p>The scope of a label defined in a spawning block is limited to that spawning block.</p>
@@ -210,12 +221,12 @@ eleventyNavigation:
         or exit a spawning block.</p>
 </del>
 
-## <code>cilk_for</code> Loops
+## <code>_Cilk_for</code> Loops
 
 <ins>
-    <p>The constraints and semantics of a <code>cilk_for</code> loop are the same as those
+    <p>The constraints and semantics of a <code>_Cilk_for</code> loop are the same as those
         of its serialization, unless specified otherwise.</p>
-    <p>Each iteration of a <code>cilk_for</code> loop is a separate strand; they need not
+    <p>Each iteration of a <code>_Cilk_for</code> loop is a separate strand; they need not
         be executed serially.</p>
 </ins>
 <p>Within each iteration of the loop body, <del>the control variable is considered a
@@ -230,21 +241,21 @@ eleventyNavigation:
 
 ### Syntactic constraints
 
-<p>To simplify the grammar, some restrictions on <code>cilk_for</code> loops are stated
+<p>To simplify the grammar, some restrictions on <code>_Cilk_for</code> loops are stated
     here in text form. <del>The three items inside parentheses in the grammar, separated
         by semicolons, are the <var>initialization</var>, <var>condition</var>, and <var>increment</var>.</del>
     <ins>Where a constraint on an expression is expressed grammatically, parentheses around
         a required expression or sub-expression are allowed.</ins></p>
 <del>
     <p>A program that contains a <code>return</code>, <code>break</code>, or <code>goto</code>
-        statement that would transfer control into or out of a <code>cilk_for</code> loop
+        statement that would transfer control into or out of a <code>_Cilk_for</code> loop
         is ill-formed.</p>
 </del>
 <p>The initialization shall declare or initialize a single variable, called the <dfn>
     control variable</dfn>. In C only, the control variable may be previously declared,
     but if so shall be reinitialized, i.e., assigned, in the initialization clause.
     In C++, the control variable shall be declared and initialized within the initialization
-    clause of the <code>cilk_for</code> loop. <ins>The variable shall have automatic storage
+    clause of the <code>_Cilk_for</code> loop. <ins>The variable shall have automatic storage
         duration.</ins> <del>No storage class may be specified for the variable within the initialization
             clause. The variable shall have integral, pointer, or class type. The variable may
             not be <code>const</code> or <code>volatile</code>.</del> The variable shall
@@ -334,19 +345,19 @@ eleventyNavigation:
 </ins>
 <p>A program that contains a <code>return</code>, <code>break</code>, <code>goto</code>
     <ins>or <code>switch</code></ins> statement that would transfer control into or
-    out of a <code>cilk_for</code> loop is ill-formed.</p>
+    out of a <code>_Cilk_for</code> loop is ill-formed.</p>
 
 ### Requirements on types and operators
 
 <p><del>The type of <var>var</var> shall be copy constructible. (For the purpose of
     specification, all C types are considered copy constructible.)</del> <ins>The control
         variable shall have unqualified integral, pointer, or copy-constructible class type.</ins></p>
-<p>The initialization, condition, and increment parts of a <code>cilk_for</code> shall
+<p>The initialization, condition, and increment parts of a <code>_Cilk_for</code> shall
     <del>be defined such that the total number of iterations (loop count) can be determined
-        before beginning the loop execution. Specifically, the parts of the <code>cilk_for</code>
+        before beginning the loop execution. Specifically, the parts of the <code>_Cilk_for</code>
         loop shall</del> meet all of the semantic requirements of the corresponding
     serial <code>for</code> statement. In addition, depending on the syntactic form
-    of the condition, a <code>cilk_for</code> adds the following requirements on the
+    of the condition, a <code>_Cilk_for</code> adds the following requirements on the
     types of <del><var>var</var></del> <ins>the control variable</ins>, <del><var>limit</var></del>
     <ins>the limit expression</ins>, and <del><var>stride</var></del> <ins>the stride.</ins>
     <del>(and by extension <var>incr</var>), and</del></p>
@@ -594,16 +605,16 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
 <p>If the loop body throws an exception that is not caught within the same iteration
     of the loop, it is unspecified which other loop iterations execute, <ins>but no other
         iteration is terminated early</ins>. If multiple loop iterations throw exceptions
-    that are not caught in the loop body, the <code>cilk_for</code> statement throws
+    that are not caught in the loop body, the <code>_Cilk_for</code> statement throws
     the exception that would have occurred first in the serialization of the program.</p>
 
 ### Grainsize pragma
 
-<p>A <code>cilk_for</code> <var>iteration-statement</var> may optionally be preceded
+<p>A <code>_Cilk_for</code> <var>iteration-statement</var> may optionally be preceded
     by a <var>grainsize-pragma</var>. The grainsize pragma shall immediately precede
-    a <code>cilk_for</code> loop and may not appear anywhere else in a program, except
-    that other pragmas that appertain to the <code>cilk_for</code> loop may appear
-    between the <var>grainsize-pragma</var> and the <code>cilk_for</code> loop. The
+    a <code>_Cilk_for</code> loop and may not appear anywhere else in a program, except
+    that other pragmas that appertain to the <code>_Cilk_for</code> loop may appear
+    between the <var>grainsize-pragma</var> and the <code>_Cilk_for</code> loop. The
     expression in the grainsize pragma shall evaluate to a type convertible to <code>long</code>.</p>
 <p>The presence of the pragma provides a hint to the runtime specifying the number of
     serial iterations desired in each chunk of the parallel loop. <del>The grainsize expression
@@ -615,25 +626,25 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
     evaluates to 0, then the runtime will pick a grainsize using its own internal heuristics.
     If the grainsize evaluates to a negative value, the behavior is unspecified. (The
     meaning of negative grainsizes is reserved for future extensions.) The grainsize
-    pragma applies only to the <code>cilk_for</code> statement that immediately follows
-    it &#x2013; the grain sizes for other <code>cilk_for</code> statements are not
+    pragma applies only to the <code>_Cilk_for</code> statement that immediately follows
+    it &#x2013; the grain sizes for other <code>_Cilk_for</code> statements are not
     affected.</p>
 
 ## Spawn
 
-<p>The <code>cilk_spawn</code> keyword suggests to the implementation that an executed
+<p>The <code>_Cilk_spawn</code> keyword suggests to the implementation that an executed
     statement or part of a statement may be run in parallel with following statements.
     A consequence of this parallelism is that the program may exhibit undefined behavior
-    not present in the serialization. Execution of a <code>cilk_spawn</code> keyword
-    is called a <dfn>spawn</dfn>. Execution of a <code>cilk_sync</code> statement is
+    not present in the serialization. Execution of a <code>_Cilk_spawn</code> keyword
+    is called a <dfn>spawn</dfn>. Execution of a <code>_Cilk_sync</code> statement is
     called a <dfn>sync</dfn>. <del>A statement</del> <ins>An expression statement or declaration
         statement</ins> that contains a spawn is called a <dfn>spawning statement</dfn>.
-    <ins>In a declaration containing a <code>cilk_spawn</code> keyword, the initialization
+    <ins>In a declaration containing a <code>_Cilk_spawn</code> keyword, the initialization
         of each object declared is treated as a separate statement.</ins></p>
-<p>The <dfn><a id="deffollowingsync">following sync</a></dfn> of a <code>cilk_spawn</code>
-    refers to the next <code>cilk_sync</code> executed (dynamically, not lexically)
+<p>The <dfn><a id="deffollowingsync">following sync</a></dfn> of a <code>_Cilk_spawn</code>
+    refers to the next <code>_Cilk_sync</code> executed (dynamically, not lexically)
     in the same task block. Which spawn the sync follows is implied from context. The
-    following sync may be the implicit <code>cilk_sync</code> at the end of a task
+    following sync may be the implicit <code>_Cilk_sync</code> at the end of a task
     block.</p>
 <p>A <dfn><a id="defspawnpoint">spawn point</a></dfn> is a C sequence point at which
     a control flow fork is considered to have taken place. Any operations within the
@@ -650,9 +661,9 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
 <p>The spawn points associated with different spawning statements are as follows:
 </p>
 <ul>
-    <li>The body of a <code>cilk_for</code> loop is a spawning statement with spawn point
+    <li>The body of a <code>_Cilk_for</code> loop is a spawning statement with spawn point
         at the end of the loop condition test.</li>
-    <li>An expression statement containing a single <code>cilk_spawn</code> has a spawn
+    <li>An expression statement containing a single <code>_Cilk_spawn</code> has a spawn
         point at the sequence point at the call to the spawned function. Any unnamed temporary
         variables created prior to the spawn point are not destroyed until after the spawn
         point (i.e., the destructors are invoked in the child).</li>
@@ -667,7 +678,7 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
         their destructors are invoked in the child).</li>
 </ul>
 <p>For example, in the following two statements:</p>
-<pre>x[g()] = cilk_spawn f(a + b);
+<pre>x[g()] = _Cilk_spawn f(a + b);
 a++;</pre>
 	<p>The call to function <code>f</code> is the spawn point and the statement <code>a++;</code>
 		is the continuation. The expression <code>a + b</code> and the initialization of
@@ -677,13 +688,13 @@ a++;</pre>
 			a + b</code> take place in the child.</p>
 	<p>If a statement is followed by an implicit sync, that sync is the spawn continuation.</p>
 	<p class="note">Programmer note: The sequencing may be more clear if</p>
-	<pre>x[g()] = cilk_spawn f(a + b);</pre>
+	<pre>x[g()] = _Cilk_spawn f(a + b);</pre>
 	<p class="note">is considered to mean</p>
 	<pre>{
 	// <em>Evaluate arguments and receiver address before spawn point</em>
 	T tmp = a + b; // <em>T is the type of a + b</em>
 	U &amp;r = x[g()]; // <em>U is the type of x[0]</em>
-	cilk_spawn { r = f(tmp); tmp.~T(); }
+	_Cilk_spawn { r = f(tmp); tmp.~T(); }
 }</pre>
 	<p>A <code>setjmp</code>/<code>longjmp</code> call pair within the same task block has
 		undefined behavior if a spawn or sync is executed between the <code>setjmp</code>
@@ -695,7 +706,7 @@ a++;</pre>
 
 <p>A sync statement indicates that all children of the current task block must finish
     executing before execution may continue within the task block. The new strand coming
-    out of the <code>cilk_sync</code> is not running in parallel with any child strands,
+    out of the <code>_Cilk_sync</code> is not running in parallel with any child strands,
     but may still be running in parallel with parent and sibling strands (other children
     of the calling function).</p>
 <p>There is an implicit sync at the end of every task block. If a spawning statement
@@ -705,15 +716,15 @@ a++;</pre>
     effect. (The compiler may elide an explicit or implicit sync if it can statically
     determine that the sync will have no observable effect.)</p>
 <p class="note">Programmer note: Because implicit syncs follow destructors, writing
-    <code>cilk_sync</code> at the end of a function may produce a different effect
+    <code>_Cilk_sync</code> at the end of a function may produce a different effect
     than the implicit sync. In particular, if an assignment spawn or initializer spawn
     is used to modify a local variable, the function will generally need an explicit
-    <code>cilk_sync</code> to avoid a race between assignment to the local variable
+    <code>_Cilk_sync</code> to avoid a race between assignment to the local variable
     by the spawned function and destruction of the local variable by the parent function.</p>
 
 ## Exceptions
 
-<p>There is an implicit <code>cilk_sync</code> before a <del><code>throw</code>, after
+<p>There is an implicit <code>_Cilk_sync</code> before a <del><code>throw</code>, after
     the exception object has been constructed.</del> <ins><var>try-block</var>.</ins></p>
 <p>If a spawned function terminates with an exception, the exception propagates from
     the point of the corresponding sync.</p>
@@ -737,14 +748,14 @@ a++;</pre>
     into a single view, using another callback function provided by the hyperobject
     type.</p>
 <p>The view of a hyperobject visible to a program may change at any spawn or sync (including
-    the implicit spawns and syncs within a <code>cilk_for</code> loop). The identity
+    the implicit spawns and syncs within a <code>_Cilk_for</code> loop). The identity
     (address) of the view does not change within a single strand. The view of a given
     hyperobject visible within a given strand is said to be <dfn>associated</dfn> with
     that view. A hyperobject has the same view before the first spawn within a task
     block as after a sync within the same task block, even though the thread ID may
     not be the same (i.e., hyperobject views are not tied to threads). A hyperobject
-    has the same view upon entering and leaving a <code>cilk_for</code> loop and within
-    the first iteration (at least) of the <code>cilk_for</code> loop. A special view
+    has the same view upon entering and leaving a <code>_Cilk_for</code> loop and within
+    the first iteration (at least) of the <code>_Cilk_for</code> loop. A special view
     is associated with a hyperobject when the hyperobject is initially created. This
     special view is called the <dfn>leftmost view</dfn> or <dfn>earliest view</dfn>
     because it is always visible to the leftmost (earliest) descendent in the depth-first,
@@ -783,7 +794,7 @@ a++;</pre>
     the &#x201c;&#x2297;&#x201d; in the expression &#x201c;<var>R</var>&#x2190;<var>R</var>&#x2297;<var>v</var>&#x201d;
     can represent a set of mutually-associative operations. For example, <code>+=</code>
     and <code>-=</code> are mutually associative.) For example, a spawned function or
-    <code>cilk_for</code> body can append items onto the view of a list reducer with
+    <code>_Cilk_for</code> body can append items onto the view of a list reducer with
     monoid (<code>list</code>, <code>concatenate</code>, <var>empty</var>). At the end
     of the parallel section of code, the reducer's view contains the same list items
     in the same order as would be generated in a serial execution of the same code.</p>
@@ -829,6 +840,466 @@ a++;</pre>
     reducers are nevertheless occasionally useful. Note that, for a classical reducer,
     the &#x2297; operator needs to be associative, but does not need to be commutative.</p>
 
+## Hyperobjects in C++
+
+### C++ hyperobject syntax
+
+<del>
+    <p class="note">Note: The syntax described here is the syntax used in the Intel products.
+        Intel is considering a different syntax for future, either in addition to or instead
+        of the syntax described below.</p>
+</del>
+<p>At present, reducers <ins>and holders</ins> are the only kind of hyperobject supported.
+    In C++, every reducer <del>hyperobject has a hyperobject type, which</del> <ins>type</ins>
+    is an instantiation of the <code>cilk::reducer</code> class template<ins>, which is
+        defined in the header <code>&lt;cilk/reducer.h&gt;</code></ins>. The <code>cilk::reducer</code>
+    class template has a single template type parameter, <code>Monoid</code>, which
+    shall be a class type. <ins>(See <a href="#hyper.cpp.monoid">C++ Monoid class requirements</a>,
+        below.)</ins></p>
+<p>For a given monoid, <var>M</var>, the type <code>cilk::reducer&lt;</code><var>M</var><code>&gt;</code>
+    defines a hyperobject type. The <code>cilk::reducer</code> class template provides
+    <del>constructors, a destructor, and</del> (<code>const</code> and non-<code>const</code>
+    versions of) <del><code>value_type&amp; operator()</code></del> <ins><code>operator*()</code></ins>
+    and <code><del>value_type&amp; </del>view()</code>, both of which return <del>a</del>
+    <ins>an lvalue</ins> reference to the current view<ins>, and <code>operator-&gt;()</code>,
+        which returns the address of the current view</ins>.</p>
+<p>A <del>hyperobject</del> <ins>reducer</ins> is created by defining an instance of
+    <code>cilk::reducer&lt;</code><var>M</var><code>&gt;</code>:</p>
+<pre>cilk::reducer&lt;<var>M</var>&gt; hv(<var>args</var>);</pre>
+<p>Where <var>args</var> is a list of <var>M</var><code>::<del>value</del><ins>view</ins>_type</code>
+    constructor arguments used to initialize the leftmost view of <code>hv</code>. A
+    hyperobject lookup is performed by invoking the member function, <code>view()</code>
+    or member <code>operator<ins>*</ins>()</code> <ins>or <code>operator-&gt;()</code></ins>
+    on the hyperobject, as in the following examples:</p>
+<pre>hv.view().append(elem);
+<ins>(*hv).append(elem);</ins>
+<ins>hv-&gt;append(elem);</ins><del> hv().append(elem);</del></pre>
+	<p>In these examples, <code>append</code> is an operation to be applied to the current
+		view of <code>hv</code>, and is presumably consistent with the associative operation
+		defined in the monoid, <var>M</var>.</p>
+	<p>Modifying a hyperobject view in a way that is not consistent with the associative
+		operation in the monoid can lead to subtle bugs. For example, addition is not associative
+		with multiplication, so performing a multiplication on the view of a summing reducer
+		will almost certainly produce incorrect results. To prevent this kind of error,
+		it is <del>common to wrap reducers in proxy classes that expose</del> <ins>possible
+			for the monoid to define a separate <code>view_type</code> class that wraps the
+			<code>value_type</code> and exposes</ins> only the valid associative operations.
+		<ins>(See <a href="#hyper.cpp.monoid">Monoid</a> and <a href="#hyper.cpp.view">View</a>
+			class requirements, below.)</ins> All of the reducers included in the standard
+		reducer library have such wrappers.</p>
+
+### <ins>C++ <code>reducer</code> class template</ins>
+
+<p><ins>Where the below table indicates that the signature of a function includes the
+    form <code>Args&amp;&amp;...</code>, in an implementation that supports C++ variadic
+    templates, the function shall be defined as a variadic function template. In an
+    implementation that does not support variadic templates, the function shall be defined
+    as a set of templates taking from 0 to N arguments of type <code>const Arg &amp;</code>,
+    where N is at least 4.</ins></p>
+<ins>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Member</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <pre>typename Monoid</pre>
+                </td>
+                <td>Template parameter</td>
+            </tr>
+            <tr>
+                <td>
+                    <pre>typedef
+typename Monoid::value_type
+value_type;</pre>
+                </td>
+                <td>Typedef for the type of the data being reduced.</td>
+            </tr>
+            <tr>
+                <td>
+                    <pre>typedef
+typename Monoid::view_type
+view_type;</pre>
+                </td>
+                <td>Typedef for the type actually returned by a hyperobject lookup. <code>view_type</code>
+                    can be the same as <code>value_type</code> (see below).</td>
+            </tr>
+            <tr>
+                <td>
+                    <pre>template&lt;typename... <var>Args</var>&gt;
+reducer(const <var>Args</var>&amp;&amp;... <var>args</var>);</pre>
+                </td>
+                <td>Default-initialize the monoid and construct the leftmost view using constructor
+                    arguments, <var>args</var>.</td>
+            </tr>
+            <tr>
+                <td>
+                    <pre>template&lt;typename... <var>Args</var>&gt;
+reducer(const Monoid&amp; <var>m</var>,
+const Args&amp;&amp;... <var>args</var>);</pre>
+                </td>
+                <td>Initialize the monoid from <var>m</var> and construct the leftmost view using constructor
+                    arguments, <var>args</var>. This constructor is useful only for the rare monoid
+                    type that contains state. The monoid state is shared by all views of the reducer.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <pre>Monoid&amp; monoid();
+Monoid const&amp; monoid() const;</pre>
+                </td>
+                <td>Return the monoid instance for this reducer. The same monoid instance is returned
+                    for a given reducer regardless of which strand invoked this accessor. This accessor
+                    is useful only for the rare monoid type that contains state.</td>
+            </tr>
+            <tr>
+                <td>
+                    <pre>view_type&amp; view();
+view_type&amp; view() const;</pre>
+                </td>
+                <td>Return an lvalue reference to the current view (i.e., the view associated with the
+                    currently-executing strand).</td>
+            </tr>
+            <tr>
+                <td>
+                    <pre>void move_in(value_type&amp; <var>obj</var>);</pre>
+                </td>
+                <td>Replace the value in the current view with <var>obj</var>. The value of <var>obj</var>
+                    after this operation is unspecified. Note that using this operation in parallel
+                    with other operations on the same reducer will cause the final reducer value to
+                    be indeterminate.</td>
+            </tr>
+            <tr>
+                <td>
+                    <pre>void move_out(value_type&amp; <var>obj</var>);</pre>
+                </td>
+                <td>Replace the value of <var>obj</var> with the value of the current view. The value
+                    of the view after this operation is unspecified. Note that using this operation
+                    in parallel with other operations on the same reducer will place an indeterminate
+                    value in <var>obj</var> and cause the final reducer value to be indeterminate.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <pre>void set_value(const value_type&amp; <var>obj</var>);</pre>
+                </td>
+                <td>Replace the value in the current view with <var>obj</var>. Note that using this
+                    operation in parallel with other operations on the same reducer will cause the final
+                    reducer value to be indeterminate.</td>
+            </tr>
+            <tr>
+                <td>
+                    <pre><var>type</var> get_value() const;</pre>
+                </td>
+                <td>Return the value of the current view. Note that using this operation in parallel
+                    with other operations on the same reducer will return an indeterminate value. The
+                    return type is <code>const value_type&amp;</code> if <code>view_type</code> is identical
+                    to <code>value_type</code>; otherwise the return value is the same as that returned
+                    by <code>view_type::view_get_value()</code>.</td>
+            </tr>
+        </tbody>
+    </table>
+</ins>
+
+### <ins>C++ Monoid class requirements</ins>
+
+<p>To define a reducer, a program defines a monoid class with public members representing
+    the monoid, (<var>T</var>, &#x2297;, <var>identity</var>) as follows:</p>
+<table border="1">
+    <thead>
+        <tr>
+            <th><ins>Member name/signature</ins></th>
+            <th><ins>Purpose</ins></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <pre>value_type</pre>
+            </td>
+            <td>typedef for <var>T</var><ins>, the type of the data being reduced</ins></td>
+        </tr>
+        <tr>
+            <td><ins>
+                <pre>view_type</pre>
+            </ins></td>
+            <td><ins>typedef for the type actually returned by a hyperobject lookup. <code>view_type</code>
+                can be the same as <code>value_type</code> (see below).</ins> </td>
+        </tr>
+        <tr>
+            <td>
+                <pre>reduce(value_type* <var>left</var>,
+value_type* <var>right</var>)</pre>
+            </td>
+            <td>evaluate &#x201c;<code>*</code><var>left</var> <code>= *</code><var>left</var> &#x2297;
+                <code>*</code><var>right</var>&#x201d;</td>
+        </tr>
+        <tr>
+            <td>
+                <pre>identity(value_type* <var>p</var>)</pre>
+            </td>
+            <td>construct <var>identity</var> object at <code>*</code><var>p</var></td>
+        </tr>
+        <tr>
+            <td>
+                <pre>destroy(value_type* <var>p</var>)</pre>
+            </td>
+            <td>call the destructor on the object <code>*</code><var>p</var></td>
+        </tr>
+        <tr>
+            <td>
+                <pre>allocate(size_t <var>size</var>)</pre>
+            </td>
+            <td>return a pointer to <var>size</var> bytes of raw memory<ins>; return type shall
+                be <code>void*</code></ins></td>
+        </tr>
+        <tr>
+            <td>
+                <pre>deallocate(<del>value_type</del> <ins>void</ins>* <var>p</var>)</pre>
+            </td>
+            <td>deallocate the raw memory at <code>*</code><var>p</var><ins>, where <var>p</var>
+                is a value returned by a previous call to <code>allocate</code></ins></td>
+        </tr>
+    </tbody>
+</table>
+<p>If any of the above functions do not modify the state of the monoid (most monoids
+    carry no state), then those functions may be declared <code>static</code> or <code>const</code>.
+    The monoid type may derive from an instantiation of <code>cilk::monoid_base&lt;<var>T</var><ins>,<var>V</var></ins>&gt;</code>,
+    which defines <code>value_type</code> <ins>and <code>view_type</code> as aliases for
+        <code><var>T</var></code> and <code><var>V</var></code>, respectively (where <code><var>
+            V</var></code> defaults to <code><var>T</var></code>),</ins> and provides
+    default implementations for <code>identity</code>, <code>destroy</code>, <code>allocate</code>,
+    and <code>deallocate</code>. The derived class needs to define <code>reduce</code>
+    and <del>override only</del> those functions for which the default is incorrect.</p>
+
+### <ins>C++ View class requirements</ins>
+
+<p><ins>By default, <code>view_type</code> is the same as <code>value_type</code>. Commonly,
+    however, it is a wrapper around <code>value_type</code> that presents a more limited
+    interface in order to achieve a measure of static safety. For example, for a summing
+    reducer, <code>view_type</code> might support <code>+=</code> and <code>++</code>
+    but not operations like <code>*=</code> that are inconsistent with a summing reduction.
+    Other times, <code>view_type</code> holds a more complex type that allows for more
+    efficient reduction operations.</ins></p>
+<p><ins>When <code>view_type</code> is identical to <code>value_type</code> the reducer
+    imposes no further requirements on it beyond those already required by the <code>identity</code>
+    and <code>reduce</code> operations in the monoid.</ins></p>
+<p><ins>When <code>view_type</code> differs from <code>value_type</code>, then <code>
+    view_type</code> must provide the following member functions:</ins></p>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Signature</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><ins>
+                <pre>view_move_in(value_type&amp; <var>v</var>)</pre>
+            </ins></td>
+            <td><ins>Clear the existing contents of the view and replace it with the value <var>
+                v</var>. After calling this function, the new value of <var>v</var> is unspecified
+                (but valid).</ins></td>
+        </tr>
+        <tr>
+            <td><ins>
+                <pre>view_move_out(value_type&amp; <var>v</var>)</pre>
+            </ins></td>
+            <td><ins>Move the value of the view into <var>v</var>. After calling this function,
+                the new value of the view is unspecified.</ins></td>
+        </tr>
+        <tr>
+            <td><ins>
+                <pre>view_set_value(const value_type&amp; <var>v</var>)</pre>
+            </ins></td>
+            <td><ins>Set the value of the view to <var>v</var>.</ins></td>
+        </tr>
+        <tr>
+            <td><ins>
+                <pre>view_get_value() const</pre>
+            </ins></td>
+            <td><ins>Return the value of the view, either as an rvalue or as a const lvalue.</ins>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+### C++ hyperobject behavior
+
+<p>An object of type <var>M</var><code>::value_type</code> is constructed by the <code>
+    reducer</code> constructor. This object is called the initial view or leftmost view
+    of the hyperobject. When a hyperobject goes out of scope, the destructor is called
+    on the leftmost view. It is unspecified whether <var>M</var><code>::allocate</code>
+    and <var>M</var><code>::deallocate</code> are called to allocate and deallocate
+    the leftmost view (they are not called in the current Intel implementation).</p>
+<p>The implementation may create a view at any spawn that has been scheduled in parallel,
+    or may lazily defer creation until the first access within a strand. The implementation
+    creates a view by calling <var>M</var><code>::allocate</code> followed by <var>M</var><code>::identity</code>.
+    (This is in addition to the initial view created by construction of the hyperobject.)
+    The calls to <var>M</var><code>::allocate</code> and <var>M</var><code>::identity</code>
+    are part of the strand for the purpose of establishing the absence of a data race.</p>
+<p>At any sync or at the end of any spawned (child) function, the runtime may merge
+    two views by calling <var>M</var><code>::reduce(</code><var>left</var><code>,</code>
+    <var>right</var><code>)</code>, where <var>right</var> is the earliest remaining
+    view that is later than <var>left</var>. The <var>M</var><code>::reduce</code> function
+    is expected to store the merged result in the <var>left</var> view. After the merge,
+    the runtime destroys the <var>right</var> view by calling <var>M</var><code>::destroy</code>
+    followed by <var>M</var><code>::deallocate</code>. Every view except the leftmost
+    view is passed exactly once as the second argument to <code>reduce</code>. The calls
+    to <var>M</var><code>::reduce</code>, <var>M</var><code>::destroy</code> and <var>M</var><code>::deallocate</code>
+    happen after completion of both of the strands that formerly owned the left and
+    right views.</p>
+<p>If a monoid member function executes a hyperobject lookup (directly or through a
+    function call), the behavior of the program is undefined.</p>
+<p>For purposes of establishing the absence of a data race, a hyperobject view is considered
+    a distinct object in each parallel strand. A hyperobject lookup is considered a
+    read of the hyperobject.</p>
+
+## Hyperobjects in C
+
+### C hyperobject syntax
+
+<del>
+    <p class="note">Note: The syntax described here is the syntax used in the Intel products.
+        Intel is considering a different syntax for future, either in addition to or instead
+        of the syntax described below.</p>
+</del>
+<p>The C mechanism for defining and using hyperobjects depends on a small number of
+    typedefs and preprocessor macros provided in the <del>Cilk library</del> <ins>header
+        <code>&lt;cilk/reducer.h&gt;</code></ins>. C does not have the template capabilities
+    of C++ and thus has a less abstract hyperobject syntax. Unlike C++, each C hyperobject
+    variable is unique &#x2013; there is no named type that unites similar hyperobjects.
+    There is, however, an implicit &#x201c;hyperobject type&#x201d; defined by the operations
+    that comprise the hyperobjects' monoid. The provided macros facilitate creating
+    reducer variables, which are the only type of hyperobject currently supported. The
+    terms &#x201c;reducer&#x201d; and &#x201c;hyperobject&#x201d; are used interchangeably
+    in this section.</p>
+<p>To define a C reducer, the program defines three functions representing operations
+    on a monoid (<var>T</var>, &#x2297;, <var>identity</var>):</p>
+<pre>void <var>T_reduce</var>(void* <var>r</var>, void* <var>left</var>, void* <var>right</var>);
+void <var>T_identity</var>(void* <var>r</var>, void* <var>view</var>);
+void <var>T_destroy</var>(void* <var>r</var>, void* <var>view</var>);</pre>
+	<p>The names of these functions are for illustration purposes only and must be chosen,
+		as usual, to avoid conflicts with other identifiers. The purposes of these functions
+		are as follows:</p>
+	<table border="1">
+		<thead>
+			<tr>
+				<th><ins>Function tag</ins></th>
+				<th><ins>Purpose</ins></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><var>T_reduce</var></td>
+				<td>Evaluate &#x201c;<code>\*(T\*)</code><var>left</var> <code>= \*(T\*)</code> <var>left</var>
+					&#x2297; <code>\*(T\*)</code> <var>right</var>&#x201d;</td>
+			</tr>
+			<tr>
+				<td><var>T_identity</var></td>
+				<td>Initialize a <var>T</var> value to <var>identity</var></td>
+			</tr>
+			<tr>
+				<td><var>T_destroy</var></td>
+				<td>Clean up (destroy) a <var>T</var> value</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>The <var>r</var> argument to each of these functions is a pointer to the actual reducer
+		variable and is usually ignored. Since most C types do not require cleanup on destruction,
+		the <var>T_destroy</var> function often does nothing. As a convenience, the Cilk
+		library makes this common implementation available as a library function, <code>__cilkrts_hyperobject_noop_destroy</code>.</p>
+	<p>A reducer, <code>hv</code>, is defined and given an initial value, <var>init</var>,
+		using the <code>CILK_C_DECLARE_REDUCER</code> and <code>CILK_C_INIT_REDUCER</code>
+		macros as follows:</p>
+	<pre>CILK_C_DECLARE_REDUCER(<var>T</var>) hv =
+	CILK_C_INIT_REDUCER(<var>T_identity</var>, <var>T_reduce</var>, <var>T_destroy</var>,
+		<var>init</var>);</pre>
+	<p>The <var>init</var> expression is used to initialize the leftmost reducer view. The
+		<code>CILK_C_DECLARE_REDUCER</code> macro defines a <code>struct</code> and can
+		be used in a <code>typedef</code> or <code>extern</code> declaration as well:</p>
+	<pre>extern CILK_C_DECLARE_REDUCER(<var>T</var>) hv;</pre>
+	<p>The <code>CILK_C_INIT_REDUCER</code> macro expands to a static initializer for a
+		hyperobject of any type. After initialization, the leftmost view of the reducer
+		is available as <var>hv</var><code>.value</code>.</p>
+	<p><del>If</del> <ins>The behavior is undefined if</ins> a reducer <del>is local to
+		a function, it shall be</del> <ins>with automatic storage duration is not</ins>
+		registered before first use using the <code>CILK_C_REGISTER_REDUCER</code> macro
+		and unregistered after its last use using the <code>CILK_C_UNREGISTER_REDUCER</code>
+		macro:</p>
+	<pre>CILK_C_REGISTER_REDUCER(<var>hv</var>);
+<em>/* use hv here */</em>
+CILK_C_UNREGISTER_REDUCER(<var>hv</var>);</pre>
+	<p>For the purpose of registration and unregistration, <dfn>first use</dfn> and <dfn>
+		last use</dfn> are defined with respect to the serialization of the program. <ins>If</ins>
+		the reducer view immediately before unregistration <del>shall be</del> <ins>is not</ins>
+		the same (<ins>does not</ins> have the same address) as the reducer view immediately
+		after registration, <ins>the behavior is undefined</ins>. In practice, this means
+		that any spawns after the registration have been synced before the unregistration
+		and that no spawns before the registration have been synced before the unregistration.
+		Registration and unregistration are optional for reducers declared in global scope.
+		The <code>value</code> member of the reducer continues to be available after unregistration,
+		but a hyperobject lookup on an unregistered reducer results in undefined behavior
+		unless the reducer is registered again.</p>
+	<p>A hyperobject lookup is performed using the <code>REDUCER_VIEW</code> macro:</p>
+	<pre>REDUCER_VIEW(<var>hv</var>) += <var>expr</var>;</pre>
+	<p>As in the case of a C++ reducer, modifying a reducer other than through the correct
+		associative operations can cause bugs. Unfortunately, C does not have sufficient
+		abstraction mechanisms to prevent this kind of error. Nevertheless, the Cilk library
+		provides wrapper macros to simplify the declaration and initialization, though not
+		the safety, of library-provided reducers in C. For example, you can define and initialize
+		a summing reducer this way:</p>
+	<pre>CILK_C_DECLARE_REDUCER(long) hv =
+	REDUCER_OPADD_INIT(long, 0);</pre>
+	<p>A C reducer can be declared, defined, and accessed within C++ code, but a C++ reducer
+		cannot be used within C code.</p>
+
+### C hyperobject behavior
+
+<p>The macro <code>CILK_C_DECLARE_REDUCER(<var>T</var>)</code> defines a <code>struct</code>
+    with a data member of type <var>T</var>, named <code>value</code>. The macro <code>CILK_C_INIT_REDUCER(<ins><var>T</var>,</ins><var>I</var>,<var>R</var>,<var>D</var>,<var>V</var>)</code>
+    expands to a <var>braced-init-list</var> appropriate for initializing a variable,
+    <var>hv</var>, of structure type declared with <code>CILK_C_DECLARE_REDUCER(<var>T</var>)</code>
+    such that <var>hv</var>, can be recognized by the runtime system as a C reducer
+    with value type <var>T</var>, identity function <var>I</var>, reduction function
+    <var>R</var>, destroy function <var>D</var>, and initial value <var>V</var>.</p>
+<p>Invoking <code>CILK_C_REGISTER_REDUCER(<var>hv</var>)</code> makes a call into the
+    runtime system that registers <var>hv</var><code>.value</code> as the initial, or
+    leftmost, view of the C hyperobject <var>hv</var>. The macro <code>CILK_C_UNREGISTER_REDUCER(<var>hv</var>)</code>
+    makes a call into the runtime system that removes hyperobject <var>hv</var> from
+    the runtime system's internal map. Attempting to access <var>hv</var> after it has
+    been unregistered will result in undefined behavior. If a hyperobject is never registered,
+    the leftmost view will be associated with the program strand before the very first
+    spawn in the program and will follow the leftmost branch of the execution DAG. This
+    association is typically useful only for hyperobjects in global scope.</p>
+<p>The implementation may create a view at <del>any spawn</del> <ins>the start of any
+    strand</ins> that has been scheduled in parallel, or may lazily defer creation until
+    the first access within a strand. The implementation creates a view by allocating
+    it with <code>malloc</code>, then calling the identity function specified in the
+    reducer initialization. (This is in addition to the initial view created by construction
+    of the reducer.) The call to the identity function is part of the strand for the
+    purpose of establishing the absence of a data race.</p>
+<p>At any sync or at the end of any spawned (child) function, the runtime may merge
+    two views by calling the reduction function (specified in the reducer initialization)
+    on the values <var>left</var> and <var>right</var>, where <var>right</var> is the
+    earliest remaining view that is later than <var>left</var>. The reduction function
+    is expected to store the merged result in the <var>left</var> view. After the merge,
+    the runtime destroys the <var>right</var> view by calling the destroy function for
+    the hyperobject, then deallocates it using <code>free</code>. Every view except
+    the leftmost view is passed exactly once as the second argument the reduction function.
+    The calls to reduction and destroy functions happen after completion of both of
+    the strands that formerly owned the left and right views.</p>
+<p>If a monoid function executes a hyperobject lookup, the behavior of the program is
+    undefined.</p>
+<p>For purposes of establishing the absence of a data race, a hyperobject view is considered
+    a distinct object in each parallel strand. A hyperobject lookup is considered a
+    read of the hyperobject.</p>
+<hr />
 
 # Disclaimer and other legal information
 
