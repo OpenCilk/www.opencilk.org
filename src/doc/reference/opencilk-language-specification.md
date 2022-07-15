@@ -152,7 +152,7 @@ A new form of Statement is introduced:
 
 _Cilk_scope { Statement* }
 
-Statements within _Cilk_scope are executed as usual.  There is an implicit _Cilk_sync at the end of the statements included within _Cilk_scope.
+Statements within _Cilk_scope are executed as usual.  There is an implicit _Cilk_sync at the end of the statements included within the _Cilk_scope construct.
 
 ## Semantics
 
@@ -196,11 +196,11 @@ Statements within _Cilk_scope are executed as usual.  There is an implicit _Cilk
 <p><strong>The serialization of a pure C or C++ program is itself.</strong></p>
 <p>If a C or C++ program has defined behavior and does not use the tasking keywords
     or library functions, it is an OpenCilk with the same defined behavior.</p>
-<p><strong>The serializations of <code>_Cilk_spawn</code> and <code>_Cilk_sync</code>
+<p><strong>The serializations of <code>_Cilk_scope</code>, <code>_Cilk_spawn</code> and <code>_Cilk_sync</code>
     are empty.</strong></p>
 <p>If an OpenCilk program has defined deterministic behavior, then that behavior is
     the same as the behavior of the C or C++ program derived from the original by removing
-    all instances of the keywords <code>_Cilk_spawn</code>, and <code>_Cilk_sync</code>.</p>
+    all instances of the keywords <code>_Cilk_scope</code>, <code>_Cilk_spawn</code>, and <code>_Cilk_sync</code>.</p>
 <p><strong>The serialization of <code>_Cilk_for</code> is <code>for</code>.</strong></p>
 <p>If an OpenCilk program has defined deterministic behavior, then that behavior is
     the same as the behavior of the C or C++ program derived from the original by replacing
@@ -689,9 +689,9 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
 a++;</pre>
 	<p>The call to function <code>f</code> is the spawn point and the statement <code>a++;</code>
 		is the continuation. The expression <code>a + b</code> and the initialization of
-		the temporary variable holding that value, and the evaluation of <code>x\\\\[g()]</code>
+		the temporary variable holding that value, and the evaluation of <code>x\\\\\[g()]</code>
 		take place before the spawn point. The execution of <code>f</code>, the assignment
-		to <code>x\\\\[g()]</code>, and the destruction of the temporary variable holding <code>
+		to <code>x\\\\\[g()]</code>, and the destruction of the temporary variable holding <code>
 			a + b</code> take place in the child.</p>
 	<p>If a statement is followed by an implicit sync, that sync is the spawn continuation.</p>
 	<p class="note">Programmer note: The sequencing may be more clear if</p>
@@ -1204,8 +1204,8 @@ void <var>T_destroy</var>(void* <var>r</var>, void* <var>view</var>);</pre>
 		<tbody>
 			<tr>
 				<td><var>T_reduce</var></td>
-				<td>Evaluate &#x201c;<code>\\\\*(T\\\\*)</code><var>left</var> <code>= \\\\*(T\\\\*)</code> <var>left</var>
-					&#x2297; <code>\\\\*(T\\\\*)</code> <var>right</var>&#x201d;</td>
+				<td>Evaluate &#x201c;<code>\\\\\*(T\\\\\*)</code><var>left</var> <code>= \\\\\*(T\\\\\*)</code> <var>left</var>
+					&#x2297; <code>\\\\\*(T\\\\\*)</code> <var>right</var>&#x201d;</td>
 			</tr>
 			<tr>
 				<td><var>T_identity</var></td>
