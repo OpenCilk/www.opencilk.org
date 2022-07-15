@@ -11,10 +11,9 @@ tags:
 eleventyNavigation:
   key: Language specification
 ---
-
 <h1 class="title">OpenCilk Language Extension Specification<br />
     Version 1.0 (2021-02-01) </h1>
-<p>Copyright &#xa9; 2020, 2021 Massachusetts Institute of Technology. All rights reserved.</p>
+<p>Copyright &#xa9; 2020, 2021, 2022 Massachusetts Institute of Technology. All rights reserved.</p>
 <p>More information about OpenCilk can be found at <a href="https://opencilk.org">
     opencilk.org</a></p>
 <p>Feedback on this specification is encouraged and welcome; please send to <a href="mailto:contact@opencilk.org">
@@ -37,7 +36,7 @@ eleventyNavigation:
     of the task scheduler. The programmer visible parts of the language include the
     following constructs:</p>
 <ol>
-    <li>Three keywords (<code>_Cilk_spawn</code>, <code>_Cilk_sync</code> and <code>_Cilk_for</code>)
+    <li>Four keywords (<code>_Cilk_scope</code>, _Cilk_spawn</code>, <code>_Cilk_sync</code> and <code>_Cilk_for</code>)
         to express tasking</li>
     <li>Hyperobjects, which provide local views to shared objects</li>
 </ol>
@@ -74,6 +73,7 @@ eleventyNavigation:
 
 <p>OpenCilk adds the following new keywords:</p>
 <ul>
+    <li><code>_Cilk_scope</code></li>
     <li><code>_Cilk_sync</code></li>
     <li><code>_Cilk_spawn</code></li>
     <li><code>_Cilk_for</code></li>
@@ -85,7 +85,8 @@ eleventyNavigation:
 
 <p>The header <code>&lt;cilk/cilk.h&gt;</code> defines the following aliases for the
     Cilk keywords:</p>
-<pre>#define cilk_spawn _Cilk_spawn
+<pre>#define cilk_scope _Cilk_scope
+#define cilk_spawn _Cilk_spawn
 #define cilk_sync  _Cilk_sync
 #define cilk_for   _Cilk_for</pre>
 
@@ -682,9 +683,9 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
 a++;</pre>
 	<p>The call to function <code>f</code> is the spawn point and the statement <code>a++;</code>
 		is the continuation. The expression <code>a + b</code> and the initialization of
-		the temporary variable holding that value, and the evaluation of <code>x\[g()]</code>
+		the temporary variable holding that value, and the evaluation of <code>x\\\\[g()]</code>
 		take place before the spawn point. The execution of <code>f</code>, the assignment
-		to <code>x\[g()]</code>, and the destruction of the temporary variable holding <code>
+		to <code>x\\\\[g()]</code>, and the destruction of the temporary variable holding <code>
 			a + b</code> take place in the child.</p>
 	<p>If a statement is followed by an implicit sync, that sync is the spawn continuation.</p>
 	<p class="note">Programmer note: The sequencing may be more clear if</p>
@@ -1197,8 +1198,8 @@ void <var>T_destroy</var>(void* <var>r</var>, void* <var>view</var>);</pre>
 		<tbody>
 			<tr>
 				<td><var>T_reduce</var></td>
-				<td>Evaluate &#x201c;<code>\*(T\*)</code><var>left</var> <code>= \*(T\*)</code> <var>left</var>
-					&#x2297; <code>\*(T\*)</code> <var>right</var>&#x201d;</td>
+				<td>Evaluate &#x201c;<code>\\\\*(T\\\\*)</code><var>left</var> <code>= \\\\*(T\\\\*)</code> <var>left</var>
+					&#x2297; <code>\\\\*(T\\\\*)</code> <var>right</var>&#x201d;</td>
 			</tr>
 			<tr>
 				<td><var>T_identity</var></td>
