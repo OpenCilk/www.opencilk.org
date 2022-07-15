@@ -148,6 +148,12 @@ eleventyNavigation:
     are called the <dfn>initialization</dfn>, <dfn>condition</dfn>, and <dfn>increment</dfn>,
     respectively. (A semicolon is included in the grammar of <var>declaration</var>.)</ins></p>
 
+A new form of Statement is introduced:
+
+_Cilk_scope { Statement* }
+
+Statements within _Cilk_scope are executed as usual.  There is an implicit _Cilk_sync at the end of the statements included within _Cilk_scope.
+
 ## Semantics
 
 ### Tasking Execution Model
