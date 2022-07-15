@@ -3,6 +3,7 @@ layout: layouts/page.njk
 title: Introduction to Cilk programming
 author: Bruce Hoppe
 date: 2022-07-15T18:13:01.322Z
+image: /img/p-fib-4-trace.png
 ---
 Parallel computers—computers with multiple processing units—are ubiquitous.
 Handheld, laptop, desktop, and cloud machines are all multicore computers, or
