@@ -64,18 +64,18 @@ int fib(int n)
 }
 ```
 
-The `p-fib` procedure (below) computes Fibonacci numbers, but using the
+The `p_fib` procedure (below) computes Fibonacci numbers, but using the
 parallel keywords `cilk_spawn` and `cilk_sync` to indicate parallelism in the code.
-If the keywords `cilk_spawn` and `cilk_sync` are deleted from `p-fib`, the resulting pseudocode text is identical to `fib` (other than renaming the procedure in the header).
+If the keywords `cilk_spawn` and `cilk_sync` are deleted from `p_fib`, the resulting pseudocode text is identical to `fib` (other than renaming the procedure in the header).
 
 ```c#
-int p-fib(int n)
+int p_fib(int n)
 {
   if (n <= 1)
     return n;
   else {
-    x = cilk_spawn p-fib(n-1);  // don't wait for funtion to return
-    y = p-fib(n-2);             // in parallel with spawned function
+    x = cilk_spawn p_fib(n-1);  // don't wait for funtion to return
+    y = p_fib(n-2);             // in parallel with spawned function
     cilk_sync;                  // wait for spawned function to finish
     return x + y;
   }
@@ -83,13 +83,13 @@ int p-fib(int n)
 ```
 
 Spawning occurs when the keyword `cilk_spawn` precedes a procedure call, as in line 6
-of `p-fib`. The semantics of a spawn differs from an ordinary procedure call in
+of `p_fib`. The semantics of a spawn differs from an ordinary procedure call in
 that the procedure instance that executes the spawn—the parent—may continue
 to execute in parallel with the spawned subroutine—its child—instead of waiting
 for the child to finish, as would happen in a serial execution. In this case, while
-the spawned child is computing `p-fib(n-1)`, the parent may go on to compute
-`p-fib(n-2)` in line 7 in parallel with the spawned child. 
-Since the `p-fib` procedure
+the spawned child is computing `p_fib(n-1)`, the parent may go on to compute
+`p_fib(n-2)` in line 7 in parallel with the spawned child. 
+Since the `p_fib` procedure
 is recursive, these two subroutine calls themselves create nested parallelism, as
 do their children, thereby creating a potentially vast tree of subcomputations, all
 executing in parallel.
