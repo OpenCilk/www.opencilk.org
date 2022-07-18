@@ -1,5 +1,7 @@
 ---
 title: Build OpenCilk from source
+author: Tao B. Schardl
+date: 2022-07-18T18:51:45.651Z
 tags: install
 ---
 
@@ -36,19 +38,19 @@ Clone the OpenCilk infrastructure repository:
 $ git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
 ```
 
-Run the following script to get the OpenCilk source code:
+Run the `get` script to get the OpenCilk source code:
 
 ```shell-session
 $ infrastructure/tools/get $(pwd)/opencilk
 ```
 
-Then run the following script to build OpenCilk:
+Run the `build` script to build OpenCilk:
 
 ```shell-session
 $ infrastructure/tools/build $(pwd)/opencilk $(pwd)/build
 ```
 
-You should now be ready to use OpenCilk.  Skip to [Usage](INSTALLING.md#Usage) now, or read
+You should now be ready to use OpenCilk.  Skip to [Usage](#Usage) now, or read
 on for more explicit directions on building OpenCilk from source.
 
 ## Obtaining the OpenCilk source code
@@ -107,6 +109,7 @@ To echo the OpenCilk build script call syntax, use the `--help` switch:
 $ infrastructure/tools/build --help
 ```
 
+{% alert "info" %}
 ***Advanced build options:*** If you wish, you can customize your
 build of OpenCilk beyond what the script provides --- e.g., to build
 additional LLVM subprojects --- by running the necessary CMake
@@ -118,6 +121,7 @@ as standard LLVM, which are documented here:
 OpenCilk build with these options, we recommend keeping `clang` in
 the list passed to `-DLLVM_ENABLE_PROJECTS` and `cheetah;cilktools`
 in the list passed to `-DLLVM_ENABLE_RUNTIMES`.
+{% endalert %}
 
 ## Usage
 
@@ -131,13 +135,15 @@ processors (released starting in 2011), and Steamroller and newer AMD
 processors (released starting in 2014).
 
 OpenCilk should work on any 64-bit ARM via its experimental ARM
-support.  In particular, OpenCilk has been tested on Apple's M1.  It
+support.  In particular, OpenCilk has been tested on Apple's M1 processor.  It
 may be helpful to try different values of the `CILK_NWORKERS`
 environment variable on chips like the M1 that mix low- and high-power
 cores.
 
-On MacOSX, you will need an XCode or CommandLineTools installation to
-provide standard system libraries and header files for clang.  To run
+On MacOSX, you will need an
+[XCode](https://developer.apple.com/support/xcode/) or
+[XCode Command Line Tools](https://mac.install.guide/commandlinetools/index.html)
+installation to provide standard system libraries and header files for clang.  To run
 clang with those header files and libraries, invoke the clang binary
 with `xcrun`; for example:
 
