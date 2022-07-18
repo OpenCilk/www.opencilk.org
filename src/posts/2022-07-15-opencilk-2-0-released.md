@@ -9,3 +9,9 @@ tags:
   - release
 ---
 TBD
+
+## Acknowledgments
+
+Thanks to everyone who contributed to this release, especially:
+- Brian Wheatman
+- William Luo
