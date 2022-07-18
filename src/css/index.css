@@ -46,6 +46,10 @@ a {
 a:hover {
   color: var(--lime);
 }
+a.defn {
+  font-weight: bold;
+  font-style: italic;
+}
 .blog.card-body {
   color: white;
 }

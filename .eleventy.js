@@ -8,6 +8,13 @@ const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const pluginTOC = require("eleventy-plugin-toc");
 const mathjax3 = require('markdown-it-mathjax3');
+const slugify = str =>
+str
+  .toLowerCase()
+  .trim()
+  .replace(/[^\w\s-]/g, '')
+  .replace(/[\s_-]+/g, '-')
+  .replace(/^-+|-+$/g, '');
 
 const featuredPosts = (post) => post.data.featured;
 
@@ -134,6 +141,19 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addShortcode(
     "imgLeft",
     function(source='', size='400') { return `<img style="margin: 0.2em 4em 0.2em 2em; max-width:${size}; max-height:${size}" src="${source}" class="img-fluid float-start"></img>` }
+  );
+
+  // Shortcode for glossary links
+  eleventyConfig.addShortcode(
+    "defn",
+    function(term='', text='') { 
+      const url = "/doc/reference/glossary/#" + slugify(term)
+      if (text=='') 
+        docText = term
+      else
+        docText = text
+      return `<a class="defn" href="${url}">${docText}</a>` 
+    }
   );
 
   // Paired Shortcode for Bootstrap 5 alerts

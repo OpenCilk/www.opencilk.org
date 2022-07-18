@@ -1,7 +1,7 @@
 ---
 title: Load instructions
-defn: |-
-    Memory is accessed by load instructions and by store instructions.
-    *Load instructions* copy data from a location in 
-    memory to a register within a processor.
 ---
+
+Memory is accessed by load instructions and by store instructions.
+*Load instructions* copy data from a location in 
+memory to a register within a processor.
