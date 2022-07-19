@@ -2,10 +2,21 @@
 
 Thank you for considering contributing to www.opencilk.org. People like you make it simple to build fast and composable software with OpenCilk. Following these guidelines helps make the OpenCilk website and documentation better for users&mdash;researchers, educators, students, and coders interested in software performance engineering.
 
-## Making simple changes
+## Platform and content basics
 
 The OpenCilk website is generated using [Eleventy](https://www.11ty.dev/), a Node.js package for building static websites.
 All the content used to generate the site is in the `src/` folder.
+
+As much as possible, content is written in markdown. (We have not yet selected an official dialect.) 
+The generator also recognizes a few shortcodes that we have created specifically for this site:
+
+- `{% defn "term", "optional_display text" %}`: this shortcode renders `"term"` (or `"optional_display_text"`) as a link to the glossary entry for `"term"`.
+- `{% img "/img/filename.ext", "optional_size" %}`: this shortcode displays a centered image (as a CSS block), sized so that neither its width nor height exceed `"optional_size"`, which defaults to 400px.
+  * `{% imgRight "/img/filename.ext", "size" %}`: similar to `img` but floats right
+  * `{% imgLeft "/img/filename.ext", "size" %}`: similar to `img` but floats left
+- `{% alert "optional_style" %} lorem ipsum {% endalert %}`: this paired shortcode renders its content inside a [Bootstrap 5 alert box](https://getbootstrap.com/docs/5.0/components/alerts/), using `"optional_style"` as the style of alert ("info" is the default).
+
+## Making simple changes
 
 To suggest a simple change to the website, you can navigate to the page with the content you think should be changed, and edit it.
 (Here are [instructions for editing on GitHub](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files).)
