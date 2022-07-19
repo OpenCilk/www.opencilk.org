@@ -70,7 +70,7 @@ it’s the importance of marketing!
 
 ## Work
 
-The first important measure is _work_, which is what you get when you add up
+The first important measure is {% defn "work" %}, which is what you get when you add up
 the total amount of time for all the instructions. Assuming for simplicity that
 it takes unit time to execute an instruction, the work for the example dag is
 $18$, because there are 18 vertices in the dag. The literature contains
@@ -105,7 +105,7 @@ exhibits _superlinear speedup_.
 
 ## Span
 
-The second important measure is _span_, which is the longest path of
+The second important measure is {% defn "span" %}, which is the longest path of
 dependencies in the dag. The span of the dag in the figure is $9$, which
 corresponds to the path $1 → 2 → 3→ 6 → 7 → 8 → 11 → 12 → 18$. This path is
 sometimes called the _critical path_ of the dag, and span is sometimes referred
@@ -126,7 +126,7 @@ mimic a $P$-processor machine exactly.
 
 ## Parallelism
 
-Parallelism is defined as the ratio of work to span, or $T_1/T_∞$. Why does
+{% defn "Parallelism" %} is defined as the ratio of work to span, or $T_1/T_∞$. Why does
 this definition make sense? There are several ways to understand it:
 
 1. The parallelism $T_1/T_∞$ is the average amount of work along each step of
