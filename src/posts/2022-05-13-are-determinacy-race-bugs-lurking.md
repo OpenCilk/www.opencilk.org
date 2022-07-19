@@ -1,15 +1,16 @@
 ---
-title: Are determinacy-race bugs lurking in YOUR multicore application?
 excerpt: The bane of concurrency, race conditions are notoriously hard to find.
   If you're going to multicore-enable your application, you need a reliable way
   to find them and eliminate them.
-author: Charles Leiserson
-date: 2022-05-13
 draft: true
+author: I-Ting Angelina Lee
+thumbnail: /img/determinacy-races-1.png
+title: Are determinacy-race bugs lurking in YOUR multicore application?
+tagline: determinacy race; data race; task parallelism
+date: 2022-07-19T17:46:52.940Z
 tags:
   - determinacy race
   - data race
-thumbnail: /img/determinacy-races-1.png
 ---
 
 Race conditions are the bane of concurrency.  Famous race bugs include the Therac-25 radiation therapy machine, which killed three people and injured several others, and the North American Blackout of 2003, which left over 50 million people without power.  These pernicious bugs are notoriously hard to find.  You can run regression tests in the lab for days without a failure only to discover that your software crashes in the field with regularity.  If you're going to multicore-enable your application, you need a reliable way to find and eliminate race conditions.
