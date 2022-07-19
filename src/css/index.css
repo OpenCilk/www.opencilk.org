@@ -20,7 +20,7 @@ html,
 body {
   padding-left: 0;
   padding-right: 0;
-  padding-top: 35px;
+  padding-top: 0;
   margin: 0;
   font-family: Roboto, sans-serif;
   color: var(--darkgray);
@@ -29,6 +29,14 @@ body {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover; 
+}
+.underNav {
+  position: sticky;
+  margin-top: 84px;
+}
+main {
+  overflow: scroll;
+  height: 100%;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: Ubuntu, sans-serif;

@@ -1,10 +1,13 @@
 
-    {% set navPages = ['Blog', 'Documentation', 'Community', 'About us', 'Contribute'] %}
-    {% if eleventyNavigation.key in navPages %}
-    {% set context = eleventyNavigation.key %}
-    {% else %}
-    {% set context = eleventyNavigation.parent %}
-    {% endif %}
+{% set navPages = ['Blog', 'Documentation', 'Community', 'About us', 'Contribute'] %}
+{% if eleventyNavigation.key in navPages %}
+{% set context = eleventyNavigation.key %}
+{% else %}
+{% set context = eleventyNavigation.parent %}
+{% endif %}
+
+<div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+
     <h5 class="w-100 p-2 rounded" style="margin-left: -0.4em; color: var(--midnight); background-color: var(--lime);">
         {{ context }}
     </h5>
@@ -28,3 +31,5 @@
             {{ content | toc | safe }}
         </div>
     </div> 
+
+</div>
