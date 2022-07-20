@@ -1,7 +1,6 @@
 ---
 title: Reducers
 author: John F. Carr
-tags: reference
 ---
 
 ## Reducers
