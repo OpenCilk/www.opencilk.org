@@ -1,5 +1,6 @@
 ---
 title: Invocation tree
+tags: invocation tree
 ---
 
 A fork-join parallel trace can be pictured as a dag of strands embedded in an

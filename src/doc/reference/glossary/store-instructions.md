@@ -1,5 +1,6 @@
 ---
 title: Store instructions
+tags: store instructions
 ---
 
 Memory is accessed by store instructions and by load instructions.

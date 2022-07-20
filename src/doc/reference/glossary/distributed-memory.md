@@ -1,5 +1,6 @@
 ---
 title: Distributed memory
+tags: distributed memory
 ---
 
 Multicore clusters usually have a distributed memory, where one multicore's memory

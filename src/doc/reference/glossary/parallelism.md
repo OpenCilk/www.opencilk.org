@@ -1,5 +1,6 @@
 ---
 title: Parallelism
+tags: parallelism
 ---
 
 The ratio $T_1/T_{\infty}$ of the work to the span gives the *parallelism* of a parallel

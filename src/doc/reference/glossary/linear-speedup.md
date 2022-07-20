@@ -1,5 +1,6 @@
 ---
 title: Linear speedup
+tags: linear speedup
 ---
 
 When the speedup of a computation on $P$ processesors

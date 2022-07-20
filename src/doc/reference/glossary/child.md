@@ -1,5 +1,6 @@
 ---
 title: Child
+tags: child
 ---
 
 A *child* process is one that results from a spawn.

@@ -1,5 +1,6 @@
 ---
 title: Scheduler
+tags: scheduler
 ---
 
 The *scheduler* for task-parallel computations

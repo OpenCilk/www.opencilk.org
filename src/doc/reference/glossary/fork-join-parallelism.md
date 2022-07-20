@@ -1,5 +1,6 @@
 ---
 title: Fork-join parallelism
+tags: fork-join parallelism
 ---
 
 Almost all task-parallel environments support *fork-join parallelism*, which is typically embodied

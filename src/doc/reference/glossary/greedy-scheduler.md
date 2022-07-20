@@ -1,5 +1,6 @@
 ---
 title: Greedy scheduler
+tags: greedy scheduler
 ---
 
 A *greedy scheduler* assigns as many strands to

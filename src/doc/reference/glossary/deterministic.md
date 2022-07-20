@@ -1,5 +1,6 @@
 ---
 title: Deterministic
+tags: deterministic
 ---
 
 A parallel algorithm is *deterministic* if it always does the same thing on the same

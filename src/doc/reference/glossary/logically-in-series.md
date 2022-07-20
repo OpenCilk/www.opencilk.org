@@ -1,5 +1,6 @@
 ---
 title: Logically in series
+tags: logically in series
 ---
 
 If $u$ and $v$ are strands in [parallel trace](/doc/reference/glossary/#parallel-trace) $G$,

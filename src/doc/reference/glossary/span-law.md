@@ -1,5 +1,6 @@
 ---
 title: Span law
+tags: span
 ---
 
 The span provides a lower bound on the running time $T_P$ of a task-parallel computation on $P$ processors.

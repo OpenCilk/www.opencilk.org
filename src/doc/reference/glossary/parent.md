@@ -1,5 +1,6 @@
 ---
 title: Parent
+tags: parent
 ---
 
 A *parent* process is one that executes a spawn,

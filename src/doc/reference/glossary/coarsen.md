@@ -1,5 +1,6 @@
 ---
 title: Coarsen
+tags: coarsen
 ---
 
 To reduce the overhead of recursive spawning, task-parallel platforms sometimes

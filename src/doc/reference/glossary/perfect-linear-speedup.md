@@ -1,5 +1,6 @@
 ---
 title: Perfect linear speedup
+tags: perfect linear speedup
 ---
 
 The maximum possible speedup of a computation on $P$ processors is 

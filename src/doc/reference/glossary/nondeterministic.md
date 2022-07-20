@@ -1,5 +1,6 @@
 ---
 title: Nondeterministic
+tags: nondeterministic
 ---
 
 A parallel algorithm is *nondeterministic* if its behavior might vary from run to run when the input is the same.

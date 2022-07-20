@@ -1,5 +1,6 @@
 ---
 title: Concurrency
+tags: concurrency
 ---
 
 With some parallel-programming models, a programmer cannot

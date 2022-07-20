@@ -139,4 +139,5 @@ collections:
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Definition", name: "body", widget: "markdown" }

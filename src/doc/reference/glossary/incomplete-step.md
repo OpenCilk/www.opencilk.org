@@ -1,5 +1,6 @@
 ---
 title: Incomplete step
+tags: incomplete step
 ---
 
 As a greedy scheduler manages a computation on $P$ processors, each step is classified as complete or incomplete.

@@ -1,5 +1,6 @@
 ---
 title: Online
+tags: online
 ---
 
 A task-parallel scheduler must must operate *online*, 

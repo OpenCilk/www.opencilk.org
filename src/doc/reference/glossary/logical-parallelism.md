@@ -1,5 +1,6 @@
 ---
 title: Logical parallelism
+tags: logical parallelism
 ---
 
 Parallel keywords like `cilk_spawn`, `cilk_scope`, `cilk_sync`, and `cilk_for` express

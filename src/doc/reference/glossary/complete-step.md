@@ -1,5 +1,6 @@
 ---
 title: Complete step
+tags: complete step
 ---
 
 As a {% defn "greedy scheduler" %} manages a computation on $P$ processors, each step is classified as *complete* or {% defn "incomplete step", "incomplete" %}.

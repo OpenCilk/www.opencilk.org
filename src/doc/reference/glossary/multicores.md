@@ -1,5 +1,6 @@
 ---
 title: Multicores
+tags: multicores
 ---
 
 Parallel computers&mdash;computers with multiple processing units&mdash;are ubiquitous. Handheld, laptop, desktop, and cloud machines are all

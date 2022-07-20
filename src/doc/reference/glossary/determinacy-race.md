@@ -1,5 +1,6 @@
 ---
 title: Determinacy race
+tags: determinacy race
 ---
 
 A *determinacy race* occurs when two logically parallel instructions access the

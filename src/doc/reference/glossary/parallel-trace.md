@@ -1,5 +1,6 @@
 ---
 title: Parallel trace
+tags: parallel trace
 ---
 
 It helps to view the execution of a parallel computation&mdash;the dynamic stream of

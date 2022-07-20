@@ -1,5 +1,6 @@
 ---
 title: Speedup
+tags: speedup
 ---
 
 We define the *speedup* of a computation on $P$ processors by the ratio $T_1/T_P$,

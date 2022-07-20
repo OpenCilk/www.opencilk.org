@@ -1,5 +1,6 @@
 ---
 title: Ideal parallel computer
+tags: ideal parallel computer
 ---
 
 Our analyses generally assume that parallel algorithms execute on an *ideal parallel 

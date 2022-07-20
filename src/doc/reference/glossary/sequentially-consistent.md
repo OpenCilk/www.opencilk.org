@@ -1,5 +1,6 @@
 ---
 title: Sequential consistency
+tags: sequential consistency
 ---
 
 *Sequential consistency* means that even if

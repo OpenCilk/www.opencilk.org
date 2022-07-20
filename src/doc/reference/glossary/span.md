@@ -1,5 +1,6 @@
 ---
 title: Span
+tags: span
 ---
 
 The *span* is the fastest possible time to execute the computation on an

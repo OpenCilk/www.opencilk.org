@@ -1,5 +1,6 @@
 ---
 title: Critical path
+tags: critical path
 ---
 
 The *critical path* of a task-parallel trace is the 

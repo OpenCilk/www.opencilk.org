@@ -1,5 +1,6 @@
 ---
 title: Parallel slackness
+tags: parallel slackness
 ---
 
 We define the *(parallel) slackness* of a task-parallel computation executed on

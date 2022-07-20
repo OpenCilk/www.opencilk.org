@@ -1,5 +1,6 @@
 ---
 title: Spawning
+tags: spawning
 ---
 
 *Spawning* occurs when the keyword `cilk_spawn` precedes a procedure call. 

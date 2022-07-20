@@ -1,5 +1,6 @@
 ---
 title: Parallel loops
+tags: parallel loops
 ---
 
 A *parallel loop* is like an ordinary `for` loop, 

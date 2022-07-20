@@ -1,5 +1,6 @@
 ---
 title: Centralized
+tags: Centralized
 ---
 
 A good scheduler operates in a distributed fashion, where
