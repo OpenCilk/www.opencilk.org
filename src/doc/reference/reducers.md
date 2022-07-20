@@ -26,7 +26,7 @@ _monoid_.  The reducer combines a type (e.g., `double` or
 associative binary operation (`+` or `std::list<int>:splice`).
 
 The identity value is provided by a callback function which takes a
-pointer to the value to be initialized (cast to `void&nbsp;*`).  The
+pointer to the value to be initialized (cast to `void`&nbsp;`*`).  The
 binary operation, called reduction, is implemented by a function with
 two pointer arguments pointing to the two values to be combined.  The
 value pointed to by the second argument should be merged into the
