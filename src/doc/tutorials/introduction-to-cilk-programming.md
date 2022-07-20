@@ -1,9 +1,9 @@
 ---
 layout: layouts/page.njk
 title: Introduction to Cilk programming
-tagline: OpenCilk extends C/C++ with a few Cilk keywords to support
-  task-parallel programming, a simple and efficient model for writing fast code
-  for multicore computers.
+tagline: With a few Cilk keywords, OpenCilk extends C/C++ to support fork-join
+  parallel programming, a simple and efficient model for writing fast code for
+  multicore computers.
 author: Bruce Hoppe
 date: 2022-07-15T18:13:01.322Z
 image: /img/p-fib-4-trace.png
