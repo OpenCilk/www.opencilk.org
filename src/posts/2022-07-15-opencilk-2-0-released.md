@@ -14,4 +14,5 @@ TBD
 
 Thanks to everyone who contributed to this release, especially:
 - Brian Wheatman
+- Teo Collin
 - William Luo
