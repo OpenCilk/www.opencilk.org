@@ -176,7 +176,7 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 \
 Cilkscale will report the total work, span, and parallelism in the code at the end of the program execution, as shown above.
 
-The Cilkscale tool can be used in conjunction with other benchmarking and visualization scripts provided as part of the OpenCilk toolbox. More information about the use of Cilkscale and related tools for benchmarking and visualizing parallel program performance can be found [here](doc/users-guide/getting-started/#using-cilkscale). Using Cilkscale and related tools, we can produce plots that illustrate the speedup and observed runtime performance of our quicksort program when run on a varying number of processors. The resultant plots are shown below.
+The Cilkscale tool can be used in conjunction with other benchmarking and visualization scripts provided as part of the OpenCilk toolbox. More information about the use of Cilkscale and related tools for benchmarking and visualizing parallel program performance can be found [here](/doc/users-guide/getting-started/#using-cilkscale). Using Cilkscale and related tools, we can produce plots that illustrate the speedup and observed runtime performance of our quicksort program when run on a varying number of processors. The resultant plots are shown below.
 
 ![Cilkscale speedup for quicksort.](/img/cilkscale-qsort-speedup.png "Quicksort speedup")
 
@@ -191,4 +191,4 @@ The Cilksan race detector can be used to check for race conditions in the parall
 ./qsort 10000000
 ```
 
-The Cilksan race detector will report any race conditions present in the program and verify the absence of races in a race-free program. More detailed instructions about the use of Cilksan can be found [here](doc/users-guide/getting-started/#using-cilksan).
+The Cilksan race detector will report any race conditions present in the program and verify the absence of races in a race-free program. More detailed instructions about the use of Cilksan can be found [here](/doc/users-guide/getting-started/#using-cilksan).
