@@ -3,7 +3,7 @@ title: Convert a C++ program
 author: Timothy Kaler
 date: 2022-07-20T16:22:55.620Z
 ---
-A common application of OpenCilk is the parallelization of existing serial code. Indeed, it is often advisable for programmers to prioritize writing correct and efficient serial code before attempting parallelization due to the notorious difficulty of writing correct parallel code. In this section, we shall walk through the process of converting an existing serial C or C++ code to an OpenCilk parallel program and show how OpenCilk's suite of tools can be used to debug race-conditions and scalability bottlenecks.
+A common application of OpenCilk is the parallelization of existing serial code. Indeed, it is often advisable for programmers to prioritize writing correct and efficient serial code before attempting parallelization because of the notorious difficulty of writing correct parallel code. In this section, we shall walk through the process of converting an existing serial C or C++ code to an OpenCilk parallel program and show how OpenCilk's suite of tools can be used to debug race-conditions and scalability bottlenecks.
 
 ## General workflow
 
