@@ -1,45 +1,23 @@
 ---
 title: Convert a C++ program
+author: Timothy Kaler
+date: 2022-07-20T16:22:55.620Z
 ---
+A common application of OpenCilk is the parallelization of existing serial codes. Indeed, it is often advisable for programmers to write correct and efficient serial codes prior to introducing parallelism because of the notorious difficulty of writing correct parallel programs. In this section, we shall walk through the process of converting an existing serial C or C++ code to an OpenCilk parallel program and show how OpenCilk's suite of tools can be used to debug race-conditions and scalability bottlenecks.
 
-{% alert "primary" %}
-***Note:*** This page will be updated soon to include `cilk_scope`, introduced with OpenCilk 2.0.
-{% endalert %}
+One typically begins with an existing serial C or C++ program that implements the functions or algorithms that are relevant to one's application. Ideally, the serial code you start with will be well-tested to verify it is correct and performance-engineered to be efficient in terms of the total work it performs. Any correctness bugs in the serial code will result in correctness bugs in the parallel program, but they will be more difficult to identify and fix! Similarly, inefficiency in the original sequential code will translate to inefficiency in its parallel equivalent.\
+\
+Next, one begins the process of introducing parallelism into the program.  Typically one starts by identifying the regions of the program that will most benefit from parallel execution. Operations that are relatively long-running and/or tasks that can be performed independently are prime candidates for parallelization. The programmer then uses the three OpenCilk keywords to identify tasks that can execute in parallel:
 
-## Overview
+* `cilk_spawn` indicates a call to a function (a "child") that can proceed in parallel with the caller (the "parent").
+* `cilk_sync` indicates that all spawned children must complete before proceeding.
+* `cilk_for` identifies a loop for which all iterations can execute in parallel.
 
-Here is the sequence of steps to create a parallel program using OpenCilk.
+The programmer can then compile and test their new parallel program. On **Linux* OS** one can compile one's program using the OpenCilk compiler with the `clang` or `clang++` compiler commands. The program can then be run on the local machine and tested for correctness and performance. If the parallelization of the original (correct) serial program contains no ***race conditions***, then the parallel program will produce the same result as the serial program. \
+\
+The OpenCilk tools can be used to debug race conditions and scalability bottlenecks in parallelized codes. Verifying the absence of race conditions is particularly important when writing parallel code. Fortunately, OpenCilk provides the ***cilksan race detector*** which can identify all possible race conditions introduced by parallel operations when a program is run on a given input. Using the OpenCilk tools, the programmer can identify possible race conditions in their parallel code and correct them using a combination of **reducers,** locks, and recoding.
 
-* Typically, you will start with a serial C or C++ program that implements the basic
-  functions or algorithms that you want to parallelize. You will likely
-  be most successful if the serial program is correct to begin with!
-  Any bugs in the serial program will occur in the parallel program, but
-  they will be more difficult to identify and fix.
-* Next, identify the program regions that will benefit from parallel
-  operation. Operations that are relatively long-running and which can
-  be performed independently are prime candidates.
-* Use the three OpenCilk keywords to identify tasks that can execute in
-  parallel:
-      * `cilk_spawn` indicates a call to a function (a "child") that can proceed in parallel with the caller (the "parent").*
-       `cilk_sync` indicates that all spawned children must complete before proceeding.
-      * `cilk_for` identifies a loop for which all iterations can execute in parallel.
-* Build the program:
-
-  * **Linux* OS:** Use the `clang` or `clang++` compiler command.
-* Run the program. If there are no ***race conditions***, the parallel program will produce the same result
-  as the serial program.
-* Even if the parallel and serial program results are the same, there
-  may still be race conditions. Run the program under the ***cilksan
-  race detector*** to identify possible race
-  conditions introduced by parallel operations.
-* ***Correct any race conditions*** with ***reducers***, locks, or recode to resolve
-  conflicts.
-* Note that a traditional debugger can debug the *serialization* of a parallel program, which you can create
-  easily with OpenCilk.
-
-We will walk through this process in detail using a sort program as an example.
-
-## Start with a serial program
+## Example: Quicksort
 
 We'll demonstrate how to use write an OpenCilk program by parallelizing
 a simple implementation of ***Quicksort***
@@ -103,20 +81,9 @@ int main(int argc, char* argv[])
 }
 ```
 
-## Convert to an OpenCilk program
+### Compiling Quicksort with the OpenCilk compiler
 
-Converting the C++ code to OpenCilk C++ code is very simple.
-
-* Add a "`#include <cilk.h>`" statement to the source. `cilk.h`
-  declares all the entry points to the OpenCilk runtime.
-
-The result is an OpenCilk program that has no parallelism yet.
-
-Compile the program to ensure that the OpenCilk SDK development
-environment is setup correctly.
-
-Typically, OpenCilk programs are built with optimized code for best
-performance.
+This quicksort code can be compiled using the OpenCilk C++ compiler by adding `#include <cilk.h>` statement to the source file. The `cilk.h` header file contains declarations of the OpenCilk runtime API and the keywords used to specify parallel control flow. After adding the `cilk.h` header file, one can compile the quicksort program using the OpenCilk compiler, as shown below.
 
 ##### Linux* OS
 
@@ -124,21 +91,15 @@ performance.
 > clang++ qsort.cpp -o qsort –O3 -fopencilk
 ```
 
-## Add parallelism using `cilk_spawn`
+### Add parallelism using `cilk_spawn`
 
-We are now ready to introduce parallelism into our `qsort` program.
+The next step is to actually introduce parallelism into our quicksort program. This can be accomplished through the judicious use of OpenCilk's three keywords for expressing parallelism: `cilk_spawn`, `cilk_sync`, and `cilk_for`. 
 
-The `cilk_spawn` keyword indicates that a function (the *child*) may be
-executed in parallel with the code that follows the `cilk_spawn`
-statement (the *parent*). Note that the keyword *allows* but does not
-*require* parallel operation. The OpenCilk scheduler will dynamically
-determine what actually gets executed in parallel when multiple
-processors are available. The `cilk_sync` statement indicates that the
-function may not continue until all `cilk_spawn` requests in the same
-function have completed. `cilk_sync` does not affect parallel strands
-spawned in other functions.
+In this example, we shall make use of just the `cilk_spawn` and `cilk_sync` keywords. The `cilk_spawn` keyword indicates that a function (the *child*) may be executed in parallel with the code that follows the `cilk_spawn`statement (the *parent*). Note that the keyword *allows* but does not *require* parallel operation. The OpenCilk scheduler will dynamically determine what actually gets executed in parallel when multiple processors are available. The `cilk_sync` statement indicates that the function may not continue until all `cilk_spawn` requests in the same function have completed. `cilk_sync` does not affect parallel strands spawned in other functions.
 
-```c
+Let us walk through a version of the quicksort code that has been parallelized using OpenCilk.
+
+```
 void sample_qsort(int * begin, int * end)
 {
     if (begin != end) {
@@ -153,25 +114,15 @@ void sample_qsort(int * begin, int * end)
 }
 ```
 
-In line 8, we spawn a recursive invocation of `sample_qsort` that can
-execute asynchronously. Thus, when we call `sample_qsort` again in line 9, the call at line 8 might not have completed. The `cilk_sync`
-statement at line 10 indicates that this function will not continue
-until all `cilk_spawn` requests in the same function have completed.
+In the example code above, the serial quicksort code has been converted into a parallel OpenCilk code by adding the `cilk_spawn` keyword on line 8, and the  `cilk_sync` keyword on line 10. The `cilk_spawn` keyword on line 8 indicates that the function call `sample_qsort(begin, middle)` is allowed to execute in-parallel with its ***continuation*** which includes the program instructions that are executed after the return of the function call on line 8 and the `cilk_sync` instruction on line 10. 
 
-There is an implicit `cilk_sync` at the end of every function that waits
-until all tasks spawned in the function have returned, so the `cilk_sync` here is redundant, but written explicitly for clarity.
+The `cilk_spawn` keyword can be thought of as allowing the recursive invocation of `sample_qsort` on line 8 to execute asynchronously. Thus, when we call `sample_qsort` again in line 9, the call at line 8 might not have completed. The `cilk_sync` statement at line 10 indicates that this function will not continue until all `cilk_spawn` requests in the same function have completed. There is an implicit `cilk_sync` at the end of every function that waits until all tasks spawned in the function have returned, so the `cilk_sync` here is redundant, but written explicitly for clarity.
 
-The above change implements a typical divide-and-conquer strategy for
-parallelizing recursive algorithms. At each level of recursion, we have
-two-way parallelism; the parent strand (line 9) continues executing the
-current function, while a child strand executes the other recursive
-call. This recursion can expose quite a lot of parallelism.
+The parallelization of quicksort provided in this example implements a typical divide-and-conquer strategy for parallelizing recursive algorithms. At each level of recursion, we have two-way parallelism; the parent strand (line 9) continues executing the current function, while a child strand executes the other recursive call. In general, recursive divide-and-conquer algorithms can expose significant parallelism. In the case of quicksort, however, parallelizing according to the standard recursive structure of the serial algorithm only exposes limited parallelism. The reason for this is due to the substantial amount of work performed by the serial `partition` function invoked on line 5. The partition algorithm may be parallelized for better scalability, but we shall leave this task as an exercise to the intrepid reader.
 
-## Build, execute, and test
+### Build, execute, and test
 
-With these changes, you can now build and execute the OpenCilk version
-of the qsort program. Build and run the program exactly as we did with
-the previous example:
+Now that you have introduced parallelism into the quicksort program, you can build and execute the OpenCilk version of the qsort program with the command shown below.
 
 ##### Linux* OS:
 
@@ -179,7 +130,8 @@ the previous example:
 > clang++ qsort.cpp -o qsort –O3 -fopencilk
 ```
 
-### Run qsort from the command line
+\
+The quicksort code can be run from then command line as shown below to verify correctness and measure its runtime performance.
 
 ```shell
 > qsort
@@ -188,17 +140,13 @@ Sorting 10000000 integers
 Sort succeeded.
 ```
 
-By default, an OpenCilk program will query the operating system and use
-all available cores. You can control the number of workers by setting
-the CILK_NWORKERS environment variable:
+By default, an OpenCilk program will execute in-parallel using all of the cores available on the machine. You can control the number of workers for a particular execution by setting the CILK_NWORKERS environment variable as shown below.
 
 ```shell
 CILK_NWORKERS=8 ./qsort
 ```
 
-### Observe speedup on a multicore system
-
-Run qsort using one and then two cores:
+Using the CILK_NWORKERS environment one can measure the parallel speedup achieved by quicksort when varying the number of utilized cores. Below we show the result of running the quicksort program using one and two cores.
 
 ```powershell
 > CILK_NWORKERS=1 qsort
@@ -210,4 +158,5 @@ Sorting 10000000 integers
 1.468 seconds Sort succeeded.
 ```
 
-Alternately, run cilkscale to get a more detailed performance graph.
+\
+One can also use the cilkscale tool to generate more detailed performance graphs.
