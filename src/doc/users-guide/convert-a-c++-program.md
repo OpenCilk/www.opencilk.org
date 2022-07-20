@@ -190,6 +190,10 @@ The Cilksan race detector can be used to check for race conditions in the parall
 ```shell
 > clang++ qsort.cpp -o qsort –Og -g -fopencilk -fsanitize=cilk
 ./qsort 10000000
+
+Cilksan detected 0 distinct races.
+Cilksan suppressed 0 duplicate race reports.
+
 ```
 
 The Cilksan race detector will report any race conditions present in the program and verify the absence of races in a race-free program. More detailed instructions about the use of Cilksan can be found [here](/doc/users-guide/getting-started/#using-cilksan).
