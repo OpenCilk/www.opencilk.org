@@ -1,6 +1,6 @@
 ---
 layout: layouts/base.njk
-templateClass: tmpl-glossary
+templateClass: tmpl-page
 ---
 {% if not hero.image %}
   <h1>{{ title }}</h1>
@@ -11,8 +11,6 @@ templateClass: tmpl-glossary
   <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
 {%- endfor %}
 
-{% if defn %}
 <div style="font-size: larger;">
-{{ defn | markdownify | safe }}
+{{ content | markdownify | safe }}
 </div>
-{% endif %}
