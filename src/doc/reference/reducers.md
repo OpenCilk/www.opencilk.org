@@ -158,6 +158,7 @@ reducer-aware code.
 
 ```c
     extern long f(int index);
+    // The argument is a pointer to a reducer.
     void compute_sum(long cilk_reducer(zero, add) *reducer)
     {
         cilk_for (int i = 0; i < 10000000; ++i)
@@ -165,7 +166,7 @@ reducer-aware code.
     }
     long provide_reducer()
     {
-        long cilk_reducer(zero, add) sum;
+        long cilk_reducer(zero, add) sum = 0L; // must be initialized
         compute_sum(__builtin_address(sum));
         return sum;
     }
@@ -186,6 +187,20 @@ callback functions.  The compiler knows two functions are equivalent
 if they are the same function referenced by name.  Anything more
 complicated is not checked.  (It is impossible to prove reliably that
 two arbitrary expressions are always equivalent.)
+
+In C++, reducers are not implicitly converted to views when binding
+references.  This limitation is planned to be removed in a future
+version of OpenCilk.  As a workaround, you can take the address of the
+reducer, yielding a pointer to the current view, and dereference the
+pointer.
+
+```cpp
+extern void f(int &, int _Hyperobject &);
+void g(int _Hyperobject *p)
+{
+  f(*&*p, *p); // ideally you could write f(*p, *p);
+}
+```
 
 ### Porting from Cilk Plus
 
