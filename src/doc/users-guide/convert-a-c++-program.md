@@ -159,7 +159,7 @@ Sorting 10000000 integers
 
 ### Measuring scalability using Cilkscale
 
-Cilkscale can be used to benchmark and analyze the parallelism, in terms of work and span, of an OpenCilk program. These measurements can be used to predict parallel performance on parallel processors.
+Cilkscale can be used to benchmark and analyze the parallelism, in terms of work and span, of an OpenCilk program. These measurements can be used to predict performance when running on a varying number of parallel processors.
 
 One can use Cilkscale to benchmark the parallel scalability of quicksort by compiling with the additional flag `-fcilktool=cilkscale` and then executing the program as shown below.
 
@@ -175,7 +175,7 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 
 Cilkscale will report the total work, span, and parallelism in the code at the end of the program execution, as shown above.
 
-The Cilkscale tool can be used in conjunction with other benchmarking and visualization scripts provided as part of the OpenCilk toolbox. More information about the use of Cilkscale and related tools for benchmarking and visualizing parallel program performance can be found [here](/doc/users-guide/getting-started/#using-cilkscale). Using Cilkscale and related tools, we can produce plots that illustrate the speedup and observed runtime performance of our quicksort program when run on a varying number of processors. 
+The Cilkscale tool can be used in conjunction with other benchmarking and visualization scripts provided as part of the OpenCilk toolbox. More information about the use of Cilkscale and related tools for benchmarking and visualizing parallel program performance can be found [here](/doc/users-guide/getting-started/#using-cilkscale). 
 
 Plots illustrating the parallel execution time and speedup of the quicksort program we have parallelized in this example are shown below.
 
