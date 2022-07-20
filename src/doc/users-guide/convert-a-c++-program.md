@@ -3,28 +3,27 @@ title: Convert a C++ program
 author: Timothy Kaler
 date: 2022-07-20T16:22:55.620Z
 ---
-A common application of OpenCilk is the parallelization of existing serial codes. Indeed, it is often advisable for programmers to write correct and efficient serial codes prior to introducing parallelism because of the notorious difficulty of writing correct parallel programs. In this section, we shall walk through the process of converting an existing serial C or C++ code to an OpenCilk parallel program and show how OpenCilk's suite of tools can be used to debug race-conditions and scalability bottlenecks.
+A common application of OpenCilk is the parallelization of existing serial code. Indeed, it is often advisable for programmers to prioritize writing correct and efficient serial code before attempting parallelization due to the notorious difficulty of writing correct parallel code. In this section, we shall walk through the process of converting an existing serial C or C++ code to an OpenCilk parallel program and show how OpenCilk's suite of tools can be used to debug race-conditions and scalability bottlenecks.
 
-One typically begins with an existing serial C or C++ program that implements the functions or algorithms that are relevant to one's application. Ideally, the serial code you start with will be well-tested to verify it is correct and performance-engineered to be efficient in terms of the total work it performs. Any correctness bugs in the serial code will result in correctness bugs in the parallel program, but they will be more difficult to identify and fix! Similarly, inefficiency in the original sequential code will translate to inefficiency in its parallel equivalent.\
-\
-Next, one begins the process of introducing parallelism into the program.  Typically one starts by identifying the regions of the program that will most benefit from parallel execution. Operations that are relatively long-running and/or tasks that can be performed independently are prime candidates for parallelization. The programmer then uses the three OpenCilk keywords to identify tasks that can execute in parallel:
+## General workflow
+
+One typically begins with an existing serial C or C++ program that implements the functions or algorithms that are relevant to one's application. Ideally, the serial code you start with will be well tested to verify it is correct and be performance engineered to achieve good performance when run serially. Any correctness bugs in the serial code will result in correctness bugs in the parallel program, but they will be more difficult to identify and fix! Similarly, inefficiency in the original sequential code will translate to inefficiency in its parallel equivalent.
+
+Next, one begins the process of introducing parallelism into the program.  Typically one starts by identifying the regions of the program that will most benefit from parallel execution. Operations that are relatively long-running and/or tasks that can be performed independently are prime candidates for parallelization. The programmer can identify tasks in their code that can execute in parallel using the three OpenCilk keywords:
 
 * `cilk_spawn` indicates a call to a function (a "child") that can proceed in parallel with the caller (the "parent").
 * `cilk_sync` indicates that all spawned children must complete before proceeding.
 * `cilk_for` identifies a loop for which all iterations can execute in parallel.
 
-The programmer can then compile and test their new parallel program. On **Linux* OS** one can compile one's program using the OpenCilk compiler with the `clang` or `clang++` compiler commands. The program can then be run on the local machine and tested for correctness and performance. If the parallelization of the original (correct) serial program contains no ***race conditions***, then the parallel program will produce the same result as the serial program. \
-\
+The parallel version of the code can be compiled and tested using the OpenCilk compiler.  On **Linux* OS** one invokes the OpenCilk compiler using the `clang` or `clang++` commands. One compiled, the program can be run on the local machine to tested for correctness and measure performance. If the parallelization of the original (correct) serial program contains no ***race conditions***, then the parallel program will produce the same result as the serial program. 
+
 The OpenCilk tools can be used to debug race conditions and scalability bottlenecks in parallelized codes. Verifying the absence of race conditions is particularly important when writing parallel code. Fortunately, OpenCilk provides the ***cilksan race detector*** which can identify all possible race conditions introduced by parallel operations when a program is run on a given input. Using the OpenCilk tools, the programmer can identify possible race conditions in their parallel code and correct them using a combination of **reducers,** locks, and recoding.
 
 ## Example: Quicksort
 
-We'll demonstrate how to use write an OpenCilk program by parallelizing
-a simple implementation of ***Quicksort***
-([<span class="underline">http://en.wikipedia.org/wiki/Quicksort</span>](http://en.wikipedia.org/wiki/Quicksort)).
+Let us illustrate the process of parallelizing an existing serial code by walking through an example wherein we shall introduce parallelism into a serial implementation of ***Quicksort*** ([<span class="underline">http://en.wikipedia.org/wiki/Quicksort</span>](http://en.wikipedia.org/wiki/Quicksort)).
 
-Note that the function name `sample_qsort` avoids confusion with the
-Standard C Library `qsort` function.
+Note that in this example we use the function name `sample_qsort` in order to avoid confusion with the Standard C Library `qsort` function.
 
 ```c
 #include <algorithm>
@@ -83,7 +82,7 @@ int main(int argc, char* argv[])
 
 ### Compiling Quicksort with the OpenCilk compiler
 
-This quicksort code can be compiled using the OpenCilk C++ compiler by adding `#include <cilk.h>` statement to the source file. The `cilk.h` header file contains declarations of the OpenCilk runtime API and the keywords used to specify parallel control flow. After adding the `cilk.h` header file, one can compile the quicksort program using the OpenCilk compiler, as shown below.
+This quicksort code can be compiled using the OpenCilk C++ compiler by adding `#include <cilk.h>` statement to the source file. The `cilk.h` header file contains declarations of the OpenCilk runtime API and the keywords used to specify parallel control flow. After adding the `cilk.h` header file, one can compile the quicksort program using the OpenCilk compiler.
 
 ##### Linux* OS
 
@@ -95,11 +94,11 @@ This quicksort code can be compiled using the OpenCilk C++ compiler by adding `#
 
 The next step is to actually introduce parallelism into our quicksort program. This can be accomplished through the judicious use of OpenCilk's three keywords for expressing parallelism: `cilk_spawn`, `cilk_sync`, and `cilk_for`. 
 
-In this example, we shall make use of just the `cilk_spawn` and `cilk_sync` keywords. The `cilk_spawn` keyword indicates that a function (the *child*) may be executed in parallel with the code that follows the `cilk_spawn`statement (the *parent*). Note that the keyword *allows* but does not *require* parallel operation. The OpenCilk scheduler will dynamically determine what actually gets executed in parallel when multiple processors are available. The `cilk_sync` statement indicates that the function may not continue until all `cilk_spawn` requests in the same function have completed. `cilk_sync` does not affect parallel strands spawned in other functions.
+In this example, we shall make use of just the `cilk_spawn` and `cilk_sync` keywords. The `cilk_spawn` keyword indicates that a function (the *child*) may be executed in parallel with the code that follows the `cilk_spawn` statement (the *parent*). Note that the keyword *allows* but does not *require* parallel operation. The OpenCilk scheduler will dynamically determine what actually gets executed in parallel when multiple processors are available. The `cilk_sync` statement indicates that the function may not continue until all `cilk_spawn` requests in the same function have completed. `cilk_sync` does not affect parallel strands spawned in other functions.
 
 Let us walk through a version of the quicksort code that has been parallelized using OpenCilk.
 
-```
+```c
 void sample_qsort(int * begin, int * end)
 {
     if (begin != end) {
