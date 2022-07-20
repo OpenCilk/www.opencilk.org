@@ -174,7 +174,7 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 ```
 
 \
-The CIlkscale tool reports on the total work, span, and parallelism in the execution of quicksort. The Cilkscale tool can be used in conjunction with other benchmarking and visualization scripts provided as part of the OpenCilk toolbox. More information about the use of Cilkscale and related tools for benchmarking and visualizing parallel program performance can be found [here](doc/users-guide/getting-started/#using-cilkscale). \
+The Cilkscale tool reports on the total work, span, and parallelism in the execution of quicksort. The Cilkscale tool can be used in conjunction with other benchmarking and visualization scripts provided as part of the OpenCilk toolbox. More information about the use of Cilkscale and related tools for benchmarking and visualizing parallel program performance can be found [here](doc/users-guide/getting-started/#using-cilkscale). \
 \
 Using Cilkscale and the visualization tools provided in OpenCilk, we can produce plots that illustrate the speedup and observed runtime performance of our quicksort program when run on a varying number of processors.
 
