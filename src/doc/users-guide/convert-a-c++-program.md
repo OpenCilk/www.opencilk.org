@@ -161,7 +161,7 @@ Sorting 10000000 integers
 
 Cilkscale can be used to benchmark and analyze the parallelism, in terms of work and span, of an OpenCilk program. These measurements can be used to predict parallel performance on parallel processors.\
 \
-The Cilkscale visualizer tool can be used to illustrate the scalability of the quicksort program by compiling the program with the additional flag `-fcilktool=cilkscale` and then executing the program as shown below.
+One can use Cilkscale to benchmark the parallel scalability of quicksort by compiling with the additional flag `-fcilktool=cilkscale` and then executing the program as shown below.
 
 ```shell
 > clang++ qsort.cpp -o qsort –O3 -fopencilk -fcilktool=cilkscale
@@ -174,15 +174,13 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 ```
 
 \
-The Cilkscale tool reports on the total work, span, and parallelism in the execution of quicksort. The Cilkscale tool can be used in conjunction with other benchmarking and visualization scripts provided as part of the OpenCilk toolbox. More information about the use of Cilkscale and related tools for benchmarking and visualizing parallel program performance can be found [here](doc/users-guide/getting-started/#using-cilkscale). \
-\
-Using Cilkscale and the visualization tools provided in OpenCilk, we can produce plots that illustrate the speedup and observed runtime performance of our quicksort program when run on a varying number of processors.
+Cilkscale will report the total work, span, and parallelism in the code at the end of the program execution, as shown above.
+
+The Cilkscale tool can be used in conjunction with other benchmarking and visualization scripts provided as part of the OpenCilk toolbox. More information about the use of Cilkscale and related tools for benchmarking and visualizing parallel program performance can be found [here](doc/users-guide/getting-started/#using-cilkscale). Using Cilkscale and related tools, we can produce plots that illustrate the speedup and observed runtime performance of our quicksort program when run on a varying number of processors. The resultant plots are shown below.
 
 ![Cilkscale speedup for quicksort.](/img/cilkscale-qsort-speedup.png "Quicksort speedup")
 
 ![Cilkscale execution time for quicksort.](/img/cilkscale-qsort-execution-time.png "Quicksort execution time")
-
-
 
 ### Checking for race conditions using Cilksan
 
