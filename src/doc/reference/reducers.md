@@ -55,10 +55,12 @@ called the _leftmost_ view.
 A reducer is declared with the `cilk_reducer` keyword, with the
 identity and reduce functions as arguments:
 
-        void zero_double(void *view) { *(double *)view = 0.0; }
-        void add_double(void *left, void *right)
-            { *(double *)left += *(double *)right; }
-        double cilk_reducer(zero_double, add_double) sum;
+```c
+    void zero_double(void *view) { *(double *)view = 0.0; }
+    void add_double(void *left, void *right)
+        { *(double *)left += *(double *)right; }
+    double cilk_reducer(zero_double, add_double) sum;
+```
 
 When necessary the runtime calls the identity callback (constructor)
 to create a new view.  All views created by the runtime will
@@ -76,47 +78,57 @@ C++ constructor, use placement `new` in the identity function.  If it
 has a destructor, call the destructor explicitly instead of using
 `delete`:
 
-        void identity(void *view)
-        {
-            new (view) Type();
-        }
-        void reduce(void *left, void *right)
-        {
-            // Here data moves from the right view to the left view.
-            static_cast<Type *>(left)->reduce(static_cast<Type *>(right));
-            static_cast<Type *>(right)->~Type();
-            // The right view will be freed on return from this function.
-        }
-        Type cilk_reducer(identity, reduce) var; // var is a reducer
+```cpp
+    void identity(void *view)
+    {
+        new (view) Type();
+    }
+    void reduce(void *left, void *right)
+    {
+        // Here data moves from the right view to the left view.
+        static_cast<Type *>(left)->reduce(static_cast<Type *>(right));
+        static_cast<Type *>(right)->~Type();
+        // The right view will be freed on return from this function.
+    }
+    Type cilk_reducer(identity, reduce) var; // var is a reducer
+```
 
 If the data type requires a custom allocator a level of indirection
 can be added by using a pointer type:
 
-        void identity(void *view)
-        {
-            // Type::operator new will be used, if defined.
-            *static_cast<Type **>(view) = new Type();
-        }
-        void reduce(void *left, void *right)
-        {
-            (*static_cast<Type **>(left))->reduce(*static_cast<Type **>(right));
-            delete *static_cast<Type **>(right);
-        }
-        Type *cilk_reducer(identity, reduce) var;
+```cpp
+    void identity(void *view)
+    {
+        // Type::operator new will be used, if defined.
+        *static_cast<Type **>(view) = new Type();
+    }
+    void reduce(void *left, void *right)
+    {
+        (*static_cast<Type **>(left))->reduce(*static_cast<Type **>(right));
+        delete *static_cast<Type **>(right);
+    }
+    Type *cilk_reducer(identity, reduce) var;
+```
 
 The `cilk_reducer` keyword binds much like `*`.  In particular,
 
-        Type cilk_reducer a, b;
+```c
+    Type cilk_reducer a, b;
+```
 
 declares a reducer and a non-reducer variable, like
 
-        Type *a, b;
+```c
+    Type *a, b;
+```
 
 declares a pointer and a non-pointer.  A `typedef` can be used
 for more pleasing declarations:
 
-        typedef Type cilk_reducer TypeReducer;
-        TypeReducer a, b;
+```c
+    typedef Type cilk_reducer TypeReducer;
+    TypeReducer a, b;
+```
 
 Modifications to a reducer should be consistent with the binary
 operator.  For example, if the reduction adds two views then all
@@ -138,18 +150,20 @@ If you need a pointer to a reducer explicitly treated as a reducer use
 `__builtin_addressof` to get one.  You can pass this pointer to
 reducer-aware code.
 
-        extern long f(int index);
-        void compute_sum(long cilk_reducer(zero, add) *reducer)
-        {
-            cilk_for (int i = 0; i < 10000000; ++i)
-                *sum += f(i); // dereferenced pointer converts to current view
-        }
-        long provide_reducer()
-        {
-            long cilk_reducer(zero, add) sum;
-            compute_sum(__builtin_address(sum));
-            return sum;
-        }
+```c
+    extern long f(int index);
+    void compute_sum(long cilk_reducer(zero, add) *reducer)
+    {
+        cilk_for (int i = 0; i < 10000000; ++i)
+            *sum += f(i); // dereferenced pointer converts to current view
+    }
+    long provide_reducer()
+    {
+        long cilk_reducer(zero, add) sum;
+        compute_sum(__builtin_address(sum));
+        return sum;
+    }
+```
 
 ### Limitations
 
@@ -172,16 +186,20 @@ two arbitrary expressions are always equivalent.)
 The macros used by Intel Cilk Plus are no longer required.
 The example from former `<cilk/reducer.h>`
 
-        CILK_C_DECLARE_REDUCER(int) my_add_int_reducer =
-            CILK_C_INIT_REDUCER(int,
-                                add_int_reduce,
-                                add_int_identity,
-                                0,
-                                0);
+```c
+    CILK_C_DECLARE_REDUCER(int) my_add_int_reducer =
+        CILK_C_INIT_REDUCER(int,
+                            add_int_reduce,
+                            add_int_identity,
+                            0,
+                            0);
+```
 
 becomes
 
-        int cilk_reducer(add_int_identity, add_int_reduce) my_add_int_reducer;
+```c
+    int cilk_reducer(add_int_identity, add_int_reduce) my_add_int_reducer;
+```
 
 Where Cilk Plus allowed up to five callback functions, OpenCilk has
 only two and they have different signatures.
