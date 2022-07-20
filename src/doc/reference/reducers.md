@@ -5,7 +5,7 @@ title: Reducers
 ## Reducers
 
 When two threads access the same object there is a risk of a _{%defn
-determinacy race}_.  According to the C and C++ language standards a
+determinacy race %}_.  According to the C and C++ language standards a
 data race is undefined behavior.  Your program can give incorrect
 results, crash, or worse.  A counter may not increment reliably or a
 linked list may become corrupt.
