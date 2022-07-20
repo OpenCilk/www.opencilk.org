@@ -5,8 +5,8 @@ title: Reducers
 ## Reducers
 
 When two threads access the same object there is a risk of a _{% defn
-"determinacy race" %}_.  According to the C and C++ language standards a
-data race is undefined behavior.  Your program can give incorrect
+"determinacy race" %}_.  According to the C and C++ language standards
+a race is undefined behavior.  Your program can give incorrect
 results, crash, or worse.  A counter may not increment reliably or a
 linked list may become corrupt.
 
@@ -21,9 +21,8 @@ the operation is _associative_ (`A ⊕ (B ⊕ C) = (A ⊕ B) ⊕ C`)
 the final result will be correct.
 
 Formally, a reducer is an instance of a mathematical object called a
-_monoid_.  The reducer combines a type (e.g., `double` or
-`std::list<int>`), an _identity_ value (`0.0` or `{}`), and an
-associative binary operation (`+` or `std::list<int>:splice`).
+_monoid_.  The reducer combines a type (e.g., `double`), an _identity_
+value (`0.0`), and an associative binary operation (`+`).
 
 The identity value is provided by a callback function which takes a
 pointer to the value to be initialized (cast to `void`&nbsp;`*`).  The
@@ -33,6 +32,8 @@ value pointed to by the second argument should be merged into the
 value pointed to by the first argument.  Common names for these
 functions are `identity` and `reduce` in the general case and `zero`
 and `add` when computing a sum.
+
+### Reducers and views
 
 OpenCilk will ensure that every reference to a reducer uses a private
 copy.  The private copy is called the _view_.  The address of the
@@ -51,6 +52,8 @@ receives arguments in proper order, left before right.  (Even if the
 operation is commutative, the runtime requires the result to be in the
 left view.)  The variable declared by the programmer is sometimes
 called the _leftmost_ view.
+
+### Declaring a reducer
 
 A reducer is declared with the `cilk_reducer` keyword, with the
 identity and reduce functions as arguments:
@@ -110,7 +113,9 @@ can be added by using a pointer type:
     Type *cilk_reducer(identity, reduce) var;
 ```
 
-The `cilk_reducer` keyword binds much like `*`.  In particular,
+Formally, the `cilk_reducer` keyword is part of the type of the
+variable rather than an attribute of the variable itself.  It binds
+much like `*`.  In particular,
 
 ```c
     Type cilk_reducer a, b;
