@@ -15,13 +15,13 @@ Next, one begins the process of introducing parallelism into the program.  Typic
 * `cilk_sync` indicates that all spawned children must complete before proceeding.
 * `cilk_for` identifies a loop for which all iterations can execute in parallel.
 
-The parallel version of the code can be compiled and tested using the OpenCilk compiler.  On **Linux* OS** one invokes the OpenCilk compiler using the `clang` or `clang++` commands. One compiled, the program can be run on the local machine to tested for correctness and measure performance. If the parallelization of the original (correct) serial program contains no ***race conditions***, then the parallel program will produce the same result as the serial program. 
+The parallel version of the code can be compiled and tested using the OpenCilk compiler.  On **Linux* OS** one invokes the OpenCilk compiler using the `clang` or `clang++` commands. One compiled, the program can be run on the local machine to test for correctness and measure performance. If the parallelization of the original (correct) serial program contains no ***race conditions***, then the parallel program will produce the same result as the serial program. 
 
-The OpenCilk tools can be used to debug race conditions and scalability bottlenecks in parallelized codes. Verifying the absence of race conditions is particularly important when writing parallel code. Fortunately, OpenCilk provides the ***cilksan race detector*** which can identify all possible race conditions introduced by parallel operations when a program is run on a given input. Using the OpenCilk tools, the programmer can identify possible race conditions in their parallel code and correct them using a combination of **reducers,** locks, and recoding.
+The OpenCilk tools can be used to debug race conditions and scalability bottlenecks in parallelized codes. Verifying the absence of race conditions is particularly important as such errors can lead to non-deterministic (and often buggy) behavior. Fortunately, OpenCilk provides the ***cilksan race detector*** which can identify all possible race conditions introduced by parallel operations when a program is run on a given input. With the help of OpenCilk's tools, one can identify and resolve race conditions through the use of **reducers**, locks, and recoding. 
 
 ## Example: Quicksort
 
-Let us illustrate the process of parallelizing an existing serial code by walking through an example wherein we shall introduce parallelism into a serial implementation of ***Quicksort*** ([<span class="underline">http://en.wikipedia.org/wiki/Quicksort</span>](http://en.wikipedia.org/wiki/Quicksort)).
+Let us illustrate the process of parallelizing an existing serial code by walking through an example wherein we shall expose parallelism in a serial implementation of ***Quicksort*** ([<span class="underline">http://en.wikipedia.org/wiki/Quicksort</span>](http://en.wikipedia.org/wiki/Quicksort)).
 
 Note that in this example we use the function name `sample_qsort` in order to avoid confusion with the Standard C Library `qsort` function.
 
@@ -94,7 +94,7 @@ This quicksort code can be compiled using the OpenCilk C++ compiler by adding `#
 
 The next step is to actually introduce parallelism into our quicksort program. This can be accomplished through the judicious use of OpenCilk's three keywords for expressing parallelism: `cilk_spawn`, `cilk_sync`, and `cilk_for`. 
 
-In this example, we shall make use of just the `cilk_spawn` and `cilk_sync` keywords. The `cilk_spawn` keyword indicates that a function (the *child*) may be executed in parallel with the code that follows the `cilk_spawn` statement (the *parent*). Note that the keyword *allows* but does not *require* parallel operation. The OpenCilk scheduler will dynamically determine what actually gets executed in parallel when multiple processors are available. The `cilk_sync` statement indicates that the function may not continue until all `cilk_spawn` requests in the same function have completed. `cilk_sync` does not affect parallel strands spawned in other functions.
+In this example, we shall make use of just the `cilk_spawn` and `cilk_sync` keywords. The `cilk_spawn` keyword indicates that a function (the *child*) may be executed in parallel with the code that follows the `cilk_spawn` statement (the *parent*). Note that the keyword *allows* but does not *require* parallel operation. The OpenCilk scheduler will dynamically determine what actually gets executed in parallel when multiple processors are available. The `cilk_sync` statement indicates that the function may not continue until all `cilk_spawn` requests in the same function have completed. The `cilk_sync` instruction does not affect parallel strands spawned in other functions.
 
 Let us walk through a version of the quicksort code that has been parallelized using OpenCilk.
 
