@@ -43,42 +43,58 @@ the fork-join model, as well as how the underlying runtime system can schedule
 task-parallel computations (which include fork-join computations) efficiently.
 
 Our exploration of parallel programming begins with the problem of computing
-Fibonacci numbers recursively in parallel. We’ll look at a straightforward serial
-Fibonacci calculation, which, although inefficient, serves as a good illustration of
-how to express parallelism in pseudocode.
+Fibonacci numbers recursively in parallel. 
+The $n$th Fibonacci number is the $n$th number (indexed from 0) in the sequence 0, 1, 1, 2, 3, 5, 8, 13, 21,…, where each number is the sum of the previous two. 
+We’ll look at a straightforward serial
+Fibonacci calculation, which, though inefficient, serves as a good illustration of
+how to express parallelism in Cilk.
 
-To calculate the $n$th Fibonacci number recursively, you could use the ordinary serial
-algorithm in the procedure `fib` below. You would not really want to compute large Fibonacci numbers this way, because this computation does needless
+To calculate the $n$th Fibonacci number recursively, you could use the ordinary serial algorithm in the procedure `fib` below. You would not really want to compute large Fibonacci numbers this way, because this computation does needless
 repeated work, but parallelizing it can be instructive.
 
-```c#
+```c
 int fib(int n)
 {
-  if (n <= 1)
-    return n;
+  if (n < 2) return n;
   else {
-    x = fib(n-1);
-    y = fib(n-2);
+    int x = cilk_spawn fib(n-1);
+    int y = fib(n-2);
+    cilk_sync;
     return x + y;
   }
+}
+	  	 
+int cilk_main(int argc, char *argv[])
+{
+  int n = atoi(argv[1]);
+  int result = fib(n);
+  printf("Fibonacci of %d is %d.\n", n, result);
+  return 0;
 }
 ```
 
 The `p_fib` procedure (below) computes Fibonacci numbers, but using the
 parallel keywords `cilk_spawn` and `cilk_sync` to indicate parallelism in the code.
-If the keywords `cilk_spawn` and `cilk_sync` are deleted from `p_fib`, the resulting pseudocode text is identical to `fib` (other than renaming the procedure in the header).
+If the keywords `cilk_spawn` and `cilk_sync` are deleted from `p_fib`, the resulting code is identical to `fib` (other than renaming the procedure in the header).
 
 ```c#
 int p_fib(int n)
 {
-  if (n <= 1)
-    return n;
+  if (n < 2) return n;
   else {
-    x = cilk_spawn p_fib(n-1);  // don't wait for funtion to return
-    y = p_fib(n-2);             // in parallel with spawned function
-    cilk_sync;                  // wait for spawned function to finish
+    int x = cilk_spawn p_fib(n-1);  // don't wait for funtion to return
+    int y = p_fib(n-2);             // in parallel with spawned function
+    cilk_sync;                      // wait for spawned function to finish
     return x + y;
   }
+}
+
+int cilk_main(int argc, char *argv[])
+{
+  int n = atoi(argv[1]);
+  int result = p_fib(n);
+  printf("Fibonacci of %d is %d.\n", n, result);
+  return 0;
 }
 ```
 
