@@ -59,8 +59,8 @@ on for more explicit directions on building OpenCilk from source.
 ## Obtaining the OpenCilk source code (detailed instructions)
 
 Clone the OpenCilk compiler, runtime, and productivity-tool repositories.  The
-Cheetah runtime and OpenCilk tool repositories must be cloned into
-sub-directories of the OpenCilk project directory:
+Cheetah runtime and OpenCilk tool repositories must be cloned into specific
+subdirectories of the OpenCilk project directory:
 
 ```shell-session
 $ git clone -b opencilk/v2.0 https://github.com/OpenCilk/opencilk-project
@@ -112,6 +112,8 @@ To echo the OpenCilk build script call syntax, use the `--help` switch:
 $ infrastructure/tools/build --help
 ```
 
+If you encounter problems during the build process, see [Troubleshooting](#troubleshooting) for guidance on fixing common problems, or contact us via the [OpenCilk issue tracker](https://github.com/OpenCilk/opencilk-project/issues) or by emailing us at [contact@opencilk.org](mailto:contact@opencilk.org).
+
 {% alert "info" %}
 ***Advanced build options:*** If you wish, you can customize your
 build of OpenCilk beyond what the script provides --- e.g., to build
@@ -130,9 +132,10 @@ in the list passed to `-DLLVM_ENABLE_RUNTIMES`.
 
 You can run the OpenCilk C compiler out of its build tree, adding
 `/bin/clang` to the build directory name.  Similarly, add
-`/bin/clang++` for the OpenCilk C++ compiler.
+`/bin/clang++` to the build-directory path to run the OpenCilk C++
+compiler.
 
-Running on x86, you must have a chip with Intel's Advanced Vector
+To run on x86, you must have a chip with Intel's Advanced Vector
 Instructions (AVX).  This includes Sandy Bridge and newer Intel
 processors (released starting in 2011), and Steamroller and newer AMD
 processors (released starting in 2014).
@@ -143,10 +146,10 @@ may be helpful to try different values of the `CILK_NWORKERS`
 environment variable on chips like the M1 that mix low- and high-power
 cores.
 
-On MacOSX, you will need an
+On macOS, you will need a
 [XCode](https://developer.apple.com/support/xcode/) or
 [XCode Command Line Tools](https://mac.install.guide/commandlinetools/index.html)
-installation to provide standard system libraries and header files for clang.  To run
+installed to provide standard system libraries and header files for clang.  To run
 clang with those header files and libraries, invoke the clang binary
 with `xcrun`; for example:
 
@@ -156,15 +159,32 @@ $ xcrun $(pwd)/build/bin/clang
 
 ## Optional: Installing OpenCilk
 
-You can install OpenCilk into a directory of your choosing by
-running the `cmake_install.cmake` script generated in the build
-directory.  For example, run the following to install OpenCilk into
-the directory `/tmp/llvm`:
+You can install OpenCilk into the system directory `/opt/opencilk-2` using the following command:
 
 ```shell-session
-$ cd $(pwd)/build
-$ cmake -DCMAKE_INSTALL_PREFIX=/tmp/llvm -P cmake_install.cmake
+$ cmake --build build --target install
 ```
+
+Note that you may need superuser privileges to perform this installation, in order to write to the system directory.
+
+If you don't have superuser privileges or would prefer not to install OpenCilk into a system directory, you can instead install OpenCilk locally in a directory of your choosing by running the `cmake_install.cmake` script in the build
+directory.  For example, the following command will install OpenCilk into your
+home directory, specifically, under `$HOME/.local/opencilk`:
+
+```shell-session
+$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/.local/opencilk -P build/cmake_install.cmake
+```
+
+After either of these installation steps, you will need to add the
+`bin` directory within the OpenCilk installation --- e.g.,
+`/opt/opencilk-2/bin` or `$HOME/.local/opencilk/bin` --- to your
+`$PATH` in order to run the OpenCilk binary executables without
+specifying the path to those binaries, e.g., by simply running `clang`
+or `clang++` (or, on macOS, by running `xcrun clang` or `xcrun
+clang++`).  To verify that `clang` refers to the OpenCilk compier, run
+`which clang` and verify that the output matches the path to the
+`clang` binary in your OpenCilk installation, e.g.,
+`/opt/opencilk-2/bin/clang` or `$HOME/.local/opencilk/bin/clang`.
 
 ## Troubleshooting
 
@@ -191,3 +211,7 @@ compiler versions on the system.
 
 **Fix:** Make sure that the versions of `gcc` and `g++` installed on the
 system are consistent.
+
+Don't see your issue here?  Please contact us via the [OpenCilk issue
+tracker](https://github.com/OpenCilk/opencilk-project/issues) or by
+emailing us at [contact@opencilk.org](mailto:contact@opencilk.org).
