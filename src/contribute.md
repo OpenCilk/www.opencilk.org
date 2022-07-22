@@ -9,7 +9,7 @@ eleventyNavigation:
   order: 7
 ---
 
-The OpenCilk project welcomes your expertise and enthusiasm. A few specific opportunities are listed below. If you see anything interesting, or have ideas that we haven't thought of, please contact us on the [OpenCilk discussion forum](https://github.com/OpenCilk/opencilk-project/discussions). 
+The OpenCilk project welcomes your expertise and enthusiasm. A few specific opportunities are listed below. If you see anything interesting, or have ideas that we haven't thought of, please [contact us](/contribute/contact/).
 
 ## Testing
 We are interested in your experiences or issues in installing and writing code and running OpenCilk programs.

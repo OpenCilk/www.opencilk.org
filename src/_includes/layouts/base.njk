@@ -12,7 +12,7 @@
       <div class="d-flex row flex-nowrap">
         {% if sidebar %}
           <div class="col-auto p-0">
-            <div id="sidebar" class="collapse show h-100 px-3 pt-0" style="margin-left: 1em; max-width: 280px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
+            <div id="sidebar" class="collapse show h-100 px-3 pt-0" style="margin-left: 1em; min-width: 200px; max-width: 300px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
               {% set sidebarCode = ["partials/sidebar-", sidebar, ".njk"] | join %}
               {% include sidebarCode %}
             </div>

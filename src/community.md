@@ -2,6 +2,7 @@
 layout: layouts/page.njk
 title: Community
 sidebar: toc
+background: bg-white
 eleventyNavigation:
   key: Community
   parent: Home
@@ -34,4 +35,3 @@ Below are the academic conferences traditionally most popular with the OpenCilk 
 
 
 See also: **[Contribute](/contribute)**.
-
