@@ -10,7 +10,7 @@ OpenCilk is available as source code in
 [three Git repositories](https://github.com/OpenCilk).  We provide an
 [infrastructure facilities repository](https://github.com/OpenCilk/infrastructure)
 with scripts for downloading and building OpenCilk from source.
-OpenCilk 1.1 is only guaranteed to support 64-bit x86 on Linux and other Unix-like
+OpenCilk 2.0 is only guaranteed to support 64-bit x86 on Linux and other Unix-like
 operating systems, although prototype support for 64-bit ARM is
 included.
 
@@ -18,7 +18,7 @@ included.
 
 The build requirements for OpenCilk are largely consistent with those
 for LLVM.  In summary, to build OpenCilk on a modern system running
-Linux or MacOSX, you will need the following:
+Linux or macOS, you will need the following:
 - A relatively recent version of Git.
 - A relatively modern C/C++ compiler, such as GCC or Clang, that is
 capable of building LLVM.  Any compiler you are likely to have
@@ -32,19 +32,22 @@ More details on build requirements for LLVM can be found here:
 
 ## Quick start
 
-Clone the OpenCilk infrastructure repository:
+In most cases, the following three steps suffice to build OpenCilk from
+source on a compatible system with prerequisite software installed.
+
+1. Clone the OpenCilk infrastructure repository:
 
 ```shell-session
-$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
+$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/infrastructure
 ```
 
-Run the `get` script to get the OpenCilk source code:
+2. Run the `get` script to get the OpenCilk source code:
 
 ```shell-session
 $ infrastructure/tools/get $(pwd)/opencilk
 ```
 
-Run the `build` script to build OpenCilk:
+3. Run the `build` script to build OpenCilk:
 
 ```shell-session
 $ infrastructure/tools/build $(pwd)/opencilk $(pwd)/build
@@ -53,16 +56,16 @@ $ infrastructure/tools/build $(pwd)/opencilk $(pwd)/build
 You should now be ready to use OpenCilk.  Skip to [Usage](#usage) now, or read
 on for more explicit directions on building OpenCilk from source.
 
-## Obtaining the OpenCilk source code
+## Obtaining the OpenCilk source code (detailed instructions)
 
 Clone the OpenCilk compiler, runtime, and productivity-tool repositories.  The
 Cheetah runtime and OpenCilk tool repositories must be cloned into
 sub-directories of the OpenCilk project directory:
 
 ```shell-session
-$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/opencilk-project
-$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/cheetah opencilk-project/cheetah
-$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/productivity-tools opencilk-project/cilktools
+$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/opencilk-project
+$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/cheetah opencilk-project/cheetah
+$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/productivity-tools opencilk-project/cilktools
 ```
 
 Note that, because these commands clone specific tags of the OpenCilk
@@ -73,10 +76,10 @@ Clone the OpenCilk infrastructure repository, which contains the OpenCilk build
 script:
 
 ```shell-session
-$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
+$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/infrastructure
 ```
 
-## Building OpenCilk
+## Building OpenCilk (detailed instructions)
 
 Run the `infrastructure/tools/build` script with two or three arguments.  The
 1st argument is the absolute pathname to the `opencilk-project` repository
