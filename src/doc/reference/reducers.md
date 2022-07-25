@@ -8,7 +8,7 @@ author: John F. Carr
 _Reducers_ are a new data type to help programmers avoid _{% defn
 "data race", "data races" %}_.  Data races happen when one thread
 modifies an object while a second thread is using it.  According to
-the C and C++ language standards a race is undefined behavior.  Your
+the C and C++ language standards a race is undefined behavior.  A
 program can give incorrect results, crash, or worse.  A counter may
 not increment reliably or a linked list may become corrupt.
 
@@ -52,13 +52,14 @@ freed.  Even if the operation is commutative, the result should be
 stored in the first argument.
 
 There is a total order on views, the order in which they would have
-been created in a serial program.  The older of any pair of views is
-conventionally called the _left_ view and the younger of the pair is
-called the _right_ view.  The left view is the first argument to the
-reduce callback.  The variable declared by the programmer is the
-_leftmost_ view.  The programmer needs to initialize or construct the
-variable just like any other.  See `<cilk/ostream_reducer.h>` for an
-example where the leftmost view does not get the identity value.
+been created in a {% defn "serial projection", "serial" %} program.
+The older of any pair of views is conventionally called the _left_
+view and the younger of the pair is called the _right_ view.  The left
+view is the first argument to the reduce callback.  The variable
+declared by the programmer is the _leftmost_ view.  The programmer
+needs to initialize or construct the variable just like any other.
+See `<cilk/ostream_reducer.h>` for an example where the leftmost view
+does not get the identity value.
 
 ### Declaring a reducer
 
@@ -161,9 +162,9 @@ to the size of a cache line (64 bytes on supported platforms).  This
 alignment avoids {% defn "false sharing" %} on reducer accesses.  If
 greater alignment is required a level of indirection must be added.
 
-Because reducers are types, pointers to reducers are possible.  If you
-need a pointer to a reducer explicitly treated as a reducer use
-`__builtin_addressof` to get one.  You can pass this pointer to
+Because reducers are types, pointers to reducers are possible.  Use
+`__builtin_addressof` to get a pointer to a reducer treated as a
+reducer instead of a view.  This pointer can be passed to
 reducer-aware code.
 
 ```c
@@ -202,7 +203,7 @@ problem in the general case.
 
 In C++, reducers are not implicitly converted to views when binding
 references.  This limitation is planned to be removed in a future
-version of OpenCilk.  As a workaround, you can take the address of the
+version of OpenCilk.  As a workaround, take the address of the
 reducer, yielding a pointer to the current view, and dereference the
 pointer.
 
