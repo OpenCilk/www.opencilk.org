@@ -5,59 +5,68 @@ author: John F. Carr
 
 ## Reducers
 
-When two threads access the same object there is a risk of a _{% defn
-"determinacy race" %}_.  According to the C and C++ language standards
-a race is undefined behavior.  Your program can give incorrect
-results, crash, or worse.  A counter may not increment reliably or a
-linked list may become corrupt.
+_Reducers_ are a new data type to help programmers avoid _{% defn
+"data race", "data races" %}.  Data races happen when one thread
+modifies an object while a second thread is using it.  According to
+the C and C++ language standards a race is undefined behavior.  Your
+program can give incorrect results, crash, or worse.  A counter may
+not increment reliably or a linked list may become corrupt.
 
-Data types called _hyperobjects_ allow race-free access to shared
-variables.
+A reducer is a special case of a more general type known as a
+_hyperobject_.  Different types of hyperobjects are used depending on
+the desired semantics.
 
-The type of hyperobject supported by OpenCilk 2.0 is called a
-_reducer_.  Reducers are used when a shared object is modified
-in a consistent way every time, such as by adding a number to
-an accumulator or appending an item to a list.  As long as
-the operation is _associative_ (`A ⊕ (B ⊕ C) = (A ⊕ B) ⊕ C`)
-the final result will be correct.
+Reducers are used when the final value in a variable is built up from
+a series of independent modifications.  The modifications should all
+be of the same kind, such as by adding a number to an accumulator or
+appending an item to a list.  As long as the operation is
+_associative_ (`A ⊕ (B ⊕ C) = (A ⊕ B) ⊕ C`) the final result will be
+correct.
 
-Formally, a reducer is an instance of a mathematical object called a
-_monoid_.  The reducer combines a type (e.g., `double`), an _identity_
-value (`0.0`), and an associative binary operation (`+`).
-
-The identity value is provided by a callback function which takes a
-pointer to the value to be initialized (cast to `void`&nbsp;`*`).  The
-binary operation, called reduction, is implemented by a function with
-two pointer arguments pointing to the two values to be combined.  The
-value pointed to by the second argument should be merged into the
-value pointed to by the first argument.  Common names for these
-functions are `identity` and `reduce` in the general case and `zero`
-and `add` when computing a sum.
+Formally, a reducer is a mathematical object called a _{% defn
+"monoid" %}_.  A reducer has a type (e.g., `double`), an _identity_
+value (`0.0`), and an associative binary operation (`+`).  The
+operation does not need to be commutative.  A reducer can hold a list
+with the binary operation being concatenation.
 
 ### Reducers and views
 
-OpenCilk will ensure that every reference to a reducer uses a private
-copy.  The private copy is called the _view_.  The address of the
-current view can change at any spawn or sync, including the implicit
-spawns and syncs associated with `cilk_for` and `cilk_scope`.  The
-address operator `&` returns the address of the current view, so the
-address of a reducer can change when the address of a normal variable
-would be constant over its lifetime.  Be careful about saving the
-address of a reducer.  The race detector (Cilk sanitizer) can be used
-to check for improper retention of a pointer to a view.
+OpenCilk ensures that every reference to a reducer uses a private
+copy, called a _view_.  The address of the current view can change at
+any spawn or sync, including the implicit spawns and syncs associated
+with `cilk_for` and `cilk_scope`.  The address operator `&` returns
+the address of the current view, so the address of a reducer can
+change when the address of a normal variable would be constant over
+its lifetime.  Be careful about saving the address of a reducer.  The
+race detector (Cilk sanitizer) can be used to check for improper
+retention of a pointer to a view.
 
-When two views are to be distinguished, the one that would have been
-created first in serial order is called the _left_ view and the other
-the _right_ view.  The runtime guarantees that the reduction function
-receives arguments in proper order, left before right.  (Even if the
-operation is commutative, the runtime requires the result to be in the
-left view.)  The variable declared by the programmer is sometimes
-called the _leftmost_ view.
+Views are created and merged using programmer-provided callback
+functions commonly named `identity` and `reduce`.  The identity
+callback takes a pointer to the value to be initialized (cast to
+`void`&nbsp;`*`).  The reduce callback takes two pointer arguments
+pointing to the two values to be combined.  The value pointed to by
+the second argument should be merged into the value pointed to by the
+first argument, and storage held by the second argument should be
+freed.  Even if the operation is commutative, the result should be
+stored in the first argument.
+
+There is a total order on views, the order in which they would have
+been created in a serial program.  The older of any pair of views is
+conventionally called the _left_ view and the younger of the pair is
+called the _right_ view.  The left view is the first argument to the
+reduce callback.  The variable declared by the programmer is the
+_leftmost_ view.  The programmer needs to initialize or construct the
+variable just like any other.  See `<cilk/ostream_reducer.h>` for an
+example where the leftmost view does not get the identity value.
 
 ### Declaring a reducer
 
 A reducer is declared with the `cilk_reducer` keyword, with the
-identity and reduce functions as arguments:
+identity and reduce functions as arguments.
+
+For example, to declare a reducer holding sums of `double`s
+one can write
 
 ```c
     void zero_double(void *view) { *(double *)view = 0.0; }
@@ -149,10 +158,11 @@ example) is always correct at the end, but not in the middle.
 Declaring a variable to be a reducer does not change its size.  In the
 current implementation all views allocated by the runtime are aligned
 to the size of a cache line (64 bytes on supported platforms).  This
-alignment avoids false sharing on reducer accesses.  If greater
-alignment is required a level of indirection must be added.
+alignment avoids {% defn "false sharing" %} on reducer accesses.  If
+greater alignment is required a level of indirection must be added.
 
-If you need a pointer to a reducer explicitly treated as a reducer use
+Because reducers are types, pointers to reducers are possible.  If you
+need a pointer to a reducer explicitly treated as a reducer use
 `__builtin_addressof` to get one.  You can pass this pointer to
 reducer-aware code.
 
@@ -180,13 +190,15 @@ This limitation is planned to be removed in a future version of OpenCilk.
 
 Reducers may not contain reducers.
 
-Although the system will accept any expressions with the proper type
-after `cilk_reduce`, names of functions are preferred.  Two reducers
-have the same type if they have the same data type and equivalent
-callback functions.  The compiler knows two functions are equivalent
-if they are the same function referenced by name.  Anything more
-complicated is not checked.  (It is impossible to prove reliably that
-two arbitrary expressions are always equivalent.)
+Callback functions should not spawn.
+
+Callback functions should be passed by name to `cilk_reduce`.  Two
+reducers have the same type if they have the same data type and
+equivalent callback functions.  If the callback functions are
+expressions other than the names of functions the compiler does not
+know whether they are equivalent and may give spurious errors about
+type incompatibility.  Proving expression equivalence is an unsolvable
+problem in the general case.
 
 In C++, reducers are not implicitly converted to views when binding
 references.  This limitation is planned to be removed in a future
