@@ -3,7 +3,7 @@ title: Reducers
 author: John F. Carr
 ---
 
-## Reducers
+# Reducers
 
 _Reducers_ are a new data type to help programmers avoid _{% defn
 "data race", "data races" %}_.  Data races happen when one thread
@@ -29,7 +29,7 @@ value (`0.0`), and an associative binary operation (`+`).  The
 operation does not need to be commutative.  A reducer can hold a list
 with the binary operation being concatenation.
 
-### Reducers and views
+## Reducers and views
 
 OpenCilk ensures that every reference to a reducer uses a private
 copy, called a _view_.  The address of the current view can change at
@@ -61,7 +61,7 @@ needs to initialize or construct the variable just like any other.
 See `<cilk/ostream_reducer.h>` for an example where the leftmost view
 does not get the identity value.
 
-### Declaring a reducer
+## Declaring a reducer
 
 A reducer is declared with the `cilk_reducer` keyword, with the
 identity and reduce functions as arguments.
@@ -183,7 +183,7 @@ reducer-aware code.
     }
 ```
 
-### Limitations
+## Limitations
 
 In OpenCilk 2.0 a reducer must be a variable.  Reducers may not be
 dynamically allocated and may not be members of structures or arrays.
@@ -215,7 +215,7 @@ void g(int _Hyperobject *p)
 }
 ```
 
-### Porting from Cilk Plus
+## Porting from Cilk Plus
 
 The macros used by Intel Cilk Plus are no longer required.
 The example from former `<cilk/reducer.h>`
