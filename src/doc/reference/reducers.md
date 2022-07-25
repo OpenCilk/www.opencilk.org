@@ -6,7 +6,7 @@ author: John F. Carr
 ## Reducers
 
 _Reducers_ are a new data type to help programmers avoid _{% defn
-"data race", "data races" %}.  Data races happen when one thread
+"data race", "data races" %}_.  Data races happen when one thread
 modifies an object while a second thread is using it.  According to
 the C and C++ language standards a race is undefined behavior.  Your
 program can give incorrect results, crash, or worse.  A counter may
