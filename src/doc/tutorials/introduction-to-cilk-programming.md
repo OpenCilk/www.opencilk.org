@@ -8,41 +8,22 @@ author: Bruce Hoppe
 date: 2022-07-15T18:13:01.322Z
 image: /img/p-fib-4-trace.png
 ---
-Programming a shared-memory parallel computer using threads
-tends to be difficult and error-prone. One reason is that it can be complicated
-to dynamically partition the work among the threads so that each thread receives
-approximately the same load. For any but the simplest of applications, the pro-
-grammer must use complex communication protocols to implement a scheduler
-that load-balances the work.
+Parallel programming involves writing instructions that can be executed on different processors simultaneously. Compared to serial programming, parallel programming offers opportunities to reduce the resources consumed (e.g., time, storage, energy, etc.), but taking advantage of these opportunities can be too much for developers to manage on their own. 
 
-The difficulty of thread programming has led to the creation of task-parallel plat-
-forms, which provide a layer of software on top of threads to coordinate, schedule,
-and manage the processors of a multicore. Some task-parallel platforms are built as
-runtime libraries, but others provide full-fledged parallel languages with compiler
-and runtime support.
+OpenCilk is a task-parallel platform, which provides a layer of software that coordinates, schedules, and manages the mutiple processors of a parallel program. OpenCilk automatically load-balances the tasks of the different processors and achieves performance that is provably close to optimal.
 
-Task-parallel programming allows parallelism to be specified in a “processor-oblivious” fashion, where the programmer identifies what computational tasks may
-run in parallel but does not indicate which thread or processor performs the task.
-Thus, the programmer is freed from worrying about communication protocols, load
-balancing, and other vagaries of "do-it-yourself" multicore programming. The task-parallel platform
-contains a scheduler, which automatically load-balances the tasks across the processors, thereby greatly simplifying the programmer’s chore. Task-parallel algorithms provide a natural extension to ordinary serial algorithms, allowing performance to be reasoned about mathematically using “work/span analysis.”
+Using the OpenCilk platform, a developer writes code in Cilk, which extends C and C++ with a just few keywords to support task-parallel programming. Cilk specifically supports fork-join parallelism with spawning and parallel loops.  
 
-Although the functionality of task-parallel environments is still evolving and increasing, almost all support fork-join parallelism, which is typically embodied
-in two linguistic features: spawning and parallel loops. Spawning allows a subroutine to be “forked”: executed like a subroutine call, except that the caller can
-continue to execute while the spawned subroutine computes its result. A parallel
-loop is like an ordinary for loop, except that multiple iterations of the loop can
-execute at the same time.
+Let's look an example of spawning. Spawning allows a subroutine to be “forked”: executed like a subroutine call, except that the caller can continue to execute while the spawned subroutine computes its result. 
 
-Fork-join parallel algorithms employ spawning and parallel loops to describe
-parallelism. A key aspect of this parallel model, inherited from the task-parallel
-model but different from the thread model, is that the programmer does not specify
-which tasks in a computation must run in parallel, only which tasks may run in
-parallel. The underlying runtime system uses threads to load-balance the tasks
-across the processors. This chapter investigates parallel algorithms described in
-the fork-join model, as well as how the underlying runtime system can schedule
-task-parallel computations (which include fork-join computations) efficiently.
+Let's look at an example of a parallel loop. A parallel loop is like an ordinary for loop, except that multiple iterations of the loop can execute at the same time.)
 
-Our exploration of parallel programming begins with the problem of computing
+With Cilk programming, a programmer uses these keywords to describe
+parallelism. A key aspect of this parallel model is that the programmer does not specify
+which tasks in a computation *must* run in parallel, only which tasks *may* run in
+parallel. (Behind the scenes, the OpenCilk runtime system uses threads to load-balance the tasks across the processors.)
+
+We introduce Cilk programming begins with the problem of computing
 Fibonacci numbers recursively in parallel. 
 The $n$th Fibonacci number is the $n$th number (indexed from 0) in the sequence 0, 1, 1, 2, 3, 5, 8, 13, 21,…, where each number is the sum of the previous two. 
 We’ll look at a straightforward serial
@@ -107,24 +88,23 @@ the spawned child is computing `p_fib(n-1)`, the parent may go on to compute
 `p_fib(n-2)` in line 7 in parallel with the spawned child. 
 Since the `p_fib` procedure
 is recursive, these two subroutine calls themselves create nested parallelism, as
-do their children, thereby creating a potentially vast tree of subcomputations, all
+do their children, thereby creating a potentially vast tree of sub-computations, all
 executing in parallel.
 
 The keyword spawn does not say, however, that a procedure must execute in
 parallel with its spawned children, only that it may. The parallel keywords express
-the logical parallelism of the computation, indicating which parts of the compu-
-tation may proceed in parallel. At runtime, it is up to a scheduler to determine
+the logical parallelism of the computation, indicating which parts of the computation may proceed in parallel. At runtime, it is up to a scheduler to determine
 which subcomputations actually run in parallel by assigning them to available 
 processors as the computation unfolds. 
 
-A procedure cannot safely use the values returned by its spawned children until after it executes a sync statement, as in line 5. The keyword sync indicates
+A procedure cannot safely use the values returned by its spawned children until after it executes a sync statement, as in line 5. The keyword \`cilk_sync\` indicates
 that the procedure must wait as necessary for all its spawned children to finish 
-before proceeding to the statement after the sync—the “join” of a fork-join parallel
-computation. The P-F IB procedure requires a sync before the return statement
-in line 6 to avoid the anomaly that would occur if x and y were summed before
-P-F IB .n 1/ had finished and its return value had been assigned to x. In addition
-to explicit join synchronization provided by the sync statement, it is convenient
-to assume that every procedure executes a sync implicitly before it returns, thus
+before proceeding to the statement after the \`cilk_sync\`—the “join” of a fork-join parallel
+computation. The \`p_fib\` procedure requires a \`cilk_sync\` before the \`return\` statement
+in line 6 to avoid the anomaly that would occur if \`x\` and \`y\` were summed before
+\`p_fib\` had finished and its return value had been assigned to \`x\`. In addition
+to explicit join synchronization provided by the \`cilk_sync\` statement, it is convenient
+to assume that every procedure executes a \`cilk_sync\` implicitly before it returns, thus
 ensuring that all children finish before their parent finishes.
 
 It helps to view the execution of a parallel computation—the dynamic stream of
