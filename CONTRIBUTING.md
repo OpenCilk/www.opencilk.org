@@ -8,13 +8,7 @@ The OpenCilk website is generated using [Eleventy](https://www.11ty.dev/), a Nod
 All the content used to generate the site is in the `src/` folder.
 
 As much as possible, content is written in markdown. (We have not yet selected an official dialect.) 
-The generator also recognizes a few shortcodes that we have created specifically for this site:
-
-- `{% defn "term", "optional_display text" %}`: this shortcode renders `"term"` (or `"optional_display_text"`) as a link to the glossary entry for `"term"`.
-- `{% img "/img/filename.ext", "optional_size" %}`: this shortcode displays a centered image (as a CSS block), sized so that neither its width nor height exceed `"optional_size"`, which defaults to 400px.
-  * `{% imgRight "/img/filename.ext", "size" %}`: similar to `img` but floats right
-  * `{% imgLeft "/img/filename.ext", "size" %}`: similar to `img` but floats left
-- `{% alert "optional_style" %} lorem ipsum {% endalert %}`: this paired shortcode renders its content inside a [Bootstrap 5 alert box](https://getbootstrap.com/docs/5.0/components/alerts/), using `"optional_style"` as the style of alert ("info" is the default).
+The generator is programmed to recognize a few shortcodes that we have created specifically for this site, which are described at the end of this document.
 
 ## Making simple changes
 
@@ -87,3 +81,13 @@ If you haven't already done so, please choose the Authors collection and make su
 ### Editing a page with Netlify CMS
 
 Netlify CMS is configured so that you can create and edit the top-level basic information for your page(s), as shown in the left side of the Netlify CMS edit screen, at the top. </br>![netlify-cms-editor](/src/img/netlify-cms-editor.png)
+
+## Custom shortcodes
+
+The generator for this site has been programmed to recognize the following shortcodes in markdown:
+
+- `{% defn "term", "optional_display text" %}`: this shortcode renders `"term"` (or `"optional_display_text"`) as a link to the glossary entry for `"term"`.
+- `{% img "/img/filename.ext", "optional_size" %}`: this shortcode displays a centered image (as a CSS block), sized so that neither its width nor height exceed `"optional_size"`, which defaults to 400px.
+  * `{% imgRight "/img/filename.ext", "size" %}`: similar to `img` but floats right
+  * `{% imgLeft "/img/filename.ext", "size" %}`: similar to `img` but floats left
+- `{% alert "optional_style" %} lorem ipsum {% endalert %}`: this paired shortcode renders its content inside a [Bootstrap 5 alert box](https://getbootstrap.com/docs/5.0/components/alerts/), using `"optional_style"` as the style of alert ("info" is the default).
