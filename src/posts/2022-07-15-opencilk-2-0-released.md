@@ -22,11 +22,9 @@ void zero(void *v) {
   *(int *)v = 0;
 }
 
-
 void plus(void *l, void *r) {
   *(int *)l += *(int *)r;
 }
-
 
 int foo(int *A, int n) {
   int cilk_reducer(zero, plus) sum = 0;
