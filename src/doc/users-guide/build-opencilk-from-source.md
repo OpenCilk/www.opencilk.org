@@ -1,5 +1,7 @@
 ---
 title: Build OpenCilk from source
+author: Tao B. Schardl
+date: 2022-07-18T18:51:45.651Z
 tags: install
 ---
 
@@ -8,7 +10,7 @@ OpenCilk is available as source code in
 [three Git repositories](https://github.com/OpenCilk).  We provide an
 [infrastructure facilities repository](https://github.com/OpenCilk/infrastructure)
 with scripts for downloading and building OpenCilk from source.
-OpenCilk 1.1 is only guaranteed to support 64-bit x86 on Linux and other Unix-like
+OpenCilk 2.0 is only guaranteed to support 64-bit x86 on Linux and other Unix-like
 operating systems, although prototype support for 64-bit ARM is
 included.
 
@@ -16,7 +18,7 @@ included.
 
 The build requirements for OpenCilk are largely consistent with those
 for LLVM.  In summary, to build OpenCilk on a modern system running
-Linux or MacOSX, you will need the following:
+Linux or macOS, you will need the following:
 - A relatively recent version of Git.
 - A relatively modern C/C++ compiler, such as GCC or Clang, that is
 capable of building LLVM.  Any compiler you are likely to have
@@ -30,37 +32,40 @@ More details on build requirements for LLVM can be found here:
 
 ## Quick start
 
-Clone the OpenCilk infrastructure repository:
+In most cases, the following three steps suffice to build OpenCilk from
+source on a compatible system with prerequisite software installed.
+
+1. Clone the OpenCilk infrastructure repository:
 
 ```shell-session
-$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
+$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/infrastructure
 ```
 
-Run the following script to get the OpenCilk source code:
+2. Run the `get` script to get the OpenCilk source code:
 
 ```shell-session
 $ infrastructure/tools/get $(pwd)/opencilk
 ```
 
-Then run the following script to build OpenCilk:
+3. Run the `build` script to build OpenCilk:
 
 ```shell-session
 $ infrastructure/tools/build $(pwd)/opencilk $(pwd)/build
 ```
 
-You should now be ready to use OpenCilk.  Skip to [Usage](INSTALLING.md#Usage) now, or read
+You should now be ready to use OpenCilk.  Skip to [Usage](#usage) now, or read
 on for more explicit directions on building OpenCilk from source.
 
-## Obtaining the OpenCilk source code
+## Obtaining the OpenCilk source code (detailed instructions)
 
 Clone the OpenCilk compiler, runtime, and productivity-tool repositories.  The
-Cheetah runtime and OpenCilk tool repositories must be cloned into
-sub-directories of the OpenCilk project directory:
+Cheetah runtime and OpenCilk tool repositories must be cloned into specific
+subdirectories of the OpenCilk project directory:
 
 ```shell-session
-$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/opencilk-project
-$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/cheetah opencilk-project/cheetah
-$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/productivity-tools opencilk-project/cilktools
+$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/opencilk-project
+$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/cheetah opencilk-project/cheetah
+$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/productivity-tools opencilk-project/cilktools
 ```
 
 Note that, because these commands clone specific tags of the OpenCilk
@@ -71,10 +76,10 @@ Clone the OpenCilk infrastructure repository, which contains the OpenCilk build
 script:
 
 ```shell-session
-$ git clone -b opencilk/v1.1 https://github.com/OpenCilk/infrastructure
+$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/infrastructure
 ```
 
-## Building OpenCilk
+## Building OpenCilk (detailed instructions)
 
 Run the `infrastructure/tools/build` script with two or three arguments.  The
 1st argument is the absolute pathname to the `opencilk-project` repository
@@ -107,6 +112,9 @@ To echo the OpenCilk build script call syntax, use the `--help` switch:
 $ infrastructure/tools/build --help
 ```
 
+If you encounter problems during the build process, see [Troubleshooting](#troubleshooting) for guidance on fixing common problems, or contact us via the [OpenCilk issue tracker](https://github.com/OpenCilk/opencilk-project/issues) or by emailing us at [contact@opencilk.org](mailto:contact@opencilk.org).
+
+{% alert "info" %}
 ***Advanced build options:*** If you wish, you can customize your
 build of OpenCilk beyond what the script provides --- e.g., to build
 additional LLVM subprojects --- by running the necessary CMake
@@ -118,26 +126,30 @@ as standard LLVM, which are documented here:
 OpenCilk build with these options, we recommend keeping `clang` in
 the list passed to `-DLLVM_ENABLE_PROJECTS` and `cheetah;cilktools`
 in the list passed to `-DLLVM_ENABLE_RUNTIMES`.
+{% endalert %}
 
 ## Usage
 
 You can run the OpenCilk C compiler out of its build tree, adding
 `/bin/clang` to the build directory name.  Similarly, add
-`/bin/clang++` for the OpenCilk C++ compiler.
+`/bin/clang++` to the build-directory path to run the OpenCilk C++
+compiler.
 
-Running on x86, you must have a chip with Intel's Advanced Vector
+To run on x86, you must have a chip with Intel's Advanced Vector
 Instructions (AVX).  This includes Sandy Bridge and newer Intel
 processors (released starting in 2011), and Steamroller and newer AMD
 processors (released starting in 2014).
 
 OpenCilk should work on any 64-bit ARM via its experimental ARM
-support.  In particular, OpenCilk has been tested on Apple's M1.  It
+support.  In particular, OpenCilk has been tested on Apple's M1 processor.  It
 may be helpful to try different values of the `CILK_NWORKERS`
 environment variable on chips like the M1 that mix low- and high-power
 cores.
 
-On MacOSX, you will need an XCode or CommandLineTools installation to
-provide standard system libraries and header files for clang.  To run
+On macOS, you will need a
+[XCode](https://developer.apple.com/support/xcode/) or
+[XCode Command Line Tools](https://mac.install.guide/commandlinetools/index.html)
+installed to provide standard system libraries and header files for clang.  To run
 clang with those header files and libraries, invoke the clang binary
 with `xcrun`; for example:
 
@@ -147,15 +159,32 @@ $ xcrun $(pwd)/build/bin/clang
 
 ## Optional: Installing OpenCilk
 
-You can install OpenCilk into a directory of your choosing by
-running the `cmake_install.cmake` script generated in the build
-directory.  For example, run the following to install OpenCilk into
-the directory `/tmp/llvm`:
+You can install OpenCilk into the system directory `/opt/opencilk-2` using the following command:
 
 ```shell-session
-$ cd $(pwd)/build
-$ cmake -DCMAKE_INSTALL_PREFIX=/tmp/llvm -P cmake_install.cmake
+$ cmake --build build --target install
 ```
+
+Note that you may need superuser privileges to perform this installation, in order to write to the system directory.
+
+If you don't have superuser privileges or would prefer not to install OpenCilk into a system directory, you can instead install OpenCilk locally in a directory of your choosing by running the `cmake_install.cmake` script in the build
+directory.  For example, the following command will install OpenCilk into your
+home directory, specifically, under `$HOME/.local/opencilk`:
+
+```shell-session
+$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/.local/opencilk -P build/cmake_install.cmake
+```
+
+After either of these installation steps, you will need to add the
+`bin` directory within the OpenCilk installation --- e.g.,
+`/opt/opencilk-2/bin` or `$HOME/.local/opencilk/bin` --- to your
+`$PATH` in order to run the OpenCilk binary executables without
+specifying the path to those binaries, e.g., by simply running `clang`
+or `clang++` (or, on macOS, by running `xcrun clang` or `xcrun
+clang++`).  To verify that `clang` refers to the OpenCilk compier, run
+`which clang` and verify that the output matches the path to the
+`clang` binary in your OpenCilk installation, e.g.,
+`/opt/opencilk-2/bin/clang` or `$HOME/.local/opencilk/bin/clang`.
 
 ## Troubleshooting
 
@@ -182,3 +211,7 @@ compiler versions on the system.
 
 **Fix:** Make sure that the versions of `gcc` and `g++` installed on the
 system are consistent.
+
+Don't see your issue here?  Please contact us via the [OpenCilk issue
+tracker](https://github.com/OpenCilk/opencilk-project/issues) or by
+emailing us at [contact@opencilk.org](mailto:contact@opencilk.org).
