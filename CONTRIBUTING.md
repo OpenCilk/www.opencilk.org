@@ -64,7 +64,7 @@ Netlify CMS provides a dashboard-like UI that lets you
 ### Logging in
 
 Access Netlify CMS at https://www.opencilk.org/admin. At the Netlify Identity prompt, choose "Continue with GitHub". Your first time, you will be asked to authorize the GitHub OAuth app that connects Netlify CMS with GitHub. The screen will look roughly like this:
-</br>![Netlify CMS GitHub OAuth](src/img/Netlify%20CMS%20GitHub%20OAuth.png)
+</br>![Netlify CMS GitHub OAuth](/src/img/Netlify%20CMS%20GitHub%20OAuth.png)
 
 The app will only access data of the OpenCilk organization;
 however, the authorize modal may report that the app has permission to access more than that. If you see another organization with a green check beside it, it means that the administrator of that organization has *removed the default GitHub restrictions* that control third-party access, so that any app used by any member is allowed to access the data of that organization. (If you disagree with your org admin, you can ask them to restore default restrictions, which is easy for them to do.)
