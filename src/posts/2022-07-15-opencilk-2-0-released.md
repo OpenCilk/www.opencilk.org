@@ -9,12 +9,12 @@ tags:
   - news
   - release
 ---
-OpenCilk 2.0, which features several changes and enhancements over OpenCilk 1.1, is now available.  See the [Install](doc/users-guide/install) page for instructions on how to download and install OpenCilk 2.0.
+OpenCilk 2.0, which features several changes and enhancements over OpenCilk 1.1, is now available.  See the [Install](/doc/users-guide/install) page for instructions on how to download and install OpenCilk 2.0.
 
 ## Major changes
 
 OpenCilk 2.0 features the following major changes from OpenCilk 1.1:
-- **[Beta]** Cilk reducer hyperobjects (a.k.a., reducers) are now supported through a new language syntax and implementation.  A local or global variable in C or C++ can be made into a reducer by adding `cilk_reducer(I,R)` to its type, where `I` and `R` designate the identity and reduce functions for the reducer.  See the [Reducer documentation](doc/reference/reducers) for details.
+- **[Beta]** Cilk reducer hyperobjects (a.k.a., reducers) are now supported through a new language syntax and implementation.  A local or global variable in C or C++ can be made into a reducer by adding `cilk_reducer(I,R)` to its type, where `I` and `R` designate the identity and reduce functions for the reducer.  See the [Reducer documentation](/doc/reference/reducers) for details.
 
 - The compiler has been upgraded to be based on LLVM 14.0.6.
 - Support for pedigrees and built-in deterministic parallel random-number generation has been improved and optimized.  In particular, pedigrees are now correctly updated at both spawns and syncs.
@@ -22,7 +22,7 @@ OpenCilk 2.0 features the following major changes from OpenCilk 1.1:
 - Many bug fixes and performance improvements have been included compared to the previous version.
 
 ## Known limitations
-- Reducers must be global variables and local variables.  In particular, OpenCilk 2.0 does not support reducers as struct or class members or as heap-allocated objects.  See the [Reducer documentation](doc/reference/reducers) for details.
+- Reducers must be global variables and local variables.  In particular, OpenCilk 2.0 does not support reducers as struct or class members or as heap-allocated objects.  See the [Reducer documentation](/doc/reference/reducers) for details.
 - Support for the Intel Cilk Plus reducer library has been removed.
 - With the compiler now based on LLVM 14, the default DWARF version is now DWARFv5.  If you encounter an error when using a tool such as `unhandled dwarf2 abbrev form code 0x25`, then the tool does not support DWARFv5.  You can opt back into using the old DWARF version by passing either `-gdwarf-4` or `-fdebug-default-version=4` to `clang` when you compile the program.
 - The default setting of floating-point contraction is now `-ffp-contract=on`.  As a result, floating-point computation may behave differently with this version of OpenCilk.  You can opt back into the old floating-point-contraction behavior by passing the compiler flag `-ffp-contract=off`.  See [here](https://releases.llvm.org/14.0.0/tools/clang/docs/ReleaseNotes.html#floating-point-support-in-clang) for more details.
