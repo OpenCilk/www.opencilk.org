@@ -10,12 +10,24 @@ All the content used to generate the site is in the `src/` folder.
 As much as possible, content is written in markdown. (We have not yet selected an official dialect.) 
 The generator is programmed to recognize a few shortcodes that we have created specifically for this site, which are described at the end of this document.
 
+## Production and staging
+
+The site is hosted by Netlify, which provides an alternate URL https://sage-licorice-6da44d.netlify.app/ for viewing this site, in addition to our custom domain https://www.opencilk.org, which visitors typically use. These two URLs both show the `main` branch of this repository.
+
+Edits to the site should initially be made to the `staging` branch.
+Netlify deploys those commits to a special staging URL: https://staging--sage-licorice-6da44d.netlify.app/.
+When commits are ready to be published on the production site, they are
+merged with the `main` branch. 
+
+For both `staging` and `main`, commits automatically trigger a rebuild, which
+usually takes 2-3 minutes to deploy.
+
 ## Making simple changes
 
-To suggest a simple change to the website, you can navigate to the page with the content you think should be changed, and edit it.
+To suggest a simple change to the website, you can navigate to the `staging` branch of the page with the content you think should be changed, and edit it.
 (Here are [instructions for editing on GitHub](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files).)
 You will be prompted to fork the repo (if you haven't already) and then open a Pull Request.
-Once your Pull Request is merged, you should see your changes show up on the website in a few minutes.
+Once your Pull Request is merged with `staging`, you should see your changes show up on https://staging--sage-licorice-6da44d.netlify.app/ in a few minutes.
 
 ## Tracking work in progress
 
@@ -38,36 +50,30 @@ When you work on a page of the website, please consider carefully the top-level 
 
 ## Join the team
 
-Members of the `@opencilk/website-contributors` team have write access and can push changes directly to the main branch of www.opencilk.org.
+Members of the `@opencilk/website-contributors` team have write access to this repository.
 If you are interested in joining, please [let us know](https://github.com/orgs/OpenCilk/discussions).
 
 ## Netlify CMS
 
-For any changes worth tracking as Issues, members of `@opencilk/website-contributors` should use Netlify CMS to edit pages of the site. 
+Members of `@opencilk/website-contributors` (people with accounts with write access) may use Netlify CMS to edit pages of the site. 
 Netlify CMS provides a dashboard-like UI that lets you
 
 - Edit WYSIWYG-style, with rich text, as an alternative to markdown;
-- Manage pre-publication with queues for "draft" content, "in-review" content, and "ready" content; and
 - Manage images and similar files with a Media page.
 
 ### Logging in
 
-Access Netlify CMS at https://www.opencilk.org/admin. At the Netlify Identity prompt, choose "Continue with GitHub": </br>![netlify-cms-github](/src/img/netlify-cms-continue-with-github.png)
+Access Netlify CMS at https://www.opencilk.org/admin. At the Netlify Identity prompt, choose "Continue with GitHub". Your first time, you will be asked to authorize the GitHub OAuth app that connects Netlify CMS with GitHub. The screen will look roughly like this:
+</br>![Netlify CMS GitHub OAuth](src/img/Netlify%20CMS%20GitHub%20OAuth.png)
 
-### Collections and workflow
+The app will only access data of the OpenCilk organization;
+however, the authorize modal may report that the app has permission to access more than that. If you see another organization with a green check beside it, it means that the administrator of that organization has *removed the default GitHub restrictions* that control third-party access, so that any app used by any member is allowed to access the data of that organization. (If you disagree with your org admin, you can ask them to restore default restrictions, which is easy for them to do.)
 
-Once you are logged into https://www.opencilk.org/admin, you may choose Collections or Workflow.
+### Collections
 
-#### Workflow 
-
-Workflow organizes work in progress&mdash;content held in special branches depending on whether its status is draft, in-review, or ready.
-</br>![netlify-cms-workflow](/src/img/netlify-cms-workflow.png).
-
-#### Collections
-
-Collections are for published content (held in the main branch) and they include Authors, Blog, User's guide, Tutorials, Reference, and Glossary.
-When you edit published content, Netlify CMS will set the page to draft status, after which you may change the status to in-review, ready, or (re-)published.
-</br>![netlify-cms-collections](/src/img/netlify-cms-collections.png).
+Once you are logged into https://www.opencilk.org/admin, you may choose Collections or Media. These web UIs allow you to work with content in the `staging` branch.
+Media stores images, and 
+Collections include Authors, Blog, User's guide, Tutorials, Reference, and Glossary.
 
 ### Your author page
 
