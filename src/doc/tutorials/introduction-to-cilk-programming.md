@@ -63,9 +63,10 @@ int p_fib(int n)
 {
   if (n < 2) return n;
   else {
-    int x = cilk_spawn p_fib(n-1);  // don't wait for funtion to return
-    int y = p_fib(n-2);             // in parallel with spawned function
-    cilk_sync;                      // wait for spawned function to finish
+    cilk_scope {
+      int x = cilk_spawn p_fib(n-1);  // don't wait for funtion to return
+      int y = p_fib(n-2);             // in parallel with spawned function
+    }                                 // wait for spawned function to finish
     return x + y;
   }
 }
