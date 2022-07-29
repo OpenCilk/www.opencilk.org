@@ -8,13 +8,25 @@ author: Bruce Hoppe
 date: 2022-07-15T18:13:01.322Z
 image: /img/p-fib-4-trace.png
 ---
-{% defn "parallel algorithms", "Parallel programming" %} involves writing instructions that can be executed on different processors simultaneously. Compared to serial programming, parallel programming offers opportunities to reduce the resources consumed (e.g., time, storage, energy, etc.), but taking advantage of these opportunities can be too much for developers to manage on their own. 
+a{% defn "parallel algorithms", "Parallel programming" %} involves writing instructions that can be executed on different processors simultaneously. Compared to serial programming, parallel programming offers opportunities to reduce the resources consumed (e.g., time, storage, energy, etc.), but taking advantage of these opportunities can be exceedingly complicated and error-prone &mdash; too much for developers to manage on their own. 
 
-OpenCilk is a task-parallel platform, which provides a layer of software that coordinates, schedules, and manages the multiple processors of a parallel program. OpenCilk automatically load-balances the tasks of the different processors and achieves performance that is provably close to optimal.
+OpenCilk is a task-parallel platform that provides a layer of software that coordinates, schedules, and manages the multiple processors of a parallel program. OpenCilk automatically load-balances the tasks of the different processors and achieves performance that is provably close to optimal.
 
 Using the OpenCilk platform, a developer writes code in Cilk, which extends C and C++ with a just few keywords to support task-parallel programming. Cilk specifically supports {% defn "fork-join parallelism" %} with spawning and parallel loops. Let's look at an example each.
 
-{% defn "Spawning" %} allows a subroutine to be “forked”: executed like a subroutine call, except that the caller can continue to execute while the spawned subroutine computes its result. 
+{% defn "Spawning" %} allows a subroutine to be “forked,” or executed like a subroutine call, except that the caller can continue to execute while the spawned subroutine computes its result. For example, consider the fragment of C below. 
+Spawning occurs in line 2, where the keyword `cilk_spawn` precedes the call to function `f`.
+With a spawn, the instance that executes the spawn—the parent—may continue
+to execute in parallel with the spawned subroutine—its child—instead of waiting
+for the child to finish, as would happen in a serial execution. In this case, while
+the spawned child is computing `p_fib(n-1)`, the parent may go on to compute
+`p_fib(n-2)` in line 7 in parallel with the spawned child.
+
+```c#
+  // assume int n and func f
+  int x = cilk_spawn f(n-1);
+  int y = f(n-2);
+```
 
 {% defn "Parallel loops" %} are like ordinary \`for\` loops, except that multiple iterations of the loop can execute at the same time.)
 
