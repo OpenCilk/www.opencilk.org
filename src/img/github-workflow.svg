@@ -25,8 +25,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.84096521"
-     inkscape:cx="644.49753"
-     inkscape:cy="422.72855"
+     inkscape:cx="224.74176"
+     inkscape:cy="384.67703"
      inkscape:window-width="1848"
      inkscape:window-height="1016"
      inkscape:window-x="72"
@@ -392,86 +392,6 @@
          style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
          d="M 3,-3 0,0 3,3"
          id="path5057-1-3-6"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Dot-5-0-2-7"
-       refX="0"
-       refY="0"
-       orient="auto"
-       inkscape:stockid="Dot"
-       markerWidth="5.6666665"
-       markerHeight="5.6666665"
-       viewBox="0 0 5.6666667 5.6666667"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         transform="scale(0.5)"
-         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
-         d="M 5,0 C 5,2.76 2.76,5 0,5 -2.76,5 -5,2.76 -5,0 c 0,-2.76 2.3,-5 5,-5 2.76,0 5,2.24 5,5 z"
-         id="Dot1-62-6-3-8"
-         sodipodi:nodetypes="sssss" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1-9-2-7-4"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Arrow1"
-       markerWidth="4.0606604"
-       markerHeight="6.7071066"
-       viewBox="0 0 4.0606602 6.7071068"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         id="path5057-1-6-5-5"
-         transform="rotate(180,0.125,0)"
-         sodipodi:nodetypes="ccc" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Dot-5-7-9-0"
-       refX="0"
-       refY="0"
-       orient="auto"
-       inkscape:stockid="Dot"
-       markerWidth="5.6666665"
-       markerHeight="5.6666665"
-       viewBox="0 0 5.6666667 5.6666667"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         transform="scale(0.5)"
-         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
-         d="M 5,0 C 5,2.76 2.76,5 0,5 -2.76,5 -5,2.76 -5,0 c 0,-2.76 2.3,-5 5,-5 2.76,0 5,2.24 5,5 z"
-         id="Dot1-62-0-7-6"
-         sodipodi:nodetypes="sssss" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="Arrow1-9-9-3-3"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Arrow1"
-       markerWidth="4.0606604"
-       markerHeight="6.7071066"
-       viewBox="0 0 4.0606602 6.7071068"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
-         d="M 3,-3 0,0 3,3"
-         id="path5057-1-3-6-2"
          transform="rotate(180,0.125,0)"
          sodipodi:nodetypes="ccc" />
     </marker>
@@ -1125,7 +1045,10 @@
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot);marker-end:url(#Arrow1)"
        d="M 96.719775,86.792843 H 74.631287"
        id="path236"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="github-workflow.png"
+       inkscape:export-xdpi="199.968"
+       inkscape:export-ydpi="199.968" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-5);marker-end:url(#Arrow1-9)"
        d="m 122.55025,86.668476 h -22.0885"
@@ -1162,16 +1085,6 @@
        id="path236-2-6-9"
        sodipodi:nodetypes="cc" />
     <path
-       style="fill:none;stroke:#ffcc00;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-5-0-2-7);marker-end:url(#Arrow1-9-2-7-4)"
-       d="M 157.98492,151.93415 H 139.60055"
-       id="path236-2-1-1-0"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#ffcc00;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-5-7-9-0);marker-end:url(#Arrow1-9-9-3-3)"
-       d="m 135.87959,152.08253 c -16.08764,-0.33764 -28.66246,-46.84742 -17.8812,-61.065793"
-       id="path236-2-6-9-1"
-       sodipodi:nodetypes="cc" />
-    <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-3);marker-end:url(#marker2014)"
        d="M 70.781898,86.825729 H 48.69341"
        id="path236-3"
@@ -1193,17 +1106,6 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;font-family:'Latin Modern Mono';-inkscape-font-specification:'Latin Modern Mono';stroke-width:0.264583"
          x="117.36596"
          y="80.556282">main</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Latin Modern Mono';-inkscape-font-specification:'Latin Modern Mono';word-spacing:0px;fill:#ffcc00;stroke:#000000;stroke-width:0.2;stroke-dasharray:none"
-       x="143.55794"
-       y="145.43298"
-       id="text3471-5"><tspan
-         sodipodi:role="line"
-         id="tspan3469-5"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;font-family:'Latin Modern Mono';-inkscape-font-specification:'Latin Modern Mono';fill:#ffcc00;stroke:#000000;stroke-width:0.2;stroke-dasharray:none;paint-order:stroke fill markers"
-         x="143.55794"
-         y="145.43298">cms-staging</tspan></text>
     <path
        style="fill:none;stroke:#0000ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-5-0-2-7-1);marker-end:url(#Arrow1-9-2-7-4-3)"
        d="M 158.90291,207.30327 H 140.51855"
@@ -1300,56 +1202,56 @@
          y="117.93015">PR-/doc/users-guide/article-name</tspan></text>
     <path
        style="fill:none;stroke:#784421;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-5-0-4);marker-end:url(#Arrow1-9-2-5)"
-       d="M 193.90985,168.80767 H 175.52547"
+       d="M 168.07921,158.01166 H 149.69483"
        id="path236-2-1-9"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#784421;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-5-0-8-93);marker-end:url(#Arrow1-9-2-9-4)"
-       d="M 216.20849,168.66413 H 197.82411"
+       d="M 190.37785,157.86812 H 171.99347"
        id="path236-2-1-0-20"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#784421;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-5-7-2);marker-end:url(#Arrow1-9-9-4)"
-       d="m 171.80451,168.95605 c -7.4693,-0.22942 -9.91126,-5.5803 -12.58303,-13.92809"
+       d="m 145.97387,158.16004 c -26.08342,-6.35617 -40.77871,-42.79662 -29.3045,-67.123411"
        id="path236-2-6-6"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-5-0-2-4);marker-end:url(#Arrow1-9-2-7-3)"
-       d="M 193.97886,187.89911 H 175.59449"
+       d="M 168.14822,177.1031 H 149.76385"
        id="path236-2-1-1-8"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-5-0-8-9-7);marker-end:url(#Arrow1-9-2-9-2-68)"
-       d="M 216.2775,187.75556 H 197.89313"
+       d="M 190.44686,176.95955 H 172.06249"
        id="path236-2-1-0-2-9"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Dot-5-7-9-4);marker-end:url(#Arrow1-9-9-3-1)"
-       d="m 171.87353,188.04748 c -12.48334,-0.70643 -19.2879,-21.88963 -15.13425,-32.58371"
+       d="M 146.04289,177.25147 C 119.87115,170.91599 97.841532,126.8093 112.29985,96.088711"
        id="path236-2-6-9-2"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Latin Modern Mono';-inkscape-font-specification:'Latin Modern Mono';word-spacing:0px;fill:#784421;stroke-width:0.264583"
-       x="184.57979"
-       y="161.42004"
+       x="158.74915"
+       y="150.62404"
        id="text3471-3-6"><tspan
          sodipodi:role="line"
          id="tspan3469-1-6"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;font-family:'Latin Modern Mono';-inkscape-font-specification:'Latin Modern Mono';fill:#784421;stroke-width:0.264583"
-         x="184.57979"
-         y="161.42004">cms/posts/post-name</tspan></text>
+         x="158.74915"
+         y="150.62404">cms/blog/post-name</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Latin Modern Mono';-inkscape-font-specification:'Latin Modern Mono';word-spacing:0px;fill:#666666;stroke-width:0.264583"
-       x="183.87233"
-       y="182.11166"
+       x="158.04169"
+       y="171.31566"
        id="text3471-3-9-4"><tspan
          sodipodi:role="line"
          id="tspan3469-1-4-9"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;font-family:'Latin Modern Mono';-inkscape-font-specification:'Latin Modern Mono';fill:#666666;stroke-width:0.264583"
-         x="183.87233"
-         y="182.11166">cms/doc/users-guide/article-name</tspan></text>
+         x="158.04169"
+         y="171.31566">cms/users-guide/article-name</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.23333px;line-height:1.25;font-family:Caladea;-inkscape-font-specification:Caladea;word-spacing:0px;white-space:pre;inline-size:96.9519;display:inline;stroke-width:0.264583"
@@ -1359,75 +1261,59 @@
        transform="translate(96.706207,58.291185)"><tspan
          x="147.15446"
          y="35.929871"
-         id="tspan12925"><tspan
+         id="tspan2041"><tspan
    style="font-weight:bold"
-   id="tspan12923">&quot;Manual pull requests&quot;:</tspan> Each PR corresponds to </tspan><tspan
+   id="tspan2039">&quot;Manual pull requests&quot;:</tspan> Each PR corresponds to </tspan><tspan
          x="147.15446"
          y="41.221531"
-         id="tspan12927">updating one page of content. For each PR, Netlify </tspan><tspan
+         id="tspan2043">updating one page of content. For each PR, Netlify </tspan><tspan
          x="147.15446"
          y="46.513195"
-         id="tspan12929">generates a deploy-preview and updates that preview </tspan><tspan
+         id="tspan2045">generates a deploy-preview and updates that preview </tspan><tspan
          x="147.15446"
          y="51.804859"
-         id="tspan12931">as the PR is modified by additional commits. That </tspan><tspan
+         id="tspan2047">as the PR is modified by additional commits. That </tspan><tspan
          x="147.15446"
          y="57.096523"
-         id="tspan12933">preview and its corresponding thread of PR-</tspan><tspan
+         id="tspan2049">preview and its corresponding thread of PR-</tspan><tspan
          x="147.15446"
          y="62.388188"
-         id="tspan12935">comments is the basis of all discussion about updates </tspan><tspan
+         id="tspan2051">comments is the basis of all discussion about updates </tspan><tspan
          x="147.15446"
          y="67.679852"
-         id="tspan12937">to that page.</tspan></text>
+         id="tspan2053">to that page.</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.23333px;line-height:1.25;font-family:Caladea;-inkscape-font-specification:Caladea;word-spacing:0px;white-space:pre;inline-size:68.7565;display:inline;stroke-width:0.264583"
+       style="font-size:4.23333px;line-height:1.25;font-family:Caladea;-inkscape-font-specification:Caladea;word-spacing:0px;white-space:pre;inline-size:106.359;display:inline;stroke-width:0.264583"
        x="147.15446"
        y="35.929871"
        id="text4075-5"
-       transform="translate(128.51391,105.04607)"><tspan
+       transform="translate(96.63424,114.34391)"><tspan
          x="147.15446"
          y="35.929871"
-         id="tspan12941"><tspan
+         id="tspan2057"><tspan
    style="font-weight:bold"
-   id="tspan12939">&quot;Netlify CMS pull requests&quot;:</tspan>
+   id="tspan2055">&quot;Netlify CMS pull requests&quot;:</tspan>
 </tspan><tspan
          x="147.15446"
          y="41.221531"
-         id="tspan12943">These are similar to manual PRs </tspan><tspan
+         id="tspan2059">These are similar to manual PRs except that Netlify CMS </tspan><tspan
          x="147.15446"
          y="46.513195"
-         id="tspan12945">except that Netlify CMS names and </tspan><tspan
+         id="tspan2061">names and manages them automatically. 
+</tspan><tspan
          x="147.15446"
          y="51.804859"
-         id="tspan12947">manages them automatically. Netlify </tspan><tspan
+         id="tspan2063">
+</tspan><tspan
          x="147.15446"
          y="57.096523"
-         id="tspan12949">CMS updates its own dedicated </tspan><tspan
+         id="tspan2065">Each page has a status that corresponds to a GitHub label </tspan><tspan
          x="147.15446"
          y="62.388188"
-         id="tspan12953">branch, <tspan
+         id="tspan2069">associated with the PR (e.g., <tspan
    style="font-family:'Latin Modern Mono';-inkscape-font-specification:'Latin Modern Mono, Normal'"
-   id="tspan12951">cms-staging</tspan>, where content </tspan><tspan
-         x="147.15446"
-         y="67.679852"
-         id="tspan12955">is &quot;published&quot; before final approval </tspan><tspan
-         x="147.15446"
-         y="72.971516"
-         id="tspan12957">for merging with the main branch. </tspan><tspan
-         x="147.15446"
-         y="78.26318"
-         id="tspan12959">(We no longer use the &quot;workflow&quot; </tspan><tspan
-         x="147.15446"
-         y="83.554844"
-         id="tspan12961">module of Netlify CMS, but use </tspan><tspan
-         x="147.15446"
-         y="88.846508"
-         id="tspan12963">GitHub Project status to track draft vs. </tspan><tspan
-         x="147.15446"
-         y="94.138172"
-         id="tspan12965">in-review etc.)</tspan></text>
+   id="tspan2067">netlify-cms/draft</tspan>).</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.23333px;line-height:1.25;font-family:Caladea;-inkscape-font-specification:Caladea;word-spacing:0px;white-space:pre;inline-size:81.4789;display:inline;stroke-width:0.264583"
@@ -1437,30 +1323,30 @@
        transform="translate(-103.79225,166.48668)"><tspan
          x="147.15446"
          y="35.929871"
-         id="tspan12969"><tspan
+         id="tspan2073"><tspan
    style="font-weight:bold"
-   id="tspan12967">Changes to website infrastructure</tspan> are </tspan><tspan
+   id="tspan2071">Changes to website infrastructure</tspan> are </tspan><tspan
          x="147.15446"
          y="41.221531"
-         id="tspan12971">managed on different branches than changes </tspan><tspan
+         id="tspan2075">managed on different branches than changes </tspan><tspan
          x="147.15446"
          y="46.513195"
-         id="tspan12973">to page content. Each infrastructure branch </tspan><tspan
+         id="tspan2077">to page content. Each infrastructure branch </tspan><tspan
          x="147.15446"
          y="51.804859"
-         id="tspan12975">corresponds to a &quot;release&quot; of the website. </tspan><tspan
+         id="tspan2079">corresponds to a &quot;release&quot; of the website. </tspan><tspan
          x="147.15446"
          y="57.096523"
-         id="tspan12977">Most team members contribute only to </tspan><tspan
+         id="tspan2081">Most team members contribute only to </tspan><tspan
          x="147.15446"
          y="62.388188"
-         id="tspan12979">changes in page content. Bruce and any </tspan><tspan
+         id="tspan2083">changes in page content. Bruce and any </tspan><tspan
          x="147.15446"
          y="67.679852"
-         id="tspan12981">other website builders would also contribute </tspan><tspan
+         id="tspan2085">other website builders would also contribute </tspan><tspan
          x="147.15446"
          y="72.971516"
-         id="tspan12983">to changes in website infrastructure. </tspan></text>
+         id="tspan2087">to changes in website infrastructure. </tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:Caladea;-inkscape-font-specification:Caladea;word-spacing:0px;stroke-width:0.264583"
