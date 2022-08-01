@@ -9,7 +9,6 @@ date: 2022-07-15T18:13:01.322Z
 image: /img/p-fib-4-trace.png
 tags:
   - task-parallelism
-  - fork-join-parallelism
   - spawn
 ---
 {% defn "parallel algorithms", "Parallel programming" %} involves writing instructions that can be executed on different processors simultaneously. Compared to serial programming, parallel programming offers opportunities to reduce the resources consumed (e.g., time, storage, energy, etc.), but taking advantage of these opportunities can be exceedingly complicated and error-prone &mdash; too much for developers to manage on their own. 
