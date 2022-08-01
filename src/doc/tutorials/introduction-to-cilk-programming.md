@@ -26,12 +26,13 @@ With a spawn, the instance that executes the spawn&mdash;the {% defn "parent" %}
 ```c#
 int p_fib(int n)
 {
+  int x, y;
   if (n < 2) return n;
   else {
     cilk_scope {
-      int x = cilk_spawn p_fib(n-1);  // don't wait for function to return
-      int y = p_fib(n-2);             // run in parallel with spawned function
-    }                                 // wait for spawned function to finish
+      x = cilk_spawn p_fib(n-1);  // don't wait for function to return
+      y = p_fib(n-2);             // run in parallel with spawned function
+    }                             // wait for spawned function to finish
     return x + y;
   }
 }
@@ -54,10 +55,11 @@ If you remove `cilk_spawn` and `cilk_scope` from this example program, the resul
 ```c#
 int fib(int n)
 {
+  int x, y;
   if (n < 2) return n;
   else {
-    int x = fib(n-1);
-    int y = fib(n-2);
+    x = fib(n-1);
+    y = fib(n-2);
     return x + y;
   }
 }
