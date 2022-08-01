@@ -6,7 +6,7 @@ tagline: With a few Cilk keywords, OpenCilk extends C/C++ to support fork-join
   multicore computers.
 author: Bruce Hoppe
 date: 2022-07-15T18:13:01.322Z
-image: /img/p-fib-4-trace.png
+image: /img/fib-code-multicore.png
 tags:
   - task-parallelism
   - spawn
@@ -14,7 +14,7 @@ tags:
 ## Task-parallel programming
 {% defn "parallel algorithms", "Parallel programming" %} involves writing instructions that can be executed on different processors simultaneously. Compared to serial programming, parallel programming offers opportunities to reduce the resources consumed (e.g., time, storage, energy, etc.), but taking advantage of these opportunities can be exceedingly complicated and error-prone &mdash; too much for developers to manage on their own. 
 
-OpenCilk is a task-parallel platform: a layer of software that coordinates, schedules, and manages the multiple processors of a parallel program. OpenCilk automatically load-balances the tasks of the different processors and achieves performance that is provably close to optimal.
+OpenCilk is a {% defn "task-parallel-platforms-programming-and-algorithms", "task-parallel platform" %}: a layer of software that coordinates, schedules, and manages the multiple processors of a parallel program. OpenCilk automatically load-balances the tasks of the different processors and achieves performance that is provably close to optimal.
 
 Using the OpenCilk platform, a developer writes code in Cilk, which extends C and C++ with a just few keywords to support task-parallel programming. Cilk supports {% defn "fork-join parallelism" %}, an especially simple form of task-parallelism that uses spawning and parallel loops. We'll introduce spawning here
 and cover parallel loops in a later tutorial.
@@ -42,6 +42,9 @@ int p_fib(int n)
 With Cilk, there are no tasks that *must* run in parallel; instead,
 the programmer uses `cilk_spawn` to specify those which *may* run in parallel.
 Every time a task-parallel program is executed, the OpenCilk runtime system uses this information to load-balance the tasks on the available processors.
+For example, the picture below depicts a basic multicore architecture where each processor is a yellow circle with a "P" inside.
+
+{% img "/img/fib-code-multicore.png" %}
 
 The keyword `cilk_scope` complements `cilk_spawn` by defining a boundary that limits the extent to which tasks may run in parallel.
 Whenever the program execution leaves a block of code delimited by `cilk_scope{...}` , it must wait as necessary for all spawned functions within the block to finish before proceeding.
@@ -61,7 +64,7 @@ int fib(int n)
 ```
 
 Function `fib` is the {% defn "serial projection" %} of `p_fib`,
-which means they compute exactly the same thing.
+which means it computes exactly the same result but without any tasks running simultaneously.
 So why bother with parallelism?
 Because of the differences in *how* `fib` and `p_fib` compute their (identical) results.
 For many computations, allowing tasks to run in parallel significantly reduces the resources required (e.g., time, storage, energy).
