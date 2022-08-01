@@ -11,6 +11,7 @@ tags:
   - task-parallelism
   - spawn
 ---
+## Task-parallel programming
 {% defn "parallel algorithms", "Parallel programming" %} involves writing instructions that can be executed on different processors simultaneously. Compared to serial programming, parallel programming offers opportunities to reduce the resources consumed (e.g., time, storage, energy, etc.), but taking advantage of these opportunities can be exceedingly complicated and error-prone &mdash; too much for developers to manage on their own. 
 
 OpenCilk is a task-parallel platform: a layer of software that coordinates, schedules, and manages the multiple processors of a parallel program. OpenCilk automatically load-balances the tasks of the different processors and achieves performance that is provably close to optimal.
@@ -19,8 +20,8 @@ Using the OpenCilk platform, a developer writes code in Cilk, which extends C an
 and cover parallel loops in a later tutorial.
 
 {% defn "Spawning" %} allows a function to be “forked,” or executed like a function call, except that the caller can continue to execute while the spawned function computes its result. For example, consider the fragment of C below. 
-Spawning occurs in line 5, where the keyword `cilk_spawn` precedes the call to function `p_fib`.
-With a spawn, the instance that executes the spawn&mdash;the parent&mdash;may continue to execute in parallel with the spawned function&mdash;its child&mdash;instead of waiting for the child to finish, as would happen in a serial execution.
+Spawning occurs in line 6, where the keyword `cilk_spawn` precedes the call to function `p_fib`.
+With a spawn, the instance that executes the spawn&mdash;the {% defn "parent" %}&mdash;may continue to execute in parallel with the spawned function&mdash;its {% defn "child" %}&mdash;instead of waiting for the child to finish, as would happen in a serial execution.
 
 ```c#
 int p_fib(int n)
@@ -35,6 +36,8 @@ int p_fib(int n)
   }
 }
 ```
+
+## How OpenCilk runs your program
 
 With Cilk, there are no tasks that *must* run in parallel; instead,
 the programmer uses `cilk_spawn` to specify those which *may* run in parallel.
