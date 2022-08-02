@@ -11,7 +11,7 @@ tags:
   - task-parallelism
   - spawn
 ---
-`## Task-parallel programming with `cilk_spawn` and `cilk_scope`
+## Task-parallel programming with `cilk_spawn` and `cilk_scope`
 
 {% defn "parallel algorithms", "Parallel programming" %} involves writing instructions that can be executed on different processors simultaneously. Compared to serial programming, parallel programming offers opportunities to reduce the resources consumed (e.g., time, storage, energy, etc.), but taking advantage of these opportunities can be exceedingly complicated and error-prone &mdash; too much for developers to manage on their own. 
 
