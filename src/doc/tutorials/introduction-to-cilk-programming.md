@@ -59,12 +59,9 @@ var = cilk_spawn (object.*pointer)(args);
 
 If you spawn a function that returns a value, the value should be assigned to a previously declared receiver variable before spawning. Otherwise, there will be a compiler error or warning. Here are three examples.
 
-Example 1: Assign a function value to a variable constructed in the same statement.
+**Example 1:** Assign a function value to a variable constructed in the same statement.
 
-Wrong:
-```c
-int x = cilk_spawn f();
-```
+Wrong: `int x = cilk_spawn f();`
 
 The correct form is to declare the receiver variable in a separate statement.
 
@@ -73,21 +70,15 @@ int x;
 x = cilk_spawn f();
 ```
 
-Example 2: Spawn the function without a receiver variable.
+**Example 2:** Spawn the function without a receiver variable.
 
-Wrong:
-```c
-cilk_spawn f();
-```
+Wrong: `cilk_spawn f();`
 
 The correct form is to declare the receiver variable in a separate statement, as in Example 1.
 
-Example 3: Spawn a function used as an argument to another function.
+**Example 3:** Spawn a function used as an argument to another function.
 
-Wrong:
-```c
-g(cilk_spawn f());
-```
+Wrong: `g(cilk_spawn f());`
 
 The correct syntax in this case is to declare the receiver variable in a separate statement, spawn, sync (see Part 2), and use the result as the argument to `g()`. However, there is no benefit to this as the parent strand must sync immediately and cannot run in parallel with `f()`.
 
