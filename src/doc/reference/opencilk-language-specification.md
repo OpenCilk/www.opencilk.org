@@ -689,9 +689,9 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
 a++;</pre>
 	<p>The call to function <code>f</code> is the spawn point and the statement <code>a++;</code>
 		is the continuation. The expression <code>a + b</code> and the initialization of
-		the temporary variable holding that value, and the evaluation of <code>x\\\\\[g()]</code>
+		the temporary variable holding that value, and the evaluation of <code>x\\\\\\[g()]</code>
 		take place before the spawn point. The execution of <code>f</code>, the assignment
-		to <code>x\\\\\[g()]</code>, and the destruction of the temporary variable holding <code>
+		to <code>x\\\\\\[g()]</code>, and the destruction of the temporary variable holding <code>
 			a + b</code> take place in the child.</p>
 	<p>If a statement is followed by an implicit sync, that sync is the spawn continuation.</p>
 	<p class="note">Programmer note: The sequencing may be more clear if</p>
@@ -1204,8 +1204,8 @@ void <var>T_destroy</var>(void* <var>r</var>, void* <var>view</var>);</pre>
 		<tbody>
 			<tr>
 				<td><var>T_reduce</var></td>
-				<td>Evaluate &#x201c;<code>\\\\\*(T\\\\\*)</code><var>left</var> <code>= \\\\\*(T\\\\\*)</code> <var>left</var>
-					&#x2297; <code>\\\\\*(T\\\\\*)</code> <var>right</var>&#x201d;</td>
+				<td>Evaluate &#x201c;<code>\\\\\\*(T\\\\\\*)</code><var>left</var> <code>= \\\\\\*(T\\\\\\*)</code> <var>left</var>
+					&#x2297; <code>\\\\\\*(T\\\\\\*)</code> <var>right</var>&#x201d;</td>
 			</tr>
 			<tr>
 				<td><var>T_identity</var></td>
