@@ -42,8 +42,8 @@ int p_fib(int n)
 
 A `cilk_spawn` statement has two forms, depending on whether it returns a value or not.
 ```c
-var = cilk_spawn func(args);	// func() returns a value cilk_spawn
-func(args);						// func() returns void
+var = cilk_spawn func(args);	// func() returns a value 
+cilk_spawn func(args);			// func() returns void
 ```
 
 `var` is a variable with the type returned by `func`. It is known as the *receiver* because it receives the function call result. The receiver must be omitted for `void` functions.
