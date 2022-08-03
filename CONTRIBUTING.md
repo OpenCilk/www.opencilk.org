@@ -87,8 +87,8 @@ and may use Netlify CMS to edit pages of the site.
 **Downsides of Netlify CMS:** 
 
 - **Time.** Every time you save your changes with Netlify CMS, no matter how trivial, it takes 2-3 minutes to see the result, because that's how long it takes Netlify to regenerate the deploy-preview of that PR.
-Alternatively, with a local fork of the repository, you can work on the PR and see the results of each edit in 2-3 seconds, because regenerating your instance of the site on `localhost` is that much faster than regnerating on Netlify.
-- **Comments.** Every time you save your changes with Netlify CMS, it adds the same generic comment to GitHub: "Update <collection-name> cms/<your-article>".
+Alternatively, with a local fork of the repository, you can work on the PR and see the results of each edit in 2-3 seconds, because regenerating your instance of the site on `localhost` is that much faster than regenerating on Netlify.
+- **Comments.** Every time you save your changes with Netlify CMS, it adds a generic "Update" comment to GitHub.
  Alternatively, if you use git to push commits to this PR, you can write your own comments so that each change is documented.
 
 
