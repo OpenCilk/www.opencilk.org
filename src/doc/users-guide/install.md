@@ -38,13 +38,6 @@ ARM processors.  It has been tested on the following operating systems:
  - Fedora (34, 36)
  - macOS (10.15, 11.6, 12.4)
 
-## Download
-
-Use the links below to download the appropriate OpenCilk precompiled shell
-archive (`.sh`), tarball (`.tar.gz`), or Docker image.
-
-You can also [build OpenCilk from source](../build-opencilk-from-source), which is the recommended approach for Ubuntu 18.04 and other operating systems not listed above.
-
 {% alert "info" %}
 ***Prerequisites:*** The OpenCilk binaries assume that system header files and system libraries
 are already installed on the system.
@@ -54,36 +47,39 @@ the [XCode Command Line Tools](https://mac.install.guide/commandlinetools/index.
 the necessary system files. 
 {% endalert %}
 
-### Linux binaries
- 
+## Methods of installation
+
+Precompiled binaries for OpenCilk 2.0 can be installed in several ways:
+- Using a [shell archive (`.sh`)](#installing-using-a-shell-archive) built for the target hardware and operating system.
+- Using a [tarball (`.tar.gz`)](#installing-using-a-tarball) built for the target hardware and operating system.
+- Using a [docker image](#docker-image).
+
+You can also [build OpenCilk from source](../build-opencilk-from-source),
+which is the recommended approach for Ubuntu 18.04 and other operating systems for
+which precompiled binaries are not available.
+
+## Installing using a shell archive
+
+To install OpenCilk 2.0 using a shell archive, first download the appropriate shell
+archive for your system, then follow the installation instructions.
+
+### Download
+
+Download the appropriate shell archive for your system using one of the following links:
+
+***Linux:***
  - [{{ download.ubuntu_2004_x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2004_x86.shell }})
-   ({{ download.ubuntu_2004_x86.size }})
- - <a id="{{ download.release }} ubuntu 2004 x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2004_x86.binary }}">{{ download.ubuntu_2004_x86.binary }}</a>
    ({{ download.ubuntu_2004_x86.size }})
  - [{{ download.ubuntu_2204_x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2204_x86.shell }})
    ({{ download.ubuntu_2204_x86.size }})
- - <a id="{{ download.release }} ubuntu 2204 x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2204_x86.binary }}">{{ download.ubuntu_2204_x86.binary }}</a>
-   ({{ download.ubuntu_2204_x86.size }})
-
-### macOS binaries
-
+ 
+***macOS:***
  - [{{ download.macos_arm.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.macos_arm.shell }})
-   ({{ download.macos_arm.size }})
- - <a id="{{ download.release }} macos arm" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.macos_arm.binary }}">{{ download.macos_arm.binary }}</a>
    ({{ download.macos_arm.size }})
  - [{{ download.macos_x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.macos_x86.shell }})
    ({{ download.macos_x86.size }})
- - <a id="{{ download.release }} macos x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.macos_x86.binary }}">{{ download.macos_x86.binary }}</a>
-   ({{ download.macos_x86.size }})
 
-### Docker image
-
- - <a id="{{ download.release }} docker" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.docker.binary }}">{{ download.docker.binary }}</a>
-   ({{ download.docker.size }})
-
-## Install
-
-### Shell archive
+### Install
 
 Execute the shell script to extract OpenCilk 2.0 into the current directory.  For example:
 
@@ -102,7 +98,8 @@ the `--help` argument to the script.
 The OpenCilk C (or C++) compiler can be invoked via `bin/clang` (or
 `bin/clang++`) from within the installation directory.
 
-#### Example
+{% alert "info" %}
+***Example:***
 
 The following shows the process of installing OpenCilk into a version-specific
 subdirectory within `/opt/opencilk/`.
@@ -136,26 +133,52 @@ The OpenCilk C compiler can now be run as
 `/opt/opencilk/OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/bin/clang`.  Or you can add
 `/opt/opencilk/OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/bin` to your `PATH` environment variable
 and invoke the OpenCilk C/C++ compiler simply as `clang` or `clang++`.
+{% endalert %}
 
-### Tarball
+## Installing using a tarball
 
-As an alternative to using the self-extracting shell archive above, you can
-extract OpenCilk {{ download.version }} from the `.tar.gz` tarball.  For example:
+To install OpenCilk 2.0 using a tarball, first download the appropriate tarball
+for your system, then follow the installation instructions.
 
+### Download
+
+Download the appropriate tarball for your system using one of the following links:
+
+***Linux:***
+ - <a id="{{ download.release }} ubuntu 2004 x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2004_x86.binary }}">{{ download.ubuntu_2004_x86.binary }}</a>
+   ({{ download.ubuntu_2004_x86.size }})
+ - <a id="{{ download.release }} ubuntu 2204 x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2204_x86.binary }}">{{ download.ubuntu_2204_x86.binary }}</a>
+   ({{ download.ubuntu_2204_x86.size }})
+ 
+***macOS:***
+ - <a id="{{ download.release }} macos arm" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.macos_arm.binary }}">{{ download.macos_arm.binary }}</a>
+   ({{ download.macos_arm.size }})
+ - <a id="{{ download.release }} macos x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.macos_x86.binary }}">{{ download.macos_x86.binary }}</a>
+   ({{ download.macos_x86.size }})
+ 
+### Install
+
+Extract OpenCilk 2.0 from the downloaded tarball.  For example:
 ```shell-session
 $ tar xvzf OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.tar.gz
 ```
-
 will extract the OpenCilk installation into a subdirectory
 `OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/` within the current working directory.
 
-> Extracting the tarball as above is equivalent to running the corresponding
-> shell script with options `--skip-license --include-subdir`.
+{% alert "info" %}
+Extracting the tarball as above is equivalent to running the corresponding
+shell script with options `--skip-license --include-subdir`.
+{% endalert %}
 
-### Docker image
+## Docker image
 
-OpenCilk 2.0 is also available as a Docker image based on Ubuntu 20.04.  The
-OpenCilk C and C++ compilers are available as `clang` and `clang++` in the
+OpenCilk 2.0 is also available as a docker image based on Ubuntu 20.04.
+You can download the docker image here:
+
+- <a id="{{ download.release }} docker" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.docker.binary }}">{{ download.docker.binary }}</a>
+   ({{ download.docker.size }})
+
+The OpenCilk C and C++ compilers are available as `clang` and `clang++` in the
 image.  To use the OpenCilk 2.0 Docker image, download the
 `docker-opencilk-v2.0.tar.gz` file, load the image, and run a container.  For
 example:
@@ -165,7 +188,7 @@ $ docker load -i docker-opencilk-v2.0.tar.gz
 $ docker run -it opencilk:v2.0 /bin/bash
 ```
 
-## Test
+## Next steps
 
 The OpenCilk 2.0 installation includes LLVM 14 with the following OpenCilk
 components:
@@ -176,7 +199,7 @@ components:
  - Cilkscale scalability analyzer and visualization script
 
 See [Getting started](/doc/users-guide/getting-started) for steps to verify
-that your installation is working.
+that your installation is working and to start using OpenCilk.
 
 ## Additional resources
 
