@@ -27,13 +27,13 @@ download:
     size: 1.05 GB
 ---
 
-## Requirements
+## System requirements
 
 OpenCilk 2.0 runs on Intel x86 64-bit processors (Haswell and newer), AMD x86
 64-bit processors (Excavator and newer), and Apple M1 and other 64-bit
 ARM processors.  It has been tested on the following operating systems:
 
- - Ubuntu (20.04, 22.04), including via WSL2 (Windows Subsystem for Linux 2)
+ - Ubuntu (18.04, 20.04, 22.04), including via WSL2 (Windows Subsystem for Linux 2)
  - FreeBSD (13)
  - Fedora (34, 36)
  - macOS (10.15, 11.6, 12.4)
@@ -45,34 +45,38 @@ archive (`.sh`), tarball (`.tar.gz`), or Docker image.
 
 You can also [build OpenCilk from source](../build-opencilk-from-source), which is the recommended approach for Ubuntu 18.04 and other operating systems not listed above.
 
-### Linux
+{% alert "info" %}
+***Prerequisites:*** The OpenCilk binaries assume that system header files and system libraries
+are already installed on the system.
+- On Linux, we recommend installing GCC (or equivalent) to provide these necessary system files.
+- On macOS, you must install [XCode](https://developer.apple.com/support/xcode/) or
+the [XCode Command Line Tools](https://mac.install.guide/commandlinetools/index.html) to get
+the necessary system files. 
+{% endalert %}
+
+### Linux binaries
  
  - [{{ download.ubuntu_2004_x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2004_x86.shell }})
    ({{ download.ubuntu_2004_x86.size }})
- - <a id="{{ download.release }} x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2004_x86.binary }}">{{ download.ubuntu_2004_x86.binary }}</a>
+ - <a id="{{ download.release }} ubuntu 2004 x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2004_x86.binary }}">{{ download.ubuntu_2004_x86.binary }}</a>
    ({{ download.ubuntu_2004_x86.size }})
-   
-{% alert "info" %}
-***Note for non-macOS Linux systems:*** You need to install GCC (or equivalent) to provide
-necessary system include files and system libraries.
-{% endalert %}
+ - [{{ download.ubuntu_2204_x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2204_x86.shell }})
+   ({{ download.ubuntu_2204_x86.size }})
+ - <a id="{{ download.release }} ubuntu 2204 x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2204_x86.binary }}">{{ download.ubuntu_2004_x86.binary }}</a>
+   ({{ download.ubuntu_2204_x86.size }})
 
-### macOS
+### macOS binaries
 
  - [{{ download.macos_arm.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.macos_arm.shell }})
    ({{ download.macos_arm.size }})
- - <a id="{{ download.release }} arm" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.macos_arm.binary }}">{{ download.macos_arm.binary }}</a>
+ - <a id="{{ download.release }} macos arm" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.macos_arm.binary }}">{{ download.macos_arm.binary }}</a>
    ({{ download.macos_arm.size }})
+ - [{{ download.macos_x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.macos_x86.shell }})
+   ({{ download.macos_x86.size }})
+ - <a id="{{ download.release }} macos x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.macos_x86.binary }}">{{ download.macos_x86.binary }}</a>
+   ({{ download.macos_x86.size }})
 
-{% alert "info" %}
-***Note for macOS users:*** Unless you are using the OpenCilk Docker image,
-you must also install [XCode](https://developer.apple.com/support/xcode/) or
-the [XCode Command Line
-Tools](https://mac.install.guide/commandlinetools/index.html), which provide
-standard system libraries and header files needed by the OpenCilk compiler.
-{% endalert %}
-
-### Docker
+### Docker image
 
  - <a id="{{ download.release }} docker" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.docker.binary }}">{{ download.docker.binary }}</a>
    ({{ download.docker.size }})
