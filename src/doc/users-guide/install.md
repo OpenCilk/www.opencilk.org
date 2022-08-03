@@ -5,7 +5,6 @@ eleventyNavigation:
   order: -3
 download:
   host: https://github.com/OpenCilk/opencilk-project/
-  version: 2.0
   release: opencilk/v2.0
   ubuntu-2004-x86: 
     shell: OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.sh
@@ -30,7 +29,7 @@ download:
 
 ## Requirements
 
-OpenCilk {{ download.version }} runs on Intel x86 64-bit processors (Haswell and newer), AMD x86
+OpenCilk 2.0 runs on Intel x86 64-bit processors (Haswell and newer), AMD x86
 64-bit processors (Excavator and newer), and Apple M1 and other 64-bit
 ARM processors.  It has been tested on the following operating systems:
 
@@ -48,10 +47,10 @@ You can also [build OpenCilk from source](../build-opencilk-from-source), which 
 
 ### Linux
  
- - [{{ download.x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.x86.shell }})
-   ({{ download.x86.size }})
- - <a id="{{ download.release }} x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.x86.binary }}">{{ download.x86.binary }}</a>
-   ({{ download.x86.size }})
+ - [{{ download.ubuntu-2004-x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu-2004-x86.shell }})
+   ({{ download.ubuntu-2004-x86.size }})
+ - <a id="{{ download.release }} x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu-2004-x86.binary }}">{{ download.ubuntu-2004-x86.binary }}</a>
+   ({{ download.ubuntu-2004-x86.size }})
    
 {% alert "info" %}
 ***Note for non-macOS Linux systems:*** You need to install GCC (or equivalent) to provide
@@ -60,10 +59,10 @@ necessary system include files and system libraries.
 
 ### macOS
 
- - [{{ download.arm.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.arm.shell }})
-   ({{ download.arm.size }})
- - <a id="{{ download.release }} arm" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.arm.binary }}">{{ download.arm.binary }}</a>
-   ({{ download.arm.size }})
+ - [{{ download.macos-arm.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.macos-arm.shell }})
+   ({{ download.macos-arm.size }})
+ - <a id="{{ download.release }} arm" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.macos-arm.binary }}">{{ download.macos-arm.binary }}</a>
+   ({{ download.macos-arm.size }})
 
 {% alert "info" %}
 ***Note for macOS users:*** Unless you are using the OpenCilk Docker image,
@@ -82,7 +81,7 @@ standard system libraries and header files needed by the OpenCilk compiler.
 
 ### Shell archive
 
-Execute the shell script to extract OpenCilk {{ download.version }} into the current directory.  For example:
+Execute the shell script to extract OpenCilk 2.0 into the current directory.  For example:
 
 ```shell-session
 $ sh OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.sh
@@ -140,7 +139,7 @@ As an alternative to using the self-extracting shell archive above, you can
 extract OpenCilk {{ download.version }} from the `.tar.gz` tarball.  For example:
 
 ```shell-session
-$ tar xvzf OpenCilk-1.1-LLVM-12.0.0-Ubuntu-20.04-x86_64.tar.gz
+$ tar xvzf OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.tar.gz
 ```
 
 will extract the OpenCilk installation into a subdirectory
@@ -151,9 +150,9 @@ will extract the OpenCilk installation into a subdirectory
 
 ### Docker image
 
-OpenCilk {{ download.version }} is also available as a Docker image based on Ubuntu 20.04.  The
+OpenCilk 2.0 is also available as a Docker image based on Ubuntu 20.04.  The
 OpenCilk C and C++ compilers are available as `clang` and `clang++` in the
-image.  To use the OpenCilk {{ download.version }} Docker image, download the
+image.  To use the OpenCilk 2.0 Docker image, download the
 `docker-opencilk-v2.0.tar.gz` file, load the image, and run a container.  For
 example:
 
@@ -164,7 +163,7 @@ $ docker run -it opencilk:v2.0 /bin/bash
 
 ## Test
 
-The OpenCilk {{ download.version }} installation includes LLVM 14 with the following OpenCilk
+The OpenCilk 2.0 installation includes LLVM 14 with the following OpenCilk
 components:
 
  - OpenCilk compiler (with the `clang` and `clang++` front-ends)
