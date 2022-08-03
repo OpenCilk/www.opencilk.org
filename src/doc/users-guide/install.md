@@ -62,7 +62,7 @@ the necessary system files.
    ({{ download.ubuntu_2004_x86.size }})
  - [{{ download.ubuntu_2204_x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2204_x86.shell }})
    ({{ download.ubuntu_2204_x86.size }})
- - <a id="{{ download.release }} ubuntu 2204 x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2204_x86.binary }}">{{ download.ubuntu_2004_x86.binary }}</a>
+ - <a id="{{ download.release }} ubuntu 2204 x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2204_x86.binary }}">{{ download.ubuntu_2204_x86.binary }}</a>
    ({{ download.ubuntu_2204_x86.size }})
 
 ### macOS binaries
