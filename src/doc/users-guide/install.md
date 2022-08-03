@@ -6,19 +6,19 @@ eleventyNavigation:
 download:
   host: https://github.com/OpenCilk/opencilk-project/
   release: opencilk/v2.0
-  ubuntu-2004-x86: 
+  ubuntu_2004_x86: 
     shell: OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.sh
     binary: OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.tar.gz
     size: 764 MB
-  ubuntu-2204-x86: 
+  ubuntu_2204_x86: 
     shell: OpenCilk-2.0.0-x86_64-Linux-Ubuntu-22.04.sh
     binary: OpenCilk-2.0.0-x86_64-Linux-Ubuntu-22.04.tar.gz
     size: 782 MB
-  macos-x86: 
+  macos_x86: 
     shell: OpenCilk-2.0.0-x86_64-Apple-Darwin.sh
     binary: OpenCilk-2.0.0-x86_64-Apple-Darwin.tar.gz
     size: 767 MB
-  macos-arm:
+  macos_arm:
     shell: OpenCilk-2.0.0-arm64-Apple-Darwin.sh
     binary: OpenCilk-2.0.0-arm64-Apple-Darwin.tar.gz
     size: 695 MB
@@ -47,10 +47,10 @@ You can also [build OpenCilk from source](../build-opencilk-from-source), which 
 
 ### Linux
  
- - [{{ download.ubuntu-2004-x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu-2004-x86.shell }})
-   ({{ download.ubuntu-2004-x86.size }})
- - <a id="{{ download.release }} x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu-2004-x86.binary }}">{{ download.ubuntu-2004-x86.binary }}</a>
-   ({{ download.ubuntu-2004-x86.size }})
+ - [{{ download.ubuntu_2004_x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2004_x86.shell }})
+   ({{ download.ubuntu_2004_x86.size }})
+ - <a id="{{ download.release }} x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2004_x86.binary }}">{{ download.ubuntu_2004_x86.binary }}</a>
+   ({{ download.ubuntu_2004_x86.size }})
    
 {% alert "info" %}
 ***Note for non-macOS Linux systems:*** You need to install GCC (or equivalent) to provide
@@ -59,10 +59,10 @@ necessary system include files and system libraries.
 
 ### macOS
 
- - [{{ download.macos-arm.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.macos-arm.shell }})
-   ({{ download.macos-arm.size }})
- - <a id="{{ download.release }} arm" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.macos-arm.binary }}">{{ download.macos-arm.binary }}</a>
-   ({{ download.macos-arm.size }})
+ - [{{ download.macos_arm.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.macos_arm.shell }})
+   ({{ download.macos_arm.size }})
+ - <a id="{{ download.release }} arm" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.macos_arm.binary }}">{{ download.macos_arm.binary }}</a>
+   ({{ download.macos_arm.size }})
 
 {% alert "info" %}
 ***Note for macOS users:*** Unless you are using the OpenCilk Docker image,
