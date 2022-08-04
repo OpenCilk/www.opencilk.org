@@ -5,9 +5,11 @@ tagline: OpenCilk 2.0 features a new syntax and implementation for reducer
   hyperobjects, an upgraded compiler, improved support for pedigrees, and more.
 author: Tao B. Schardl
 date: 2022-07-20T19:08:51.844Z
+image: /img/logo-circle-onblue-512.png
 tags:
   - news
   - release
+featured: true
 ---
 OpenCilk 2.0 is now available.  See the [Install](/doc/users-guide/install) page for instructions on how to download and install.
 
