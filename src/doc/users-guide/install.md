@@ -106,7 +106,7 @@ subdirectory within `/opt/opencilk/`.
 
 ```shell-session
 $ sh OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.sh --prefix=/opt/opencilk
-OpenCilk Installer Version: 14.0.6, Copyright (c) OpenCilk
+OpenCilk Installer Version: 2.0.0, Copyright (c) OpenCilk
 This is a self-extracting archive.
 The archive will be extracted to: /opt/opencilk
 
