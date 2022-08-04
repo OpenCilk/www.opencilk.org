@@ -166,7 +166,7 @@ will extract the OpenCilk installation into a subdirectory
 `OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/` within the current working directory.
 
 {% alert "info" %}
-Extracting the tarball as above is equivalent to running the corresponding
+***Note:*** Extracting the tarball as above is equivalent to running the corresponding
 shell script with options `--skip-license --include-subdir`.
 {% endalert %}
 
@@ -200,20 +200,3 @@ components:
 
 See [Getting started](/doc/users-guide/getting-started) for steps to verify
 that your installation is working and to start using OpenCilk.
-
-## Additional resources
-
-### External OpenCilk-powered libraries
-
-The following third-party libraries are known to work with OpenCilk out of the
-box for parallel execution.
-
-- [SG-t-SNE-Π](https://github.com/fcdimitr/sgtsnepi): Low-dimensional embedding
-  of sparse stochastic graphs.
-- [FGLT](https://github.com/ailiop/fglt): Fast graphlet transform.
-- [RecFMM](https://github.com/zhang416/recfmm): Adaptive fast multipole method.
-
-### Miscellaneous developer tools
-
-- [cilk-mode.el](https://github.com/ailiop/cilk-mode/): Emacs minor mode for
-  Cilk source code.
