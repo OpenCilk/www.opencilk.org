@@ -5,7 +5,6 @@ tagline: OpenCilk 1.1 features the new `cilk_scope` keyword, interactive
   improvements.
 author: Tao B. Schardl
 date: 2021-10-22
-featured: true
 image: /img/super-mario.png
 tags:
   - news
