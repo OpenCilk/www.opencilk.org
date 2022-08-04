@@ -11,7 +11,7 @@ eleventyNavigation:
 This page lists software contributed by the community that is related to OpenCilk, including OpenCilk-powered applications and libraries and
 miscellaneous tools to help developers write Cilk programs.
 
-### OpenCilk-powered libraries
+## OpenCilk-powered libraries
 
 The following third-party libraries are known to work with OpenCilk out of the
 box for parallel execution.
@@ -22,7 +22,7 @@ box for parallel execution.
 - [RecFMM](https://github.com/zhang416/recfmm): Adaptive fast multipole method.
 - [ParlayLib](https://github.com/cmuparlay/parlaylib): A toolkit for programming parallel algorithms on shared-memory multicore machines.
 
-### OpenCilk-powered applications
+## OpenCilk-powered applications
 
 The following third-party applications are known to work with OpenCilk.
 
@@ -30,7 +30,7 @@ The following third-party applications are known to work with OpenCilk.
 - [GBBS: Graph Based Benchmark Suite](https://github.com/ParAlg/gbbs): A collection of fast parallel graph algorithms.
 - [mold](https://github.com/wheatman/mold): A port of the mold linker to OpenCilk.
 
-### Miscellaneous developer tools
+## Miscellaneous developer tools
 
 - [cilk-mode.el](https://github.com/ailiop/cilk-mode/): Emacs minor mode for
   Cilk source code.
