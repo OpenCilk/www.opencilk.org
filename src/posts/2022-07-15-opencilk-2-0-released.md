@@ -9,7 +9,7 @@ tags:
   - news
   - release
 ---
-OpenCilk 2.0, which features several changes and enhancements over OpenCilk 1.1, is now available.  See the [Install](/doc/users-guide/install) page for instructions on how to download and install OpenCilk 2.0.
+OpenCilk 2.0 is now available.  See the [Install](/doc/users-guide/install) page for instructions on how to download and install.
 
 ## Major changes
 
