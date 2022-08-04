@@ -13,15 +13,17 @@ tags:
 ---
 ## Task-parallel programming with `cilk_spawn` and `cilk_scope`
 
-{% defn "parallel algorithms", "Parallel programming" %} involves writing instructions that can be executed on different processors simultaneously. Compared to serial programming, parallel programming offers opportunities to reduce the resources consumed (e.g., time, storage, energy, etc.), but taking advantage of these opportunities can be exceedingly complicated and error-prone &mdash; too much for developers to manage on their own. 
+{% defn "parallel algorithms", "Parallel programming" %} involves writing instructions that can be executed on different processors simultaneously.
+Compared to serial programming, where instructions (logically) execute one-at-a-time on a single processor, parallel programming can reduce the runtime of a computation; but taking advantage of this opportunity can be difficult and error-prone.
 
-OpenCilk is a {% defn "task-parallel-platforms-programming-and-algorithms", "task-parallel platform" %}: a layer of software that coordinates, schedules, and manages the multiple processors of a parallel program. OpenCilk automatically load-balances the tasks of the different processors and achieves performance that is provably close to optimal.
+OpenCilk is a {% defn "task-parallel-platforms-programming-and-algorithms", "task-parallel platform" %}: a layer of software that simplifies the development of correct and efficient parallel programs by coordinating, scheduling, and managing the multiple processors involved. OpenCilk automatically load-balances the tasks of the different processors and achieves performance that is provably close to optimal.
 
 Using the OpenCilk platform, a developer writes code in Cilk, which extends C and C++ with a just few keywords to support task-parallel programming. Cilk supports {% defn "fork-join parallelism" %}, an especially simple form of task-parallelism that uses spawning and parallel loops. We'll introduce spawning here
 and cover parallel loops in a later tutorial.
 
-{% defn "Spawning" %} allows a function to be “forked,” or executed like a function call. The `cilk_spawn` keyword modifies a function call statement to tell the OpenCilk runtime system that the function may (but is not required to) run in parallel with the caller.
-A spawned function is called a {% defn "child" %} of the function that spawned it. Conversely, the function that executes the `cilk_spawn` statement is known as the {% defn "parent" %} of the spawned function.
+{% defn "Spawning" %} a function means running it in parallel with the caller. 
+To indicate that a function may be spawned, put the `cilk_spawn` keyword before the call to the function.
+The `cilk_spawn` keyword tells the OpenCilk runtime system that the function may (but is not required to) run in parallel with the caller.
 For example, consider the fragment of C below. 
 Spawning occurs in line 7, where the keyword `cilk_spawn` precedes the call to function `p_fib`.
 
@@ -40,15 +42,15 @@ int p_fib(int n)
 }
 ```
 
+A spawned function is called a {% defn "child" %} of the function that spawned it. Conversely, the function that executes the `cilk_spawn` statement is known as the {% defn "parent" %} of the spawned function.
+
 A `cilk_spawn` statement has two forms, depending on whether it returns a value or not.
 ```c
 var = cilk_spawn func(args);	// func() returns a value 
 cilk_spawn func(args);			// func() returns void
 ```
 
-`var` is a variable with the type returned by `func`. It is known as the *receiver* because it receives the function call result. The receiver must be omitted for `void` functions.
-
-`args` are the arguments to the function being spawned. Be careful to ensure that pass-by-reference and pass-by-address arguments have life spans that extend at least until the next `cilk_sync` or else the spawned function may outlive the variable and attempt to use it after it has been destroyed. Note that this is an example of a data race which would be caught by cilksan.
+`var` is a variable with the type returned by `func`. It is known as the *receiver* because it receives the function call result. The receiver must be omitted for `void` functions. `args` are the arguments to the function being spawned. 
 
 {% alert %}
 **Note:** A function can be spawned using any expression that is a function. For instance you could use a function pointer or member function pointer, as in:
@@ -57,38 +59,6 @@ var = cilk_spawn (object.*pointer)(args);
 ```
 {% endalert %}
 
-If you spawn a function that returns a value, the value should be assigned to a previously declared receiver variable before spawning. Otherwise, there will be a compiler error or warning. Here are three examples.
-
-**Example 1:** Assign a function value to a variable constructed in the same statement.
-
-Wrong: `int x = cilk_spawn f();`
-
-The correct form is to declare the receiver variable in a separate statement.
-
-```c
-int x;
-x = cilk_spawn f();
-```
-
-**Example 2:** Spawn the function without a receiver variable.
-
-Wrong: `cilk_spawn f();`
-
-The correct form is to declare the receiver variable in a separate statement, as in Example 1.
-
-**Example 3:** Spawn a function used as an argument to another function.
-
-Wrong: `g(cilk_spawn f());`
-
-The correct syntax in this case is to declare the receiver variable in a separate statement, spawn, sync (see Part 2), and use the result as the argument to `g()`. However, there is no benefit to this as the parent strand must sync immediately and cannot run in parallel with `f()`.
-
-```c
-int x;
-x = cilk_spawn f(); 
-cilk_sync;
-g(x);
-```
-
 ## How OpenCilk runs your program
 
 With Cilk, there are no tasks that *must* run in parallel; instead,
@@ -96,12 +66,68 @@ the programmer uses `cilk_spawn` to specify those which *may* run in parallel.
 Every time a task-parallel program is executed, the OpenCilk runtime system uses this information to load-balance the tasks on the available processors.
 For example, the picture below depicts a basic multicore architecture where each processor is a yellow circle with a "P" inside.
 
-{% img "/img/fib-code-multicore.png" %}
+{% img "/img/fib-code-multicore-wide.png", "500" %}
 
 The keyword `cilk_scope` complements `cilk_spawn` by defining a boundary that limits the extent to which tasks may run in parallel.
 Whenever the program execution leaves a block of code delimited by `cilk_scope{...}` , it must wait as necessary for all spawned functions within the block to finish before proceeding.
 
-If you remove `cilk_spawn` and `cilk_scope` from this example program, the result is a traditional serial program, which we call \`fib\`.
+If you spawn a function that returns a value, be sure the spawned function returns before using the value of the receiver variable.
+
+{% alert "danger" %}
+**Incorrect:**
+```c
+cilk_scope {
+  x = cilk_spawn p_fib(n-1);  
+  y = p_fib(n-2);
+  return x + y;                     // Value of x is indeterminate
+}                             
+
+```
+{% endalert %}
+
+{% alert "success" %}
+**Correct:**
+```c
+cilk_scope {
+  x = cilk_spawn p_fib(n-1);  
+  y = p_fib(n-2);
+}
+return x + y;                       // Value of x is p_fib(n-1)             
+
+```
+{% endalert %}
+
+On a related note, if you spawn a function that returns a value, be sure to declare the receiver variable before the `cilk_scope` block that uses it. 
+Otherwise, the receiver variable won't be defined after the completion of the `cilk_scope` block (which is where its value is defined).
+
+{% alert "danger" %}
+**Incorrect:**
+```c
+cilk_scope {
+  int x = cilk_spawn p_fib(n-1);  
+  int y = p_fib(n-2);             
+}                             
+return x + y;                     // x and y are not defined
+```
+{% endalert %}
+
+{% alert "success" %}
+**Correct:**
+```c
+int x, y;
+cilk_scope {
+  x = cilk_spawn p_fib(n-1);  
+  y = p_fib(n-2);             
+}                             
+return x + y;                     // x and y are defined
+```
+{% endalert %}
+
+Be careful to ensure that pass-by-reference and pass-by-address arguments to a spawned function do not expire within the function's `cilk_scope` block, or else the function may outlive the arguments and attempt to use them after they have been destroyed. (Note that this is an example of a {% defn "data race" %} which would be caught by Cilksan.)
+
+## Serializing your parallel program
+
+If you remove `cilk_spawn` and `cilk_scope` from our example program, the result is a traditional serial program, which we call `fib`.
 
 ```c#
 int fib(int n)
@@ -120,5 +146,5 @@ Function `fib` is the {% defn "serial projection" %} of `p_fib`,
 which means it computes exactly the same result but without running any tasks simultaneously.
 So why bother with parallelism?
 Because of the differences in *how* `fib` and `p_fib` compute their (identical) results.
-For many computations, allowing tasks to run in parallel significantly reduces the resources required (e.g., time, storage, energy).
+For many computations, allowing tasks to run in parallel significantly reduces the runtime.
 We will see this in a subsequent tutorial, when we analyze the performance of `p_fib` compared to `fib`.
