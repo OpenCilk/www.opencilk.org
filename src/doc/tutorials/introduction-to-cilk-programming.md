@@ -81,7 +81,6 @@ cilk_scope {
   y = p_fib(n-2);
   return x + y;                     // Value of x is indeterminate
 }                             
-
 ```
 {% endalert %}
 
@@ -93,7 +92,6 @@ cilk_scope {
   y = p_fib(n-2);
 }
 return x + y;                       // Value of x is p_fib(n-1)             
-
 ```
 {% endalert %}
 
