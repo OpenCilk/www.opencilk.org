@@ -20,7 +20,7 @@ box for parallel execution.
   of sparse stochastic graphs.
 - [FGLT](https://github.com/ailiop/fglt): Fast graphlet transform.
 - [RecFMM](https://github.com/zhang416/recfmm): Adaptive fast multipole method.
-- [PArlayLib](https://github.com/cmuparlay/parlaylib): A toolkit for programming parallel algorithms on shared-memory multicore machines.
+- [ParlayLib](https://github.com/cmuparlay/parlaylib): A toolkit for programming parallel algorithms on shared-memory multicore machines.
 
 ### OpenCilk-powered applications
 
@@ -38,3 +38,5 @@ The following third-party applications are known to work with OpenCilk.
 ### Contribute
 
 Want your OpenCilk-powered software listed here?  Contact us at [contact@opencilk.org](mailto:contact@opencilk.org).
+
+You can find more information on contributing to OpenCilk [here](/contribute).
