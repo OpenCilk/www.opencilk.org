@@ -35,7 +35,7 @@ The following third-party applications are known to work with OpenCilk.
 - [cilk-mode.el](https://github.com/ailiop/cilk-mode/): Emacs minor mode for
   Cilk source code.
 
-### Contribute
+## Contribute
 
 Want your OpenCilk-powered software listed here?  Contact us at [contact@opencilk.org](mailto:contact@opencilk.org).
 
