@@ -14,8 +14,25 @@ OpenCilk 2.0 is now available.  See the [Install](/doc/users-guide/install) page
 ## Major changes
 
 OpenCilk 2.0 features the following major changes from OpenCilk 1.1:
-- **[Beta]** Cilk reducer hyperobjects (a.k.a., reducers) are now supported through a new language syntax and implementation.  A local or global variable in C or C++ can be made into a reducer by adding `cilk_reducer(I,R)` to its type, where `I` and `R` designate the identity and reduce functions for the reducer.  See the [Reducer documentation](/doc/reference/reducers) for details.
+- **[Beta]** Cilk reducer hyperobjects (a.k.a., reducers) are now supported through a new language syntax and implementation.  A local or global variable in C or C++ can be made into a reducer by adding `cilk_reducer(I,R)` to its type, where `I` and `R` designate the identity and reduce functions for the reducer.  Documentation on the new reducer syntax and implementation is forthcoming, but as a simple example, here is how a simple integer-summation reducer can be implemented using the new reducer syntax:
+```c
+#include <cilk/cilk.h>
 
+void zero(void *v) {
+  *(int *)v = 0;
+}
+
+void plus(void *l, void *r) {
+  *(int *)l += *(int *)r;
+}
+
+int foo(int *A, int n) {
+  int cilk_reducer(zero, plus) sum = 0;
+  cilk_for (int i = 0; i < n; ++i)
+    sum += A[i];
+  return sum;
+}
+```
 - The compiler has been upgraded to be based on LLVM 14.0.6.
 - Support has been improved and optimized for pedigrees and built-in deterministic parallel random-number generation. In particular, pedigrees are now correctly updated at both spawns and syncs.
 - Support for pedigrees has been streamlined.  To enable pedigree support, simply link the Cilk program with the pedigree library, `-lopencilk-pedigrees`.
