@@ -1,15 +1,17 @@
 ---
 title: What the $#@! is parallelism, anyhow?
-tagline: We take inspiration from Amdahl's Law to give a more "authoritative" introduction to the basic concepts of multithreaded execution — work, span, and parallelism.
-author: Charles Leiserson
+tagline: We take inspiration from Amdahl's Law to give a more "authoritative"
+  introduction to the basic concepts of multithreaded execution — work, span,
+  and parallelism.
+author: Charles E. Leiserson
 date: 2022-05-20
 image: /img/multithreaded-dag.png
 featured: true
 tags:
- - parallelism
- - work
- - span
- - multithreading
+  - parallelism
+  - work
+  - span
+  - multithreading
 ---
 
 I’m constantly amazed how many seemingly well-educated computer technologists
