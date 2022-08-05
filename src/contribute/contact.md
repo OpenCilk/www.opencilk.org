@@ -32,9 +32,11 @@ We would love to hear from you. (See also [Community](/community/) and [Contribu
                 <textarea name="message" class="form-control" id="message" rows="7"></textarea>
             </div>
         </div>
+        <!-- Comment out the recaptcha because it's onerous IMO
         <div class="field">
                 <div data-netlify-recaptcha="true"></div>
         </div>
+        -->  
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
