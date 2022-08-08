@@ -43,7 +43,7 @@ The OpenCilk compiler is based on a recent stable version of the LLVM `clang`
 compiler.  It supports all compiler flags and features that LLVM `clang`
 supports, including optimization-level flags, debug-information flags, and
 target-dependent compilation options. See the [Clang
-documentation](https://releases.llvm.org/12.0.0/tools/clang/docs/ClangCommandLineReference.html)
+documentation](https://releases.llvm.org/14.0.0/tools/clang/docs/ClangCommandLineReference.html)
 for more information on the command-line arguments.
 
 ### macOS
