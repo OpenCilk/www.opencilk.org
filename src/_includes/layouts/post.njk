@@ -5,16 +5,17 @@ templateClass: tmpl-post
 <h1>{{ title }}</h1>
 
 <div style="font-size: larger;">
+
+    <p class="my-0 py-0"><span>{{ page.date | readableDate }}</span> &mdash; <span class="me-4">By {{ author }}</span></p>
+
     {% if tagline %}
     <p>{{ tagline | markdownify | safe }}</p>
     {% endif %}
 
-    <p class="my-0 py-0"><span>{{ page.date | readableDate }}</span> &mdash; By {{ author }}
     {%- for tag in tags | filterTagList -%}
     {%- set tagUrl %}/tags/{{ tag | slug }}/{% endset -%}
     <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
     {%- endfor %}
-    </p>
 
     {% if attribution %}
       <small><div class="breadcrumb-item active">{{ metadata.attribution.cilkplus }}</div></small>
