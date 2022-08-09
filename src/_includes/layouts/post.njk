@@ -16,6 +16,10 @@ templateClass: tmpl-post
     {%- endfor %}
     </p>
 
+    {% if attribution %}
+      <small><div class="breadcrumb-item active">{{ metadata.attribution.cilkplus }}</div></small>
+    {% endif %}
+
     <div style="margin-top: 0.5em;">
         {{ content | safe }}
     </div>
