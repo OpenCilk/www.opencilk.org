@@ -73,6 +73,7 @@ collections:
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Featured Image", name: "image", widget: "file", required: false }
       - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Give attribution to Intel and Cilk Arts", name: "attribution", widget: boolean, default: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - label: "User's guide"
     name: "users-guide"
@@ -92,6 +93,7 @@ collections:
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Featured Image", name: "image", widget: "file", required: false }
       - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Give attribution to Intel and Cilk Arts", name: "attribution", widget: boolean, default: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - label: "Tutorials"
     name: "tutorials"
@@ -111,6 +113,7 @@ collections:
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Featured Image", name: "image", widget: "file", required: false }
       - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Give attribution to Intel and Cilk Arts", name: "attribution", widget: boolean, default: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - label: "Reference"
     name: "reference"
@@ -130,6 +133,7 @@ collections:
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Featured Image", name: "image", widget: "file", required: false }
       - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Give attribution to Intel and Cilk Arts", name: "attribution", widget: boolean, default: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - label: "Glossary"
     name: "glossary"
@@ -140,4 +144,5 @@ collections:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/page.njk" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Give attribution to Intel and Cilk Arts", name: "attribution", widget: boolean, default: false }
       - { label: "Definition", name: "body", widget: "markdown" }
