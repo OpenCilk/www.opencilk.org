@@ -10,6 +10,7 @@ image: /img/fib-code-multicore.png
 tags:
   - task-parallelism
   - spawn
+attribution: true
 ---
 ## Task-parallel programming with `cilk_spawn` and `cilk_scope`
 
