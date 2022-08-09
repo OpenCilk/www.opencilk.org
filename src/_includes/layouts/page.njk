@@ -6,11 +6,21 @@ templateClass: tmpl-page
   <h1>{{ title }}</h1>
 {% endif %}
 
-{%- for tag in tags | filterTagList -%}
-  {%- set tagUrl %}/tags/{{ tag | slug }}/{% endset -%}
-  <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
-{%- endfor %}
-
 <div style="font-size: larger;">
-{{ content | safe }}
+    {% if tagline %}
+    <p>{{ tagline | markdownify | safe }}</p>
+    {% endif %}
+
+    {%- for tag in tags | filterTagList -%}
+      {%- set tagUrl %}/tags/{{ tag | slug }}/{% endset -%}
+      <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
+    {%- endfor %}
+
+    {% if attribution %}
+      <small><div class="breadcrumb-item active">{{ metadata.attribution.cilkplus }}</div></small>
+    {% endif %}
+
+    <div style="margin-top: 0.5em;">
+        {{ content | safe }}
+    </div>
 </div>

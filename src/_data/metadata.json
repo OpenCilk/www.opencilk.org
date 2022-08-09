@@ -2,8 +2,8 @@
   "tagline": "The simple way to make software fast and composable",
   "author": "The OpenCilk Team",
   "email": "contact@opencilk.org",
-  "credit": {
-    "cilkplus": "This work is a derivative of Cilk Plus documentation, used with permission of Intel Corporation and Cilk Arts."
+  "attribution": {
+    "cilkplus": "This work is derived from Cilk Plus documentation with permission of Intel Corporation and Cilk Arts."
   },
   "blog": {
     "title": "Fast Code",
