@@ -10,6 +10,7 @@ tags:
   - Grammar
 eleventyNavigation:
   key: Language specification
+attribution: true
 ---
 <h1 class="title">OpenCilk Language Extension Specification<br />
     Version 1.0 (2021-02-01) </h1>
