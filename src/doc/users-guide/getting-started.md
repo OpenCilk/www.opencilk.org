@@ -16,9 +16,11 @@ Let us walk through the steps of building, running, and testing a program with
 OpenCilk.
 
 {% alert "info" %}
+
 ***Note:*** The rest of this guide assumes that OpenCilk is installed within
 `/opt/opencilk/` and that `clang` points to the OpenCilk C compiler at
 `/opt/opencilk/bin/clang`.
+
 {% endalert %}
 
 ## Using the compiler
@@ -31,12 +33,20 @@ $ clang -fopencilk -O3 fib.c -o fib
 ```
 
 {% alert "info" %}
-***Note:*** Pass the `-fopencilk` flag to the compiler both when compiling
-and linking the Cilk program.  During compilation, the flag ensures that the
-Cilk keywords are recognized and compiled.  During linking, the flag links
-ensures the program is properly linked with the OpenCilk runtime library.
-(*Former users of Intel Cilk Plus with GCC:* make sure you do *not* include
-the `-lcilkrts` flag when linking.)
+
+***Note:*** Pass the `-fopencilk` flag to the compiler both when compiling and
+linking the Cilk program.  During compilation, the flag ensures that the Cilk
+keywords are recognized and compiled.  During linking, it ensures the program
+is properly linked with the OpenCilk runtime library.
+
+<br/>
+{% alert "danger" %}
+
+Former users of Intel Cilk Plus with GCC: Do **not** include the
+`-lcilkrts` flag when linking.
+
+{% endalert %}
+
 {% endalert %}
 
 The OpenCilk compiler is based on a recent stable version of the LLVM `clang`
@@ -68,7 +78,8 @@ fib(35) = 9227465
 ```
 
 To explicitly set the number of parallel Cilk workers for a program execution,
-set the `CILK_NWORKERS` environment variable.  For example:
+set the `CILK_NWORKERS` environment variable.  For example, to execute `fib`
+using only 2 parallel cores:
 
 ```shell-session
 $ CILK_NWORKERS=2 ./fib 35
@@ -235,17 +246,11 @@ $ clang -fopencilk -fcilktool=cilkscale-benchmark -O3 qsort.c -o qsort-bench
 
 Then, run the program with the Cilkscale benchmarking and visualizer Python
 script, which is found at `share/Cilkscale_vis/cilkscale.py` within the
-OpenCilk installation directory: 
-
-```shell-session
-$ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py \
-    -c qsort -b qsort-bench --args 10000000
-```
-
-This will first measure work, span, and parallelism; run the program with $1$,
-$2$, ..., $P$ Cilk workers (where $P$ is the number of available physical
-cores) and time the execution; and output the results as a CSV table (`out.csv`) and as
-plots in a PDF document (`plot.pdf`):
+OpenCilk installation directory.  The following will first measure work, span,
+and parallelism; run the program with $1$, $2$, ..., $P$ Cilk workers (where
+$P$ is the number of available physical cores) and time the execution; and
+output the results as a CSV table (`out.csv`) and as plots in a PDF document
+(`plot.pdf`):
 
 ```shell-session
 $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py -c qsort -b qsort-bench --args 10000000
