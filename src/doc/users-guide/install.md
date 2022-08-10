@@ -92,7 +92,9 @@ append a version-specific subdirectory to the installation prefix (by default
 the current directory).
 
 Optionally, you can select a different installation directory by passing the
-option `--prefix=/path/to/install/dir` to the script.  To see all options, pass
+option `--prefix=/path/to/install/dir` to the script.  (You will need to make
+sure that installation directory exists before running the shell archive with
+`--prefix`.)  To see all options, pass
 the `--help` argument to the script.
 
 The OpenCilk C (or C++) compiler can be invoked via `bin/clang` (or
@@ -132,7 +134,7 @@ Unpacking finished successfully
 The OpenCilk C compiler can now be run as
 `/opt/opencilk/OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/bin/clang`.  Or you can add
 `/opt/opencilk/OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/bin` to your `PATH` environment variable
-and invoke the OpenCilk C/C++ compiler simply as `clang` or `clang++`.
+and then invoke the OpenCilk C/C++ compiler simply as `clang` or `clang++`.
 {% endalert %}
 
 ## Installing using a tarball
@@ -167,12 +169,14 @@ will extract the OpenCilk installation into a subdirectory
 
 {% alert "info" %}
 ***Note:*** Extracting the tarball as above is equivalent to running the corresponding
-shell script with options `--skip-license --include-subdir`.
+shell archive with options `--skip-license --include-subdir`.  Installing using this method,
+or by passing `--skip-license` to the shell archive, implies that you accept OpenCilk's
+software license.
 {% endalert %}
 
 ## Docker image
 
-OpenCilk 2.0 is also available as a docker image based on Ubuntu 20.04.
+OpenCilk 2.0 is also available as a [docker](https://www.docker.com/) image based on Ubuntu 20.04.
 You can download the docker image here:
 
 - <a id="{{ download.release }} docker" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.docker.binary }}">{{ download.docker.binary }}</a>
