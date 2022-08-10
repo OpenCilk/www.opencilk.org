@@ -253,7 +253,7 @@ output the results as a CSV table (`out.csv`) and as plots in a PDF document
 (`plot.pdf`):
 
 ```shell-session
-$ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py -c qsort -b qsort-bench --args 10000000
+$ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py -c ./qsort -b ./qsort-bench --args 10000000
 Namespace(args=['10000000'], cilkscale='./qsort', cilkscale_benchmark='./qsort_bench',
 cpu_counts=None, output_csv='out.csv', output_plot='plot.pdf', rows_to_plot='all')
 
