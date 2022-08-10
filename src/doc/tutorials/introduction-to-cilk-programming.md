@@ -122,21 +122,21 @@ cilk_spawn {
 
 ## How OpenCilk runs your program
 
-With Cilk, there are no tasks that *must* run in parallel; the `cilk_scope` and
-`cilk_spawn` keywords only specify which tasks *may* run in parallel.  That is,
-you are only responsible for expressing the {% defn "logical parallelism" %}
-that is available in a computation.  The actual execution on a shared-memory
-multicore or multiprocessor system, illustrated in the picture below, is up to
-the OpenCilk runtime system.
+With Cilk, you are only responsible for expressing the {% defn "logical
+parallelism" %} that is available in your computation.  That is, there are no
+tasks that *must* run in parallel: the `cilk_scope` and `cilk_spawn` keywords
+only specify which tasks *may* run in parallel.
 
-{% img "/img/fib-code-multicore-wide.png", "500" %}
-
-Whenever a task-parallel Cilk program is executed, the OpenCilk runtime system
-determines how spawned tasks are assigned to processors (depicted above as
+The actual execution on a shared-memory multicore or multiprocessor system,
+illustrated in the picture below, is managed by the OpenCilk runtime system.
+Whenever your task-parallel Cilk program is executed, the OpenCilk runtime
+system determines how spawned tasks are assigned to processors (depicted as
 yellow circles labeled "P") as the computation unfolds, dynamically
 load-balancing their execution.  The OpenCilk runtime is also responsible for
 ensuring that all spawned tasks have completed when exiting the scope of a
 parallel region, waiting for outstanding tasks as necessary.
+
+{% img "/img/fib-code-multicore-wide.png", "500" %}
 
 Details of the OpenCilk runtime system are beyond the scope of this
 introductory guide.  Very roughly, the OpenCilk runtime takes advantage of
