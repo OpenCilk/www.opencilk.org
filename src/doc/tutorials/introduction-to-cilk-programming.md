@@ -37,7 +37,7 @@ introduce spawning here and cover parallel loops in a later tutorial.
 
 ## Task-parallel programming with `cilk_scope` and `cilk_spawn`
 
-We may think of a task or computation as a piece of code which contains serial
+You may think of a task or computation as a piece of code which contains serial
 and parallel regions.  A serial region contains no parallelism and its tasks
 are executed as usual.  A parallel region has two distinguishing
 characteristics:
@@ -122,12 +122,12 @@ cilk_spawn {
 
 ## How OpenCilk runs your program
 
-With Cilk, there are no tasks that *must* run in parallel; instead, the
-programmer uses `cilk_scope` and `cilk_spawn` to specify which tasks *may* run
-in parallel.  That is, the programmer is responsible for expressing the {% defn
-"logical parallelism" %} that is available in a computation.  The actual
-execution on a shared-memory multicore or multiprocessor system, illustrated in
-the picture below, is up to the OpenCilk runtime system.
+With Cilk, there are no tasks that *must* run in parallel; the `cilk_scope` and
+`cilk_spawn` keywords only specify which tasks *may* run in parallel.  That is,
+you are only responsible for expressing the {% defn "logical parallelism" %}
+that is available in a computation.  The actual execution on a shared-memory
+multicore or multiprocessor system, illustrated in the picture below, is up to
+the OpenCilk runtime system.
 
 {% img "/img/fib-code-multicore-wide.png", "500" %}
 
