@@ -61,7 +61,7 @@ Instead, you should write conversationally and address the reader as "you" to ma
 Reference documents should be concise and correct.
 
 ### Fonts
-- The first time you use a formally defined term that is (or should be) in the glossary, use the shortcode `{% defn "term", "optional_display text" %}`, and the site generator will render it as a <strong><em><a href="#">bold italicized link</a></em></strong> (as documented more below).
+- The first time you use a formally defined term that is (or should be) in the glossary, use the shortcode `{% defn "term", "optional_display text" %}`, and the site generator will render it as a <strong><em><a href="#">bold italicized link</a></em></strong> (as documented near the bottom of this page).
 - The first time you use a formally defined term that does not belong in the glossary, then
   * make it an <em><a href="#">italicized link</a></em> if you are referencing an external webpage definition, or
   * make it <em>italicized</em> if you are not referencing an external webpage definition.
@@ -71,7 +71,7 @@ Reference documents should be concise and correct.
 Please use diagrams to help people follow your article. If you mention a person (perhaps as an important influence on your topic)
 then consider including a headshot, to make your article more "personable."
 
-If you put `code` into an image, please use Consolas font. 
+If you put code into an image, please use Consolas font. 
 
 To simplify using images, the site supports the shortcode `{% img "/img/filename.ext", "optional_size" %}`, which is documented below (along with variants `imgRight` and `imgLeft`).
 
