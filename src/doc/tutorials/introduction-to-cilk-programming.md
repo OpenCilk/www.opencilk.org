@@ -19,21 +19,34 @@ Compared to serial programs, whose instructions (logically) execute
 one-at-a-time on a single processor, parallel programs can utilize multiple
 processing units to reduce the runtime of a computation.  Historically,
 parallel programming has been considered substantially more difficult and
-error-prone than serial programming — OpenCilk aims to bridge this gap, making
-it easy to write parallel programs that are both correct and fast.
+error-prone than serial programming.  {% defn "OpenCilk" %} aims to bridge this
+gap.  OpenCilk supports the {% defn "Cilk" %} language extensions to C and C++,
+which make it easy to write parallel programs that are both correct and fast.
 
 OpenCilk is a {% defn "task-parallel-platforms-programming-and-algorithms",
-"task-parallel platform" %}: a layer of software that simplifies the
-development of parallel programs by coordinating, scheduling, and managing
-multiple processors.  To achieve good performance during execution, OpenCilk
-automatically load-balances the work among different processors by scheduling
-the parallel tasks in a way that is provably close to optimal.
+"task-parallel platform" %} that provides language abstractions for {% defn
+"shared-memory" %} parallel computations on {% defn "multicores", "multicore"
+%} systems.  As a Cilk programmer, you are only responsible for expressing the
+{% defn "logical parallelism" %} in your application, that is, which tasks
+*may* run in parallel.  The OpenCilk compiler then produces optimized parallel
+code, and the OpenCilk runtime system schedules and load-balances your
+computation onto the available processors in a way that is provably close to
+optimal.
 
-Using the OpenCilk platform, a developer writes code in the Cilk language,
-which extends C and C++ with a just few keywords to support task-parallel
-programming.  Cilk supports {% defn "fork-join parallelism" %}, an especially
-simple form of task-parallelism that uses spawning and parallel loops.  We'll
+When using the OpenCilk platform, you write code in the Cilk language, which
+extends C and C++ with a just few keywords to support task-parallel
+programming.  Specifically, Cilk supports {% defn "fork-join parallelism" %}, a
+simple and effective form of task parallelism.  Cilk provides linguistic
+mechanisms for {% defn "spawning" %} and {% defn "parallel loops" %}.  We'll
 introduce spawning here and cover parallel loops in a later tutorial.
+
+Upcoming tutorials will also cover the following:
+
+- How to ensure your program is free of {% defn "determinacy-race", "race bugs"
+  %} using the {% defn "Cilksan" %} tool.
+- How to determine the {% defn "scalability" %} of your program on multiple
+  processors using the {% defn "Cilkscale" %} tool.
+- How OpenCilk runs your program to achieve good performance.
 
 ## Task-parallel programming with `cilk_scope` and `cilk_spawn`
 
