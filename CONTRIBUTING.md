@@ -50,6 +50,49 @@ Your edit will create a PR. Once the PR is merged with `main`, you should see it
 
 For tracking bigger changes (or suggesting that others make changes to the website), please use GitHub Issues&mdash;by [searching the existing issues](https://github.com/OpenCilk/www.opencilk.org/issues), creating a new issue if needed, and adding comments to track progress.
 
+## Style guide
+
+### Prose
+
+I can't resist blogs written in first-person singular ("I"), where I can hear the voice of the author as I read,
+so please write blog posts that way.
+For the user's guide and tutorials, one should not write too formally.
+Instead, you should write conversationally and address the reader as "you" to make the topic more engaging.
+Reference documents should be concise and correct.
+
+### Fonts
+- The first time you use a formally defined term that is (or should be) in the glossary, use the shortcode `{% defn "term", "optional_display text" %}`, and the site generator will render it as a <strong><em><a href="#">bold italicized link</a></em></strong> (as documented more below).
+- The first time you use a formally defined term that does not belong in the glossary, then
+  * make it an <em><a href="#">italicized link</a></em> if you are referencing an external webpage definition, or
+  * make it <em>italicized</em> if you are not referencing an external webpage definition.
+
+### Images
+
+Please use diagrams to help people follow your article. If you mention a person (perhaps as an important influence on your topic)
+then consider including a headshot, to make your article more "personable."
+
+If you put `code` into an image, please use Consolas font. 
+
+To simplify using images, the site supports the shortcode `{% img "/img/filename.ext", "optional_size" %}`, which is documented below (along with variants `imgRight` and `imgLeft`).
+
+### Colors
+
+![colors](/src/img/color-family.png)
+
+```css
+/* Color definitions in CSS */
+:root {
+  --lime: #91b301;              /* RGB: 145,179,0 -- link hover, headers */
+  --tangelo: #f44500;           /* RGB: 244,69,0 */
+  --teal: #11a5a1;              /* RGB: 17,165,161 */
+  --sky: #0cb3e1;               /* RGB: 12,179,225 */
+  --americanyellow: #f4b200;    /* RGB: 244,178,0 */
+  --safetyyellow: #f4d400;      /* RGB: 244,212,0 */
+  --blue: #043065;              /* RGB: 4,48,101 -- links, headers */
+  --midnight: #001630;          /* RGB: 0,22,48 -- dark backgrounds */
+  
+}
+```
 ## Editing tips
 
 ### Distilling the goals of one page
