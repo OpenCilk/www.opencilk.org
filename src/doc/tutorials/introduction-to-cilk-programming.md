@@ -63,13 +63,17 @@ characteristics:
 Functions within either a serial or parallel region may themselves contain
 serial and parallel regions, allowing for {% defn "nested parallelism" %}.
 
-To indicate that a function may be spawned, put the `cilk_spawn` keyword before
-the function call.  The `cilk_spawn` keyword tells the OpenCilk runtime system
-that the function may (but is not required to) run in parallel with the caller.
-To delineate a parallel region, use the `cilk_scope` keyword before a [*block
-scope*](https://en.cppreference.com/w/c/language/scope).  Execution may continue
-past the `cilk_scope` only after all computations that were spawned within it
-have finished.
+You can add parallelism to your program with just two keywords:
+
+- To indicate that a function may be spawned, put the `cilk_spawn` keyword
+  before the function call.  The `cilk_spawn` keyword tells the OpenCilk
+  runtime system that the function may (but is not required to) run in parallel
+  with the caller.
+- To delineate a parallel region, use the `cilk_scope` keyword before a [*block
+  scope*](https://en.cppreference.com/w/c/language/scope).  The OpenCilk
+  runtime system will ensure that execution will continue past the `cilk_scope`
+  only after all functions that were spawned within it have returned, waiting
+  if necessary.
 
 For example, consider the C code below, which shows a parallel implementation
 for recursive computation of Fibonacci numbers.  The `cilk_scope` creates a
