@@ -153,7 +153,7 @@ load-balancing their execution.  The OpenCilk runtime is also responsible for
 ensuring that all spawned tasks have completed when exiting the scope of a
 parallel region, waiting for outstanding tasks as necessary.
 
-{% img "/img/fib-code-multicore-wide.png", "500" %}
+{% img "/img/fib-code-multicore-wide.png", "1200" %}
 
 Details of the OpenCilk runtime system are beyond the scope of this
 introductory guide.  Very roughly, the OpenCilk runtime takes advantage of
