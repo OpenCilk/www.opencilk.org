@@ -27,5 +27,5 @@ cilk_for (int x=0; x < 100000; ++x) { ... }
 ## Implementation of `cilk_for`
 
 OpenCilk uses divide and conquer.
-![implementation of cilk_for](/img/implementation-of-cilk_for.png)
+{% img "/img/implementation-of-cilk_for.png", "600" %}
 
