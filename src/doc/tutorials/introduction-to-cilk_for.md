@@ -24,4 +24,8 @@ cilk_for (int x=0; x < 100000; ++x) { ... }
   * Must be able to jump to the start of any iteration at random.
   * Iterations should be independent of one another.
 
+## Implementation of `cilk_for`
+
+OpenCilk uses divide and conquer.
+![implementation of cilk_for](/img/implementation-of-cilk_for.png)
 
