@@ -10,7 +10,11 @@ attribution: false
 
 Below is a rough collection of content about `cilk_for` taken from
 - https://www.intel.sg/content/dam/www/public/apac/xa/en/pdfs/ssg/Introduction_to_Intel_Cilk.pdf
-- 6.172
+- 6.172 Lecture 8 https://canvas.mit.edu/courses/11151/files/1723140?module_item_id=444341
+
+See also
+- https://www.smcm.iqfr.csic.es/docs/intel/compiler_c/main_cls/index.htm#cref_cls/common/cilk_for.htm 
+- https://cilk.mit.edu/programming/
 
 ## `cilk_for` loop
 - Looks like a normal `for` loop of C/C++
@@ -27,5 +31,8 @@ cilk_for (int x=0; x < 100000; ++x) { ... }
 ## Implementation of `cilk_for`
 
 OpenCilk uses divide and conquer.
-{% img "/img/implementation-of-cilk_for.png", "600" %}
+{% img "/img/divide-conquer-cilk_for.png", "600" %}
 
+## Loop parallelism and matrix transpose
+
+Use 6.172 Lecture 8 https://canvas.mit.edu/courses/11151/files/1723140?module_item_id=444341
