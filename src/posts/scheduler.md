@@ -1,3 +1,8 @@
+---
+title: What does spawning mean?
+author: John F. Carr
+---
+
 # What does spawning mean?
 
 I want to explain how the OpenCilk compiler implements spawn, but
