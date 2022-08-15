@@ -6,7 +6,9 @@
           <h4 class="display-8 fw-bold lh-1 mb-2">{{ post.data.title }}</h4>
         </a>
         <small><p class="fw-light my-0 py-0"><span>{{ post.data.date | readableDate }}</span> &mdash; By {{ post.data.author }}</p></small>
-        <p style="line-height: 1.3;">{{ post.data.tagline | markdownify | safe }}</p>
+        {% if post.data.tagline %}
+          <p style="line-height: 1.3;">{{ post.data.tagline | markdownify | safe }}</p>
+        {% endif %}
         <small>
           {% for tag in post.data.tags | filterTagList %}
           {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
