@@ -115,7 +115,7 @@ pre {
 code {
   font-size: 110%;
   color: var(--tangelo);
-  word-break: break-all;
+  word-break: normal;
 }
 
 .alert p {
