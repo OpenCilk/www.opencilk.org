@@ -117,16 +117,6 @@ member function pointer, as in:
 var = cilk_spawn (object.*pointer)(arg1, arg2);
 ```
 
-Similarly, you can spawn a block of instructions without explicitly wrapping it
-in a function, as in:
-
-```c
-cilk_spawn {
-  int x = f();
-  g(x);
-}
-```
-
 {% endalert %}
 
 ## Common pitfalls and how to avoid them
