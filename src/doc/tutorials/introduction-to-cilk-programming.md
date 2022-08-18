@@ -28,10 +28,10 @@ OpenCilk is a {% defn "task-parallel-platforms-programming-and-algorithms",
 "shared-memory" %} parallel computations on {% defn "multicores", "multicore"
 %} systems.  As a Cilk programmer, you are only responsible for expressing the
 {% defn "logical parallelism" %} in your application, that is, which tasks
-*may* run in parallel.  The OpenCilk compiler then produces optimized parallel
-code, and the OpenCilk runtime system schedules and load-balances your
-computation onto the available processors in a way that is provably close to
-optimal.
+*may* run in parallel.  (With Cilk, there are no tasks which *must* run in
+parallel.)  The OpenCilk compiler produces optimized parallel code, and the
+OpenCilk runtime system schedules and load-balances your computation onto the
+available processors in a way that is provably close to optimal.
 
 When using the OpenCilk platform, you write code in the Cilk language, which
 extends C and C++ with a just few keywords to support task-parallel
@@ -136,30 +136,6 @@ cilk_spawn {
 ```
 
 {% endalert %}
-
-## How OpenCilk runs your program
-
-With Cilk, you are only responsible for expressing the {% defn "logical
-parallelism" %} that is available in your computation.  That is, there are no
-tasks that *must* run in parallel: the `cilk_scope` and `cilk_spawn` keywords
-only specify which tasks *may* run in parallel.
-
-The actual execution on a shared-memory multicore or multiprocessor system,
-illustrated in the picture below, is managed by the OpenCilk runtime system.
-Whenever your task-parallel Cilk program is executed, the OpenCilk runtime
-system determines how spawned tasks are assigned to processors (depicted as
-yellow circles labeled "P") as the computation unfolds, dynamically
-load-balancing their execution.  The OpenCilk runtime is also responsible for
-ensuring that all spawned tasks have completed when exiting the scope of a
-parallel region, waiting for outstanding tasks as necessary.
-
-{% img "/img/fib-code-multicore-wide.png", "1200" %}
-
-Details of the OpenCilk runtime system are beyond the scope of this
-introductory guide.  Very roughly, the OpenCilk runtime takes advantage of
-available parallelism to ensure that the available processing cores are kept
-busy while also minimizing task migrations across cores, thus guaranteeing
-near-optimal parallel scheduling.
 
 ## Common pitfalls and how to avoid them
 
