@@ -102,18 +102,10 @@ as the {% defn "parent" %} of the spawned function.  The code in the parent
 function that follows a spawn statement in a parallel region is called the
 parent {% defn "continuation" %} of the spawn.
 
-A `cilk_spawn` statement has two forms, depending on whether it returns a value
-or not.
-
-```c
-var = cilk_spawn func(arg1, arg2);  // func() returns a value 
-cilk_spawn func(arg1, arg2);        // func() returns void
-```
-
-The output `var` is a variable with the type returned by `func`.  It is known
-as the *receiver* because it receives the function call result.  The receiver
-must be omitted for `void` functions.  Input arguments (`arg1, arg2, ...`) to
-the spawned function are passed as they normally would in serial code.
+Input arguments to a spawned function are passed as they normally would in
+serial code and are evaluated _before_ the function is spawned.  That is, the
+parent continuation may not start executing until the spawned child arguments
+have been evaluated.
 
 {% alert %}
 
@@ -140,7 +132,8 @@ cilk_spawn {
 ## Common pitfalls and how to avoid them
 
 If you spawn a function that returns a value, make sure the spawned function
-has returned before using the value of the receiver variable.
+has finished executing before using its returned value.  The same is true for
+any state that may change as a side-effect of a spawned function.
 
 {% alert "danger" %}
 
@@ -171,9 +164,9 @@ return x + y;                       // value of x is p_fib(n-1)
 {% endalert %}
 
 On a related note, if you spawn a function that returns a value, be sure to
-declare the receiver variable before the `cilk_scope` block that uses it.
-Otherwise, the receiver variable won't be defined outside the `cilk_scope`
-block (which is where it is assigned its value).
+declare the variable which will receive the returned value before the
+`cilk_scope` block that uses it.  Otherwise, that variable won't be defined
+outside the `cilk_scope` block (which is where its value is assigned).
 
 {% alert "danger" %}
 
