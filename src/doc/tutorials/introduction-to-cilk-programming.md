@@ -37,11 +37,12 @@ When using the OpenCilk platform, you write code in the Cilk language, which
 extends C and C++ with a just few keywords to support task-parallel
 programming.  Specifically, Cilk supports {% defn "fork-join parallelism" %}, a
 simple and effective form of task parallelism.  Cilk provides linguistic
-mechanisms for {% defn "spawning" %} and {% defn "parallel loops" %}.  We'll
-introduce spawning here and cover parallel loops in a later tutorial.
+mechanisms for {% defn "spawning" %} and {% defn "parallel loops" %}.
 
-Upcoming tutorials will also cover the following:
+In this tutorial, we'll introduce spawning parallel tasks.  Upcoming tutorials
+will also cover the following:
 
+- How to use parallel loops.
 - How to ensure your program is free of {% defn "determinacy-race", "race bugs"
   %} using the {% defn "Cilksan" %} tool.
 - How to determine the {% defn "scalability" %} of your program on multiple
@@ -52,7 +53,7 @@ Upcoming tutorials will also cover the following:
 
 You may think of a task or computation as a piece of code which contains serial
 and parallel regions.  A serial region contains no parallelism and its tasks
-are executed as usual.  A parallel region has two distinguishing
+are executed in sequence, as usual.  A parallel region has two distinguishing
 characteristics:
 
 1. Within the parallel region, functions may be {% defn "spawning", "spawned"
