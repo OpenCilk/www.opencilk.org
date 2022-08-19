@@ -69,8 +69,8 @@ $ cd tutorial
 
 ## Using the compiler
 
-To compile a Cilk program with OpenCilk, pass the `-fopencilk` flag to Clang
-(or Clang++).  For example:
+To compile a Cilk program with OpenCilk, pass the `-fopencilk` flag to the
+compiler.  For example:
 
 ```shell-session
 $ clang -fopencilk -O3 fib.c -o fib
@@ -93,24 +93,29 @@ Former users of Intel Cilk Plus with GCC: Do **not** include the
 
 {% endalert %}
 
-The OpenCilk compiler is based on a recent stable version of the LLVM `clang`
-compiler.  It supports all compiler flags and features that LLVM `clang`
-supports, including optimization-level flags, debug-information flags, and
-target-dependent compilation options. See the [Clang
-documentation](https://releases.llvm.org/14.0.0/tools/clang/docs/ClangCommandLineReference.html)
-for more information on the command-line arguments.
+{% alert "info" %}
 
-### macOS
-
-On macOS, `clang` needs standard system libraries and headers which are provided by
+***macOS users:*** On macOS, `clang` needs the standard system libraries and
+headers that are provided by
 [XCode](https://developer.apple.com/support/xcode/) or the [XCode Command Line
 Tools](https://mac.install.guide/commandlinetools/index.html).  To run the
-OpenCilk compiler with those libraries and headers, invoke the `clang` binary
-with `xcrun`.  For example:
+OpenCilk compiler with those libraries and headers, invoke `clang` with
+`xcrun`.  For example:
 
 ```shell-session
 $ xcrun clang -fopencilk -O3 fib.c -o fib
 ```
+
+{% endalert %}
+
+The OpenCilk compiler is based on a recent stable version of the LLVM `clang`
+compiler.  In addition to OpenCilk-specific options, the OpenCilk compiler
+supports all flags and features of LLVM `clang`, including optimization-level
+flags, debug-information flags, and target-dependent compilation options.  See
+the [LLVM Clang
+documentation](https://releases.llvm.org/12.0.0/tools/clang/docs/ClangCommandLineReference.html)
+for more information on the command-line arguments.
+
 
 ## Running the program on multiple cores
 
