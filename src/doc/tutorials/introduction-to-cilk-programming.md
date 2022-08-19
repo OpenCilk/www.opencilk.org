@@ -12,6 +12,8 @@ tags:
   - task-parallelism
   - spawn
 attribution: true
+eleventyNavigation:
+  order: -3
 ---
 
 ## Task-parallel programming
