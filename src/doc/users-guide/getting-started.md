@@ -195,7 +195,7 @@ Cilksan does not currently recognize.  To work around this behavior, add the
 flag `–D_FORTIFY_SOURCE=0` when compiling:
 
 ```shell-session
-$ clang -fopencilk -fsanitize=cilk -Og -g -D_FORTIFY_SOURCE=0 nqueens.c -o nqueens
+$ xcrun clang -fopencilk -fsanitize=cilk -Og -g -D_FORTIFY_SOURCE=0 nqueens.c -o nqueens
 ```
 {% endalert %}
 
