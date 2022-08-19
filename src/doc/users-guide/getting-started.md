@@ -114,11 +114,14 @@ $ xcrun clang -fopencilk -O3 fib.c -o fib
 
 ## Running the program on multiple cores
 
-The program will automatically execute in parallel, using all available cores.
+A Cilk program compiled with OpenCilk will automatically execute in parallel,
+using all available cores.  For example, on a laptop with an 8-core Intel Core
+i7-10875H CPU:
 
 ```shell-session
-$ ./fib 35
-fib(35) = 9227465
+$ ./fib 40 
+fib(40) = 102334155
+Time(fib) = 0.368499700 sec
 ```
 
 To explicitly set the number of parallel Cilk workers for a program execution,
@@ -126,8 +129,9 @@ set the `CILK_NWORKERS` environment variable.  For example, to execute `fib`
 using only 2 parallel cores:
 
 ```shell-session
-$ CILK_NWORKERS=2 ./fib 35
-fib(35) = 9227465
+$ CILK_NWORKERS=2 ./fib 40
+fib(40) = 102334155
+Time(fib) = 1.459649400 sec
 ```
 
 ## Using Cilksan
