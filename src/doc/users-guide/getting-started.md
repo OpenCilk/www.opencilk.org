@@ -134,13 +134,14 @@ fib(40) = 102334155
 Time(fib) = 1.459649400 sec
 ```
 
+
 ## Using Cilksan
 
-Use the OpenCilk Cilksan race detector to verify that your parallel Cilk
-program is deterministic.  Cilksan instruments a program to detect determinacy
-race bugs at runtime.  It is guaranteed to find any and all determinacy races
-that arise in a given program execution.  If there are no races, Cilksan will
-report that the execution was race-free.
+Use the OpenCilk [Cilksan race detector](dead-link) to verify that your
+parallel Cilk program is deterministic.  Cilksan instruments a program to
+detect [determinacy race bugs](dead-link) at runtime.  Cilksan is guaranteed to
+find any and all determinacy races that arise in a given program execution.  If
+there are no races, Cilksan will report that the execution was race-free.
 
 To check for determinacy races with Cilksan, add the `-fsanitize=cilk` flag
 during compilation and linking.  We also recommend the `-Og -g` flags for
@@ -190,7 +191,7 @@ is expected to run up to several times slower than its non-instrumented serial
 counterpart.
 
 {% alert "info" %}
-***Note:*** On macOS, the compiled `nqueens.c` binary uses builtins that
+***macOS users:*** On macOS, the compiled `nqueens.c` binary uses builtins that
 Cilksan does not currently recognize.  To work around this behavior, add the
 flag `–D_FORTIFY_SOURCE=0` when compiling:
 
