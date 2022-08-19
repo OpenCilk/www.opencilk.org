@@ -237,55 +237,32 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 ,13.9352,0.177858,78.35,0.178218,78.1917
 ```
 
-### Analyzing a region
+{% alert "info" %}
 
-By default, Cilkscale will only analyze whole-program execution.  To analyze
-specific regions of a program, annotate the code accordingly using the
-Cilkscale API. 
+***Work-span analysis of specific program regions:*** By default, Cilkscale
+will only analyze whole-program execution.  To analyze specific regions of your
+Cilk program, use the [Cilkscale work-span API](dead-link).
 
-For example, to measure the work and span of the core function `sample_qsort`
-in the tutorial `qsort.c` code:
+<br/>
+{% alert "primary" %}
 
-```c
-…
-#include <cilk/cilkscale.h>
-…
-int main(int argc, char **argv) {
-  // …
-  wsp_t start, end;
-  start = wsp_getworkspan();
-  sample_qsort(a, a + n); /* <-- analyze this */
-  end = wsp_getworkspan(); 
-  // …
-  wsp_dump(wsp_sub(end, start), "sample_qsort");
-  // …
-}
-```
+***Example:*** The tutorial program `qsort_wsp.c` shows how to modify the code
+of `qsort.c` to measure the work and span of the core function
+`sample_qsort()`.  Compiling `qsort_wsp.c` with Cilkscale and running the
+instrumented binary will output an additional row in Cilkscale's CSV table with
+the analysis results for `sample_qsort()`.
 
-Then, recompile with Cilkscale and rerun:
+{% endalert %}
 
-```shell-session
-$ clang -fopencilk -fcilktool=cilkscale -O3 qsort.c -o qsort
-$ ./qsort 10000000
-Sorting 10000000 integers
-All sorts succeeded
-tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-sample_qsort,14.3595,0.13184,108.916,0.132084,108.715
-,14.412,0.184341,78.181,0.184585,78.0777
-```
-
-Every analyzed region appears as a separate row in the Cilkscale CSV output,
-tagged with the string that was passed in the corresponding call to `wsp_dump()`.
+{% endalert %}
 
 ### Scalability benchmarking and visualization
 
-Cilkscale can also be used to benchmark and plot the execution time of your
-program (and each analyzed region) on different numbers of processors.
+Cilkscale also provides facilities to benchmark and plot the execution time of
+your program (and each analyzed region) on different numbers of processors.
 
-First, build your program twice,
-
-* once with `-fcilktool=cilkscale`, and
-* once with `-fcilktool=cilkscale-benchmark`:
+First, build your program twice, once with `-fcilktool=cilkscale` and once with
+`-fcilktool=cilkscale-benchmark`:
 
 ```shell-session
 $ clang -fopencilk -fcilktool=cilkscale -O3 qsort.c -o qsort
