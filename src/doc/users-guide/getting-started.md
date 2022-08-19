@@ -199,12 +199,14 @@ $ xcrun clang -fopencilk -fsanitize=cilk -Og -g -D_FORTIFY_SOURCE=0 nqueens.c -o
 ```
 {% endalert %}
 
+
 ## Using Cilkscale
 
-Use the OpenCilk Cilkscale scalability analyzer and benchmarking script to
-measure the [work,
-span, and parallelism](../../../posts/2022-05-20-what-the-is-parallelism-anyhow/ "What the $#@! is parallelism, anyhow?") of your Cilk program, and to
-benchmark parallel speedup on different numbers of cores.
+Use the OpenCilk [Cilkscale scalability analyzer](dead-link) script to measure
+the [work, span, and
+parallelism](../../../posts/2022-05-20-what-the-is-parallelism-anyhow/ "What
+the \$#@! is parallelism, anyhow?") of your Cilk program, and to benchmark
+parallel its speedup on different numbers of cores.
 
 To measure work and span with Cilkscale, add the `-fcilktool=cilkscale`
 flag during compilation and linking:
@@ -222,7 +224,7 @@ $ ./qsort 10000000
 Sorting 10000000 integers
 All sorts succeeded
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-,14.511,0.191245,75.8764,0.191514,75.7699
+,11.9831,0.167725,71.4447,0.168013,71.3225
 ```
 
 To output the Cilkscale measurements to a file, set the `CILKSCALE_OUT`
@@ -234,7 +236,7 @@ Sorting 10000000 integers
 All sorts succeeded
 $ cat qsort_workspan.csv
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-,13.9352,0.177858,78.35,0.178218,78.1917
+,12.3098,0.166994,73.7141,0.167288,73.5847
 ```
 
 {% alert "info" %}
@@ -265,46 +267,47 @@ First, build your program twice, once with `-fcilktool=cilkscale` and once with
 `-fcilktool=cilkscale-benchmark`:
 
 ```shell-session
-$ clang -fopencilk -fcilktool=cilkscale -O3 qsort.c -o qsort
-$ clang -fopencilk -fcilktool=cilkscale-benchmark -O3 qsort.c -o qsort-bench
+$ clang -fopencilk -fcilktool=cilkscale -O3 qsort_wsp.c -o qsort_wsp
+$ clang -fopencilk -fcilktool=cilkscale-benchmark -O3 qsort_wsp.c -o qsort_wsp_bench
 ```
 
 Then, run the program with the Cilkscale benchmarking and visualizer Python
 script, which is found at `share/Cilkscale_vis/cilkscale.py` within the
-OpenCilk installation directory.  The following will first measure work, span,
-and parallelism; run the program with $1$, $2$, ..., $P$ Cilk workers (where
-$P$ is the number of available physical cores) and time the execution; and
-output the results as a CSV table (`out.csv`) and as plots in a PDF document
-(`plot.pdf`):
+OpenCilk installation directory.  For example:
 
 ```shell-session
-$ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py -c ./qsort -b ./qsort-bench --args 10000000
-Namespace(args=['10000000'], cilkscale='./qsort', cilkscale_benchmark='./qsort_bench',
+$ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py -c ./qsort_wsp -b ./qsort_wsp_bench --args 10000000
+Namespace(args=['10000000'], cilkscale='./qsort_wsp', cilkscale_benchmark='./qsort_wsp_bench',
 cpu_counts=None, output_csv='out.csv', output_plot='plot.pdf', rows_to_plot='all')
 
->> STDOUT (./qsort 10000000)
+>> STDOUT (./qsort_wsp 10000000)
 Sorting 10000000 integers
 All sorts succeeded
 << END STDOUT
 
->> STDERR (./qsort 10000000)
+>> STDERR (./qsort_wsp 10000000)
 << END STDERR
 
 INFO:runner:Generating scalability data for 8 cpus.
-INFO:runner:CILK_NWORKERS=1 taskset -c 0 ./qsort_bench 10000000
-INFO:runner:CILK_NWORKERS=2 taskset -c 0,2 ./qsort_bench 10000000
-INFO:runner:CILK_NWORKERS=3 taskset -c 0,2,4 ./qsort_bench 10000000
-INFO:runner:CILK_NWORKERS=4 taskset -c 0,2,4,6 ./qsort_bench 10000000
-INFO:runner:CILK_NWORKERS=5 taskset -c 0,2,4,6,8 ./qsort_bench 10000000
-INFO:runner:CILK_NWORKERS=6 taskset -c 0,2,4,6,8,10 ./qsort_bench 10000000
-INFO:runner:CILK_NWORKERS=7 taskset -c 0,2,4,6,8,10,12 ./qsort_bench 10000000
-INFO:runner:CILK_NWORKERS=8 taskset -c 0,2,4,6,8,10,12,14 ./qsort_bench 10000000
+INFO:runner:CILK_NWORKERS=1 taskset -c 0 ./qsort_wsp_bench 10000000
+INFO:runner:CILK_NWORKERS=2 taskset -c 0,2 ./qsort_wsp_bench 10000000
+INFO:runner:CILK_NWORKERS=3 taskset -c 0,2,4 ./qsort_wsp_bench 10000000
+INFO:runner:CILK_NWORKERS=4 taskset -c 0,2,4,6 ./qsort_wsp_bench 10000000
+INFO:runner:CILK_NWORKERS=5 taskset -c 0,2,4,6,8 ./qsort_wsp_bench 10000000
+INFO:runner:CILK_NWORKERS=6 taskset -c 0,2,4,6,8,10 ./qsort_wsp_bench 10000000
+INFO:runner:CILK_NWORKERS=7 taskset -c 0,2,4,6,8,10,12 ./qsort_wsp_bench 10000000
+INFO:runner:CILK_NWORKERS=8 taskset -c 0,2,4,6,8,10,12,14 ./qsort_wsp_bench 10000000
 INFO:plotter:Generating plot
 ```
 
-To see all options of the Cilkscale `cilkscale.py` script, pass it the `--help`
-argument:
+Running the `cilkscale.py` script as above does the following:
 
-```shell-session
-$ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py --help
-```
+1. Measures the work, span, and parallelism of `qsort_wsp` with argument
+   `10000000`.
+2. Runs and times the program with $1$, $2$, ..., $P$ parallel Cilk workers,
+   where $P$ is the number of available physical cores (in this case, $P = 8$)
+3. Outputs the analysis and benchmarking results as a CSV table (`out.csv`) and
+   as plots in a PDF document (`plot.pdf`).
+
+For more information on the Cilkscale scalability analysis and visualization
+script, see the [Cilkscale documentation page](dead-link).
