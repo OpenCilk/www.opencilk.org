@@ -136,8 +136,7 @@ $ sudo ln -s /opt/opencilk/bin/clang /usr/local/bin/clang
 $ sudo ln -s /opt/opencilk/bin/clang++ /usr/local/bin/clang++
 ```
 
-- Verify that `clang` (similarly for `clang++`) points to the OpenCilk
-compiler with the following command:
+- If you set your `PATH` or install symbolic links, you may need to open a new terminal session for those changes to take effect. Then you can verify that `clang` (similarly for `clang++`) points to the OpenCilk compiler with the following command:
 
 ```shell-session
 $ clang --version
