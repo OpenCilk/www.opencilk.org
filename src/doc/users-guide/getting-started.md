@@ -1,11 +1,9 @@
 ---
 title: Getting started
+tagline: This guide overviews the components of OpenCilk and walks through the basic steps of building, running, and testing a Cilk program with OpenCilk.
 eleventyNavigation:
   order: -2
 ---
-This guide will overview the components of OpenCilk and walk you through the
-basic steps of building, running, and testing a Cilk program with OpenCilk.
-
 
 ## Prerequisites
 
@@ -13,47 +11,9 @@ basic steps of building, running, and testing a Cilk program with OpenCilk.
 
 See the [install page](/doc/users-guide/install) for detailed instructions on
 installing the latest version of OpenCilk.
-
-This guide assumes that OpenCilk is installed within `/opt/opencilk/` and that
-the OpenCilk C compiler can be invoked from the terminal as `clang`.
-
-{% alert "primary" %}
-
-***Example:*** First, download the precompiled [OpenCilk shell
-archive](/doc/users-guide/install/#installing-using-a-shell-archive) for your
-system.  Then, assuming you are on Ubuntu 20.04, install OpenCilk with the
-following command:
-
-```shell-session
-$ mkdir -p /opt/opencilk
-$ sh OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.sh --prefix=/opt/opencilk --exclude-subdir
-```
-
-Finally, set `clang` and `clang++` to point to the OpenCilk C and C++
-compilers.  This can be achieved in numerous ways, such as by setting your
-`PATH` environment variable to look in `/opt/opencilk/bin/`, or by installing
-system-wide symbolic links as:
-
-```shell-session
-$ sudo ln -s /opt/opencilk/bin/clang /usr/local/bin/clang
-$ sudo ln -s /opt/opencilk/bin/clang++ /usr/local/bin/clang++
-```
-
-You can verify that `clang` (similarly for `clang++`) points to the OpenCilk
-compiler with the following command:
-
-```shell-session
-$ clang --version
-clang version 14.0.6 (https://github.com/OpenCilk/opencilk-project fc90ded2b090672f84c58d12d8d85cd999eb6c1a)
-Target: x86_64-unknown-linux-gnu
-Thread model: posix
-InstalledDir: /usr/local/bin
-```
-
-The installation and setup process is analogous for macOS and other Linux
-systems.
-
-{% endalert %}
+We assume you have installed OpenCilk as shown in [this example](/doc/users-guide/install/#example),
+so that the OpenCilk files are in `/opt/opencilk/`,
+and the OpenCilk C/C++ compiler can be invoked from the terminal as `clang` or `clang++`.
 
 ### Example Cilk programs
 
