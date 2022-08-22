@@ -38,7 +38,7 @@ ARM processors.  It has been tested on the following operating systems:
  - Fedora (34, 36)
  - macOS (10.15, 11.6, 12.4)
 
-{% alert "info" %}
+{% alert "primary" %}
 ***Prerequisites:*** The OpenCilk binaries assume that system header files and system libraries
 are already installed on the system.
 - On Linux, we recommend installing GCC (or equivalent) to provide these necessary system files.
@@ -99,42 +99,55 @@ the `--help` argument to the script.
 
 The OpenCilk C (or C++) compiler can be invoked via `bin/clang` (or
 `bin/clang++`) from within the installation directory.
+Alternatively, you can configure your system so that `clang` and `clang++` point to the OpenCilk C and C++ compilers, 
+as shown in the example below.
 
-{% alert "info" %}
-***Example:***
+### Example
 
-The following shows the process of installing OpenCilk into a version-specific
-subdirectory within `/opt/opencilk/`.
+{% alert "primary" %}
+
+The following example shows the process on Ubuntu 20.04 to install OpenCilk into `/opt/opencilk/`
+without adding a version-specific subdirectory.
+The installation and setup process is analogous for macOS and other Linux systems.
+
+- Download the precompiled [OpenCilk shell
+archive](/doc/users-guide/install/#installing-using-a-shell-archive) for your
+system.  
+- Make directory `/opt/opencilk` if it does not already exist, and execute the shell script to install OpenCilk into the directory.
 
 ```shell-session
-$ sh OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.sh --prefix=/opt/opencilk
+$ mkdir -p /opt/opencilk
+$ sh OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.sh --prefix=/opt/opencilk --exclude-subdir
 OpenCilk Installer Version: 2.0.0, Copyright (c) OpenCilk
 This is a self-extracting archive.
-The archive will be extracted to: /opt/opencilk
-
-If you want to stop extracting, please press <ctrl-C>.
-
-[...license text omitted...]
-
-Do you accept the license? [yn]:
-y
-
-By default the OpenCilk will be installed in:
-  "/opt/opencilk/OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04"
-Do you want to include the subdirectory OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04?
-Saying no will install in: "/opt/opencilk" [Yn]:
-y
-
-Using target directory: /opt/opencilk/OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04
-Extracting, please wait...
-
+The archive will be extracted to: /opt/opencilk 
+Using target directory: /opt/opencilk/
+Extracting, please wait... 
 Unpacking finished successfully
 ```
 
-The OpenCilk C compiler can now be run as
-`/opt/opencilk/OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/bin/clang`.  Or you can add
-`/opt/opencilk/OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/bin` to your `PATH` environment variable
-and then invoke the OpenCilk C/C++ compiler simply as `clang` or `clang++`.
+- Set `clang` and `clang++` to point to the OpenCilk C and C++
+compilers.  This can be achieved in numerous ways, such as by setting your
+`PATH` environment variable to look in `/opt/opencilk/bin/`, or by installing
+system-wide symbolic links as:
+
+```shell-session
+$ sudo ln -s /opt/opencilk/bin/clang /usr/local/bin/clang
+$ sudo ln -s /opt/opencilk/bin/clang++ /usr/local/bin/clang++
+```
+
+- Verify that `clang` (similarly for `clang++`) points to the OpenCilk
+compiler with the following command:
+
+```shell-session
+$ clang --version
+clang version 14.0.6 (https://github.com/OpenCilk/opencilk-project fc90ded2b090672f84c58d12d8d85cd999eb6c1a)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /usr/local/bin
+```
+
+The OpenCilk C/C++ compiler can now be run as `clang` or `clang++`.
 {% endalert %}
 
 ## Installing using a tarball
