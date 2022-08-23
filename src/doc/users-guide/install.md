@@ -99,14 +99,13 @@ the `--help` argument to the script.
 
 The OpenCilk C (or C++) compiler can be invoked via `bin/clang` (or
 `bin/clang++`) from within the installation directory.
-Alternatively, you can configure your system so that `clang` and `clang++` point to the OpenCilk C and C++ compilers, 
-as shown in the example below.
-
-### Example
+Optionally, you can configure your system so that `clang` and `clang++` point to the OpenCilk C and C++
+compilers (e.g., by setting your `PATH` environment variable or installing system-wide symbolic links).
 
 {% alert "primary" %}
+### Example
 
-The following example shows the process on Ubuntu 20.04 to install OpenCilk into `/opt/opencilk/`
+The following example shows the process on Ubuntu 20.04 to install OpenCilk into `/opt/opencilk`
 without adding a version-specific subdirectory.
 The installation and setup process is analogous for macOS and other Linux systems.
 
@@ -121,32 +120,16 @@ $ sh OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.sh --prefix=/opt/opencilk --exclud
 OpenCilk Installer Version: 2.0.0, Copyright (c) OpenCilk
 This is a self-extracting archive.
 The archive will be extracted to: /opt/opencilk 
-Using target directory: /opt/opencilk/
+Using target directory: /opt/opencilk
 Extracting, please wait... 
 Unpacking finished successfully
 ```
 
-- Set `clang` and `clang++` to point to the OpenCilk C and C++
+- The OpenCilk C/C++ compiler can now be run as `/opt/opencilk/bin/clang` or `/opt/opencilk/bin/clang++`.
+- Optionally, set `clang` and `clang++` to point to the OpenCilk C and C++
 compilers.  This can be achieved in numerous ways, such as by setting your
-`PATH` environment variable to look in `/opt/opencilk/bin/`, or by installing
-system-wide symbolic links as:
-
-```shell-session
-$ sudo ln -s /opt/opencilk/bin/clang /usr/local/bin/clang
-$ sudo ln -s /opt/opencilk/bin/clang++ /usr/local/bin/clang++
-```
-
-- If you set your `PATH` or install symbolic links, you may need to open a new terminal session for those changes to take effect. Then you can verify that `clang` (similarly for `clang++`) points to the OpenCilk compiler with the following command:
-
-```shell-session
-$ clang --version
-clang version 14.0.6 (https://github.com/OpenCilk/opencilk-project fc90ded2b090672f84c58d12d8d85cd999eb6c1a)
-Target: x86_64-unknown-linux-gnu
-Thread model: posix
-InstalledDir: /usr/local/bin
-```
-
-The OpenCilk C/C++ compiler can now be run as `clang` or `clang++`.
+`PATH` environment variable to look in `/opt/opencilk/bin/` or by installing
+system-wide symbolic links.
 {% endalert %}
 
 ## Installing using a tarball
@@ -179,7 +162,7 @@ $ tar xvzf OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.tar.gz
 will extract the OpenCilk installation into a subdirectory
 `OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/` within the current working directory.
 
-{% alert "info" %}
+{% alert "primary" %}
 ***Note:*** Extracting the tarball as above is equivalent to running the corresponding
 shell archive with options `--skip-license --include-subdir`.  Installing using this method,
 or by passing `--skip-license` to the shell archive, implies that you accept OpenCilk's
