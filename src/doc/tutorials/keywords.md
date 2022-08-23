@@ -1,8 +1,11 @@
 ---
+permalink: false
+eleventyExcludeFromCollections: true
+---
+
 title: OpenCilk keywords
 eleventyNavigation:
   order: -2
----
 
 The Cilk programming language provides a simple extension to the C and
 C++ languages that allow programmers to expose logically parallel
