@@ -12,8 +12,8 @@ eleventyNavigation:
 See the [install page](/doc/users-guide/install) for detailed instructions on
 installing the latest version of OpenCilk.
 We assume you have installed OpenCilk as shown in [this example](/doc/users-guide/install/#example),
-so that the OpenCilk files are in `/opt/opencilk/`,
-and the OpenCilk C/C++ compiler can be invoked from the terminal as `clang` or `clang++`.
+so that the OpenCilk files are in `/opt/opencilk`,
+and the OpenCilk C/C++ compiler can be invoked from the terminal as `/opt/opencilk/bin/clang` or `/opt/opencilk/bin/clang++`.
 
 ### Example Cilk programs
 
@@ -33,7 +33,7 @@ To compile a Cilk program with OpenCilk, pass the `-fopencilk` flag to the
 compiler.  For example:
 
 ```shell-session
-$ clang -fopencilk -O3 fib.c -o fib
+$ /opt/opencilk/bin/clang -fopencilk -O3 fib.c -o fib
 ```
 
 {% alert "info" %}
@@ -63,7 +63,7 @@ OpenCilk compiler with those libraries and headers, invoke `clang` with
 `xcrun`.  For example:
 
 ```shell-session
-$ xcrun clang -fopencilk -O3 fib.c -o fib
+$ xcrun /opt/opencilk/bin/clang -fopencilk -O3 fib.c -o fib
 ```
 
 {% endalert %}
@@ -102,9 +102,9 @@ Time(fib) = 1.459649400 sec
 
 ## Using Cilksan
 
-Use the OpenCilk [Cilksan race detector](dead-link) to verify that your
+Use the OpenCilk [Cilksan race detector](#) to verify that your
 parallel Cilk program is deterministic.  Cilksan instruments a program to
-detect [determinacy race bugs](dead-link) at runtime.  Cilksan is guaranteed to
+detect [determinacy race bugs](#) at runtime.  Cilksan is guaranteed to
 find any and all determinacy races that arise in a given program execution.  If
 there are no races, Cilksan will report that the execution was race-free.
 
@@ -113,7 +113,7 @@ during compilation and linking.  We also recommend the `-Og -g` flags for
 debugging:
 
 ```shell-session
-$ clang -fopencilk -fsanitize=cilk -Og -g nqueens.c -o nqueens
+$ /opt/opencilk/bin/clang -fopencilk -fsanitize=cilk -Og -g nqueens.c -o nqueens
 ```
 
 The `nqueens.c` code in this example contains a subtle determinacy race bug.
@@ -161,14 +161,14 @@ Cilksan does not currently recognize.  To work around this behavior, add the
 flag `–D_FORTIFY_SOURCE=0` when compiling:
 
 ```shell-session
-$ xcrun clang -fopencilk -fsanitize=cilk -Og -g -D_FORTIFY_SOURCE=0 nqueens.c -o nqueens
+$ xcrun /opt/opencilk/bin/clang -fopencilk -fsanitize=cilk -Og -g -D_FORTIFY_SOURCE=0 nqueens.c -o nqueens
 ```
 {% endalert %}
 
 
 ## Using Cilkscale
 
-Use the OpenCilk [Cilkscale scalability analyzer](dead-link) script to measure
+Use the OpenCilk [Cilkscale scalability analyzer](#) script to measure
 the [work, span, and
 parallelism](../../../posts/2022-05-20-what-the-is-parallelism-anyhow/ "What
 the \$#@! is parallelism, anyhow?") of your Cilk program, and to benchmark
@@ -178,7 +178,7 @@ To measure work and span with Cilkscale, add the `-fcilktool=cilkscale`
 flag during compilation and linking:
 
 ```shell-session
-$ clang -fopencilk -fcilktool=cilkscale -O3 qsort.c -o qsort
+$ /opt/opencilk/bin/clang -fopencilk -fcilktool=cilkscale -O3 qsort.c -o qsort
 ```
 
 Running the Cilkscale-instrumented program will output work, span, and
@@ -209,7 +209,7 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 
 ***Work-span analysis of specific program regions:*** By default, Cilkscale
 will only analyze whole-program execution.  To analyze specific regions of your
-Cilk program, use the [Cilkscale work-span API](dead-link).
+Cilk program, use the [Cilkscale work-span API](#).
 
 <br/>
 {% alert "primary" %}
@@ -233,8 +233,8 @@ First, build your program twice, once with `-fcilktool=cilkscale` and once with
 `-fcilktool=cilkscale-benchmark`:
 
 ```shell-session
-$ clang -fopencilk -fcilktool=cilkscale -O3 qsort_wsp.c -o qsort_wsp
-$ clang -fopencilk -fcilktool=cilkscale-benchmark -O3 qsort_wsp.c -o qsort_wsp_bench
+$ /opt/opencilk/bin/clang -fopencilk -fcilktool=cilkscale -O3 qsort_wsp.c -o qsort_wsp
+$ /opt/opencilk/bin/clang -fopencilk -fcilktool=cilkscale-benchmark -O3 qsort_wsp.c -o qsort_wsp_bench
 ```
 
 Then, run the program with the Cilkscale benchmarking and visualizer Python
@@ -276,4 +276,4 @@ Running the `cilkscale.py` script as above does the following:
    as plots in a PDF document (`plot.pdf`).
 
 For more information on the Cilkscale scalability analysis and visualization
-script, see the [Cilkscale documentation page](dead-link).
+script, see the [Cilkscale documentation page](#).
