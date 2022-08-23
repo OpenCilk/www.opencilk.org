@@ -1,6 +1,11 @@
 ---
 title: Convert a C++ program
 ---
+
+{% alert "primary" %}
+***Note:*** This page will be updated soon to include `cilk_scope`, introduced with OpenCilk 2.0.
+{% endalert %}
+
 ## Overview
 
 Here is the sequence of steps to create a parallel program using OpenCilk.
