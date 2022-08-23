@@ -73,7 +73,7 @@ compiler.  In addition to OpenCilk-specific options, the OpenCilk compiler
 supports all flags and features of LLVM `clang`, including optimization-level
 flags, debug-information flags, and target-dependent compilation options.  See
 the [LLVM Clang
-documentation](https://releases.llvm.org/12.0.0/tools/clang/docs/ClangCommandLineReference.html)
+documentation](https://releases.llvm.org/14.0.0/tools/clang/docs/ClangCommandLineReference.html)
 for more information on the command-line arguments.
 
 
