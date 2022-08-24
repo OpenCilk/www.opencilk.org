@@ -474,6 +474,17 @@ INFO:runner:CILK_NWORKERS=8 taskset -c 0,2,4,6,8,10,12,14 ./qsort_cilkscale_benc
 INFO:plotter:Generating plot (2 subplots)
 ```
 
+{% alert "info" %}
+
+***Note:*** To see a list and description of all command-line arguments to
+`cilkscale.py`, run:
+
+```shell-session
+$ python3 cilkscale.py --help
+```
+
+{% endalert %}
+
 The `cilkscale.py` script runs the program multiple times: once to obtain
 work-span analysis measurements, and then once per CPU core-count to collect
 timing information.  After the first run, the script also prints the `stdout`
