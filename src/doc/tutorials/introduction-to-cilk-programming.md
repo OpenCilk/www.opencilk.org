@@ -91,7 +91,7 @@ parallel region (that is, the call to `p_fib(n-2)` in line 7).  The end of the
 `cilk_scope` in line 8 guarantees that the spawned function has finished before
 the return statement in line 9 is executed.
 
-```c#
+```cilkc#
 int p_fib(int n) {
   if (n < 2)
     return n;                   // base case
@@ -121,7 +121,7 @@ have been evaluated.
 spawned.  For instance, you can spawn a computation using a function pointer or
 member function pointer, as in:
 
-```c
+```cilkc
 var = cilk_spawn (object.*pointer)(arg1, arg2);
 ```
 
@@ -137,7 +137,7 @@ any state that may change as a side-effect of a spawned function.
 
 **Incorrect:**
 
-```c
+```cilkc
 cilk_scope {
   x = cilk_spawn p_fib(n-1);
   y = p_fib(n-2);
@@ -151,7 +151,7 @@ cilk_scope {
 
 **Correct:**
 
-```c
+```cilkc
 cilk_scope {
   x = cilk_spawn p_fib(n-1);
   y = p_fib(n-2);
@@ -170,7 +170,7 @@ outside the `cilk_scope` block (which is where its value is assigned).
 
 **Incorrect:**
 
-```c
+```cilkc
 cilk_scope {
   int x = cilk_spawn p_fib(n-1);
   int y = p_fib(n-2);
@@ -188,7 +188,7 @@ nested within another scope that also uses `x` and `y` identifiers.
 
 **Correct:**
 
-```c
+```cilkc
 int x, y;
 cilk_scope {
   x = cilk_spawn p_fib(n-1);
@@ -212,7 +212,7 @@ program, the result is a valid and correct serial program.  For example, if you
 do this with the `p_fib()` function code above, you end up with the following
 function, which we call `fib()`:
 
-```c#
+```cilkc#
 int fib(int n) {
   if (n < 2)
     return n;
