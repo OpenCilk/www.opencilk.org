@@ -114,7 +114,7 @@ pre {
 }
 code {
   font-size: 110%;
-  color: var(--tangelo);
+  color: #eb551d; /* Darker tangelo also in prism.css */
   word-break: normal;
 }
 
