@@ -37,13 +37,14 @@ attribution: true
     of the task scheduler. The programmer visible parts of the language include the
     following constructs:</p>
 <ol>
-    <li>Four keywords (<code>_Cilk_scope</code>, _Cilk_spawn</code>, <code>_Cilk_sync</code> and <code>_Cilk_for</code>)
+
+    <li>Four keywords (<code>cilk_scope</code>, <code>cilk_for</code>, <code>cilk_spawn</code> and <code>cilk_sync</code>)
         to express tasking</li>
     <li>Hyperobjects, which provide local views to shared objects</li>
 </ol>
 <p>An implementation of the language may take advantage of all parallelism resources
     available in the hardware. On a typical CPU, these include at least multiple cores
-    and vector units. Some of the language constructs, e.g. <code>_Cilk_spawn</code>,
+    and vector units. Some of the language constructs, e.g. <code>cilk_spawn</code>,
     utilize only core parallelism; some, e.g. SIMD loops, utilize only vector parallelism,
     and some, e.g. SIMD-enabled functions, utilize both. The defined behavior of every
     deterministic Cilk program is the same as the behavior of a similar C or C++ program
@@ -74,49 +75,40 @@ attribution: true
 
 <p>OpenCilk adds the following new keywords:</p>
 <ul>
-    <li><code>_Cilk_scope</code></li>
-    <li><code>_Cilk_sync</code></li>
-    <li><code>_Cilk_spawn</code></li>
-    <li><code>_Cilk_for</code></li>
+    <li><code>cilk_scope</code></li>
+    <li><code>cilk_for</code></li>
+    <li><code>cilk_sync</code></li>
+    <li><code>cilk_spawn</code></li>
 </ul>
 <p>A program that uses these keywords other than as defined in the grammar extension
     below is ill-formed.</p>
-
-## Keyword Aliases
-
-<p>The header <code>&lt;cilk/cilk.h&gt;</code> defines the following aliases for the
-    Cilk keywords:</p>
-<pre>#define cilk_scope _Cilk_scope
-#define cilk_spawn _Cilk_spawn
-#define cilk_sync  _Cilk_sync
-#define cilk_for   _Cilk_for</pre>
 
 ## Grammar
 
 <p>The three keywords are used in the following new productions:</p>
 <dl class="bnf">
     <dt><dfn>jump-statement</dfn>:</dt>
-    <dd><code>_Cilk_sync ;</code></dd>
+    <dd><code>cilk_sync ;</code></dd>
 </dl>
-<p>The call production of the grammar is modified to permit the keyword <code>_Cilk_spawn</code>
+<p>The call production of the grammar is modified to permit the keyword <code>cilk_spawn</code>
     before the expression denoting the function to be called:</p>
 <dl class="bnf">
     <dt><dfn>postfix-expression</dfn>:</dt>
-    <dd><code>_Cilk_spawn</code><sub>opt</sub> <var>postfix-expression</var> <code>(</code>
+    <dd><code>cilk_spawn</code><sub>opt</sub> <var>postfix-expression</var> <code>(</code>
         <var>expression-list</var><sub>opt</sub> <code>)</code></dd>
 </dl>
-<p>Consecutive <code>_Cilk_spawn</code> tokens are not permitted. The <var>postfix-expression</var>
-    following <code>_Cilk_spawn</code> is called a <dfn>spawned function</dfn>. <del>The
+<p>Consecutive <code>cilk_spawn</code> tokens are not permitted. The <var>postfix-expression</var>
+    following <code>cilk_spawn</code> is called a <dfn>spawned function</dfn>. <del>The
         spawned function may be a normal function call, a member-function call, or the function-call
         (parentheses) operator of a function object (functor) or a call to a lambda expression.</del>
     Overloaded operators other than the parentheses operator may be spawned only by
     using the function-call notation (e.g., <code>operator+(arg1,arg2)</code>). There
-    shall be no more than one <code>_Cilk_spawn</code> within a full expression. A function
+    shall be no more than one <code>cilk_spawn</code> within a full expression. A function
     that contains a spawn statement is called a <dfn>spawning function</dfn>.</p>
 <p class="note">Note: The spawned function <ins>call</ins> may be a normal function
     call, a member-function call, the function-call (parentheses) operator of a function
     object (functor), or a call to a lambda expression.</p>
-<p>A program is <del>considered</del> ill formed if the <code>_Cilk_spawn</code> form
+<p>A program is <del>considered</del> ill formed if the <code>cilk_spawn</code> form
     of this expression appears other than in one of the following contexts:</p>
 <ul>
     <li>as the <del>entire body</del> <ins>full-expression</ins> of an expression statement,</li>
@@ -125,10 +117,10 @@ attribution: true
     <li>as the entire <var>initializer-clause</var> in a simple declaration <ins>for an
         object with automatic storage duration</ins>.</li>
 </ul>
-<p><del>(A <code>_Cilk_spawn</code> expression may be permitted in more contexts in
+<p><del>(A <code>cilk_spawn</code> expression may be permitted in more contexts in
     the future.)</del> <ins>The rank of a spawned function call shall be zero. (See <a
         href="#array.sect">The section expression</a>.)</ins></p>
-<p>A statement with a <code>_Cilk_spawn</code> on the right hand side of an assignment
+<p>A statement with a <code>cilk_spawn</code> on the right hand side of an assignment
     or declaration is called an <dfn><a id="defassignspawn">assignment spawn</a></dfn>
     or <dfn>initializer spawn</dfn>, respectively and the object assigned or initialized
     by the spawn is called the <dfn>receiver.</dfn></p>
@@ -139,10 +131,10 @@ attribution: true
 </dl>
 <dl class="bnf">
     <dt><dfn>iteration-statement</dfn>:</dt>
-    <dd><var>grainsize-pragma</var><sub>opt</sub> <code>_Cilk_for (</code> <var>expression</var>
+    <dd><var>grainsize-pragma</var><sub>opt</sub> <code>cilk_for (</code> <var>expression</var>
         <code>;</code> <var>expression</var> <code>;</code> <var>expression</var> <code>)</code>
         <var>statement</var></dd>
-    <dd><var>grainsize-pragma</var><sub>opt</sub> <code>_Cilk_for (</code> <var>declaration</var>
+    <dd><var>grainsize-pragma</var><sub>opt</sub> <code>cilk_for (</code> <var>declaration</var>
         <var>expression</var> <code>;</code> <var>expression</var> <code>)</code> <var>statement</var></dd>
 </dl>
 <p><ins>The three items inside parentheses in the grammar, separated by semicolons,
@@ -197,31 +189,32 @@ Statements within _Cilk_scope are executed as usual.  There is an implicit _Cilk
 <p><strong>The serialization of a pure C or C++ program is itself.</strong></p>
 <p>If a C or C++ program has defined behavior and does not use the tasking keywords
     or library functions, it is an OpenCilk with the same defined behavior.</p>
-<p><strong>The serializations of <code>_Cilk_scope</code>, <code>_Cilk_spawn</code> and <code>_Cilk_sync</code>
+
+<p><strong>The serializations of <code>cilk_scope</code>, <code>cilk_spawn</code> and <code>cilk_sync</code>
     are empty.</strong></p>
 <p>If an OpenCilk program has defined deterministic behavior, then that behavior is
     the same as the behavior of the C or C++ program derived from the original by removing
-    all instances of the keywords <code>_Cilk_scope</code>, <code>_Cilk_spawn</code>, and <code>_Cilk_sync</code>.</p>
-<p><strong>The serialization of <code>_Cilk_for</code> is <code>for</code>.</strong></p>
+    all instances of the keywords <code>cilk_spawn</code>, and <code>cilk_sync</code>.</p>
+<p><strong>The serialization of <code>cilk_for</code> is <code>for</code>.</strong></p>
 <p>If an OpenCilk program has defined deterministic behavior, then that behavior is
     the same as the behavior of the C or C++ program derived from the original by replacing
-    each instance of the <code>_Cilk_for</code> keyword with <code>for</code>.</p>
+    each instance of the <code>cilk_for</code> keyword with <code>for</code>.</p>
 
 ## <del>Spawning</del> <ins>Task</ins> blocks
 
 <p>A <del>spawning</del> <ins>task</ins> block is a region of the program subject to
     special rules. Task blocks may be nested. The body of a nested task block is not
     part of the outer task block. Task blocks never partially overlap. The body of a
-    spawning function is a task block. A <code>_Cilk_for</code> statement is a task
-    block and the body of the <code>_Cilk_for</code> loop is a (nested) task block.</p>
-<p>Every <del>spawning</del> <ins>task</ins> block includes an implicit <code>_Cilk_sync</code>
+    spawning function is a task block. A <code>cilk_for</code> statement is a task
+    block and the body of the <code>cilk_for</code> loop is a (nested) task block.</p>
+<p>Every <del>spawning</del> <ins>task</ins> block includes an implicit <code>cilk_sync</code>
     executed on exit from the block, including abnormal exit due to an exception. Destructors
     for automatic objects with scope ending at the end of the task block are invoked
-    before the implicit <code>_Cilk_sync</code>. The receiver is assigned or initialized
-    to the return value before executing the implicit <code>_Cilk_sync</code> at the
-    end of a function. An implicit or explicit <code>_Cilk_sync</code> within a nested
-    task block will synchronize with <code>_Cilk_spawn</code> statements only within
-    that task block, and not with <code>_Cilk_spawn</code> statements in the surrounding
+    before the implicit <code>cilk_sync</code>. The receiver is assigned or initialized
+    to the return value before executing the implicit <code>cilk_sync</code> at the
+    end of a function. An implicit or explicit <code>cilk_sync</code> within a nested
+    task block will synchronize with <code>cilk_spawn</code> statements only within
+    that task block, and not with <code>cilk_spawn</code> statements in the surrounding
     task block.</p>
 <del>
     <p>The scope of a label defined in a spawning block is limited to that spawning block.</p>
@@ -229,12 +222,12 @@ Statements within _Cilk_scope are executed as usual.  There is an implicit _Cilk
         or exit a spawning block.</p>
 </del>
 
-## <code>_Cilk_for</code> Loops
+## <code>cilk_for</code> Loops
 
 <ins>
-    <p>The constraints and semantics of a <code>_Cilk_for</code> loop are the same as those
+    <p>The constraints and semantics of a <code>cilk_for</code> loop are the same as those
         of its serialization, unless specified otherwise.</p>
-    <p>Each iteration of a <code>_Cilk_for</code> loop is a separate strand; they need not
+    <p>Each iteration of a <code>cilk_for</code> loop is a separate strand; they need not
         be executed serially.</p>
 </ins>
 <p>Within each iteration of the loop body, <del>the control variable is considered a
@@ -249,21 +242,21 @@ Statements within _Cilk_scope are executed as usual.  There is an implicit _Cilk
 
 ### Syntactic constraints
 
-<p>To simplify the grammar, some restrictions on <code>_Cilk_for</code> loops are stated
+<p>To simplify the grammar, some restrictions on <code>cilk_for</code> loops are stated
     here in text form. <del>The three items inside parentheses in the grammar, separated
         by semicolons, are the <var>initialization</var>, <var>condition</var>, and <var>increment</var>.</del>
     <ins>Where a constraint on an expression is expressed grammatically, parentheses around
         a required expression or sub-expression are allowed.</ins></p>
 <del>
     <p>A program that contains a <code>return</code>, <code>break</code>, or <code>goto</code>
-        statement that would transfer control into or out of a <code>_Cilk_for</code> loop
+        statement that would transfer control into or out of a <code>cilk_for</code> loop
         is ill-formed.</p>
 </del>
 <p>The initialization shall declare or initialize a single variable, called the <dfn>
     control variable</dfn>. In C only, the control variable may be previously declared,
     but if so shall be reinitialized, i.e., assigned, in the initialization clause.
     In C++, the control variable shall be declared and initialized within the initialization
-    clause of the <code>_Cilk_for</code> loop. <ins>The variable shall have automatic storage
+    clause of the <code>cilk_for</code> loop. <ins>The variable shall have automatic storage
         duration.</ins> <del>No storage class may be specified for the variable within the initialization
             clause. The variable shall have integral, pointer, or class type. The variable may
             not be <code>const</code> or <code>volatile</code>.</del> The variable shall
@@ -353,19 +346,19 @@ Statements within _Cilk_scope are executed as usual.  There is an implicit _Cilk
 </ins>
 <p>A program that contains a <code>return</code>, <code>break</code>, <code>goto</code>
     <ins>or <code>switch</code></ins> statement that would transfer control into or
-    out of a <code>_Cilk_for</code> loop is ill-formed.</p>
+    out of a <code>cilk_for</code> loop is ill-formed.</p>
 
 ### Requirements on types and operators
 
 <p><del>The type of <var>var</var> shall be copy constructible. (For the purpose of
     specification, all C types are considered copy constructible.)</del> <ins>The control
         variable shall have unqualified integral, pointer, or copy-constructible class type.</ins></p>
-<p>The initialization, condition, and increment parts of a <code>_Cilk_for</code> shall
+<p>The initialization, condition, and increment parts of a <code>cilk_for</code> shall
     <del>be defined such that the total number of iterations (loop count) can be determined
-        before beginning the loop execution. Specifically, the parts of the <code>_Cilk_for</code>
+        before beginning the loop execution. Specifically, the parts of the <code>cilk_for</code>
         loop shall</del> meet all of the semantic requirements of the corresponding
     serial <code>for</code> statement. In addition, depending on the syntactic form
-    of the condition, a <code>_Cilk_for</code> adds the following requirements on the
+    of the condition, a <code>cilk_for</code> adds the following requirements on the
     types of <del><var>var</var></del> <ins>the control variable</ins>, <del><var>limit</var></del>
     <ins>the limit expression</ins>, and <del><var>stride</var></del> <ins>the stride.</ins>
     <del>(and by extension <var>incr</var>), and</del></p>
@@ -613,16 +606,16 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
 <p>If the loop body throws an exception that is not caught within the same iteration
     of the loop, it is unspecified which other loop iterations execute, <ins>but no other
         iteration is terminated early</ins>. If multiple loop iterations throw exceptions
-    that are not caught in the loop body, the <code>_Cilk_for</code> statement throws
+    that are not caught in the loop body, the <code>cilk_for</code> statement throws
     the exception that would have occurred first in the serialization of the program.</p>
 
 ### Grainsize pragma
 
-<p>A <code>_Cilk_for</code> <var>iteration-statement</var> may optionally be preceded
+<p>A <code>cilk_for</code> <var>iteration-statement</var> may optionally be preceded
     by a <var>grainsize-pragma</var>. The grainsize pragma shall immediately precede
-    a <code>_Cilk_for</code> loop and may not appear anywhere else in a program, except
-    that other pragmas that appertain to the <code>_Cilk_for</code> loop may appear
-    between the <var>grainsize-pragma</var> and the <code>_Cilk_for</code> loop. The
+    a <code>cilk_for</code> loop and may not appear anywhere else in a program, except
+    that other pragmas that appertain to the <code>cilk_for</code> loop may appear
+    between the <var>grainsize-pragma</var> and the <code>cilk_for</code> loop. The
     expression in the grainsize pragma shall evaluate to a type convertible to <code>long</code>.</p>
 <p>The presence of the pragma provides a hint to the runtime specifying the number of
     serial iterations desired in each chunk of the parallel loop. <del>The grainsize expression
@@ -634,25 +627,25 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
     evaluates to 0, then the runtime will pick a grainsize using its own internal heuristics.
     If the grainsize evaluates to a negative value, the behavior is unspecified. (The
     meaning of negative grainsizes is reserved for future extensions.) The grainsize
-    pragma applies only to the <code>_Cilk_for</code> statement that immediately follows
-    it &#x2013; the grain sizes for other <code>_Cilk_for</code> statements are not
+    pragma applies only to the <code>cilk_for</code> statement that immediately follows
+    it &#x2013; the grain sizes for other <code>cilk_for</code> statements are not
     affected.</p>
 
 ## Spawn
 
-<p>The <code>_Cilk_spawn</code> keyword suggests to the implementation that an executed
+<p>The <code>cilk_spawn</code> keyword suggests to the implementation that an executed
     statement or part of a statement may be run in parallel with following statements.
     A consequence of this parallelism is that the program may exhibit undefined behavior
-    not present in the serialization. Execution of a <code>_Cilk_spawn</code> keyword
-    is called a <dfn>spawn</dfn>. Execution of a <code>_Cilk_sync</code> statement is
+    not present in the serialization. Execution of a <code>cilk_spawn</code> keyword
+    is called a <dfn>spawn</dfn>. Execution of a <code>cilk_sync</code> statement is
     called a <dfn>sync</dfn>. <del>A statement</del> <ins>An expression statement or declaration
         statement</ins> that contains a spawn is called a <dfn>spawning statement</dfn>.
-    <ins>In a declaration containing a <code>_Cilk_spawn</code> keyword, the initialization
+    <ins>In a declaration containing a <code>cilk_spawn</code> keyword, the initialization
         of each object declared is treated as a separate statement.</ins></p>
-<p>The <dfn><a id="deffollowingsync">following sync</a></dfn> of a <code>_Cilk_spawn</code>
-    refers to the next <code>_Cilk_sync</code> executed (dynamically, not lexically)
+<p>The <dfn><a id="deffollowingsync">following sync</a></dfn> of a <code>cilk_spawn</code>
+    refers to the next <code>cilk_sync</code> executed (dynamically, not lexically)
     in the same task block. Which spawn the sync follows is implied from context. The
-    following sync may be the implicit <code>_Cilk_sync</code> at the end of a task
+    following sync may be the implicit <code>cilk_sync</code> at the end of a task
     block.</p>
 <p>A <dfn><a id="defspawnpoint">spawn point</a></dfn> is a C sequence point at which
     a control flow fork is considered to have taken place. Any operations within the
@@ -669,9 +662,9 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
 <p>The spawn points associated with different spawning statements are as follows:
 </p>
 <ul>
-    <li>The body of a <code>_Cilk_for</code> loop is a spawning statement with spawn point
+    <li>The body of a <code>cilk_for</code> loop is a spawning statement with spawn point
         at the end of the loop condition test.</li>
-    <li>An expression statement containing a single <code>_Cilk_spawn</code> has a spawn
+    <li>An expression statement containing a single <code>cilk_spawn</code> has a spawn
         point at the sequence point at the call to the spawned function. Any unnamed temporary
         variables created prior to the spawn point are not destroyed until after the spawn
         point (i.e., the destructors are invoked in the child).</li>
@@ -686,7 +679,7 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
         their destructors are invoked in the child).</li>
 </ul>
 <p>For example, in the following two statements:</p>
-<pre>x[g()] = _Cilk_spawn f(a + b);
+<pre>x[g()] = cilk_spawn f(a + b);
 a++;</pre>
 	<p>The call to function <code>f</code> is the spawn point and the statement <code>a++;</code>
 		is the continuation. The expression <code>a + b</code> and the initialization of
@@ -696,13 +689,13 @@ a++;</pre>
 			a + b</code> take place in the child.</p>
 	<p>If a statement is followed by an implicit sync, that sync is the spawn continuation.</p>
 	<p class="note">Programmer note: The sequencing may be more clear if</p>
-	<pre>x[g()] = _Cilk_spawn f(a + b);</pre>
+	<pre>x[g()] = cilk_spawn f(a + b);</pre>
 	<p class="note">is considered to mean</p>
 	<pre>{
 	// <em>Evaluate arguments and receiver address before spawn point</em>
 	T tmp = a + b; // <em>T is the type of a + b</em>
 	U &amp;r = x[g()]; // <em>U is the type of x[0]</em>
-	_Cilk_spawn { r = f(tmp); tmp.~T(); }
+	cilk_spawn { r = f(tmp); tmp.~T(); }
 }</pre>
 	<p>A <code>setjmp</code>/<code>longjmp</code> call pair within the same task block has
 		undefined behavior if a spawn or sync is executed between the <code>setjmp</code>
@@ -714,7 +707,7 @@ a++;</pre>
 
 <p>A sync statement indicates that all children of the current task block must finish
     executing before execution may continue within the task block. The new strand coming
-    out of the <code>_Cilk_sync</code> is not running in parallel with any child strands,
+    out of the <code>cilk_sync</code> is not running in parallel with any child strands,
     but may still be running in parallel with parent and sibling strands (other children
     of the calling function).</p>
 <p>There is an implicit sync at the end of every task block. If a spawning statement
@@ -724,15 +717,15 @@ a++;</pre>
     effect. (The compiler may elide an explicit or implicit sync if it can statically
     determine that the sync will have no observable effect.)</p>
 <p class="note">Programmer note: Because implicit syncs follow destructors, writing
-    <code>_Cilk_sync</code> at the end of a function may produce a different effect
+    <code>cilk_sync</code> at the end of a function may produce a different effect
     than the implicit sync. In particular, if an assignment spawn or initializer spawn
     is used to modify a local variable, the function will generally need an explicit
-    <code>_Cilk_sync</code> to avoid a race between assignment to the local variable
+    <code>cilk_sync</code> to avoid a race between assignment to the local variable
     by the spawned function and destruction of the local variable by the parent function.</p>
 
 ## Exceptions
 
-<p>There is an implicit <code>_Cilk_sync</code> before a <del><code>throw</code>, after
+<p>There is an implicit <code>cilk_sync</code> before a <del><code>throw</code>, after
     the exception object has been constructed.</del> <ins><var>try-block</var>.</ins></p>
 <p>If a spawned function terminates with an exception, the exception propagates from
     the point of the corresponding sync.</p>
@@ -756,14 +749,14 @@ a++;</pre>
     into a single view, using another callback function provided by the hyperobject
     type.</p>
 <p>The view of a hyperobject visible to a program may change at any spawn or sync (including
-    the implicit spawns and syncs within a <code>_Cilk_for</code> loop). The identity
+    the implicit spawns and syncs within a <code>cilk_for</code> loop). The identity
     (address) of the view does not change within a single strand. The view of a given
     hyperobject visible within a given strand is said to be <dfn>associated</dfn> with
     that view. A hyperobject has the same view before the first spawn within a task
     block as after a sync within the same task block, even though the thread ID may
     not be the same (i.e., hyperobject views are not tied to threads). A hyperobject
-    has the same view upon entering and leaving a <code>_Cilk_for</code> loop and within
-    the first iteration (at least) of the <code>_Cilk_for</code> loop. A special view
+    has the same view upon entering and leaving a <code>cilk_for</code> loop and within
+    the first iteration (at least) of the <code>cilk_for</code> loop. A special view
     is associated with a hyperobject when the hyperobject is initially created. This
     special view is called the <dfn>leftmost view</dfn> or <dfn>earliest view</dfn>
     because it is always visible to the leftmost (earliest) descendent in the depth-first,
@@ -802,7 +795,7 @@ a++;</pre>
     the &#x201c;&#x2297;&#x201d; in the expression &#x201c;<var>R</var>&#x2190;<var>R</var>&#x2297;<var>v</var>&#x201d;
     can represent a set of mutually-associative operations. For example, <code>+=</code>
     and <code>-=</code> are mutually associative.) For example, a spawned function or
-    <code>_Cilk_for</code> body can append items onto the view of a list reducer with
+    <code>cilk_for</code> body can append items onto the view of a list reducer with
     monoid (<code>list</code>, <code>concatenate</code>, <var>empty</var>). At the end
     of the parallel section of code, the reducer's view contains the same list items
     in the same order as would be generated in a serial execution of the same code.</p>
@@ -1167,7 +1160,7 @@ value_type* <var>right</var>)</pre>
 <p>For purposes of establishing the absence of a data race, a hyperobject view is considered
     a distinct object in each parallel strand. A hyperobject lookup is considered a
     read of the hyperobject.</p>
-
+<!-- remove old hyperobjects
 ## Hyperobjects in C
 
 ### C hyperobject syntax
@@ -1308,7 +1301,7 @@ CILK_C_UNREGISTER_REDUCER(<var>hv</var>);</pre>
     a distinct object in each parallel strand. A hyperobject lookup is considered a
     read of the hyperobject.</p>
 <hr />
-
+-->
 # Disclaimer and other legal information
 
 <p>Copyright (c) 2020 Massachusetts Institute of Technology</p>
