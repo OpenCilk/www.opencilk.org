@@ -6,7 +6,21 @@ templateClass: tmpl-post
 
 <div style="font-size: larger;">
 
-    <p class="my-0 py-0"><span>{{ page.date | readableDate }}</span> &mdash; <span class="me-4">By {{ author }}</span></p>
+    {% if authorpic %}
+      <p class="my-0 py-0">
+        <div class="d-flex justify-content-start align-items-center">
+          <div >
+            <img src="{{ authorpic }}" width="56"></img>
+          </div>
+          <div class="d-flex me-4">
+            <small>By {{ author }}</small></br>
+          </div>
+        </div>
+        <small>{{ page.date | readableDate }}</small>
+      </p>
+    {% else %}
+      <small><p class="my-0 py-0">{{ page.date | readableDate }} &mdash; By {{ author }}</p></small>
+    {% endif %}
 
     {% if tagline %}
     <p>{{ tagline | markdownify | safe }}</p>
