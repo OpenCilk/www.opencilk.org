@@ -32,7 +32,7 @@ eleventyNavigation:
     of the task scheduler. The programmer visible parts of the language include the
     following constructs:</p>
 <ol>
-    <li>Three keywords (<code>cilk_scope</code>, <code>cilk_for</code>, <code>cilk_spawn</code> and <code>cilk_sync</code>)
+    <li>Four keywords (<code>cilk_scope</code>, <code>cilk_for</code>, <code>cilk_spawn</code> and <code>cilk_sync</code>)
         to express tasking</li>
     <li>Hyperobjects, which provide local views to shared objects</li>
 </ol>
