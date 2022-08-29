@@ -84,7 +84,7 @@ attribution: true
 
 ## Grammar
 
-<p>The three keywords are used in the following new productions:</p>
+<p>The four keywords are used in the following new productions:</p>
 <dl class="bnf">
     <dt><dfn>jump-statement</dfn>:</dt>
     <dd><code>cilk_sync ;</code></dd>
