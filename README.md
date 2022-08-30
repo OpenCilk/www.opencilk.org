@@ -34,7 +34,7 @@ Then to launch the website, execute the following:
 
 Navigate to `localhost:8080` (or sometimes `localhost:8081`) in a browser and you should see your local instance of the site.
 
-## Colors
+## Color palette
 
 ![colors](/src/img/color-family.png)
 
