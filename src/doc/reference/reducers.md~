@@ -17,17 +17,17 @@ _hyperobject_.  Different types of hyperobjects are used depending on
 the desired semantics.
 
 Reducers are used when the final value in a variable is built up from
-a series of independent modifications, such as adding a number to an
-accumulator or appending an item to a list.  As long as the operation
-is _associative_ (`A ⊕ (B ⊕ C) = (A ⊕ B) ⊕ C`) the final result will
-be correct.
+a series of independent modifications.  The modifications should all
+be of the same kind, such as by adding a number to an accumulator or
+appending an item to a list.  As long as the operation is
+_associative_ (`A ⊕ (B ⊕ C) = (A ⊕ B) ⊕ C`) the final result will be
+correct.
 
 Formally, a reducer is a mathematical object called a _{% defn
 "monoid" %}_.  A reducer has a type (e.g., `double`), an _identity_
 value (`0.0`), and an associative binary operation (`+`).  The
 operation does not need to be commutative.  A reducer can hold a list
-with the binary operation being concatenation.  Associativity is
-essential.
+with the binary operation being concatenation.
 
 ## Reducers and views
 
