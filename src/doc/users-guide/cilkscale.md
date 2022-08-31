@@ -24,6 +24,15 @@ limitations of your application.
 
 {% img "/img/qsort-cilkscale-scalability-plots-sample-qsort-only.png", "1000" %}
 
+{% alert "info" %}
+
+***Note:*** This guide assumes that OpenCilk is installed within
+`/opt/opencilk/` and that the OpenCilk C++ compiler can be invoked from the
+terminal as `/opt/opencilk/bin/clang++`, as shown in [this
+example](/doc/users-guide/install/#example).
+
+{% endalert %}
+
 
 ## The three components of Cilkscale
 
@@ -38,15 +47,6 @@ We will address each of these components in turn.  But first, let's briefly
 describe a parallel divide-and-conquer
 [quicksort](https://en.wikipedia.org/wiki/Quicksort) program, which we will use
 as a running example.
-
-{% alert "info" %}
-
-***Note:*** This guide assumes that OpenCilk is installed within
-`/opt/opencilk/` and that the OpenCilk C++ compiler can be invoked from the
-terminal as `/opt/opencilk/bin/clang++`, as shown in [this
-example](/doc/users-guide/install/#example).
-
-{% endalert %}
 
 
 ## Example application: parallel divide-and-conquer quicksort
