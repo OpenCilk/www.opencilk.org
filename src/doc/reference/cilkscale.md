@@ -283,7 +283,7 @@ wsp_dump(elapsed, "my computation");
 _**Example 2:**_ Measure the work and span of an iterative computation.  The
 analyzed code region is non-contiguous in the program's execution trace.
   
-```cilkc
+```c
 wsp_t wsp_iter = wsp_zero();
 while (iteration_condition) {
   /* ...non-analyzed code... (e.g., printing to logs, diagnostic computations, etc) */
