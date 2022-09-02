@@ -1,0 +1,8 @@
+{
+    "layout": "layouts/glossary.njk",
+    "background": "bg-white",
+    "permalink": "/doc/reference/cilkarts_glossary/{{ title | slugify }}/", 
+    "eleventyNavigation": {
+        "parent": "CilkArts Glossary"
+    }
+}
