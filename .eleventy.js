@@ -121,9 +121,9 @@ module.exports = function(eleventyConfig) {
         })
   });
 
-  eleventyConfig.addCollection('cilkarts_glossary', (collection) => {
+  eleventyConfig.addCollection('intel_glossary', (collection) => {
     return collection
-        .getFilteredByGlob("./src/doc/reference/cilkarts_glossary/*.md")
+        .getFilteredByGlob("./src/doc/reference/intel-glossary/*.md")
         // Sort content alphabetically by title
         .sort((a, b) => {
           const titleA = a.data.title.toUpperCase()
