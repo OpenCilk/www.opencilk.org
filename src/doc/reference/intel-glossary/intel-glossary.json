@@ -1,0 +1,8 @@
+{
+    "layout": "layouts/glossary.njk",
+    "background": "bg-white",
+    "permalink": "/doc/reference/intel-glossary/{{ title | slugify }}/", 
+    "eleventyNavigation": {
+        "parent": "Intel Glossary"
+    }
+}

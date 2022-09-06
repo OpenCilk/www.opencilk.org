@@ -1,12 +1,13 @@
 ---
-title: CilkArts Glossary
+title: Intel Glossary
 stylesheet: glossary.css
+attribution: true
 eleventyNavigation:
-  key: CilkArts Glossary
+  key: Intel Glossary
   parent: Reference
 ---
 
-{% for entry in collections.cilkarts_glossary %}
+{% for entry in collections.intel_glossary %}
 
 ## {{ entry.data.title }} 
 
