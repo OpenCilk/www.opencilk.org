@@ -1,6 +1,7 @@
 ---
 title: Glossary
 stylesheet: glossary.css
+attribution: true
 eleventyNavigation:
   key: Glossary
   parent: Reference

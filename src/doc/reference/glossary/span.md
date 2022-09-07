@@ -2,10 +2,10 @@
 title: Span
 tags: span
 ---
-
-The *span* is the fastest possible time to execute the computation on an
-unlimited number of processors, which corresponds to the sum of the times taken
-by the strands along a longest path in the trace, where “longest” means that each
-strand is weighted by its execution time. Such a longest path is called the *critical
-path* of the trace, and thus the span is the weight of the longest (weighted) path
-in the trace.
+The theoretically fastest execution time
+for a parallel program when run on an
+infinite number of {% defn "processor", "processors" %},
+discounting overheads for
+communication and scheduling. Often
+denoted by $T_{\infty}$ in the literature, and
+sometimes called *critical-path length*.
