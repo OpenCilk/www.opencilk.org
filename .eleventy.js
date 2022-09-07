@@ -94,19 +94,6 @@ module.exports = function(eleventyConfig) {
         })
   });
 
-  eleventyConfig.addCollection('intel_glossary', (collection) => {
-    return collection
-        .getFilteredByGlob("./src/doc/reference/intel-glossary/*.md")
-        // Sort content alphabetically by title
-        .sort((a, b) => {
-          const titleA = a.data.title.toUpperCase()
-          const titleB = b.data.title.toUpperCase()
-          if (titleA > titleB) return 1
-          if (titleA < titleB) return -1
-          return 0
-        })
-  });
-
   function filterTagList(tags) {
     return (tags || []).filter(tag => ["all", "nav", "post", "posts"].indexOf(tag) === -1);
   }
@@ -168,7 +155,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addShortcode(
     "defn",
     function(term='', text='') { 
-      const url = "/doc/reference/intel-glossary/#" + slugify(term)
+      const url = "/doc/reference/glossary/#" + slugify(term)
       if (text=='') 
         docText = term
       else
