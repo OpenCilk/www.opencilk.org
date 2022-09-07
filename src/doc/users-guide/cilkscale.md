@@ -1,9 +1,16 @@
 ---
-title: Cilkscale — the OpenCilk scalability analysis tool
+title: Cilkscale — scalability analysis & benchmarking tool
+image: /img/qsort-cilkscale-scalability-plots-sample-qsort-only.png
 tags:
+  - cilkscale
   - tools
-attribution: true
+attribution: false
+author: Alexandros-Stavros Iliopoulos
+date: 2022-08-31
+eleventyNavigation:
+  order: 0
 ---
+
 Cilkscale can help you reason about the parallel performance and scalability of
 your Cilk program.  Cilkscale enables you to:
 
@@ -15,64 +22,58 @@ your Cilk program.  Cilkscale enables you to:
 - Produce tables and graphical plots with the above performance and scalability
   measurements.
 
-This guide will walk you through the basic steps for profiling, exploring, and
-understanding the parallel performance and scalability of your Cilk application
-with Cilkscale.  By the end of this guide, you will know how to generate
-performance and scalability tables and plots like the ones shown below and have
-a basic understanding of how to use them to diagnose parallel performance
-limitations of your application.
+This guide will walk you through the basic steps of profiling the parallel
+performance and scalability of your Cilk application with Cilkscale.  By the
+end of this guide, you will know how to generate performance and scalability
+tables and plots like the ones shown below and have a basic understanding of
+how to use them to diagnose parallel performance limitations of your
+application.  For details on the Cilkscale components, user options, and output
+information, see the [Cilkscale reference manual](/doc/reference/cilkscale).
 
 {% img "/img/qsort-cilkscale-scalability-plots-sample-qsort-only.png", "1000" %}
 
 {% alert "info" %}
 
-***Note:*** This guide assumes that OpenCilk is installed within
+_**Note:**_ This guide assumes that OpenCilk is installed within
 `/opt/opencilk/` and that the OpenCilk C++ compiler can be invoked from the
 terminal as `/opt/opencilk/bin/clang++`, as shown in [this
 example](/doc/users-guide/install/#example).
 
 {% endalert %}
 
+{% alert "info" %}
 
-## The three components of Cilkscale
+_**System setup for reported performance measurements:**_ All timings reported
+in this page are measured on a laptop with an 8-core Intel Core i7-10875H CPU,
+using OpenCilk 2.0.1 on Ubuntu 20.04 (via the Windows Subsystem for Linux v2 on
+Windows 10).
 
-Cilkscale comprises three main components:
-
-- Infrastructure in the OpenCilk compiler and runtime for work/span analysis.
-- A C/C++ API for fine-grained analysis of program regions.
-- A Python script for easy benchmarking and visualization of performance and
-  scalability with multiple processing cores.
-
-We will address each of these components in turn.  But first, let's briefly
-describe a parallel divide-and-conquer
-[quicksort](https://en.wikipedia.org/wiki/Quicksort) program, which we will use
-as a running example.
+{% endalert %}
 
 
 ## Example application: parallel divide-and-conquer quicksort
 
-The Cilk/C++ code for our simple parallel quicksort program, `qsort.cpp` is
-shown below.  (This code is similar to the Cilk/C `qsort.c` code in the
-[OpenCilk tutorial GitHub repo](https://github.com/OpenCilk/tutorial).)
+We shall illustrate how to use the various components of Cilkscale with a
+Cilk/C++ application that implements a parallel divide-and-conquer
+[quicksort](https://en.wikipedia.org/wiki/Quicksort).  The source code for our
+simple program, `qsort.cpp`, is shown below.
 
-```cpp#
+```cilkcpp#
 #include <iostream>
 #include <algorithm>
-#include <cstddef>
 #include <random>
-#include <chrono>
 #include <cilk/cilk.h>
 
 constexpr std::ptrdiff_t BASE_CASE_LENGTH = 32;
 
 template <typename T>
 void sample_qsort(T* begin, T* end) {
-  if (end - begin < BASE_CASE_LENGTH) { 
-    std::sort(begin, end);
+  if (end - begin < BASE_CASE_LENGTH) {
+    std::sort(begin, end);  // base case: serial sort
   } else {
     --end;  // exclude last element (pivot) from partition
     T* middle = std::partition(begin, end,
-                               [pivot = *end](T a) { return a < pivot; });
+                               [pivot=*end](T a) { return a < pivot; });
     std::swap(*end, *middle);  // move pivot to middle
     cilk_scope {
       cilk_spawn sample_qsort(begin, middle);
@@ -85,264 +86,165 @@ int main(int argc, char* argv[]) {
   long n = 100 * 1000 * 1000;
   if (argc == 2)
     n = std::atoi(argv[1]);
-  // no syntax checking for brevity
 
-  // pseudorandom integer inputs
-  std::random_device rd;
-  std::mt19937 rng (rd());
+  std::default_random_engine rng;
   std::uniform_int_distribution<long> dist(0,n);
-  long* a = new long[n];
-  std::generate(a, a + n, [&]() { return dist(rng); });
+  std::vector<long> a(n);
+  std::generate(a.begin(), a.end(), [&]() { return dist(rng); });
 
-  // sort
-  std::cout << "Sorting " << n << " random integers\n";
-  auto t_tic = std::chrono::steady_clock::now();
-  sample_qsort(a, a + n);
-  auto t_toc = std::chrono::steady_clock::now();
+  std::cout << "Sorting " << n << " random integers" << std::endl;
+  sample_qsort(a.data(), a.data() + a.size());
 
-  // verify sorting
-  bool pass = std::is_sorted(a, a + n);
+  bool pass = std::is_sorted(a.cbegin(), a.cend());
   std::cout << "Sort " << ((pass) ? "succeeded" : "failed") << "\n";
-
-  // print timing
-  std::chrono::duration<double> t_elapsed = t_toc - t_tic;
-  std::cout << "Time(sample_qsort) = " << t_elapsed.count() << " sec\n";
-
-  delete [] a;
   return (pass) ? 0 : 1;
 }
 ```
 
-The parallel Quicksort computation is implemented as function `sample_qsort()`,
-defined in lines 10–24.  The `sample_qsort()` function gets as input a
-contiguous array of numbers (technically, any data type that supports the `<`
-comparison operator) and works as follows.  First, let's look at the recursion
-in lines 14–23.  In lines 15–18, it picks the last element in the array to be
-the "pivot" and uses it to partition the array into left and right subarrays.
-The left subarray contains the elements in the input array that are smaller
-than the pivot, and the right subarray contains the remaining elements.  Then,
-in lines 19–22, it recursively partitions the left and right subarrays in
-parallel, excluding the pivot element.  The parallel recursion is {% defn
-"coarsen", "coarsened" %} with lines 12–13, which terminate the parallel
-recursion if a subarray is smaller than the `BASE_CASE_LENGTH` (defined as `32`
-in line 8), in which case the subarray is sorted serially with `std::sort()`.
-
-The `main()` function in lines 26–55 simply generates an array of random `long`
-integers, sorts it using `sample_qsort()`,  times and verifies the sorting, and
-prints the result.
-
-As a starting point, let's compile and test our `qsort.cpp` program on an array
-of $100,\!000,\!000$ random numbers.  The timing below is measured on a laptop
-with an 8-core CPU (Intel Core i7-10875H) and [simultaneous
-multithreading](https://en.wikipedia.org/wiki/Simultaneous_multithreading) (aka
-hyper-threading).
+The `qsort.cpp` program simply generates a vector of pseudorandom numbers,
+sorts it with the `sample_qsort()` function, and verifies the result.  We can
+compile and run it as follows.
 
 ```shell-session
 $ /opt/opencilk/bin/clang++ qsort.cpp -fopencilk -O3 -o qsort
 $ ./qsort 100000000
 Sorting 100000000 random integers
 Sort succeeded
-Time(sample_qsort) = 1.36157 sec
 ```
 
 
-## Work-span analysis with Cilkscale
+## Benchmarking and work/span analysis instrumentation with Cilkscale
 
-Cilkscale instruments your Cilk program to measure the {% defn "work" %}, {%
-defn "span" %}, and {% defn "parallelism" %} when running the instrumented
-program.  These measurements depend on your program's input and {% defn
-"logical parallelism" %} but not on the number of processors on which it is
-run.  Cilkscale collects performance measurements during runtime and uses the
-{% defn "parallel trace" %} of your program for its analysis.
+Cilkscale instruments your Cilk program to collect performance measurements
+during its execution.  Cilkscale instrumentation operates in one of two modes:
+benchmarking or work/span analysis.  In either case, you can use Cilkscale with
+two simple steps:
 
-In this section, we will see how to use OpenCilk to instrument a Cilk program
-with Cilkscale and collect scalability analysis results, and we will discuss
-the measurements reported by Cilkscale.
+1. Pass a [Cilkscale instrumentation
+   flag](/doc/reference/cilkscale/#compiler-options-for-cilkscale-instrumentation)
+   to the OpenCilk compiler when you compile and link your program.  The result
+   is a Cilkscale-instrumented binary.
+2. When you run the instrumented binary, Cilkscale collects performance
+   measurements and prints its report to the standard output.  (To output the
+   report to a file, set the
+   [`CILKSCALE_OUT`](/doc/reference/cilkscale/#cilkscale-report-output-file)
+   environment variable.)  Your program otherwise runs as it normally would.
 
-### Compile and run a Cilkscale-instrumented program
+By default, Cilkscale only reports results for whole-program execution.  To
+additionally report results for specific sub-computations of your program, use
+the [Cilkscale C/C++
+API](#cilkscale-api-for-fine-grained-analysis-of-parallel-regions), which we
+will address shortly.
 
-You can instrument your Cilk program with Cilkscale and start collecting
-parallel scalability measurements with two simple steps:
+### Benchmarking instrumentation
 
-1. Add the `-fcilktool=cilkscale` flag when you compile and link your
-   program.  The result is a Cilkscale-instrumented binary.  For example:
-   
-   ```shell-session
-   $ /opt/opencilk/bin/clang++ qsort.cpp -fopencilk -fcilktool=cilkscale -O3 -o qsort_cilkscale
-   ```
-
-2. When you run the instrumented binary with some input, Cilkscale analyzes its
-   parallel performance.  Your program runs as it normally would, and when it
-   returns Cilkscale prints its report to the standard output.  For example,
-   running the instrumented binary `qsort_cilkscale` yields:
-   
-   ```shell-session
-   $ ./qsort_cilkscale 100000000
-   Sorting 100000000 random integers
-   Sort succeeded
-   Time(sample_qsort) = 2.0279 sec
-   ```
-   
-   followed by Cilkscale's work, span, and parallelism report:
-   
-   ``` shell-session
-   tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-   ,24.2875,2.96416,8.19373,2.96449,8.19283
-   ```
-   
-Let's now talk about what the quantities in Cilkscale's report mean.
-
-{% alert "info" %}
-
-***Note:*** The Cilkscale-instrumented binary is slower than its
-non-instrumented counterpart.  The slowdown is due to internal computations by
-Cilkscale for keeping track of the parallel trace and associated timing
-measurements of the the computation.  The slowdown is generally no larger than
-$10\times$ and typically less than $2\times$.
-
-In our example, the Cilkscale-instrumented `qsort_cilkscale` is roughly
-$1.5\times$ slower than `qsort` ($2.03$s vs $1.36$s).
-
-{% endalert %}
-   
-{% alert "info" %}
-
-***Users who build OpenCilk from source:*** By default, the
-Cilkscale-instrumented binary runs in parallel.  If you see the message
-`Forcing CILK_NWORKERS=1` when running a Cilkscale-instrumented binary, this
-means Cilkscale was built as a serial tool.
-
-{% endalert %}
-
-### Understanding Cilkscale's work-span analysis report
-
-Cilkscale outputs its report as a table of work, span, and parallelism
-measurements in [CSV
-format](https://en.wikipedia.org/wiki/Comma-separated_values).  Specifically,
-the Cilkscale report table contains the following columns:
-
-- **Tag**  
-  A string identifier for the analyzed computation.  By default, Cilkscale only
-  analyzes the entire program, which is tagged by the empty string.
-
-- **Work**  
-  The total {% defn "work" %} $(T_1)$ of the computation, measured as CPU time.
-  The actual wall-clock time it takes to run the computation will generally be
-  smaller.  In the `qsort_cilkscale` example above, the total work is about
-  $15.74$s but the parallel program executes in about $1.65$s.
-
-- **Span**  
-  The {% defn "span" %} $(T_{\infty})$ of the computation, measured as CPU
-  time.  The span is the maximum amount of work along any path in the {% defn
-  "parallel trace" %} of the computation.  One way of understanding the span is
-  as the fastest execution time we could expect if we had an infinite number of
-  parallel cores.
-
-- **Parallelism**  
-  The {% defn "parallelism" %} of a computation is its work-to-span ratio $(T_1
-  / T_{\infty})$.  Parallelism can be thought of as the maximum possible
-  parallel speedup of the computation, or as the maximum number of cores that
-  could theoretically yield perfect linear speedup.
-
-- **Burdened span**  
-  The burdened span is similar to the span after accounting for worst-case
-  scheduling overhead.  The scheduling overhead burden is based on a heuristic
-  estimate of the costs associated with migrating and synchronizing parallel
-  tasks among processors.  (In practice, there are additional overheads that
-  can slow down parallel execution, such as insufficient memory bandwidth,
-  contention on parallel resources, false sharing, etc.)
-
-- **Burdened parallelism**  
-  The burdened parallelism is the ratio of work to burdened span.  It can be
-  thought of as a lower bound for the parallelism of the computation assuming
-  worst-case parallel scheduling.
-
-The Cilkscale report table contains a row for each analyzed region of the
-instrumented program.  You can specify program regions to analyze using the
-[Cilkscale API](#cilkscale-api-for-fine-grained-analysis-of-parallel-regions)
-as described in the relevant section below.
-
-### Deterministic measurements for work-span analysis
-
-Cilkscale supports measuring work and span in seconds (the default) or in LLVM
-"pseudo-instructions".  Pseudo-instructions measurements correspond to weighted
-counts of architecture-independent instructions based on LLVM's internal
-representation and cost model.
-
-To measure the work and span of your Cilkscale-instrumented program in
-pseudo-instructions, use the flag `-fcilktool=cilkscale-instructions` during
-compilation and linking (instead of `-fcilktool=cilkscale`).
-
-Pseudo-instruction work/span measurements are deterministic as long as the
-instrumented computation is itself deterministic.  That is, pseudo-instruction
-measurements are unaffected by other programs running at the same time, the
-state of the system, etc.  Keep in mind, however, that measuring work and span
-in pseudo-instructions may be several times slower than measuring them in
-seconds.
-
-### Export the Cilkscale report to a file
-
-You can have Cilkscale store its work-span analysis report in a file instead of
-printing it to `stdout`.  To do this, set the `CILKSCALE_OUT` environment
-variable to the path of the desired output file.  For example:
+To benchmark your application with Cilkscale, pass the
+`-fcilktool=cilkscale-benchmark` flag to the OpenCilk compiler:
 
 ```shell-session
-$ CILKSCALE_OUT=qsort_cilkscale_report.csv ./qsort_cilkscale 100000000
-[...program output without Cilkscale's report...]
-$ cat qsort_cilkscale_report.csv
-tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-,23.3894,2.89761,8.07194,2.89796,8.07098
+$ /opt/opencilk/bin/clang++ qsort.cpp -fopencilk -fcilktool=cilkscale-benchmark -O3 -o qsort_cilkscale_bench
 ```
+
+In benchmarking mode, Cilkscale simply measures the wall-clock execution time
+of your program.  Running the instrumented binary now produces the same output
+as before, followed by two lines with the timing results in [CSV
+format](https://en.wikipedia.org/wiki/Comma-separated_values):
+
+```shell-session
+$ ./qsort_cilkscale_bench 100000000
+[...]
+tag,time (seconds)
+,2.29345
+```
+
+The reported time above is untagged and refers to whole-program execution.  The
+formatting of the CSV report will become clearer shortly, when we see [how to
+use the Cilkscale
+API](#cilkscale-api-for-fine-grained-analysis-of-parallel-regions) to benchmark
+and analyze specific code regions.
+
+### Work/span analysis instrumentation
+
+To analyze the parallel scalability of your application with Cilkscale, pass
+the `-fcilktool=cilkscale` flag to the OpenCilk compiler:
+
+```shell-session
+$ /opt/opencilk/bin/clang++ qsort.cpp -fopencilk -fcilktool=cilkscale -O3 -o qsort_cilkscale
+```
+
+In work/span analysis mode, Cilkscale measures the {% defn "work" %}, {% defn
+"span" %}, and {% defn "parallelism" %} of the instrumented program.  These
+measurements depend on your program's input and {% defn "logical parallelism"
+%} but not on the number of processors on which it is run.  Cilkscale collects
+performance measurements during runtime and uses the {% defn "parallel trace"
+%} of your program for its analysis.  The [Cilkscale reference
+manual](/doc/reference/cilkscale/#workspan-analysis-measurements-reported-by-cilkscale)
+describes the specific quantities reported by Cilkscale.
+
+The Cilkscale work/span analysis report is printed in CSV format, similarly to
+the the Cilkscale benchmarking report but with different fields or columns:
+
+```shell-session
+$ ./qsort_cilkscale 100000000
+[...]
+tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
+,23.661,2.19196,10.7944,2.19226,10.793
+```
+
+As before, the reported measurements above are untagged and refer to
+whole-program execution.
 
 {% alert "info" %}
 
-***Note:*** Cilkscale assumes that the path in `CILKSCALE_OUT` points to a file
-in an existing directory.
+_**Note:**_ The Cilkscale-instrumented binary in work/span analysis mode is
+slower than its non-instrumented counterpart.  The slowdown is generally no
+larger than $10\times$ and typically less than $2\times$.
 
-- If the directory does not exist, the report is printed to the standard output
-  instead.
-- If the file already exists, the report will overwrite the file's contents.
+In the example above, `qsort_cilkscale` was about $1.5\times$ slower than
+`qsort` or `qsort_cilkscale_bench` ($3.4\,$s vs $2.3\,$s).
 
 {% endalert %}
 
 
 ## Cilkscale API for fine-grained analysis of parallel regions
 
-Cilkscale provides a C/C++ API for analyzing specific regions in a program.
-The Cilkscale API allows you to focus on and distinguish between specific
-parallel regions of your computation when analyzing its parallel scalability.
-Using the Cilkscale API is similar to using common C/C++ APIs for timing
-regions of interest (such as the C++ `std::chrono` library or the POSIX
-`clock_gettime()` function).
+Cilkscale provides a C/C++ API for benchmarking or analyzing specific regions
+in a program.  The Cilkscale API allows you to focus on and distinguish between
+specific parallel regions of your computation when measuring its parallel
+performance and scalability.  Using the Cilkscale API is similar to using
+common C/C++ APIs for timing regions of interest (such as the C++ `std::chrono`
+library or the POSIX `clock_gettime()` function).
 
-The steps for compiling and running the Cilkscale-instrumented binary are the
-same whether or not your program uses the Cilkscale API.
+The steps for [compiling and running the Cilkscale-instrumented
+binary](#benchmarking-and-workspan-analysis-instrumentation-with-cilkscale) are
+the same whether or not your program uses the Cilkscale API.
 
-Let's see how we can use the Cilkscale API to analyze the `sample_qsort()`
-function in `qsort.cpp` in isolation.  That is, we want to exclude the
-computations for initializing a random array of integers or verifying the sort
-correctness, which are all executed serially anyway.  To achieve this, we make
-the following three changes to our code and save the edited code as
-`qsort_wsp.cpp`.
+Let's see how we can use the Cilkscale API to analyze the execution of
+`sample_qsort()` function in our example quicksort application.  That is, we
+want to exclude the computations for initializing a random vector of integers
+or verifying the sort correctness, which are all executed serially anyway.  To
+achieve this, we make the following three changes to our code and save the
+edited code as `qsort_wsp.cpp`.
 
-1. Include the Cilkscale API header file.  E.g., after line 6 in `qsort.cpp`:
+1. Include the Cilkscale API header file.  E.g., after line 4 in `qsort.cpp`:
    
    ```cpp
    #include <cilk/cilkscale.h>
    ```
 
 2. Create work-span snapshots using calls to `wsp_getworkspan()` around the
-   region we want to analyze.  E.g., around line 42 in `qsort.cpp`:
+   region we want to analyze.  E.g., around the call to `sample_qsort()` in
+   line 35 in `qsort.cpp`:
    
    ```cpp
    wsp_t wsp_tic = wsp_getworkspan();
-   sample_qsort(a, a + n);
+   sample_qsort(a.data(), a.data() + a.size());
    wsp_t wsp_toc = wsp_getworkspan();
    ```
 
 3. Evaluate the work and span between the relevant snapshots and print the
-   analysis results with a descriptive tag.  E.g., after line 51 in
-   `qsort.cpp`:
+   analysis results with a descriptive tag.  E.g., just before the program
+   terminates in line 39 in `qsort.cpp`:
    
    ```cpp
    wsp_t wsp_elapsed = wsp_sub(wsp_toc, wsp_tic);
@@ -354,82 +256,39 @@ Then, we compile and run our program as before:
 ```shell-session
 $ /opt/opencilk/bin/clang++ qsort_wsp.cpp -fopencilk -fcilktool=cilkscale -O3 -o qsort_wsp_cilkscale
 $ ./qsort_wsp_cilkscale 100000000
-Sorting 100000000 random integers
-Sort succeeded
-Time(sample_qsort) = 2.04999 sec
+[...]
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-sample_qsort,22.8958,1.4491,15.8,1.44941,15.7967
-,24.562,3.11529,7.88433,3.1156,7.88355
+sample_qsort,23.3376,1.01007,23.1049,1.01039,23.0976
+,24.524,2.19645,11.1653,2.19676,11.1637
 ```
 
-Notice that the Cilkscale report above now contains an additional row with
-measurements for the `sample_qsort()` function:
+Notice that the Cilkscale report above now contains an additional row tagged
+'sample_qsort', which was output by the corresponding call to `wsp_dump()`:
 
 ```shell-session
-sample_qsort,22.8958,1.4491,15.8,1.44941,15.7967
+sample_qsort,23.3376,1.01007,23.1049,1.01039,23.097667
 ```
 
-Every call to `wsp_dump()` prints a row of work/span measurements.  The 1st
-argument to `wsp_dump()` is a Cilkscale `wsp_t` object with the measurement
-values and the 2nd argument is the tag for the row.  The last row in the
-Cilkscale report is always untagged and corresponds to the execution of the
-whole program.
+The last row in the Cilkscale report is always untagged and corresponds to
+the execution of the whole program.
 
 {% alert "info" %}
 
-***Note:*** Calls to the Cilkscale API are silently ignored with zero overhead
-if a program is compiled *without* the `-fcilktool=cilkscale` flag.
+_**Note:**_ If you compile your code without a Cilkscale instrumentation flag,
+calls to the Cilkscale API are effectively ignored with zero overhead.
 
 {% endalert %}
 
-### Accumulating work-span measurements
-
-It is sometimes desirable to accumulate work-span measurements for disjoint
-program regions into a single measurement.  For instance, your program may
-perform an iterative computation where each iteration includes parallel
-sub-computations alongside serial ones or I/O, and you may want to analyze the
-scalability of your parallel sub-computations across all iterations.  This can
-be achieved as follows:
-
-1. Initialize a `wsp_t` accumulation variable using `wsp_zero()`.
-2. Measure work and span in a sub-computation as before, using
-   `wsp_getworkspan()` and `wsp_sub()`.
-3. Add the evaluated work-span measurements to the accumulation variable using
-   `wsp_add()`.
-
-{% alert "primary" %}
-
-***Example:***
-
-```c
-wsp_t wsp_iter_1 = wsp_zero();
-wsp_t wsp_iter_2 = wsp_zero();
-while (iteration_condition) {
-  /* ...non-analyzed code... */
-  wsp_t tic = wsp_getworkspan();
-  /* ...PARALLEL SUB-COMPUTATION #1... */
-  wsp_t toc = wsp_getworkspan();
-  wsp_t elapsed = wsp_sub(toc, tic);
-  wsp_iter_1 = wsp_add(wsp_iter_1, elapsed);
-  /* ...more non-analyzed code... */
-  tic = wsp_getworkspan();
-  /* ...PARALLEL SUB-COMPUTATION #2... */
-  toc = wsp_getworkspan();
-  elapsed = wsp_sub(toc, tic);
-  wsp_iter_2 = wsp_add(wsp_iter_2, elapsed);
-  /* ...even more non-analyzed code... */
-}
-wsp_dump(wsp_iter_1, "iteration sub-computation 1");
-wsp_dump(wsp_iter_2, "iteration sub-computation 2");
-```
-
-{% endalert %}
+For more detailed information on the Cilkscale API, as well as an example of
+how to aggregate work/span analysis measurements from disjoint code regions,
+see the relevant section of the [Cilkscale reference
+manual](/doc/reference/cilkscale/#cc++-api-for-fine-grained-workspan-analysis).
 
 
 ## Benchmarking and visualization with the Cilkscale Python script
 
-Cilkscale includes a Python script for benchmarking the parallel performance
-and scalability of your program and visualizing the benchmarking results.  The
+Cilkscale includes a Python script for benchmarking your program on multiple
+cores and visualizing its performance and scalability analysis results.  The
 Cilkscale benchmarking and visualization Python script is found at
 `share/Cilkscale_vis/cilkscale.py` within the OpenCilk installation directory.
 The Cilkscale Python script automates the process of running a Cilk program on
@@ -439,9 +298,9 @@ aggregate CSV file.  In addition, the script processes the aggregate CSV file
 to generate plots of execution time and parallel speedup for each row (i.e.,
 analyzed program region) of the CSV file.
 
-{% alert "info" %}
+{% alert "warning" %}
 
-***Prerequisites:*** To use the Cilkscale benchmarking and visualization Python
+_**Prerequisites:**_ To use the Cilkscale benchmarking and visualization Python
 script, you need:
 
 - [Python](https://www.python.org/downloads/) 3.8 or later.
@@ -450,49 +309,45 @@ script, you need:
 
 {% endalert %}
 
-### Two instrumented binaries for analysis and benchmarking
+To use the `cilkscale.py` script, you must pass it two Cilkscale-instrumented
+binaries of your program — one with `-fcilktool=cilkscale` and one with
+`-fcilktool=cilkscale-benchmark` — along with a number of optional arguments.
+For a description of the `cilkscale.py` script's arguments, see the [Cilkscale
+reference manual](#running-the-cilkscale.py-script).
 
-To benchmark your Cilk program with the `cilkscale.py` script, you need to
-compile and link two separate binaries with Cilkscale instrumentation.
+Let's now see an example of using the `cilkscale.py` script to analyze and
+benchmark our `qsort_wsp.cpp` program which uses the Cilkscale API to profile
+the `sample_qsort()` function.  First, we build the two Cilkscale-instrumented
+binaries:
 
-1. Use `-fcilktool=cilkscale` to measure work, span, and parallelism, as
-   described in the previous sections.  For example:
-   
-   ```shell-session
-   $ /opt/opencilk/bin/clang++ qsort_wsp.cpp -fopencilk -fcilktool=cilkscale -O3 -o qsort_wsp_cilkscale
-   ```
-   
-2. Use `-fcilktool=cilkscale-benchmark` to measure the execution time of the
-   whole program and each region analyzed with the Cilkscale API.  For example:
-   
-   ```shell-session
-   $ /opt/opencilk/bin/clang++ qsort_wsp.cpp -fopencilk -fcilktool=cilkscale-benchmark -O3 -o qsort_wsp_cilkscale_bench
-   ```
-   
-   (Strictly speaking, the calls to the `std::chrono` library in
-   `qsort_wsp.cpp` are unnecessary since the Cilkscale API serves the same
-   function when the program is compiled with
-   `-fcilktool=cilkscale-benchmark`.)
+```shell-session
+$ /opt/opencilk/bin/clang++ qsort_wsp.cpp -fopencilk -fcilktool=cilkscale -O3 -o qsort_cs
+$ /opt/opencilk/bin/clang++ qsort_wsp.cpp -fopencilk -fcilktool=cilkscale-benchmark -O3 -o qsort_cs_bench
+```
 
-### Running the Cilkscale Python script
-
-The `cilkscale.py` script takes as input the two Cilkscale-instrumented
-binaries and a set of optional arguments.  The optional arguments specify which
-CPU cores to use for benchmarking, options for outputting a table and plots of
-the benchmarking and analysis report results, and any command-line arguments to
-the program being benchmarked.
-
-The following example shows how to benchmark `qsort_wsp.cpp` for sorting
-$100,\!000,\!000$ integers on all available physical cores.  In this example,
-benchmarking is done on a laptop with an 8-core Intel Core i7-10875H CPU:
+Then, we run `cilkscale.py` with our instrumented binaries, a problem size of
+$100,\!000,\!000$, and options to set the output paths for the resulting CSV table
+and PDF document of visualization plots:
 
 ```shell-session
 $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py \
     -c ./qsort_wsp_cilkscale -b ./qsort_wsp_cilkscale_bench \
     -ocsv qsort-bench.csv -oplot qsort-scalability-plots.pdf \
     --args 100000000
-Namespace(args=['100000000'], cilkscale='./qsort_cilkscale', cilkscale_benchmark='./qsort_cilkscale_bench', cpu_counts=None, output_csv='qsort-bench.csv', output_plot='qsort-scalability-plots.pdf', rows_to_plot='all')
+```
 
+The `cilkscale.py` script first echoes the values for all of its parameters,
+including unspecified parameters with default values:
+
+```shell-session
+Namespace(args=['100000000'], cilkscale='./qsort_cilkscale', cilkscale_benchmark='./qsort_cilkscale_bench', cpu_counts=None, output_csv='qsort-bench.csv', output_plot='qsort-scalability-plots.pdf', rows_to_plot='all')
+```
+
+Then, it runs the instrumented binary for work/span analysis on all available
+cores and prints its standard output and standard error streams.  You should
+make sure that the program output is as expected.
+
+```shell-session
 >> STDOUT (./qsort_cilkscale 100000000)
 Sorting 100000000 random integers
 Sort succeeded
@@ -501,7 +356,14 @@ Time(sample_qsort) = 2.13294 sec
 
 >> STDERR (./qsort_cilkscale 100000000)
 << END STDERR
+```
 
+It then runs the instrumented binary for benchmarking on different numbers
+of processors, per the `-cpus` argument passed to `cilkscale.py`.  (If this
+argument is not specified, the program will run $P$ times, where $P$ is the
+number of available physical cores in the system.)
+
+```shell-session
 INFO:runner:Generating scalability data for 8 cpus.
 INFO:runner:CILK_NWORKERS=1 taskset -c 0 ./qsort_cilkscale_bench 100000000
 INFO:runner:CILK_NWORKERS=2 taskset -c 0,2 ./qsort_cilkscale_bench 100000000
@@ -511,28 +373,26 @@ INFO:runner:CILK_NWORKERS=5 taskset -c 0,2,4,6,8 ./qsort_cilkscale_bench 1000000
 INFO:runner:CILK_NWORKERS=6 taskset -c 0,2,4,6,8,10 ./qsort_cilkscale_bench 100000000
 INFO:runner:CILK_NWORKERS=7 taskset -c 0,2,4,6,8,10,12 ./qsort_cilkscale_bench 100000000
 INFO:runner:CILK_NWORKERS=8 taskset -c 0,2,4,6,8,10,12,14 ./qsort_cilkscale_bench 100000000
+```
+
+In this example, the program is benchmarked on up to 8 CPU cores with IDs 0, 2,
+4, ….  This is because `cilkscale.py` only uses distinct *physical* cores by
+default.  In the computer used for this example, core IDs 1, 3, 5, … correspond
+to *logical* cores used in simultaneous multithreading or "hyper-threading".
+
+Finally, `cilkscale.py` processes the collected benchmarking and work/span
+analysis measurements and generates runtime and speedup plots for each analyzed
+region (and the entire program).
+
+```shell-session
 INFO:plotter:Generating plot (2 subplots)
 ```
 
-{% alert "info" %}
+{% alert "warning" %}
 
-***Note:*** To see a list and description of all command-line arguments to
-`cilkscale.py`, run:
-
-```shell-session
-$ python3 cilkscale.py --help
-```
+_**TODO:**_ Editing pass over the rest of the page below.
 
 {% endalert %}
-
-The `cilkscale.py` script runs the program multiple times: once to obtain
-work-span analysis measurements, and then once per CPU core-count to collect
-timing information.  After the first run, the script also prints the `stdout`
-and `stderr` streams for the execution of the program.  In this example, the
-program is then benchmarked on up to 8 CPU cores with IDs 0, 2, 4, ….  This is
-because `cilkscale.py` only uses distinct *physical* cores by default (in the
-computer used for this example, core IDs 1, 3, 5, … correspond to *logical*
-cores used in simultaneous multithreading or "hyper-threading").
 
 After the analysis and benchmarking runs finish, `cilkscale.py` prints the
 program output and produces a CSV table and a PDF collection of plots with the
