@@ -309,6 +309,8 @@ script, you need:
 
 {% endalert %}
 
+### How to run
+
 To use the `cilkscale.py` script, you must pass it two Cilkscale-instrumented
 binaries of your program — one with `-fcilktool=cilkscale` and one with
 `-fcilktool=cilkscale-benchmark` — along with a number of optional arguments.
@@ -331,16 +333,18 @@ and PDF document of visualization plots:
 
 ```shell-session
 $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py \
-    -c ./qsort_wsp_cilkscale -b ./qsort_wsp_cilkscale_bench \
-    -ocsv qsort-bench.csv -oplot qsort-scalability-plots.pdf \
+    -c ./qsort_cs -b ./qsort_cs_bench \
+    -ocsv cstable_qsort.csv -oplot csplots_qsort.pdf \
     --args 100000000
 ```
+
+### Terminal output
 
 The `cilkscale.py` script first echoes the values for all of its parameters,
 including unspecified parameters with default values:
 
 ```shell-session
-Namespace(args=['100000000'], cilkscale='./qsort_cilkscale', cilkscale_benchmark='./qsort_cilkscale_bench', cpu_counts=None, output_csv='qsort-bench.csv', output_plot='qsort-scalability-plots.pdf', rows_to_plot='all')
+Namespace(args=['100000000'], cilkscale='./qsort_cs', cilkscale_benchmark='./qsort_cs_bench', cpu_counts=None, output_csv='cstable_qsort.csv', output_plot='csplots_qsort.pdf', rows_to_plot='all')
 ```
 
 Then, it runs the instrumented binary for work/span analysis on all available
@@ -348,37 +352,40 @@ cores and prints its standard output and standard error streams.  You should
 make sure that the program output is as expected.
 
 ```shell-session
->> STDOUT (./qsort_cilkscale 100000000)
+>> STDOUT (./qsort_cs 100000000)
 Sorting 100000000 random integers
 Sort succeeded
-Time(sample_qsort) = 2.13294 sec
 << END STDOUT
 
->> STDERR (./qsort_cilkscale 100000000)
+>> STDERR (./qsort_cs 100000000)
 << END STDERR
 ```
 
-It then runs the instrumented binary for benchmarking on different numbers
-of processors, per the `-cpus` argument passed to `cilkscale.py`.  (If this
-argument is not specified, the program will run $P$ times, where $P$ is the
-number of available physical cores in the system.)
+Once the work/span analysis pass is done, `cilkscale.py` runs the instrumented
+binary for benchmarking on different numbers of processors.  The number of
+benchmarking runs and corresponding numbers of processors are determined by the
+`-cpus` arguments to `cilkcsale.py`.  (If this argument is not specified, the
+program will run on $1, 2, \ldots, P$ processors, where $P$ is the number of
+available physical cores in the system.)
 
 ```shell-session
 INFO:runner:Generating scalability data for 8 cpus.
-INFO:runner:CILK_NWORKERS=1 taskset -c 0 ./qsort_cilkscale_bench 100000000
-INFO:runner:CILK_NWORKERS=2 taskset -c 0,2 ./qsort_cilkscale_bench 100000000
-INFO:runner:CILK_NWORKERS=3 taskset -c 0,2,4 ./qsort_cilkscale_bench 100000000
-INFO:runner:CILK_NWORKERS=4 taskset -c 0,2,4,6 ./qsort_cilkscale_bench 100000000
-INFO:runner:CILK_NWORKERS=5 taskset -c 0,2,4,6,8 ./qsort_cilkscale_bench 100000000
-INFO:runner:CILK_NWORKERS=6 taskset -c 0,2,4,6,8,10 ./qsort_cilkscale_bench 100000000
-INFO:runner:CILK_NWORKERS=7 taskset -c 0,2,4,6,8,10,12 ./qsort_cilkscale_bench 100000000
-INFO:runner:CILK_NWORKERS=8 taskset -c 0,2,4,6,8,10,12,14 ./qsort_cilkscale_bench 100000000
+INFO:runner:CILK_NWORKERS=1 taskset -c 0 ./qsort_cs_bench 100000000
+INFO:runner:CILK_NWORKERS=2 taskset -c 0,2 ./qsort_cs_bench 100000000
+INFO:runner:CILK_NWORKERS=3 taskset -c 0,2,4 ./qsort_cs_bench 100000000
+INFO:runner:CILK_NWORKERS=4 taskset -c 0,2,4,6 ./qsort_cs_bench 100000000
+INFO:runner:CILK_NWORKERS=5 taskset -c 0,2,4,6,8 ./qsort_cs_bench 100000000
+INFO:runner:CILK_NWORKERS=6 taskset -c 0,2,4,6,8,10 ./qsort_cs_bench 100000000
+INFO:runner:CILK_NWORKERS=7 taskset -c 0,2,4,6,8,10,12 ./qsort_cs_bench 100000000
+INFO:runner:CILK_NWORKERS=8 taskset -c 0,2,4,6,8,10,12,14 ./qsort_cs_bench 100000000
 ```
 
 In this example, the program is benchmarked on up to 8 CPU cores with IDs 0, 2,
 4, ….  This is because `cilkscale.py` only uses distinct *physical* cores by
 default.  In the computer used for this example, core IDs 1, 3, 5, … correspond
-to *logical* cores used in simultaneous multithreading or "hyper-threading".
+to *logical* cores used in [simultaneous
+multithreading](https://en.wikipedia.org/wiki/Simultaneous_multithreading) or
+"hyper-threading".
 
 Finally, `cilkscale.py` processes the collected benchmarking and work/span
 analysis measurements and generates runtime and speedup plots for each analyzed
@@ -388,72 +395,38 @@ region (and the entire program).
 INFO:plotter:Generating plot (2 subplots)
 ```
 
-{% alert "warning" %}
+The Cilkscale benchmarking and scalability analysis reports are returned in
+tabular and graphical form.
 
-_**TODO:**_ Editing pass over the rest of the page below.
+### Tabular output
 
-{% endalert %}
+The raw measurements are output as a CSV table in the file pointed to by the
+`-ocsv` argument to `cilkscale.py`.  The CSV table contains, for each analyzed
+region, the work/span analysis results and benchmark times for all numbers of
+processors.
 
-After the analysis and benchmarking runs finish, `cilkscale.py` prints the
-program output and produces a CSV table and a PDF collection of plots with the
-benchmarking results.  For example, the above run produced the following CSV
-table:
+For example, the above run produced the following table:
 
 ```shell-session
-$ cat qsort-bench.csv
+$ cat cstable_qsort.csv
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism,1c time (seconds),2c time (seconds),3c time (seconds),4c time (seconds),5c time (seconds),6c time (seconds),7c time (seconds),8c time (seconds)
-sample_qsort,22.8861,1.4662,15.6091,1.4665,15.6059,7.69462,4.36279,2.98716,2.53078,2.1376,2.06614,1.81863,1.71402
-,24.5158,3.0959,7.9188,3.0962,7.91803,8.99369,5.66761,4.33015,3.8124,3.44797,3.44469,3.103,3.02143
+sample_qsort,33.6945,1.55145,21.7181,1.55176,21.7138,7.90022,4.18091,3.12102,2.54729,2.25585,2.05149,1.75151,1.80027
+,35.4111,3.26805,10.8355,3.26837,10.8345,9.2498,5.5804,4.42004,3.9695,3.59468,3.41839,3.29919,3.16601
 ```
 
-Below are the work-span analysis and benchmarking
-measurements in the CSV table `qsort-bench.csv`, followed by the corresponding
-plots in `qsort-scalability-plots.pdf`.
+### Graphical output (scalability plots)
 
+Cilkscale produces a set of scalability plots from the raw measurements in its
+reported table.  These plots are stored the PDF file pointed to by the `-oplot`
+argument to `cilkscale.py`.  Specifically, Cilkscale produces two figures for
+each analyzed region (i.e., row in the CSV table): one which plots execution
+time and one which plots parallel speedup.  For a more detailed description of
+these plots' contents, see the [Cilkscale reference
+manual](/doc/reference/cilkscale/#performance-and-scalability-analysis-plots).
 
-### The Cilkscale visualizations
-
-The plots in the PDF file `qsort-scalability-plots.pdf` that was produced by
-the above example run of `cilkscale.py` are shown below:
+Here are the plots in `csplots_qsort.pdf` for the above example:
 
 {% img "/img/qsort-cilkscale-scalability-plots.png", "1200" %}
-
-These plots are arranged in two columns and as many rows as calls to the
-Cilkscale API `wsp_dump()` function (plus one untagged row for the
-whole-program execution).
-
-The left-column figures show wall-clock execution time in seconds.
-Specifically, these figures plot four types of measurements:
-
-- Magenta-colored dots show the observed timing measurements for the
-  benchmarking runs.  (These are collected with the benchmark binary, which
-  does not perform any work-span analysis computations.)
-- A dark green line shows what the execution time would be if the computation
-  exhibited perfect linear speedup, that is, if the time on $P$ processors were
-  to be $P$ times smaller than the time it took on $1$ processor.
-- A teal line shows the bound that corresponds to the burdened parallel trace,
-  also referred to as the directed acyclic graph or "dag" of the computation.
-  This burdened-dag bound shows the expected execution time if we assume that
-  parallel tasks are always migrated across processors, with some fixed
-  migration overhead.  In the absence of other sources of parallel slowdown
-  (such as insufficient memory bandwidth, contention, etc), the burdened-dag
-  bound serves as a heuristic lower bound for the execution time if the
-  parallel computation does not exhibit sufficient parallelism or is too
-  fine-grained.
-- A mustard-yellow horizontal line shows the span bound, that is, the minimum
-  possible execution time if the computation was run on infinitely many
-  processors and there were no additional overheads for parallel scheduling,
-  etc.
-
-The right column plots contain the same information as those in the left
-column, except that the $y$-axis shows parallel speedup.  That is, all
-execution time measurements are divided by the execution time of the
-computation on $1$ processor.  Notice that the parallelism line (serial
-execution time divided by span) is not seen in the speedup plot for
-`sample_qsort()` because its value ($15.606$) falls outside the range of the
-$y$-axis ($0$–$8$).  Similarly to the span bound, the parallelism can be
-thought of as the maximum number of processors that could speed up the
-computation.
 
 
 ## Using Cilkscale to reason about parallel performance and scalability
@@ -470,21 +443,23 @@ example, specifically the `sample_qsort()` function?  We observe the following:
 A main issue with our parallel `sample_qsort()` is that it does not exhibit
 sufficient parallelism.  As it is, we may only expect to see speedup with up to
 about $15$ cores.  Moreover, computations with insufficient {% defn "parallel
-slackness" %} are generally impacted significantly by scheduling and migration
+slackness" %} are typically impacted adversely by scheduling and migration
 overheads.  As a rule of thumb, the parallelism of a computation is sufficient
 if it is about $10\times$ larger (or more) than the number of available
 processors.  On the other hand, if the parallelism is too high — say, several
 orders of magnitude higher than the number of processors — then it is often the
-case that the computation is adversely impacted by the overhead for spawning
-tasks that are too fine-grained.
+case that the overhead for spawning tasks that are too fine-grained becomes
+substantial.
 
 If we want to improve the parallel performance of `sample_qsort()`, it appears
 that our efforts, at least initially, are best spent increasing its
-parallelism.  We could do that by un-coarsening (e.g., setting
-`BASE_CASE_LENGTH = 1`) but that introduces unnecessary spawning overhead.  The
-one remaining candidate then is the call to `std::partition()`, which is
-currently serial and whose cost is linear with respect to the size of the input
-array.
+parallelism.  One way to do that might be to undo the {% defn "coarsening" %}
+of the base case (e.g., setting `BASE_CASE_LENGTH = 1`) but that makes the
+recursion too fine-grained and introduces unnecessary spawning overhead — that
+is, we may get better parallel speedup but slower execution overall.  The one
+remaining candidate then is the call to `std::partition()`, which is currently
+serial and whose cost is linear with respect to the size of the input array.
 
 We will not cover parallel partition algorithms for quicksort here, but warn
-that their design is an interesting problem!
+that designing and implementing efficient parallel partitions is an interesting
+and nontrivial exercise!
