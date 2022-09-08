@@ -142,7 +142,7 @@ To benchmark your application with Cilkscale, pass the
 `-fcilktool=cilkscale-benchmark` flag to the OpenCilk compiler:
 
 ```shell-session
-$ /opt/opencilk/bin/clang++ qsort.cpp -fopencilk -fcilktool=cilkscale-benchmark -O3 -o qsort_cilkscale_bench
+$ /opt/opencilk/bin/clang++ qsort.cpp -fopencilk -fcilktool=cilkscale-benchmark -O3 -o qsort_cs_bench
 ```
 
 In benchmarking mode, Cilkscale simply measures the wall-clock execution time
@@ -151,7 +151,7 @@ as before, followed by two lines with the timing results in [CSV
 format](https://en.wikipedia.org/wiki/Comma-separated_values):
 
 ```shell-session
-$ ./qsort_cilkscale_bench 100000000
+$ ./qsort_cs_bench 100000000
 [...]
 tag,time (seconds)
 ,2.29345
@@ -169,7 +169,7 @@ To analyze the parallel scalability of your application with Cilkscale, pass
 the `-fcilktool=cilkscale` flag to the OpenCilk compiler:
 
 ```shell-session
-$ /opt/opencilk/bin/clang++ qsort.cpp -fopencilk -fcilktool=cilkscale -O3 -o qsort_cilkscale
+$ /opt/opencilk/bin/clang++ qsort.cpp -fopencilk -fcilktool=cilkscale -O3 -o qsort_cs
 ```
 
 In work/span analysis mode, Cilkscale measures the {% defn "work" %}, {% defn
@@ -185,7 +185,7 @@ The Cilkscale work/span analysis report is printed in CSV format, similarly to
 the the Cilkscale benchmarking report but with different fields or columns:
 
 ```shell-session
-$ ./qsort_cilkscale 100000000
+$ ./qsort_cs 100000000
 [...]
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
 ,23.661,2.19196,10.7944,2.19226,10.793
@@ -200,8 +200,8 @@ _**Note:**_ The Cilkscale-instrumented binary in work/span analysis mode is
 slower than its non-instrumented counterpart.  The slowdown is generally no
 larger than $10\times$ and typically less than $2\times$.
 
-In the example above, `qsort_cilkscale` was about $1.5\times$ slower than
-`qsort` or `qsort_cilkscale_bench` ($3.4\,$s vs $2.3\,$s).
+In the example above, `qsort_cs` was about $1.5\times$ slower than
+`qsort` or `qsort_cs_bench` ($3.4\,$s vs $2.3\,$s).
 
 {% endalert %}
 
@@ -223,8 +223,7 @@ Let's see how we can use the Cilkscale API to analyze the execution of
 `sample_qsort()` function in our example quicksort application.  That is, we
 want to exclude the computations for initializing a random vector of integers
 or verifying the sort correctness, which are all executed serially anyway.  To
-achieve this, we make the following three changes to our code and save the
-edited code as `qsort_wsp.cpp`.
+achieve this, we make the following three changes to our code.
 
 1. Include the Cilkscale API header file.  E.g., after line 4 in `qsort.cpp`:
    
@@ -251,11 +250,12 @@ edited code as `qsort_wsp.cpp`.
    wsp_dump(wsp_elapsed, "qsort_sample");
    ```
 
-Then, we compile and run our program as before:
+Then, we save our edited code as `qsort_wsp.cpp`, compile it, and run as
+before:
 
 ```shell-session
-$ /opt/opencilk/bin/clang++ qsort_wsp.cpp -fopencilk -fcilktool=cilkscale -O3 -o qsort_wsp_cilkscale
-$ ./qsort_wsp_cilkscale 100000000
+$ /opt/opencilk/bin/clang++ qsort_wsp.cpp -fopencilk -fcilktool=cilkscale -O3 -o qsort_wsp_cs
+$ ./qsort_wsp_cs 100000000
 [...]
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
 sample_qsort,23.3376,1.01007,23.1049,1.01039,23.0976
@@ -263,10 +263,10 @@ sample_qsort,23.3376,1.01007,23.1049,1.01039,23.0976
 ```
 
 Notice that the Cilkscale report above now contains an additional row tagged
-'sample_qsort', which was output by the corresponding call to `wsp_dump()`:
+`sample_qsort`, which was output by the corresponding call to `wsp_dump()`:
 
 ```shell-session
-sample_qsort,23.3376,1.01007,23.1049,1.01039,23.097667
+sample_qsort,23.3376,1.01007,23.1049,1.01039,23.0976
 ```
 
 The last row in the Cilkscale report is always untagged and corresponds to
@@ -434,8 +434,8 @@ Here are the plots in `csplots_qsort.pdf` for the above example:
 So what can we surmise about the parallel scalability of our `qsort.cpp`
 example, specifically the `sample_qsort()` function?  We observe the following:
 
-- Our program shows strongly sub-linear scalability.  With $8$ processor cores,
-  the parallel speedup is only $4\times$.
+- Our program shows sub-linear scalability.  With $8$ processor cores, the
+  parallel speedup is only $4\times$.
 - The observed speedup measurements closely follow the burdened-dag bound.
 - The parallelism of `sample_qsort()` is small, only about twice as large as
   the amount of cores on the laptop where the experiments were run.
