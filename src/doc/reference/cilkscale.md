@@ -429,6 +429,6 @@ Specifically, these figures plot four types of measurements:
 **Parallel speedup.**  The right-column plots contain the same information as
 those in the left column, except that the $y$-axis shows parallel speedup.
 That is, all execution time measurements are divided by the execution time of
-the computation on $1$ processor.  The parallelism line (serial execution time
-divided by span) is not visible in the speedup plots for `sample_qsort()` if
-its value falls outside the range of the $y$-axis.
+the computation on $1$ processor.  The horizontal line for parallelism (serial
+execution time divided by span) is not visible in the speedup plots if its
+value falls outside the range of the $y$-axis.
