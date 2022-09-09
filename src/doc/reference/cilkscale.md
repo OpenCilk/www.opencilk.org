@@ -30,13 +30,6 @@ page](/doc/users-guide/install/#example).
 
 {% endalert %}
 
-{% alert "warning" %}
-
-_**TODO:**_ Link to tutorial on "how to diagnose parallel performance bugs with
-Cilkscale"?
-
-{% endalert %}
-
 
 ## Work/span analysis measurements reported by Cilkscale
 
@@ -83,18 +76,10 @@ measurements correspond to the following quantities:
 _**References:**_ 
 
 - Y. He, C.E. Leiserson, and W.M. Leiserson, [_The Cilkview scalability
-  analyzer_](https://doi.org/10.1145/1810479.1810509), SPAA 2010, pp. 145–156.
+  analyzer_](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/cilkview.pdf), SPAA 2010, pp. 145–156.
 - T.B. Schardl, B.C. Kuszmaul, I.T.A. Lee, W.M. Leiserson, and
   C.E. Leiserson, [_The Cilkprof scalability
-  profiler_](https://doi.org/10.1145/2755573.2755603), SPAA 2015, pp. 89–100.
-
-{% alert "warning" %}
-
-_**TODO:**_ Publicly accessible links to the papers?
-
-_**TODO:**_ BibTeX-powered citations?
-
-{% endalert %}
+  profiler_](http://supertech.csail.mit.edu/papers/cilkprof.pdf), SPAA 2015, pp. 89–100.
 
 {% endalert %}
 
@@ -336,9 +321,10 @@ $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py ARGUMENTS
   _(Optional)_ Comma-separated list of CPU counts to use when running empirical
   performance benchmarks.  On systems with [simultaneous multithreading
   (SMT)](https://en.wikipedia.org/wiki/Simultaneous_multithreading) (aka
-  hyper-threading on Intel CPUs), Cilkscale only uses distinct physical cores.
-  On systems with multiple processor nodes with [nonuniform memory access
-  (NUMA)](https://en.wikipedia.org/wiki/Non-uniform_memory_access), Cilkscale
+  "hyper-threading" on Intel CPUs), Cilkscale only uses distinct physical
+  cores.  On systems with multiple processor nodes with [nonuniform memory
+  access (NUMA)](https://en.wikipedia.org/wiki/Non-uniform_memory_access),
+  Cilkscale
   selects all cores from one processor before moving on to other processors.  
   _Default:_ `1,2,...,P`, where `P` is the total number of available physical
   cores.
@@ -362,7 +348,7 @@ $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py ARGUMENTS
 
 _**Example:**_
 
-{% alert "warning" %}
+{% alert "danger" %}
 
 _**BUG:**_ The following `shell-session` code block only gets rendered badly if
 it is within an alert-box.  It seems there are generally some styling issues
@@ -411,13 +397,6 @@ and the Cilkscale API was used to analyze one program region (tagged as
 program which is always analyzed by Cilkscale.  Details on how these plots were
 generated can be found in the [Cilkscale user's
 guide](/doc/users-guide/cilkscale).
-
-{% alert "warning" %}
-
-_**TODO:**_ Maybe regenerate these plots on a compute server with more cores
-and two NUMA nodes.
-
-{% endalert %}
 
 {% img "/img/qsort-cilkscale-scalability-plots.png", "1000" %}
 
