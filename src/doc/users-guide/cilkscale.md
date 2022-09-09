@@ -117,8 +117,8 @@ Sort succeeded
 
 Cilkscale instruments your Cilk program to collect performance measurements
 during its execution.  Cilkscale instrumentation operates in one of two modes:
-benchmarking or work/span analysis.  In either case, you can use Cilkscale with
-two simple steps:
+_benchmarking_ or _work/span analysis_ mode.  In either case, you can use
+Cilkscale with two simple steps:
 
 1. Pass a [Cilkscale instrumentation
    flag](/doc/reference/cilkscale/#compiler-options-for-cilkscale-instrumentation)
@@ -133,8 +133,8 @@ two simple steps:
 By default, Cilkscale only reports results for whole-program execution.  To
 additionally report results for specific sub-computations of your program, use
 the [Cilkscale C/C++
-API](#cilkscale-api-for-fine-grained-analysis-of-parallel-regions), which we
-will address shortly.
+API](/doc/reference/cilkscale/#cc++-api-for-fine-grained-workspan-analysis),
+which is addressed in the next section.
 
 ### Benchmarking instrumentation
 
@@ -157,11 +157,11 @@ tag,time (seconds)
 ,2.29345
 ```
 
-The reported time above is untagged and refers to whole-program execution.  The
-formatting of the CSV report will become clearer shortly, when we see [how to
-use the Cilkscale
+The report table above contains a single, untagged row with the execution time
+for the entire program.  Below, we will see [how to use the Cilkscale
 API](#cilkscale-api-for-fine-grained-analysis-of-parallel-regions) to benchmark
-and analyze specific code regions.
+and analyze specific code regions, which would appear as additional rows in the
+Cilkscale report table.
 
 ### Work/span analysis instrumentation
 
