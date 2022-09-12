@@ -1,0 +1,7 @@
+{
+    "layout": "layouts/page.njk",
+    "stylesheet": "users-guide.css",
+    "sidebar": "toc",
+    "background": "text-white bg-info",
+    "tags": "webdev"
+}
