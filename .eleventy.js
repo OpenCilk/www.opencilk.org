@@ -19,6 +19,10 @@ str
 const featuredPosts = (post) => post.data.featured;
 
 module.exports = function(eleventyConfig) {
+  eleventyConfig.setQuietMode(true);
+  // Reuse 11ty's built-in `slugify` filter.
+  const slugifyFn = eleventyConfig.getFilter("slugify");
+
   // Support .yaml extension in _data
   eleventyConfig.addDataExtension("yaml", contents => yaml.load(contents));
 
@@ -79,6 +83,29 @@ module.exports = function(eleventyConfig) {
     return collection
         .getFilteredByGlob("./src/posts/*.md") 
         .filter(featuredPosts);
+  });
+
+  // for defn things see https://github.com/11ty/eleventy/issues/2565
+  eleventyConfig.addCollection("defns", function (collectionApi) {
+    const res = [];
+    for (const post of collectionApi.getAll()) {
+      // see https://github.com/11ty/eleventy/discussions/2153, re: "Tried to use templateContent too early".
+      const defs = post.template.frontMatter?.content.trim().matchAll(/{% defn (?<value>.*?) %}/gi);
+      for (const { groups } of defs) {
+        const [ term, text ] = groups.value.split(",").map(s => s.trim().replace(/"/g, ""));
+        res.push({ url: post.url, term, text });
+      }
+    }
+    return res;
+  });
+
+  eleventyConfig.addCollection("defnTerms", function (collectionApi) {
+    const defns = collectionApi.getFilteredByTag("glossary");
+    // Possibly over-engineered here. We might really only care about the slugified title and not the unslugged version.
+    const data = defns.reduce((acc, { data }) => {
+      return Object.assign(acc, {[slugifyFn(data.title)]: data.title});
+    }, {});
+    return data;
   });
 
   eleventyConfig.addCollection('glossary', (collection) => {
@@ -151,16 +178,21 @@ module.exports = function(eleventyConfig) {
     function(source='', size='400') { return `<img style="margin: 0.2em 4em 0.2em 2em; max-width:${size}; max-height:${size}" src="${source}" class="img-fluid float-start"></img>` }
   );
 
-  // Shortcode for glossary links
+  // Shortcode for glossary links (see https://github.com/11ty/eleventy/issues/2565#issuecomment-1246106301)
   eleventyConfig.addShortcode(
     "defn",
-    function(term='', text='') { 
-      const url = "/doc/reference/glossary/#" + slugify(term)
-      if (text=='') 
-        docText = term
-      else
-        docText = text
-      return `<a class="defn" href="${url}">${docText}</a>` 
+    function(term='', text='') {
+      // Some sneaky stuff here to get the context from the `this.ctx` object so we can access
+      // `collections` and `page` variables from within our shortcode.
+      const { collections, page } = this.ctx;
+      const slug = slugifyFn(term);
+      const glossaryUrl = `/doc/reference/glossary/#${slug}`;
+      // If our `collections.defnTerms` does NOT include the current slug, it's likely a bad link/defn.
+      if (!Object.keys(collections.defnTerms).includes(slug)) {
+        console.error(`[${page.url}] Unknown term: "${term}" => ${glossaryUrl}`);
+        process.exitCode = 1;
+      }
+      return `<a class="defn" href="${glossaryUrl}">${text || term}</a>`;
     }
   );
 
