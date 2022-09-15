@@ -1,5 +1,5 @@
 ---
-title: Cilkscale reference manual
+title: Cilkscale reference
 tags:
   - cilkscale
   - tools
@@ -16,7 +16,7 @@ The OpenCilk Cilkscale tool comprises three main components:
 - A Python script for benchmarking and visualization of parallel performance
   and scalability on multiple cores.
 
-This reference page summarizes the work/span analysis measurements reported by
+This reference guide summarizes the work/span analysis measurements reported by
 Cilkscale, and details the interface, options, and output of each component.
 To learn more about how to use Cilkscale to analyze the parallel performance of
 your Cilk program, see the [Cilkscale user's
