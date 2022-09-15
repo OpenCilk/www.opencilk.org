@@ -4,5 +4,6 @@
     "permalink": "/doc/reference/glossary/{{ title | slugify }}/", 
     "eleventyNavigation": {
         "parent": "Glossary"
-    }
+    },
+    "tags": "glossary"
 }
