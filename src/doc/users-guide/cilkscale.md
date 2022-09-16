@@ -367,8 +367,8 @@ For example, the above run produced the following table:
 ```shell-session
 $ cat cstable_qsort.csv
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism,1c time (seconds),2c time (seconds),3c time (seconds),4c time (seconds),5c time (seconds),6c time (seconds),7c time (seconds),8c time (seconds)
-sample_qsort,24.6038,0.979483,25.1192,0.97977,25.1118,8.60446,4.55467,3.21454,2.74446,2.36748,2.13149,1.91633,1.81146
-,25.7335,2.10917,12.2008,2.10945,12.1991,9.43337,5.57514,4.08113,3.61695,3.24241,3.02917,2.81753,2.70128
+sample_qsort,24.2803,0.947187,25.6341,0.947475,25.6263,8.2356,4.29502,3.20479,2.66523,2.32521,2.08997,1.9421,1.78548
+,25.3529,2.01976,12.5524,2.02005,12.5506,9.03899,5.14091,4.04561,3.4967,3.1653,2.94053,2.80945,2.68116
 ```
 
 To see the table contents more clearly, you can import `cstable_qsort.csv` into
@@ -377,10 +377,10 @@ a spreadsheet (e.g., with [LibreOffice](https://www.libreoffice.org/)) or
 tools](https://chrisjean.com/view-csv-data-from-the-command-line/):
 
 ```shell-session
-$ cat cstable_qsort.csv | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
-1 tag           work (seconds)  span (seconds)  parallelism  burdened_span (seconds)  burdened_parallelism  1c time (seconds) . . .
-2 sample_qsort  24.6038         0.979483        25.1192      0.97977                  25.1118               8.60446           . . .
-3 25.7335       2.10917         12.2008         2.10945      12.1991                  9.43337               5.57514           . . .
+$ cat cstable_qsort.csv | sed -e 's/^,/ ,/g' | column -s, -t | less -#5 -N -S
+1 tag           work (seconds)  span (seconds)  parallelism  burdened_span (seconds)  burdened_parallelism 1c time (seconds)  . . .
+2 sample_qsort  24.2803         0.947187        25.6341      0.947475                 25.6263              8.2356             . . .
+3               25.3529         2.01976         12.5524      2.02005                  12.5506              9.03899            . . .
 ```
 
 ### Scalability plots
@@ -395,7 +395,7 @@ page](/doc/reference/cilkscale/#performance-and-scalability-analysis-plots).
 
 Here are the plots in `csplots_qsort.pdf` for the above example:
 
-{% img "/img/qsort-cilkscale-scalability-plots.png", "1200" %}
+{% img "/img/qsort-cilkscale-scalability-plots.png", "1000" %}
 
 
 ## Discussion: diagnosing performance limitations
