@@ -386,14 +386,16 @@ Here are the plots in `csplots_qsort.pdf` for the above example:
 {% img "/img/qsort-cilkscale-scalability-plots.png", "1200" %}
 
 
-## Insights
+## Discussion: diagnosing performance limitations
 
-So what can we surmise about the parallel scalability of our `qsort.cpp`
-example, specifically the `sample_qsort()` function?  We observe the following:
+So what can we surmise about the parallel performance and scalability of our
+`qsort.cpp` application, specifically the `sample_qsort()` function?
+
+We observe the following:
 
 - Our program shows sub-linear scalability.  With 8 processor cores, the
   parallel speedup is only about 4.7x.
-- The observed measurements roughly follow the burdened-dag bound and fall
+- The observed performance roughly follows the burdened-dag bound and falls
   short of it as the number of cores increases.
 - The parallelism of `sample_qsort()` is 25, which is only about three times as
   large as the amount of cores on the laptop where the experiments were run.
