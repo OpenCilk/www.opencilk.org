@@ -81,8 +81,6 @@ int main(int argc, char* argv[])
 }
 ```
 
-
-
 ## Identify parallelism
 
 The  `sample_qsort` function is invoked recursively on two disjoint subarrays on line 16 and line 17. These independent tasks will be relatively long-running and are good candidates for parallelization. This proposed parallelization of quicksort represents a typical divide-and-conquer strategy for parallelizing recursive algorithms. An intrepid reader might also notice that the partition algorithm invoked on line 13 may also be parallelized for even greater scalability.
@@ -91,7 +89,7 @@ The  `sample_qsort` function is invoked recursively on two disjoint subarrays on
 
 The next step is to actually introduce parallelism into our quicksort program. This can be accomplished through the judicious use of OpenCilk's three keywords for expressing parallelism: `cilk_for`, `cilk_spawn`, and `cilk_scope`. 
 
-In this example, we shall make use of just the `cilk_spawn` and `cilk_scope` keywords. The `cilk_spawn` keyword indicates that a function (the *child*) may be executed in parallel with the code that follows the `cilk_spawn` statement (the *parent*). Note that the keyword *allows* but does not *require* parallel operation. The OpenCilk scheduler will dynamically determine what actually gets executed in parallel when multiple processors are available. The `cilk_scope` statement indicates that the function may not continue until all `cilk_spawn` requests within the scoped region in the same function have completed. 
+In this example, we shall make use of just the `cilk_spawn` and `cilk_scope` keywords. The `cilk_spawn` keyword indicates that a function (the *child*) may be executed in parallel with the code that follows the `cilk_spawn` statement (the *parent*). Note that the keyword *allows* but does not *require* parallel operation. The OpenCilk scheduler will dynamically determine what actually gets executed in parallel when multiple processors are available. The `cilk_scope` statement indicates that the function may not continue until all `cilk_spawn` requests within the scoped region have completed. 
 
 Let us walk through a version of the quicksort code that has been parallelized using OpenCilk.
 
@@ -204,4 +202,3 @@ Plots illustrating the parallel execution time and speedup of the quicksort prog
 ![Cilkscale speedup for quicksort.](/img/cilkscale-qsort-speedup.png "Quicksort speedup")
 
 ![Cilkscale execution time for quicksort.](/img/cilkscale-qsort-execution-time.png "Quicksort execution time")
-
