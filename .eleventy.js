@@ -190,7 +190,7 @@ module.exports = function(eleventyConfig) {
       // If our `collections.defnTerms` does NOT include the current slug, it's likely a bad link/defn.
       if (!Object.keys(collections.defnTerms).includes(slug)) {
         console.error(`[${page.url}] Unknown term: "${term}" => ${glossaryUrl}`);
-        process.exitCode = 1;
+        // process.exitCode = 1;
       }
       return `<a class="defn" href="${glossaryUrl}">${text || term}</a>`;
     }
