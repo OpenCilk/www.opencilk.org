@@ -26,7 +26,7 @@ Let us illustrate the process of parallelizing an existing serial code by walkin
 
 Note that in this example we use the function name `sample_qsort` in order to avoid confusion with the Standard C Library `qsort` function.
 
-```c
+```cilkc#
 #include <algorithm>
 #include <iostream>
 #include <iterator>
@@ -93,7 +93,7 @@ In this example, we shall make use of just the `cilk_spawn` and `cilk_scope` key
 
 Let us walk through a version of the quicksort code that has been parallelized using OpenCilk.
 
-```c
+```cilkc#
 void sample_qsort(int * begin, int * end)
 {
     if (begin != end) {
