@@ -371,7 +371,10 @@ sample_qsort,24.6038,0.979483,25.1192,0.97977,25.1118,8.60446,4.55467,3.21454,2.
 ,25.7335,2.10917,12.2008,2.10945,12.1991,9.43337,5.57514,4.08113,3.61695,3.24241,3.02917,2.81753,2.70128
 ```
 
-To see the columns more clearly, you can import `cstable_qsort.csv` into a spreadsheet (e.g., [LibreOffice](https://www.libreoffice.org/)) or enhance `cat` with a more elaboriate script like [this](https://chrisjean.com/view-csv-data-from-the-command-line/).
+To see the table contents more clearly, you can import `cstable_qsort.csv` into
+a spreadsheet (e.g., with [LibreOffice](https://www.libreoffice.org/)) or
+[pretty-print it with command-line 
+tools](https://chrisjean.com/view-csv-data-from-the-command-line/):
 
 ```shell-session
 $ cat cstable_qsort.csv | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
@@ -395,18 +398,25 @@ Here are the plots in `csplots_qsort.pdf` for the above example:
 {% img "/img/qsort-cilkscale-scalability-plots.png", "1200" %}
 
 
-## Insights
+## Discussion: diagnosing performance limitations
 
-We have now completed the task of measuring the parallel performance and scalability of your Cilk program.
-So ... what does it mean? We will return to that question soon with forthcoming documentation and blog posts.
-Please [let us know](/contribute/contact/) if you'd like to be notified about important updates to OpenCilk and its documentation.
+We have seen how to measure and explore the parallel performance and 
+scalability of a Cilk program.  So... what next?  How can we translate the 
+Cilkscale results into actionable insights on how to _improve_ performance?  As
+with serial-program profiling, the answer varies somewhat depending on the 
+program at hand.  We will return to this question with forthcoming 
+documentation and blog posts.  Please [let us know](/contribute/contact/) if 
+you'd like to be notified about important updates to OpenCilk and its
+documentation.
 
-In the meantime, we offer some thoughts about the parallel scalability of our `qsort.cpp`
-example, specifically the `sample_qsort()` function:
+In the meantime, we offer a brief discussion regarding the parallel scalability
+of our `qsort.cpp` example, specifically the `sample_qsort()` function.
+
+We observe the following:
 
 - Our program shows sub-linear scalability.  With 8 processor cores, the
   parallel speedup is only about 4.7x.
-- The observed measurements roughly follow the burdened-dag bound and fall
+- The observed performance roughly follows the burdened-dag bound and falls
   short of it as the number of cores increases.
 - The parallelism of `sample_qsort()` is 25, which is only about three times as
   large as the amount of cores on the laptop where the experiments were run.
