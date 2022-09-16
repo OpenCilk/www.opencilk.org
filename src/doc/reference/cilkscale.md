@@ -13,8 +13,8 @@ The OpenCilk Cilkscale tool comprises three main components:
 
 - Infrastructure in the OpenCilk compiler and runtime for work/span analysis.
 - A C/C++ API for fine-grained analysis of program regions.
-- A Python script for benchmarking and visualization of parallel performance
-  and scalability on multiple cores.
+- A Python script that automates scalability analysis, benchmarking on multiple
+  cores, and visualization of parallel performance results.
 
 This reference page summarizes the work/span analysis measurements reported by
 Cilkscale, and details the interface, options, and output of each component.
@@ -31,11 +31,10 @@ page](/doc/users-guide/install/#example).
 {% endalert %}
 
 
-## Work/span analysis measurements reported by Cilkscale
+## Work/span analysis measurements
 
-Cilkscale work/span analysis reports are output as a table of measurements in
-[CSV format](https://en.wikipedia.org/wiki/Comma-separated_values).  These
-measurements correspond to the following quantities:
+Cilkscale work/span analysis reports contain the following measurements for
+each analyzed program region.
 
 - **Work**  
   The total {% defn "work" %} $(T_1)$ of the computation, measured as CPU time.
@@ -84,7 +83,7 @@ _**References:**_
 {% endalert %}
 
 
-## Compiler options for Cilkscale instrumentation
+## Compiler options
 
 - `-fcilktool=cilkscale`  
   Instrument the program to measure work and span in
@@ -120,7 +119,7 @@ compilation and linking.
 {% endalert %}
 
 
-## Cilkscale report output file
+## Analysis report file
 
 When a Cilkscale-instrumented program is executed, Cilkscale reports its
 measurements by printing them to the standard output stream by default.  To
@@ -153,10 +152,10 @@ in an existing directory.
 {% endalert %}
 
 
-## C/C++ API for fine-grained work/span analysis
+## C/C++ API for fine-grained analysis
 
-The Cilkscale C/C++ API allows fine-grained work/span analysis of specific code
-regions.  If the program is compiled with the flag `-fcilktool=cilkscale` or
+The Cilkscale C/C++ API enables fine-grained analysis of specific code regions.
+If the program is compiled with the flag `-fcilktool=cilkscale` or
 `-fcilktool=cilkscale-instructions`, the Cilkscale API functions measure work
 and span (in seconds or pseudo-instructions, respectively) as described below.
 If, however, the program is compiled with the flag
@@ -198,8 +197,8 @@ parallel trace.
 wsp_t wsp_zero()
 ```
 
-Return zero work and span measurement value.  Needed to initialize work/span
-accumulation variables.
+Return a value with zero work and span measurements.  Needed to initialize
+work/span accumulation variables.
 
 ### Work/span difference
 
@@ -226,9 +225,10 @@ accumulating work/span measurements of non-contiguous program regions.
 void wsp_dump(wsp_t wsp, const char *tag)
 ```
 
-Print a tagged row with the measurements of `wsp` in CSV format.  The fields in the
-printed row are, in order: the `tag` string, work, span, parallelism, burdened
-span, and burdened parallelism.
+Print a tagged row with the measurements of `wsp` in [CSV
+format](https://en.wikipedia.org/wiki/Comma-separated_values).  The fields in
+the printed row are, in order: the `tag` string, work, span, parallelism,
+burdened span, and burdened parallelism.
 
 See also: [Cilkscale work/span analysis
 measurements](#workspan-analysis-measurements-reported-by-cilkscale).
@@ -312,11 +312,14 @@ $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py ARGUMENTS
 
 - `-h`, `--help`  
   Print usage documentation and exit.
+
 - `-c BIN_CILKSCALE`, `--cilkscale BIN_CILKSCALE`  
   _(Required)_ Path to program binary instrumented with `-fcilktool=cilkscale`.
+
 - `-b BIN_CILKSCALE_BENCH`, `--cilkscale-benchmark BIN_CILKSCALE_BENCH`  
   _(Required)_ Path to program binary instrumented with
   `-fcilktool=cilkscale-benchmark`.
+
 - `-cpus CPU_COUNTS`, `--cpu-counts CPU_COUNTS`  
   _(Optional)_ Comma-separated list of CPU counts to use when running empirical
   performance benchmarks.  On systems with [simultaneous multithreading
@@ -328,17 +331,21 @@ $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py ARGUMENTS
   selects all cores from one processor before moving on to other processors.  
   _Default:_ `1,2,...,P`, where `P` is the total number of available physical
   cores.
+
 - `-ocsv OUTPUT_CSV`, `--output-csv OUTPUT_CSV`  
   _(Optional)_ Path to CSV file for table of work/span and benchmarking measurements.  
   _Default:_ `out.csv`.
+
 - `-oplot OUTPUT_PLOT`, `--output-plot OUTPUT_PLOT`  
   _(Optional)_ Path to PDF file for graphical plots of work/span and
   benchmarking measurements.  
   _Default:_ `plot.pdf`
+
 - `-rplot ROWS_TO_PLOT`, `--rows-to-plot ROWS_TO_PLOT`  
   _(Optional)_ Comma-separated list of rows (0-indexed) in the CSV table for
   which to generate plots; or `all` to plot all rows.  
   _Default:_ `all`.
+
 - `-a ARG1 ARG2 ...`, `--args ARG1 ARG2 ...`  
   _(Optional)_ Space-separated list of command-line arguments to pass to the
   program binary.  
