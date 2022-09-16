@@ -371,6 +371,18 @@ sample_qsort,24.6038,0.979483,25.1192,0.97977,25.1118,8.60446,4.55467,3.21454,2.
 ,25.7335,2.10917,12.2008,2.10945,12.1991,9.43337,5.57514,4.08113,3.61695,3.24241,3.02917,2.81753,2.70128
 ```
 
+To see the table contents more clearly, you can import `cstable_qsort.csv` into
+a spreadsheet (e.g., with [LibreOffice](https://www.libreoffice.org/)) or
+[pretty-print it with command-line
+tools](https://chrisjean.com/view-csv-data-from-the-command-line/):
+
+```shell-session
+$ cat cstable_qsort.csv | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
+1 tag           work (seconds)  span (seconds)  parallelism  burdened_span (seconds)  burdened_parallelism  1c time (seconds) . . .
+2 sample_qsort  24.6038         0.979483        25.1192      0.97977                  25.1118               8.60446           . . .
+3 25.7335       2.10917         12.2008         2.10945      12.1991                  9.43337               5.57514           . . .
+```
+
 ### Scalability plots
 
 Cilkscale produces a set of scalability plots from the raw measurements in its
@@ -388,8 +400,17 @@ Here are the plots in `csplots_qsort.pdf` for the above example:
 
 ## Discussion: diagnosing performance limitations
 
-So what can we surmise about the parallel performance and scalability of our
-`qsort.cpp` application, specifically the `sample_qsort()` function?
+We have seen how to measure and explore the parallel performance and
+scalability of a Cilk program.  So... what next?  How can we translate the
+Cilkscale results into actionable insights on how to _improve_ performance?  As
+with serial-program profiling, the answer varies somewhat depending on the
+program at hand.  We will return to this question with forthcoming
+documentation and blog posts.  Please [let us know](/contribute/contact/) if
+you'd like to be notified about important updates to OpenCilk and its
+documentation.
+
+In the meantime, we offer a brief discussion regarding the parallel scalability
+of our `qsort.cpp` example, specifically the `sample_qsort()` function.
 
 We observe the following:
 
