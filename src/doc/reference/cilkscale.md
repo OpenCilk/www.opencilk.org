@@ -16,7 +16,7 @@ The OpenCilk Cilkscale tool comprises three main components:
 - A Python script for benchmarking and visualization of parallel performance
   and scalability on multiple cores.
 
-This reference guide summarizes the work/span analysis measurements reported by
+This reference page summarizes the work/span analysis measurements reported by
 Cilkscale, and details the interface, options, and output of each component.
 To learn more about how to use Cilkscale to analyze the parallel performance of
 your Cilk program, see the [Cilkscale user's
@@ -226,12 +226,12 @@ accumulating work/span measurements of non-contiguous program regions.
 void wsp_dump(wsp_t wsp, const char *tag)
 ```
 
-Print a tagged row of the work/span measurements of `wsp` in CSV format.  The
-fields in the printed row are, in order: the `tag` string, work, span,
-parallelism, burdened span, and burdened parallelism.
+Print a tagged row with the measurements of `wsp` in CSV format.  The fields in the
+printed row are, in order: the `tag` string, work, span, parallelism, burdened
+span, and burdened parallelism.
 
-See also: [Cilkscale report
-output](/doc/reference/cilkscale/#cilkscale-report-output).
+See also: [Cilkscale work/span analysis
+measurements](#workspan-analysis-measurements-reported-by-cilkscale).
 
 ### C++ operator overloads
 
@@ -322,7 +322,7 @@ $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py ARGUMENTS
   performance benchmarks.  On systems with [simultaneous multithreading
   (SMT)](https://en.wikipedia.org/wiki/Simultaneous_multithreading) (aka
   "hyper-threading" on Intel CPUs), Cilkscale only uses distinct physical
-  cores.  On systems with multiple processor nodes with [nonuniform memory
+  cores.  On systems with multiple processor nodes with [non-uniform memory
   access (NUMA)](https://en.wikipedia.org/wiki/Non-uniform_memory_access),
   Cilkscale
   selects all cores from one processor before moving on to other processors.  
