@@ -375,7 +375,6 @@ Namespace(args=['100000000'], cilkscale='./qsort_cs', cilkscale_benchmark='./qso
 >> STDOUT (./qsort_cilkscale 100000000)
 Sorting 100000000 random integers
 Sort succeeded
-Time(sample_qsort) = 2.13294 sec
 << END STDOUT
 
 >> STDERR (./qsort_cilkscale 100000000)
