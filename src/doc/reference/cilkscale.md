@@ -11,7 +11,7 @@ eleventyNavigation:
 
 The OpenCilk Cilkscale tool comprises three main components:
 
-- Infrastructure in the OpenCilk compiler and runtime for work/span analysis.
+- Infrastructure in the OpenCilk compiler and runtime system for work/span analysis.
 - A C/C++ API for fine-grained analysis of program regions.
 - A Python script that automates scalability analysis, benchmarking on multiple
   cores, and visualization of parallel performance results.
@@ -36,27 +36,22 @@ page](/doc/users-guide/install/#example).
 Cilkscale work/span analysis reports contain the following measurements for
 each analyzed program region.
 
-- **Work**  
-  The total {% defn "work" %} $(T_1)$ of the computation, measured as CPU time.
+- {% defn "Work" %}: the CPU time of the computation when run on one processor, sometimes denoted $(T_1)$.
   The actual wall-clock time it takes to run the computation will generally be
   smaller than the work, since the latter adds together the time spent on
   different CPU cores in parallel.
 
-- **Span**  
-  The {% defn "span" %} $(T_{\infty})$ of the computation, measured as CPU
-  time.  The span is the maximum amount of work along any path in the {% defn
-  "parallel trace" %} of the computation.  One way of understanding the span is
-  as the expected wall-clock execution time if the computation was run on an
-  infinite number of parallel cores.
+- {% defn "Span" %}: the theoretically fastest CPU time of the computation
+  when run on an infinite number of parallel processors (discounting overheads for communication and scheduling),
+  sometimes denoted $(T_{\infty})$. The span is the maximum amount of work along any path in the {% defn
+  "parallel trace" %} of the computation.
 
-- **Parallelism**  
-  The {% defn "parallelism" %} of a computation is its work-to-span ratio $(T_1
-  / T_{\infty})$.  Parallelism can be thought of as the maximum possible
-  parallel speedup of the computation, or as the maximum number of cores that
-  could theoretically yield perfect linear speedup.
+- {% defn "Parallelism" %}: the ratio of work to span for a computation $(T_1 / T_{\infty})$,
+  which is the maximum speedup it could attain when run on an infinite number of processors.
+  Parallelism can also be interpreted as the maximum number of processors that
+  could theoretically yield {% defn "perfect linear speedup" %}.
 
-- **Burdened span**  
-  The burdened span is similar to the span after accounting for worst-case
+- ***Burdened span***: similar to span after accounting for worst-case
   scheduling overhead.  The scheduling burden overhead is based on a heuristic
   estimate of the costs associated with migrating and synchronizing parallel
   tasks among processors.  The worst-case scenario is when every time it is
@@ -65,9 +60,8 @@ each analyzed program region.
   slow down parallel execution, such as insufficient memory bandwidth,
   contention on parallel resources, false sharing, etc.)
 
-- **Burdened parallelism**  
-  The burdened parallelism is the ratio of work to burdened span.  It can be
-  thought of as a lower bound for the parallelism of the computation assuming
+- ***Burdened parallelism***: the ratio of work to burdened span.  It can be
+  interpreted as a lower bound for the parallelism of the computation assuming
   worst-case parallel scheduling.
 
 {% alert "info" %}
@@ -231,7 +225,7 @@ the printed row are, in order: the `tag` string, work, span, parallelism,
 burdened span, and burdened parallelism.
 
 See also: [Cilkscale work/span analysis
-measurements](#workspan-analysis-measurements-reported-by-cilkscale).
+measurements](#workspan-analysis-measurements).
 
 ### C++ operator overloads
 
@@ -243,7 +237,7 @@ variables:
 - The `<<` operator can be used with a prefix argument of type `std::ostream`
   or `std::ofstream` to print work/span measurements.  The `<<` operator
   behaves similarly to `wsp_dump()`, except that (1) it does not print a tag
-  field and (2) its output stream is unaffected by the `CILKSCALE_OUT`
+  field, and (2) its output stream is unaffected by the `CILKSCALE_OUT`
   environment variable.
 
 ### Examples
@@ -321,7 +315,7 @@ $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py ARGUMENTS
   `-fcilktool=cilkscale-benchmark`.
 
 - `-cpus CPU_COUNTS`, `--cpu-counts CPU_COUNTS`  
-  _(Optional)_ Comma-separated list of CPU counts to use when running empirical
+  _(Optional)_ Comma-separated list of how many cores to use when running empirical
   performance benchmarks.  On systems with [simultaneous multithreading
   (SMT)](https://en.wikipedia.org/wiki/Simultaneous_multithreading) (aka
   "hyper-threading" on Intel CPUs), Cilkscale only uses distinct physical
@@ -355,14 +349,6 @@ $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py ARGUMENTS
 
 _**Example:**_
 
-{% alert "danger" %}
-
-_**BUG:**_ The following `shell-session` code block only gets rendered badly if
-it is within an alert-box.  It seems there are generally some styling issues
-with reference pages.
-
-{% endalert %}
-
 ```shell-session
 $ /opt/opencilk/bin/clang qsort.c -fopencilk -fcilktool=cilkscale -O3 -o qsort_cs
 $ /opt/opencilk/bin/clang qsort.c -fopencilk -fcilktool=cilkscale-benchmark -O3 -o qsort_cs_bench
@@ -372,12 +358,12 @@ $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py \
     --args 100000000
 Namespace(args=['100000000'], cilkscale='./qsort_cs', cilkscale_benchmark='./qsort_cs_bench', cpu_counts=None, output_csv='qsort-bench.csv', output_plot='qsort-scalability-plots.pdf', rows_to_plot='all')
 
->> STDOUT (./qsort_cilkscale 100000000)
+\>> STDOUT (./qsort_cilkscale 100000000)
 Sorting 100000000 random integers
 Sort succeeded
 << END STDOUT
 
->> STDERR (./qsort_cilkscale 100000000)
+\>> STDERR (./qsort_cilkscale 100000000)
 << END STDERR
 
 INFO:runner:Generating scalability data for 8 cpus.
@@ -396,7 +382,7 @@ INFO:plotter:Generating plot (2 subplots)
 
 ### Performance and scalability analysis plots
 
-An example set of plots that are produced by the `cilkscale.py` script is shown
+An example set of plots produced by the `cilkscale.py` script is shown
 below.  In this example, the instrumented application is a parallel quicksort
 and the Cilkscale API was used to analyze one program region (tagged as
 "sampled_qsort" in the relevant call to `wsp_dump()`) in addition to the whole
@@ -404,7 +390,7 @@ program which is always analyzed by Cilkscale.  Details on how these plots were
 generated can be found in the [Cilkscale user's
 guide](/doc/users-guide/cilkscale).
 
-{% img "/img/qsort-cilkscale-scalability-plots.png", "1000" %}
+{% img "/img/qsort-cilkscale-scalability-plots.png", "100%" %}
 
 The Cilkscale visualization plots are arranged in two columns and as many rows
 as calls to the Cilkscale API `wsp_dump()` function (plus one untagged row for
@@ -419,11 +405,11 @@ Specifically, these figures plot four types of measurements:
   measurement overheads.
 - A dark green line shows what the execution time would be if the computation
   exhibited _perfect linear speedup_, that is, if the time on $P$ processors
-  were to be $P$ times smaller than the time it took on $1$ processor.
+  were to be $P$ times smaller than the time it took on one processor.
 - A teal line shows the heuristic _burdened-dag bound_ of the execution time
   (the parallel trace of the computation is sometimes also referred to as its
   directed acyclic graph or dag).  In the absence of other sources of parallel
-  slowdown such as insufficient memory bandwidth, contention, etc, the
+  slowdown such as insufficient memory bandwidth, contention, etc., the
   burdened-dag bound serves as a heuristic lower bound for the execution time
   if the parallel computation does not exhibit sufficient parallelism and is
   not too fine-grained.
@@ -433,8 +419,8 @@ Specifically, these figures plot four types of measurements:
   etc.
 
 **Parallel speedup.**  The right-column plots contain the same information as
-those in the left column, except that the $y$-axis shows parallel speedup.
+those in the left column, except that the y-axis shows parallel speedup.
 That is, all execution time measurements are divided by the execution time of
-the computation on $1$ processor.  The horizontal line for parallelism (serial
+the computation on one processor.  The horizontal line for parallelism (serial
 execution time divided by span) is not visible in the speedup plots if its
-value falls outside the range of the $y$-axis.
+value falls outside the range of the y-axis.

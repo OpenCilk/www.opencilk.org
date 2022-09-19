@@ -30,7 +30,7 @@ how to use them to diagnose parallel performance limitations of your
 application.  For details on the Cilkscale components, user options, and output
 information, see the [Cilkscale reference page](/doc/reference/cilkscale).
 
-{% img "/img/qsort-cilkscale-scalability-plots-sample-qsort-only.png", "1000" %}
+{% img "/img/qsort-cilkscale-scalability-plots-sample-qsort-only.png", "100%" %}
 
 {% alert "info" %}
 
@@ -192,9 +192,9 @@ achieve this, we make the following three changes to our code.
    line 35 in `qsort.cpp`:
    
    ```cpp
-   wsp_t wsp_tic = wsp_getworkspan();
+   wsp_t start = wsp_getworkspan();
    sample_qsort(a.data(), a.data() + a.size());
-   wsp_t wsp_toc = wsp_getworkspan();
+   wsp_t end = wsp_getworkspan();
    ```
 
 3. Evaluate the work and span between the relevant snapshots and print the
@@ -202,8 +202,8 @@ achieve this, we make the following three changes to our code.
    terminates in line 39 in `qsort.cpp`:
    
    ```cpp
-   wsp_t wsp_elapsed = wsp_sub(wsp_toc, wsp_tic);
-   wsp_dump(wsp_elapsed, "qsort_sample");
+   wsp_t elapsed = wsp_sub(end, start);
+   wsp_dump(elapsed, "qsort_sample");
    ```
 
 Then, we save our edited program as `qsort_wsp.cpp`, compile it with Cilkscale
@@ -395,7 +395,7 @@ page](/doc/reference/cilkscale/#performance-and-scalability-analysis-plots).
 
 Here are the plots in `csplots_qsort.pdf` for the above example:
 
-{% img "/img/qsort-cilkscale-scalability-plots.png", "1000" %}
+{% img "/img/qsort-cilkscale-scalability-plots.png", "100%" %}
 
 
 ## Discussion: diagnosing performance limitations
