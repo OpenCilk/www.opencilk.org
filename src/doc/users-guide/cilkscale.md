@@ -142,7 +142,7 @@ Cilkscale work/span analysis report in CSV format:
 $ ./qsort_cs 100000000
 [...]
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-,23.661,2.19196,10.7944,2.19226,10.793
+,26.9397,2.29954,11.7153,2.29986,11.7136
 ```
 
 The work, span, and parallelism measurements in the report depend on your
@@ -214,15 +214,15 @@ $ /opt/opencilk/bin/clang++ qsort_wsp.cpp -fopencilk -fcilktool=cilkscale -O3 -o
 $ ./qsort_wsp_cs 100000000
 [...]
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-sample_qsort,23.3376,1.01007,23.1049,1.01039,23.0976
-,24.524,2.19645,11.1653,2.19676,11.1637
+sample_qsort,26.1502,1.08122,24.1859,1.08153,24.1788
+,27.3133,2.24433,12.1699,2.24465,12.1682
 ```
 
 Notice that the Cilkscale report above now contains an additional row tagged
 `sample_qsort`, which was output by the corresponding call to `wsp_dump()`:
 
 ```shell-session
-sample_qsort,23.3376,1.01007,23.1049,1.01039,23.0976
+sample_qsort,26.1502,1.08122,24.1859,1.08153,24.1788
 ```
 
 The last row in the Cilkscale report is always untagged and corresponds to
@@ -367,8 +367,8 @@ For example, the above run produced the following table:
 ```shell-session
 $ cat cstable_qsort.csv
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism,1c time (seconds),2c time (seconds),3c time (seconds),4c time (seconds),5c time (seconds),6c time (seconds),7c time (seconds),8c time (seconds)
-sample_qsort,24.2803,0.947187,25.6341,0.947475,25.6263,8.2356,4.29502,3.20479,2.66523,2.32521,2.08997,1.9421,1.78548
-,25.3529,2.01976,12.5524,2.02005,12.5506,9.03899,5.14091,4.04561,3.4967,3.1653,2.94053,2.80945,2.68116
+sample_qsort,26.5126,0.986602,26.8726,0.986927,26.8638,8.67705,4.6205,3.3648,2.75881,2.43091,2.1171,1.93193,1.7941
+,27.6918,2.16583,12.7858,2.16616,12.7839,9.68071,5.52596,4.26341,3.65358,3.32762,3.02633,2.82155,2.67563
 ```
 
 To see the table contents more clearly, you can import `cstable_qsort.csv` into
@@ -379,8 +379,8 @@ tools](https://chrisjean.com/view-csv-data-from-the-command-line/):
 ```shell-session
 $ cat cstable_qsort.csv | sed -e 's/^,/ ,/g' | column -s, -t | less -#5 -N -S
 1 tag           work (seconds)  span (seconds)  parallelism  burdened_span (seconds)  burdened_parallelism 1c time (seconds)  . . .
-2 sample_qsort  24.2803         0.947187        25.6341      0.947475                 25.6263              8.2356             . . .
-3               25.3529         2.01976         12.5524      2.02005                  12.5506              9.03899            . . .
+2 sample_qsort  26.5126         0.986602        26.8726      0.986927                 26.8638              8.67705             . . .
+3               27.6918         2.16583         12.7858      2.16616                  12.7839              9.68071            . . .
 ```
 
 ### Scalability plots
@@ -415,11 +415,12 @@ of our `qsort.cpp` example, specifically the `sample_qsort()` function.
 We observe the following:
 
 - Our program shows sub-linear scalability.  With 8 processor cores, the
-  parallel speedup is only about 4.7x.
+  parallel speedup is only about 4.9x.
 - The observed performance roughly follows the burdened-dag bound and falls
   short of it as the number of cores increases.
-- The parallelism of `sample_qsort()` is 25, which is only about three times as
-  large as the amount of cores on the laptop where the experiments were run.
+- The parallelism of `sample_qsort()` is about 27, which is just over three
+  times as large as the amount of cores on the laptop where the experiments
+  were run.
 
 A main issue with our parallel `sample_qsort()` is that it does not exhibit
 sufficient parallelism.  The parallelism of a computation upper-bounds the

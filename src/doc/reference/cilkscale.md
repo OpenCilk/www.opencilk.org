@@ -134,7 +134,7 @@ $ CILKSCALE_OUT=qsort_workspan_report.csv ./qsort_cs 100000000
 [...program output without Cilkscale's report...]
 $ cat qsort_workspan_report.csv
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-,23.3894,2.89761,8.07194,2.89796,8.07098
+,26.3454,2.22239,11.8545,2.22271,11.8528
 ```
 
 {% endalert %}
