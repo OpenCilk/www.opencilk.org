@@ -12,8 +12,8 @@ eleventyNavigation:
 The OpenCilk Cilkscale tool comprises three main components:
 
 - Infrastructure in the OpenCilk compiler and runtime system for work/span
-  analysis.
-- A C/C++ API for fine-grained analysis of program regions.
+  analysis,
+- A C/C++ API for fine-grained analysis of program regions, and
 - A Python script that automates scalability analysis, benchmarking on multiple
   cores, and visualization of parallel performance results.
 
