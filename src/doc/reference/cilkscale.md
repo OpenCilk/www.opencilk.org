@@ -11,7 +11,8 @@ eleventyNavigation:
 
 The OpenCilk Cilkscale tool comprises three main components:
 
-- Infrastructure in the OpenCilk compiler and runtime system for work/span analysis.
+- Infrastructure in the OpenCilk compiler and runtime system for work/span
+  analysis.
 - A C/C++ API for fine-grained analysis of program regions.
 - A Python script that automates scalability analysis, benchmarking on multiple
   cores, and visualization of parallel performance results.
@@ -36,43 +37,47 @@ page](/doc/users-guide/install/#example).
 Cilkscale work/span analysis reports contain the following measurements for
 each analyzed program region.
 
-- {% defn "Work" %}: the CPU time of the computation when run on one processor, sometimes denoted $(T_1)$.
-  The actual wall-clock time it takes to run the computation will generally be
-  smaller than the work, since the latter adds together the time spent on
-  different CPU cores in parallel.
+- {% defn "Work" %}: the CPU time of the computation when run on one processor,
+  sometimes denoted $T_1$.  The actual wall-clock time it takes to run the
+  computation in parallel will generally be smaller than the work, since the
+  latter adds together the time spent on different CPU cores.
 
-- {% defn "Span" %}: the theoretically fastest CPU time of the computation
-  when run on an infinite number of parallel processors (discounting overheads for communication and scheduling),
-  sometimes denoted $(T_{\infty})$. The span is the maximum amount of work along any path in the {% defn
-  "parallel trace" %} of the computation.
+- {% defn "Span" %}: the theoretically fastest CPU time of the computation when
+  run on an infinite number of parallel processors (discounting overheads for
+  communication and scheduling), sometimes denoted $T_{\infty}$.  The span is
+  the maximum amount of work along any path in the {% defn "parallel trace" %}
+  of the computation.
 
-- {% defn "Parallelism" %}: the ratio of work to span for a computation $(T_1 / T_{\infty})$,
-  which is the maximum speedup it could attain when run on an infinite number of processors.
-  Parallelism can also be interpreted as the maximum number of processors that
-  could theoretically yield {% defn "perfect linear speedup" %}.
+- {% defn "Parallelism" %}: the ratio of work to span for a computation $(T_1 /
+  T_{\infty})$.  Parallelism can be interpreted as the maximum possible speedup
+  of the computation, or as the maximum number of processors that could
+  theoretically yield {% defn "perfect linear speedup" %}.
 
 - ***Burdened span***: similar to span after accounting for worst-case
-  scheduling overhead.  The scheduling burden overhead is based on a heuristic
-  estimate of the costs associated with migrating and synchronizing parallel
-  tasks among processors.  The worst-case scenario is when every time it is
-  possible for a task to be migrated, the scheduler does migrate it.  (In
+  scheduling overhead or "burden".  The scheduling burden is based on a
+  heuristic estimate of the costs associated with migrating and synchronizing
+  parallel tasks among processors.  The worst-case scenario is when every time
+  it is possible for a task to be migrated, the scheduler does migrate it.  (In
   practice, there are additional factors besides scheduling overhead that can
   slow down parallel execution, such as insufficient memory bandwidth,
   contention on parallel resources, false sharing, etc.)
 
 - ***Burdened parallelism***: the ratio of work to burdened span.  It can be
   interpreted as a lower bound for the parallelism of the computation assuming
-  worst-case parallel scheduling.
+  worst-case parallel scheduling (and ignoring other possible factors of
+  parallel slowdown).
 
 {% alert "info" %}
 
 _**References:**_ 
 
 - Y. He, C.E. Leiserson, and W.M. Leiserson, [_The Cilkview scalability
-  analyzer_](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/cilkview.pdf), SPAA 2010, pp. 145–156.
-- T.B. Schardl, B.C. Kuszmaul, I.T.A. Lee, W.M. Leiserson, and
-  C.E. Leiserson, [_The Cilkprof scalability
-  profiler_](http://supertech.csail.mit.edu/papers/cilkprof.pdf), SPAA 2015, pp. 89–100.
+  analyzer_](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/cilkview.pdf),
+  SPAA 2010, pp. 145–156.
+- T.B. Schardl, B.C. Kuszmaul, I.T.A. Lee, W.M. Leiserson, and C.E. Leiserson,
+  [_The Cilkprof scalability
+  profiler_](http://supertech.csail.mit.edu/papers/cilkprof.pdf), SPAA 2015,
+  pp. 89–100.
 
 {% endalert %}
 
