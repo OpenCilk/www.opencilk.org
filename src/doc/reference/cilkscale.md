@@ -320,8 +320,13 @@ $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py ARGUMENTS
   `-fcilktool=cilkscale-benchmark`.
 
 - `-cpus CPU_COUNTS`, `--cpu-counts CPU_COUNTS`  
-  _(Optional)_ Comma-separated list of how many cores to use when running empirical
-  performance benchmarks.  On systems with [simultaneous multithreading
+  _(Optional)_ Comma-separated list of how many cores to use when running
+  empirical performance benchmarks.  Cilkscale runs the benchmark binary once
+  for each core count in the list.  For each run, the number of parallel Cilk
+  workers is equal to the number of cores, and the latter are specified
+  explicitly by setting the [processor
+  affinity](https://en.wikipedia.org/wiki/Processor_affinity) of the run.  On
+  systems with [simultaneous multithreading
   (SMT)](https://en.wikipedia.org/wiki/Simultaneous_multithreading) (aka
   "hyper-threading" on Intel CPUs), Cilkscale only uses distinct physical
   cores.  On systems with multiple processor nodes with [non-uniform memory
@@ -409,8 +414,8 @@ Specifically, these figures plot four types of measurements:
   benchmarking runs.  Benchmarking runs do not involve work/span analysis
   measurement overheads.
 - A dark green line shows what the execution time would be if the computation
-  exhibited _perfect linear speedup_, that is, if the time on $P$ processors
-  were to be $P$ times smaller than the time it took on one processor.
+  exhibited _perfect linear speedup_, that is, if the time on $P$ cores were to
+  be $P$ times smaller than the time it took on one core.
 - A teal line shows the heuristic _burdened-dag bound_ of the execution time
   (the parallel trace of the computation is sometimes also referred to as its
   directed acyclic graph or dag).  In the absence of other sources of parallel
@@ -420,12 +425,12 @@ Specifically, these figures plot four types of measurements:
   not too fine-grained.
 - A mustard-yellow horizontal line shows the _span bound_, that is, the minimum
   possible execution time if the computation was run on infinitely many
-  processors and there were no additional overheads for parallel scheduling,
-  etc.
+  processing cores and there were no additional overheads for parallel
+  scheduling, etc.
 
 **Parallel speedup.**  The right-column plots contain the same information as
-those in the left column, except that the y-axis shows parallel speedup.
-That is, all execution time measurements are divided by the execution time of
-the computation on one processor.  The horizontal line for parallelism (serial
-execution time divided by span) is not visible in the speedup plots if its
-value falls outside the range of the y-axis.
+those in the left column, except that the y-axis shows parallel speedup.  That
+is, all execution time measurements are divided by the execution time of the
+computation on one core.  The horizontal line for parallelism (serial execution
+time divided by span) is not visible in the speedup plots if its value falls
+outside the range of the y-axis.
