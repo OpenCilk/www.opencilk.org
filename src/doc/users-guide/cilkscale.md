@@ -179,7 +179,7 @@ Let's see how we can use the Cilkscale API to analyze the execution of
 `sample_qsort()` function in our example quicksort application.  That is, we
 want to exclude the computations for initializing a random vector of integers
 or verifying the sort correctness, which are all executed serially anyway.  To
-achieve this, we make the following three changes to our code.
+achieve this, make the following three changes to the code.
 
 1. Include the Cilkscale API header file.  E.g., after line 4 in `qsort.cpp`:
    
@@ -206,8 +206,8 @@ achieve this, we make the following three changes to our code.
    wsp_dump(elapsed, "qsort_sample");
    ```
 
-Then, we save our edited program as `qsort_wsp.cpp`, compile it with Cilkscale
-instrumentation as before, and run it:
+Then, save the edited program (here, we save it as `qsort_wsp.cpp`), compile it
+with Cilkscale instrumentation as before, and run it:
 
 ```shell-session
 $ /opt/opencilk/bin/clang++ qsort_wsp.cpp -fopencilk -fcilktool=cilkscale -O3 -o qsort_wsp_cs
