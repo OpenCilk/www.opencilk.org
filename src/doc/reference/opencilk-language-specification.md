@@ -1,6 +1,5 @@
 ---
 layout: layouts/page.njk
-stylesheet: language-specification.css
 title: OpenCilk language specification
 date: 2022-07-14T21:37:03.433Z
 eleventyNavigation:
