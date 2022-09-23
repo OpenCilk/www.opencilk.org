@@ -16,7 +16,7 @@ OpenCilk 2.0 is now available.  See the [Install](/doc/users-guide/install) page
 ## Major changes
 
 OpenCilk 2.0 features the following major changes from OpenCilk 1.1:
-- **[Beta]** Cilk reducer hyperobjects (a.k.a., reducers) are now supported through a new language syntax and implementation.  A local or global variable in C or C++ can be made into a reducer by adding `cilk_reducer(I,R)` to its type, where `I` and `R` designate the identity and reduce functions for the reducer.  Documentation on the new reducer syntax and implementation is forthcoming, but as a simple example, here is how a simple integer-summation reducer can be implemented using the new reducer syntax:
+- **[Beta feature]** Cilk reducer hyperobjects (a.k.a., reducers) are now supported through a new language syntax and implementation.  A local or global variable in C or C++ can be made into a reducer by adding `cilk_reducer(I,R)` to its type, where `I` and `R` designate the identity and reduce functions for the reducer.  You can find documentation on the new reducer syntax [here](/doc/reference/reducers), but as a simple example, here is how a simple integer-summation reducer can be implemented using the new reducer syntax:
 ```c
 #include <cilk/cilk.h>
 
@@ -47,7 +47,7 @@ int foo(int *A, int n) {
 - The default setting of floating-point contraction is now `-ffp-contract=on`.  As a result, floating-point computation may behave differently with this version of OpenCilk.  You can opt back into the old floating-point-contraction behavior by passing the compiler flag `-ffp-contract=off`.  See [here](https://releases.llvm.org/14.0.0/tools/clang/docs/ReleaseNotes.html#floating-point-support-in-clang) for more details.
 - There are some standard library functions and LLVM intrinsic functions that Cilksan does not recognize.  When Cilksan fails to recognize such a function, it may produce a link-time error of the form, `undefined reference to '__csan_FUNC'` for some function name `__csan_FUNC`.
   - Please report these missing functions as issues on the [OpenCilk issue tracker](https://github.com/OpenCilk/opencilk-project/issues).
-  - **[Beta]** You can work around this issue by passing the additional flag ``-mllvm -cilksan-bc-path=`find /path/to/opencilk/ -name "libcilksan.bc"` `` when compiling the Cilk program.
+  - **[Beta feature]** You can work around this issue by passing the additional flag ``-mllvm -cilksan-bc-path=`find /path/to/opencilk/ -name "libcilksan.bc"` `` when compiling the Cilk program.  (Note that `/path/to/opencilk/` should *not* be the path to the `clang` executable, but is instead the path to the whole OpenCilk installation, such as `/opt/opencilk/`.)
 
 ## Acknowledgments
 
