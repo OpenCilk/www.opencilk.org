@@ -8,7 +8,7 @@ eleventyNavigation:
 ---
 
 OpenCilk is an extension to the C and C++ programming language adding
-support for {% defn "task-parallel programming %}.  It uses a modified
+support for {% defn "task-parallel programming" %}.  It uses a modified
 version of the clang compiler and a user-mode work-stealing scheduler.
 At the source level, OpenCilk has five additional keywords compared to C:
 
