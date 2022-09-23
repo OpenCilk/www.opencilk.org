@@ -7,20 +7,16 @@ eleventyNavigation:
 ---
 
 OpenCilk is an extension to the C and C++ programming language adding
-support for {% defn "task-parallel programming" %}.  It uses a modified
-version of the clang compiler and a user-mode work-stealing scheduler.
-At the source level, OpenCilk has five additional keywords compared to C:
+support for {% defn "task-parallel programming" %}.  It uses a
+modified version of [clang](https://clang.llvm.org) (the C compiler
+from the LLVM project) and a user-mode work-stealing scheduler.  At
+the source level, OpenCilk has five additional keywords compared to C:
 
 * `cilk_spawn`
 * `cilk_sync`
 * `cilk_scope`
 * `cilk_for`
 * `cilk_reducer`
-
-If `cilk_for` is replaced by `for` and the other keywords are removed,
-the result is a valid C or C++ program _with the same meaning_ called
-the %{ defn "serial projection" %}.  So a program can be developed and
-debugged serially and parallelism added later.
 
 Informally, `cilk_spawn` marks a point where the program can be forked
 into two parts running on different processors and `cilk_sync` marks a
@@ -154,6 +150,11 @@ The argument to the grain size pragma must be an integer constant
 in the range 1..2<sup>31</sup>-1.
 
 ## Execution of an OpenCilk program
+
+If `cilk_for` is replaced by `for` and the other keywords are removed,
+the result is a valid C or C++ program _with the same meaning_ called
+the %{ defn "serial projection" %}.  So a program can be developed and
+debugged serially and parallelism added later.
 
 ### Strand
 
