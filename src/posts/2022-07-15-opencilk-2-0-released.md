@@ -47,7 +47,7 @@ int foo(int *A, int n) {
 - The default setting of floating-point contraction is now `-ffp-contract=on`.  As a result, floating-point computation may behave differently with this version of OpenCilk.  You can opt back into the old floating-point-contraction behavior by passing the compiler flag `-ffp-contract=off`.  See [here](https://releases.llvm.org/14.0.0/tools/clang/docs/ReleaseNotes.html#floating-point-support-in-clang) for more details.
 - There are some standard library functions and LLVM intrinsic functions that Cilksan does not recognize.  When Cilksan fails to recognize such a function, it may produce a link-time error of the form, `undefined reference to '__csan_FUNC'` for some function name `__csan_FUNC`.
   - Please report these missing functions as issues on the [OpenCilk issue tracker](https://github.com/OpenCilk/opencilk-project/issues).
-  - **[Beta feature]** You can work around this issue by passing the additional flag ``-mllvm -cilksan-bc-path=`find /path/to/opencilk/ -name "libcilksan.bc"` `` when compiling the Cilk program.  (Note that `/path/to/opencilk/` should *not* be the path to the `clang` executable, but is instead the path to the whole OpenCilk installation, such as `/opt/opencilk/`.)
+  - **[Beta feature]** You can work around this issue by passing the additional flag ``-mllvm -cilksan-bc-path=`find /path/to/opencilk/ -name "libcilksan*.bc"` `` when compiling the Cilk program.  (Note that `/path/to/opencilk/` should *not* be the path to the `clang` executable, but is instead the path to the whole OpenCilk installation, such as `/opt/opencilk/`.)
 
 ## Acknowledgments
 
