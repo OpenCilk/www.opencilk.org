@@ -18,6 +18,14 @@ the source level, OpenCilk has five additional keywords compared to C:
 * `cilk_for`
 * `cilk_reducer`
 
+[Add explanation of organization of rest of document]
+[For example, this document will describe the grammar
+and behavior of OpenCilk.]
+[Add to each major section an introductory sentence explaining
+the section.]
+["This document provides a reference ..."]
+[Mention that <cilk/cilk.h> is required]
+
 Informally, `cilk_spawn` marks a point where the program can be forked
 into two parts running on different processors and `cilk_sync` marks a
 point where those forks must be joined.  Forking is permissive and
@@ -29,8 +37,9 @@ that do not work without multithreading.
 The statements executed in a task parallel program form a %{ defn
 "parallel trace", "directed acyclic graph" %} (DAG).  A spawn node has
 one incoming edge and two outgoing edges.  A sync node has one
-outgoing edge.  Two statements are said to be in parallel if neither
-precedes the other in DAG order.
+outgoing edge.  Two statements are said to be logically parallel if
+neither precedes the other in DAG order.  Whether they actually run
+in parallel (at the same time) depends on scheduling.
 
 ```cilkc
   int x = cilk_spawn f(); // the body of f()...
@@ -81,8 +90,8 @@ cilk_spawn cilk_scope { cilk_spawn ... }
 
 ### Scope
 
-`Cilk_scope` is followed by a statement, normally a compound
-statement.  Any spawns within the statement are synced before
+The keyword `cilk_scope` is followed by a statement, normally a
+compound statement.  Any spawns within the statement are synced before
 exit from the statment.  Syncs within the statement, including the
 implicit sync before exit, do not wait for spawns outside the
 statement.
@@ -158,8 +167,9 @@ debugged serially and parallelism added later.
 
 ### Strand
 
-A _strand_ is a series of instructions between one spawn or sync
-and the next spawn or sync.  A strand executes on a single thread.
+A _%{defn "strand" %}_ is a series of instructions between one spawn
+or sync and the next spawn or sync.  A strand executes on a single
+thread.
 
 In some cases it is necessary to specify exactly where the spawn point
 is in a spawn statement.
