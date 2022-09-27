@@ -7,4 +7,4 @@ chip. The terms "processor" and "{% defn "CPU" %}"
 are often used in place of "core,"
 although industry usage varies.
 *Archaic*: A solid-state memory made of
-magnetized toroidal memory elements
+magnetized toroidal memory elements.

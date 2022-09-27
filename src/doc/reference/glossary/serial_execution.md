@@ -2,4 +2,4 @@
 title: Serial execution
 tags: serial execution
 ---
-Execution of the {% defn "serialization" %} of a Cilk program.
+Execution of the {% defn "serial projection" %} of a Cilk program.
