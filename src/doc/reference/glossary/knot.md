@@ -12,4 +12,4 @@ multiple incoming strands and one
 outgoing strand, it is a *sync knot*. A
 Cilk program does not produce serial
 knots or knots with both multiple
-incoming and multiple outgoing strands
+incoming and multiple outgoing strands.

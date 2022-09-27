@@ -9,4 +9,4 @@ synonym. This document does not use
 the term "processor" to refer to multiple
 processing units on the same or multiple
 chips, although other documents may
-use the term that way
+use the term that way.
