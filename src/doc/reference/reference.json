@@ -1,6 +1,5 @@
 {
     "layout": "layouts/page.njk",
-    "stylesheet": "users-guide.css",
     "background": "bg-white",
     "permalink": "/doc/reference/{{ page.fileSlug | slugify }}/", 
     "eleventyNavigation": {
