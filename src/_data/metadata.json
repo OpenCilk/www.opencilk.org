@@ -3,7 +3,7 @@
   "author": "The OpenCilk Team",
   "email": "contact@opencilk.org",
   "attribution": {
-    "cilkplus": "This work is derived from Cilk Plus documentation with permission of Intel Corporation and Cilk Arts."
+    "cilkplus": "This work is derived from Cilk++ documentation with permission of Intel Corporation."
   },
   "blog": {
     "title": "Fast Code",
