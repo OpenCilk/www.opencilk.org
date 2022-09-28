@@ -103,11 +103,11 @@ Optionally, you can configure your system so that `clang` and `clang++` point to
 compilers (e.g., by setting your `PATH` environment variable or installing system-wide symbolic links).
 
 {% alert "primary" %}
+### Example
 
-<span id="example">_**Example:**_</span> The following example shows the
-process on Ubuntu 20.04 to install OpenCilk into `/opt/opencilk` without adding
-a version-specific subdirectory.  The installation and setup process is
-analogous for macOS and other Linux systems.
+The following example shows the process on Ubuntu 20.04 to install OpenCilk into `/opt/opencilk`
+without adding a version-specific subdirectory.
+The installation and setup process is analogous for macOS and other Linux systems.
 
 - Download the precompiled [OpenCilk shell
 archive](/doc/users-guide/install/#installing-using-a-shell-archive) for your
