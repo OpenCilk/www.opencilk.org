@@ -18,13 +18,10 @@ the source level, OpenCilk has five additional keywords compared to C:
 * `cilk_for`
 * `cilk_reducer`
 
+This document describes the syntax and semantics of OpenCilk
+constructs.  It is not meant to be an introduction or tutorial.
+
 [Add explanation of organization of rest of document]
-[For example, this document will describe the grammar
-and behavior of OpenCilk.]
-[Add to each major section an introductory sentence explaining
-the section.]
-["This document provides a reference ..."]
-[Mention that <cilk/cilk.h> is required]
 
 Informally, `cilk_spawn` marks a point where the program can be forked
 into two parts running on different processors and `cilk_sync` marks a
@@ -50,19 +47,30 @@ in parallel (at the same time) depends on scheduling.
 
 ## Grammar
 
+This section describes how the syntax of an OpenCilk program
+differs from a C or C++ program.
+
+All OpenCilk keywords and runtime functions require that the header
+`<cilk/cilk.h>` be included.  The header `<cilk/cilk_stub.h>` can be
+included to disable Cilk while still allowing the keywords.  If
+neither header is included the Cilk keywords are treated as ordinary
+identifiers.
+
 ### Spawn
 
-The `cilk_spawn` keyword should appear at the start of an
-expression-statement or after the `=` sign of an assignment
-(or `+=`, `-=`, etc.).
+The `cilk_spawn` keyword should appear at the start of a statement or
+after the `=` sign of an assignment (or `+=`, `-=`, etc.).
 
 ```cilkc
 int x = cilk_spawn f(0);
 cilk_spawn y = f(1);
+cilk_spawn { z = f(2); }
 ```
 
 Although the compiler accepts spawns inside of expressions, they are
-unlikely to have the expected semantics.
+unlikely to have the expected semantics.  A future version of the
+language may explicitly limit `cilk_spawn` to the contexts above,
+at or near the top of the parse tree of a statement.
 
 ### Sync
 
@@ -73,6 +81,8 @@ It takes no arguments.
 if (time_to_sync)
   cilk_sync;
 ```
+
+[move the next two paragraphs to the semantics section]
 
 A sync waits for previous spawns to complete before continuing.
 Sync normally has function scope, meaning it waits for all spawns
@@ -156,14 +166,19 @@ iterations should be executed as a serial loop.  If there are 1024
 loop iterations in total, there are only 8 parallel tasks.
 
 The argument to the grain size pragma must be an integer constant
-in the range 1..2<sup>31</sup>-1.
+in the range 1..2<sup>31</sup>-1.  [Do we want to deprecate this
+range in favor of a smaller range, or in the other direction
+up to a `size_t`?]
 
 ## Execution of an OpenCilk program
 
-If `cilk_for` is replaced by `for` and the other keywords are removed,
-the result is a valid C or C++ program _with the same meaning_ called
-the %{ defn "serial projection" %}.  So a program can be developed and
-debugged serially and parallelism added later.
+This section describes how the keywords added above may affect
+execution.  A basic principle of Cilk is that the new keywords do not
+necessarily change execution.  If `cilk_for` is replaced by `for` and
+the other keywords are removed, the result is a valid C or C++ program
+_with the same meaning_ called the %{ defn "serial projection" %}.  So
+a program can be developed and debugged serially and parallelism added
+later.
 
 ### Strand
 
@@ -214,7 +229,13 @@ nonsense.c:4:18: warning: Failed to emit spawn
 1 warning generated.
 ```
 
-This syntax may be removed in a future version of OpenCilk.
+As noted above, this syntax may be removed in a future version of
+OpenCilk.  (The return value of spawn is like a promise or lazily
+evaluated value; if it is consumed immediately the parallelism is
+lost.)
+
+The code that follows the spawn point is called the _continuation_ of
+the spawn.
 
 ### Implicit syncs
 
@@ -243,7 +264,8 @@ parallel programs are the same.
 
 If a spawned function throws an exception, the parent function may
 have continued straight line execution past the spawn.  The serial
-program goes directly to an exception handler.
+program goes directly to an exception handler.  The difference is
+observable if the continuation has side effects.
 
 When the parent function executes an implicit or explicit `cilk_sync`
 the runtime checks whether the spawned child threw an exception.  If
@@ -258,18 +280,19 @@ a spawn.
 
 ## Races and reducers
 
-If the same object is accessed by two statements running in parallel,
-and at least one of the accesses is a write, there is said to be a
-_%{defn "data race" %}_.  Data races have undefined behavior.
-[Do we want to clarify that atomic accesses are unspecified rather
-than undefined?]
+Concurrency invites races.  If the same object is accessed by two
+statements running in parallel, and at least one of the accesses is a
+write, there is said to be a _%{defn "data race" %}_.  Data races have
+undefined behavior.
+[Do we want to clarify that atomic accesses are unspecified rather than undefined?]
 
 ### Reducers
 
-Hyperobjects are special variables that can be accessed in parallel
-without data races.  The OpenCilk runtime gives each thread running
-in parallel a separate copy of the variable and merges the values
-as necessary.  The local copy of the variable is called a _view_.
+%{ defn "hyperobject", "Hyperobjects" %} are special variables that
+can be accessed in parallel without data races.  The OpenCilk runtime
+gives each thread running in parallel a separate copy of the variable
+and merges the values as necessary.  The local copy of the variable is
+called a _view_.
 
 The specific kind of hyperobject implemented by OpenCilk 2.0 is a
 _reducer_.
