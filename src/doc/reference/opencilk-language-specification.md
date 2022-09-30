@@ -1,15 +1,20 @@
 ---
 layout: layouts/page.njk
+author: Dorothy Curtis
 stylesheet: language-specification.css
 title: OpenCilk language specification
+tagline: For people who need to know grammatical details about how Cilk is
+  integrated with C.
 date: 2022-07-14T21:37:03.433Z
+tags:
+  - Grammar
 eleventyNavigation:
   key: Language specification
+attribution: true
 ---
-
 <h1 class="title">OpenCilk Language Extension Specification<br />
     Version 1.0 (2021-02-01) </h1>
-<p>Copyright &#xa9; 2020, 2021 Massachusetts Institute of Technology. All rights reserved.</p>
+<p>Copyright &#xa9; 2020, 2021, 2022 Massachusetts Institute of Technology. All rights reserved.</p>
 <p>More information about OpenCilk can be found at <a href="https://opencilk.org">
     opencilk.org</a></p>
 <p>Feedback on this specification is encouraged and welcome; please send to <a href="mailto:contact@opencilk.org">
@@ -73,14 +78,13 @@ eleventyNavigation:
     <li><code>cilk_for</code></li>
     <li><code>cilk_sync</code></li>
     <li><code>cilk_spawn</code></li>
-    
 </ul>
 <p>A program that uses these keywords other than as defined in the grammar extension
     below is ill-formed.</p>
 
 ## Grammar
 
-<p>The three keywords are used in the following new productions:</p>
+<p>The four keywords are used in the following new productions:</p>
 <dl class="bnf">
     <dt><dfn>jump-statement</dfn>:</dt>
     <dd><code>cilk_sync ;</code></dd>
@@ -136,6 +140,12 @@ eleventyNavigation:
     are called the <dfn>initialization</dfn>, <dfn>condition</dfn>, and <dfn>increment</dfn>,
     respectively. (A semicolon is included in the grammar of <var>declaration</var>.)</ins></p>
 
+A new form of Statement is introduced:
+
+cilk_scope { Statement* }
+
+Statements within cilk_scope are executed as usual.  There is an implicit cilk_sync at the end of the statements included within the cilk_scope construct.
+
 ## Semantics
 
 ### Tasking Execution Model
@@ -178,7 +188,8 @@ eleventyNavigation:
 <p><strong>The serialization of a pure C or C++ program is itself.</strong></p>
 <p>If a C or C++ program has defined behavior and does not use the tasking keywords
     or library functions, it is an OpenCilk with the same defined behavior.</p>
-<p><strong>The serializations of <code>cilk_spawn</code> and <code>cilk_sync</code>
+
+<p><strong>The serializations of <code>cilk_scope</code>, <code>cilk_spawn</code> and <code>cilk_sync</code>
     are empty.</strong></p>
 <p>If an OpenCilk program has defined deterministic behavior, then that behavior is
     the same as the behavior of the C or C++ program derived from the original by removing
@@ -671,9 +682,9 @@ else ((<var>first</var>) <code>-</code> (<var>limit</var>)) <code>/</code> <code
 a++;</pre>
 	<p>The call to function <code>f</code> is the spawn point and the statement <code>a++;</code>
 		is the continuation. The expression <code>a + b</code> and the initialization of
-		the temporary variable holding that value, and the evaluation of <code>x\[g()]</code>
+		the temporary variable holding that value, and the evaluation of <code>x\\\\\\\[g()]</code>
 		take place before the spawn point. The execution of <code>f</code>, the assignment
-		to <code>x\[g()]</code>, and the destruction of the temporary variable holding <code>
+		to <code>x\\\\\\\[g()]</code>, and the destruction of the temporary variable holding <code>
 			a + b</code> take place in the child.</p>
 	<p>If a statement is followed by an implicit sync, that sync is the spawn continuation.</p>
 	<p class="note">Programmer note: The sequencing may be more clear if</p>
@@ -720,115 +731,6 @@ a++;</pre>
 <p>When several exceptions are pending and not yet caught, later exception objects (in
     the serial execution order of the program) are destructed in an unspecified order
     before the earliest exception is caught.</p>
-
-# Hyperobjects
-
-## Description
-
-<p>Cilk <ins>Plus</ins> defines a category of objects called &#x201c;hyperobjects&#x201d;.
-    Hyperobjects allow thread-safe access to shared objects by giving each <del>parallel</del>
-    strand <ins>running in parallel</ins> a separate instance of the object.</p>
-<p>Parallel code uses a hyperobject by performing a <dfn>hyperobject lookup</dfn> operation.
-    The hyperobject lookup returns a reference to an object, called a <dfn>view,</dfn>
-    that is guaranteed not to be shared with any other active strands in the program.
-    The sequencing of a hyperobject lookup within an expression is not specified. The
-    runtime system creates a view when needed, using callback functions provided by
-    the hyperobject type. When strands synchronize, the hyperobject views are merged
-    into a single view, using another callback function provided by the hyperobject
-    type.</p>
-<p>The view of a hyperobject visible to a program may change at any spawn or sync (including
-    the implicit spawns and syncs within a <code>cilk_for</code> loop). The identity
-    (address) of the view does not change within a single strand. The view of a given
-    hyperobject visible within a given strand is said to be <dfn>associated</dfn> with
-    that view. A hyperobject has the same view before the first spawn within a task
-    block as after a sync within the same task block, even though the thread ID may
-    not be the same (i.e., hyperobject views are not tied to threads). A hyperobject
-    has the same view upon entering and leaving a <code>cilk_for</code> loop and within
-    the first iteration (at least) of the <code>cilk_for</code> loop. A special view
-    is associated with a hyperobject when the hyperobject is initially created. This
-    special view is called the <dfn>leftmost view</dfn> or <dfn>earliest view</dfn>
-    because it is always visible to the leftmost (earliest) descendent in the depth-first,
-    left-to-right traversal of the program's spawn tree. The leftmost view is given
-    an initial value when the hyperobject is created.</p>
-<p class="note">Programmer note: If two expressions compute the same address for a view,
-    then they have not been scheduled in parallel. This property yields one of the simplest
-    ways by which a program can observe the runtime behavior of the scheduler.</p>
-<p class="note">Implementation note: An implementation can optimize hyperobject lookups
-    by performing them only when a view has (or might have) changed. This optimization
-    can be facilitated by attaching implementation-specific attributes to the hyperobject
-    creation, lookup, and/or destruction operations.</p>
-
-## Reducers
-
-<p>The vast majority of hyperobjects belong to a category known as &#x201c;reducers.&#x201d;
-    Each reducer type provides a <code>reduce</code> callback operation that merges
-    two views in a manner specific to the reducer. For a pair of views <var>V<sub>1</sub></var>
-    and <var>V<sub>2</sub></var>, the result of calling <code>reduce(</code><var>V<sub>1</sub></var><code>,</code>
-    <var>V<sub>2</sub></var><code>)</code> is notated as <var>V<sub>1</sub>&#x2297;V<sub>2</sub></var>.
-    Each reducer also provides an <code>identity</code> callback operation that initializes
-    a new view.</p>
-<p>The <code>reduce</code> callback for a &#x201c;classical&#x201d; reducer implements
-    an operation &#x2297; such that (<var>a&#x2297;b</var>)&#x2297;<var>c==a</var>&#x2297;(<var>b&#x2297;c</var>)
-    (i.e., &#x2297; is associative). The view-initialization callback for such a reducer
-    sets the view to an identity value <var>I</var> such that <var>I&#x2297;v==v</var>
-    and <var>v&#x2297;I==v</var> for any value <var>v</var> of <var>value_type</var>.
-    Given an associative &#x2297; and an identity <var>I</var>, the triplet (<var>value_type</var>,
-    &#x2297;, <var>I</var>) describes a mathematical <dfn>monoid</dfn>. For example,
-    (<code>int</code>, <code>+</code>, <code>0</code>) is a monoid, as is (<code>list</code>,
-    <code>concatenate</code>, <var>empty</var>). If each individual view, <var>R</var>,
-    of a classical reducer is modified using only expressions that are equivalent to
-    <var>R</var>&#x2190;<var>R</var>&#x2297;<var>v</var> (where <var>v</var> is of <var>
-        value_type</var>), then the reducer computes the same value in the parallel
-    program as would be computed in the serialization of the program. (In actuality,
-    the &#x201c;&#x2297;&#x201d; in the expression &#x201c;<var>R</var>&#x2190;<var>R</var>&#x2297;<var>v</var>&#x201d;
-    can represent a set of mutually-associative operations. For example, <code>+=</code>
-    and <code>-=</code> are mutually associative.) For example, a spawned function or
-    <code>cilk_for</code> body can append items onto the view of a list reducer with
-    monoid (<code>list</code>, <code>concatenate</code>, <var>empty</var>). At the end
-    of the parallel section of code, the reducer's view contains the same list items
-    in the same order as would be generated in a serial execution of the same code.</p>
-<p>Given a set of strands entering a sync, <var>S<sub>1</sub>,S<sub>2</sub>,S<sub>3</sub>,&#x2026;S<sub>n</sub></var>,
-    associated with views <var>V<sub>1</sub>,V<sub>2</sub>,V<sub>3</sub>,&#x2026;V<sub>n</sub></var>,
-    respectively such that <var>S<sub>i</sub></var> is earlier in the serial ordering
-    than <var>S<sub>i+1</sub></var>, a single view, <var>W</var>, emerges from the sync
-    with value <var>W&#x2190;V<sub>1</sub>&#x2297;V<sub>2</sub>&#x2297;V<sub>3</sub>&#x2297;&#x2026;&#x2297;V<sub>n</sub></var>,
-    such that the left-to-right order is maintained but the grouping (associativity)
-    of the operations is unspecified. The timing of this &#x201c;reduction&#x201d; is
-    unspecified &#x2013; in particular, subsequences typically will be computed asynchronously
-    as child tasks complete. Every view except the one emerging from the sync is destroyed
-    after the merge. If any of the strands does not have an associated view, then the
-    invocation of the <code>reduce</code> callback function can be elided (i.e., the
-    missing view is treated as an identity).</p>
-<p>A strand is never associated with more than one view for a given reducer, but multiple
-    strands can be associated with the same view if those strands are not scheduled
-    in parallel (at run time). Specifically, for a given reducer, the association of
-    a strand to a view of the reducer obeys the following rules:</p>
-<ol>
-    <li>The strand that initializes the reducer is associated with the leftmost view.</li>
-    <li>If two strands execute in series (i.e., both strands are part of a larger strand),
-        then both are associated with the same view.</li>
-    <li>The child strand of a spawn is associated with the same view as the strand that
-        entered the spawn.</li>
-    <li>If the continuation strand of a spawn is scheduled in parallel with the child, then
-        the continuation strand is associated with a new view, initialized using <code>identity</code>.
-        The implementation may create the new view at any time up until the first hyperobject
-        lookup following the spawn. If the continuation strand does not perform a hyperobject
-        lookup, then the implementation is not required to create a view for that strand.</li>
-    <li>If the continuation strand of a spawn is not scheduled in parallel with the child
-        strand (i.e., the child and the continuation execute in series), then the continuation
-        strand is associated with the same view as the child strand.</li>
-    <li>The strand that emerges from a sync is associated with the same view as the leftmost
-        strand entering the sync.</li>
-</ol>
-<p>Even before the final reduction, the leftmost view of a reducer will contain the
-    same value as in the serial execution. Other views, however, will contain partial
-    values that are different from the serial execution.</p>
-<p>If &#x2297; is not associative or if <code>identity</code> does not yield a true
-    identity value then the result of a set of reductions will be non-deterministic
-    (i.e., it will vary based on runtime scheduling). Such &#x201c;non-classical&#x201d;
-    reducers are nevertheless occasionally useful. Note that, for a classical reducer,
-    the &#x2297; operator needs to be associative, but does not need to be commutative.</p>
-
 
 # Disclaimer and other legal information
 
