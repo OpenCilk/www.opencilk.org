@@ -7,7 +7,7 @@ eleventyNavigation:
 ---
 
 OpenCilk is an extension to the C and C++ programming language adding
-support for {% defn "task-parallel programming" %}.  It uses a
+support for {% defn "task-parallel" %} programming.  It uses a
 modified version of [clang](https://clang.llvm.org) (the C compiler
 from the LLVM project) and a user-mode work-stealing scheduler.  At
 the source level, OpenCilk has five additional keywords compared to C:
@@ -29,7 +29,7 @@ compared to older forms of parallelism using C's `pthread_create` and
 Java's `Thread.start`.  These functions encourage writing programs
 that do not work without multithreading.
 
-The statements executed in a task parallel program form a %{ defn
+The statements executed in a task parallel program form a {% defn
 "parallel trace", "directed acyclic graph" %} (DAG).  A spawn node has
 one incoming edge and two outgoing edges.  A sync node has one
 outgoing edge.  Two statements are said to be logically parallel if
