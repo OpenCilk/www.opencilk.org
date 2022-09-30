@@ -21,8 +21,6 @@ the source level, OpenCilk has five additional keywords compared to C:
 This document describes the syntax and semantics of OpenCilk
 constructs.  It is not meant to be an introduction or tutorial.
 
-[Add explanation of organization of rest of document]
-
 Informally, `cilk_spawn` marks a point where the program can be forked
 into two parts running on different processors and `cilk_sync` marks a
 point where those forks must be joined.  Forking is permissive and
@@ -58,6 +56,9 @@ identifiers.
 
 ### Spawn
 
+A statement using `cilk_spawn` is the start of a potentially parallel
+region of code.
+
 The `cilk_spawn` keyword should appear at the start of a statement or
 after the `=` sign of an assignment (or `+=`, `-=`, etc.).
 
@@ -74,29 +75,13 @@ at or near the top of the parse tree of a statement.
 
 ### Sync
 
-A sync statement is the keyword `cilk_sync` followed by a semicolon.
-It takes no arguments.
+A sync statement, `cilk_sync;`, ends a region of potentially parallel
+execution.  It takes no arguments.
 
 ```cilkc
 if (time_to_sync)
   cilk_sync;
 ```
-
-[move the next two paragraphs to the semantics section]
-
-A sync waits for previous spawns to complete before continuing.
-Sync normally has function scope, meaning it waits for all spawns
-in the same function.  A sync inside the body of a `cilk_for` or
-`cilk_scope` only waits for spawns inside the same construct.
-
-Sync scopes are disjoint, so a sync outside a `cilk_for` or
-`cilk_scope` never waits for a spawn belonging to one of these
-inner scopes.  This situation does not normally occur.
-[This handles
-```cilkc
-cilk_spawn cilk_scope { cilk_spawn ... }
-```
-]
 
 ### Scope
 
@@ -150,10 +135,11 @@ For the loop to be parallelized, several conditions must be met:
 
 #### Grain size
 
-The compiler often recognizes that the overhead of allowing
-parallel execution can exceed the benefit.  In that case groups of
-consecutive iterations run sequentially.  This behavior can be
-manually overridden with a pragma:
+The compiler often recognizes that the overhead of allowing parallel
+execution can exceed the benefit.  If the body of a loop does little
+work the compiler will arrange for groups of consecutive iterations to
+run sequentially.  This behavior can be manually overridden with a
+pragma:
 
 ```cilkc
  #pragma cilk grainsize 128
@@ -161,14 +147,44 @@ manually overridden with a pragma:
    array2[i] = f(i);
 ```
 
-The pragma tells the compiler that groups of 128 consecutive
-iterations should be executed as a serial loop.  If there are 1024
-loop iterations in total, there are only 8 parallel tasks.
+The pragma in the example tells the compiler that groups of 128
+consecutive iterations should be executed as a serial loop.  If there
+are 1024 loop iterations in total, there are only 8 parallel tasks.
 
 The argument to the grain size pragma must be an integer constant
 in the range 1..2<sup>31</sup>-1.  [Do we want to deprecate this
 range in favor of a smaller range, or in the other direction
 up to a `size_t`?]
+
+
+### Reducers
+
+A type may be suffixed with `cilk_reducer`.  Syntactically it appears
+where `*` may be used to declare a pointer type.  The type to the left
+of `cilk_reducer` is the _view type_.
+
+Two values appear in parentheses after `cilk_reducer`.  Both must be
+function types returning `void`.  The first, the _identity callback_,
+takes one argument of type `void *`.  The second, the _reduce callback_,
+takes two arguments of type `void *`.
+
+Two reducer types are the same if their view types are the same and
+their callbacks are the same function mentioned by name.  Otherwise
+two reducer types are different and not compatible.  This rule arises
+from the impossibility of proving that two different functions are
+identical.
+
+```
+    extern void identity(void *), reduce(void *, void *);
+    extern void (*idp)(void *);
+    int cilk_reducer(identity, reduce) type1;
+    int cilk_reducer(identity, reduce) type2; // same as type1
+    int cilk_reducer(idp, reduce) type3;
+    int cilk_reducer(idp, reduce) type4; // not the same as type3
+```
+
+In the current version of OpenCilk the callbacks may be omitted.
+This behavior may be removed in a future version of OpenCilk.
 
 ## Execution of an OpenCilk program
 
@@ -176,8 +192,8 @@ This section describes how the keywords added above may affect
 execution.  A basic principle of Cilk is that the new keywords do not
 necessarily change execution.  If `cilk_for` is replaced by `for` and
 the other keywords are removed, the result is a valid C or C++ program
-_with the same meaning_ called the %{ defn "serial projection" %}.  So
-a program can be developed and debugged serially and parallelism added
+_with the same meaning_ called the %{ defn "serial projection" %}.  A
+program can be developed and debugged serially and parallelism added
 later.
 
 ### Strand
@@ -229,25 +245,49 @@ nonsense.c:4:18: warning: Failed to emit spawn
 1 warning generated.
 ```
 
+The return value of spawn is like a promise or lazily evaluated value.
+If it is consumed immediately the parallelism is lost.
+
 As noted above, this syntax may be removed in a future version of
-OpenCilk.  (The return value of spawn is like a promise or lazily
-evaluated value; if it is consumed immediately the parallelism is
-lost.)
+OpenCilk.
 
 The code that follows the spawn point is called the _continuation_ of
 the spawn.
 
-### Implicit syncs
+### Sync
+
+A sync operation waits for previous spawns to complete before
+continuing.
+
+#### Explicit sync
+
+An explicit sync is a statement using `cilk_sync`.  This form normally
+has function scope, meaning it waits for all spawns in the same
+function.  A sync inside the body of a `cilk_for` or `cilk_scope` only
+waits for spawns inside the same construct.
+
+Sync scopes are disjoint, so a sync outside a `cilk_for` or
+`cilk_scope` never waits for a spawn belonging to one of these
+inner scopes.  This situation does not normally occur.
+[This handles
+```cilkc
+cilk_spawn cilk_scope { cilk_spawn ... }
+```
+]
+
+#### Implicit syncs
 
 In addition to the sync statements in the code, there is an implicit sync
 before exit from some scopes:
 
 * Before returning from a function, after calculating the value to
-  be returned.
-* On exit from the body of a `try` block.
-  [Is this always true, or only if the try block spawns?]
-* On exit from a `cilk_scope` statement.
+  be returned.  This sync has function scope.
+* On exit from the body of a `try` block.  This sync has function scope.
+  [Is this true?  Is it true only if the try block spawns?]
+* On exit from a `cilk_scope` statement.  This sync has the scope of the
+  `cilk_scope` statement.
 * On exit from the body of a `cilk_for`, i.e. once per iteration of the loop.
+  This sync has scope equal to the loop body.
   [Does grain size change this?]
 
 [What about on entry to a try block?]
@@ -272,7 +312,8 @@ the runtime checks whether the spawned child threw an exception.  If
 it did, any exception thrown by the parent is discarded and the
 exception thrown by the child is handled at the sync.  The compiler
 inserts an implicit sync at the end of a try block if the try contains
-a spawn.
+a spawn.  [Make sure this is consistent with the wording in the implicit
+syncs section.]
 
 ### Left hand side side effects
 
@@ -284,6 +325,7 @@ Concurrency invites races.  If the same object is accessed by two
 statements running in parallel, and at least one of the accesses is a
 write, there is said to be a _%{defn "data race" %}_.  Data races have
 undefined behavior.
+
 [Do we want to clarify that atomic accesses are unspecified rather than undefined?]
 
 ### Reducers
@@ -294,19 +336,19 @@ gives each thread running in parallel a separate copy of the variable
 and merges the values as necessary.  The local copy of the variable is
 called a _view_.
 
+Because each thread may operate on a separate copy, the address of a
+view is not constant.  This is also true of thread local variables,
+but reducers do not follow the same rules as thread local variables.
+
 The specific kind of hyperobject implemented by OpenCilk 2.0 is a
 _reducer_.
 
-A reducer is a variable that has a well-defined value in serial
-code and an indeterminate value in parallel code.
+A view of a reducer has a well-defined value in serial code and an
+indeterminate value in parallel code.
 
 monoid
 
 value is unspecified; do read-modify-write operations and ignore the result
-
-address is not constant (except when?)
-
-[define view]
 
 If the reduce callback does nothing the reducer is called a _holder_
 and is essentially a form of thread-local storage.
