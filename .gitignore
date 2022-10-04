@@ -7,6 +7,7 @@ node_modules/
 *git/
 package-lock.json
 .env
+src/sphinx
 src/sphinx-bootstrap-theme
 src/pydata-sphinx-theme
 *~
