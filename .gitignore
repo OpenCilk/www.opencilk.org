@@ -8,6 +8,7 @@ node_modules/
 package-lock.json
 .env
 src/sphinx-bootstrap-theme
+src/pydata-sphinx-theme
 *~
 
 # Local Netlify folder
