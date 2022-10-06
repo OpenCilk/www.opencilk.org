@@ -28,7 +28,7 @@ module.exports = function(eleventyConfig) {
 
   // Copy the sphinx/docs/build/html folder to the output
   eleventyConfig.addPassthroughCopy({
-    "./src/sphinx/docs/build/html": "sphinx",
+    "./src/sphinx/docs/build/html": "/sphinx-html",
   });
 
   // Copy Netlify CMS config to the output
