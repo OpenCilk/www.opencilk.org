@@ -1,28 +1,5 @@
-/* Colors */
-:root {
-  --lightgray: #e0e0e0;
-  --gray: #C0C0C0;
-  --darkgray: #333;
-  --midnight: #001630;
-  --blue: #043065;
-  --white: #fff;
-  --lime: #91b301;
-  --teal: #11a5a1;
-  --darkteal: #0e8481;
-  --sky: #0cb3e1;
-  --tangelo: #f44500;
-  --yellow: #f4b200;
-  --americanyellow: #f4b200;
-  --safetyyellow: #f4d400;
-}
-
-html,
-body {
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  margin: 0;
-  font-family: Roboto, sans-serif;
+/* See custom.css in Sphinx */
+html, body {
   color: var(--darkgray);
   background: url('/img/grey-silk-bg.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -30,29 +7,39 @@ body {
   background-size: cover;
   -o-background-size: cover; 
 }
-.underNav {
-  position: sticky;
-  margin-top: 84px;
-}
-main {
-  overflow: scroll;
-  height: 100%;
-}
-h1, h2, h3, h4, h5, h6 {
-  font-family: Ubuntu, sans-serif;
-  margin-bottom: 0.5em;
-}
-h2, h3, h4, h5 {
-  margin-top: 0.75em;
-}
-h1, h2, h3 {
-  color: var(--blue);
-}
 a {
   color: var(--blue);
 }
 a:hover {
   color: var(--lime);
+}
+.mynavbar-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0;
+}
+a.mynav-link {
+  color: var(--gray);
+}
+a.mynav-link.active {
+  color: white;
+}
+a.mynav-link:hover {
+  color: var(--lime);
+}
+ul#navbar-main-elements li.mynav-item {
+  display: inline;
+  margin-right: 2em;
+}
+.bd-sidebar-primary {
+  border-right: 2px solid var(--lime);
+}
+.bd-article-container a {
+  text-decoration: underline;
+}
+footer.bd-footer {
+  border-top: 2px solid var(--lime);
 }
 a.defn {
   font-weight: bold;
@@ -84,48 +71,10 @@ a.card-tag {
   text-transform: uppercase;
   font-size: smaller;
 }
-.codefont,
-pre,
-code {
-  font-family: "Ubuntu Mono", "DejaVu Sans Mono", "Liberation Mono", monospace;
-}
-pre,
-code {
-  line-height: 1.5;
-}
-pre {
-  line-height: 1.375;
-  direction: ltr;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  -moz-tab-size: 2;
-  -o-tab-size: 2;
-  tab-size: 2;
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-  padding: 1em;
-  margin: .5em 0;
-  color: var(--sky);
-  background-color: var(--blue);
-}
 code {
   font-size: 110%;
   color: #eb551d; /* Darker tangelo also in prism.css */
   word-break: normal;
-}
-
-@media only screen and not (max-width: 960px) {
-  .small-screen-warn {
-    display: none;
-  }
-}
-
-.alert p {
-  margin-bottom: 0;
 }
 
 .list-tight p {
@@ -133,14 +82,15 @@ code {
 }
 .list-tight li {
   margin-bottom: 0.4em;
-}
+}/* Posts list */
 .footer {
-  background-color: var(--gray);
+  border-top: 2px solid var(--lime);
+  background-color: #d1cec8;
   padding: 1em;
 }
-
-/* Posts list */
-
+footer a {
+  color: var(--teal);
+}
 .postlist-date,
 .postlist-item:before {
   font-size: 0.8125em; /* 13px /16 */
@@ -160,7 +110,6 @@ code {
   font-size: 1.1875em; /* 19px /16 */
   font-weight: 700;
 }
-
 
 /* Tags */
 .post-tag {
@@ -189,31 +138,4 @@ a[href].post-tag:focus {
 }
 .postlist-item > .post-tag {
   align-self: center;
-}
-
-/* Warning */
-.warning {
-  background-color: #ffc;
-  padding: 1em 0.625em; /* 16px 10px /16 */
-}
-.warning ol:only-child {
-  margin: 0;
-}
-
-/* Direct Links / Markdown Headers */
-.direct-link {
-  font-family: sans-serif;
-  text-decoration: none;
-  font-style: normal;
-  margin-left: .1em;
-}
-a[href].direct-link,
-a[href].direct-link:visited {
-  color: transparent;
-}
-a[href].direct-link:focus,
-a[href].direct-link:focus:visited,
-:hover > a[href].direct-link,
-:hover > a[href].direct-link:visited {
-  color: #aaa;
 }

@@ -1,83 +1,90 @@
 {% if permalink !== false %}
-<html lang="{{ site.lang}}">
-  {% include 'partials/header.njk' %}
-  <body class="thumb d-flex flex-column vh-100">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T6NQSGF"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+{% set sphinxDir = "/sphinx/" %}
+<!DOCTYPE html>
 
-    {% include 'partials/navbar.njk' %}
-    {% set mainWhite = false %}
-    <div class="underNav">
-      <div class="d-flex row flex-nowrap">
-        {% if sidebar %}
-          <div class="col-auto p-0">
-            <div id="sidebar" class="collapse show vh-100 overflow-scroll px-3 pt-0" style="margin-left: 1em; min-width: 200px; max-width: 300px; border-right-width: 2; border-right-style: solid; border-color: var(--lime);">
-              {% set sidebarCode = ["partials/sidebar-", sidebar, ".njk"] | join %}
-              {% include sidebarCode %}
-            </div>
-          </div>
-        {% endif %}
-        <div class="col mx-0 px-0 min-vh-100">
-          <main class="vh-100 overflow-scroll pt-3 px-4 {{ background }}">
-            {% if page.url != "/" %}
-              <small>
-                {% if eleventyNavigation.key %}
-                  <div class="d-flex w-100 justify-content-between">
-                    <div class="d-flex">
-                      <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="h4 me-3 text-decoration-none"><i class="bi bi-list-ul"></i></a>
-                      {% set crumbPages = collections.all | eleventyNavigationBreadcrumb( eleventyNavigation.key ) %}
-                      <nav aria-label="breadcrumb">
-                      <ol class="breadcrumb">
-                      {%- for entry in crumbPages %}
-                          <li class="breadcrumb-item">
-                              <a href="{{ entry.url | url }}">{{ entry.title }}</a>
-                          </li>
-                      {%- endfor %}
-                      <li class="breadcrumb-item active" aria-current="page">
-                          {{ title }}
-                      </li>
-                      </ol>
-                      </nav>
-                    </div>
-                    <div class="d-flex">
-                      <a href="https://github.com/OpenCilk/www.opencilk.org/issues?q=is%3Aissue+{{ page.url }}+in%3Atitle" target="_blank">Website issues / discussion <img src="/img/GitHub-Mark.png" style="margin-left: 0.5em; height:24px;"></img></a>
-                    </div>
-                  </div>
-                {% endif %}
-              </small>
-            {% endif %}
-
-            {{ content | safe }}
-
-            {% if comments %}
-            <div id="disqus_thread"></div>
-              <script>
-                  /**
-                  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-                  
-                  var disqus_config = function () {
-                  this.page.url = "https://www.opencilk.org{{ page.url }}";  // Replace PAGE_URL with your page's canonical URL variable
-                  this.page.identifier = "{{ page.fileSlug }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                  };
-                  
-                  (function() { // DON'T EDIT BELOW THIS LINE
-                  var d = document, s = d.createElement('script');
-                  s.src = 'https://opencilk.disqus.com/embed.js';
-                  s.setAttribute('data-timestamp', +new Date());
-                  (d.head || d.body).appendChild(s);
-                  })();
-              </script>
-              <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-            {% endif %}
-
-          </main>
+<html lang="en">
+{% include 'partials/header.njk' %}
+ 
+<body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+    <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+    <label class="overlay overlay-primary" for="__primary"></label>
+    <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+    <label class="overlay overlay-secondary" for="__secondary"></label>
+    <div class="search-button__wrapper">
+        <div class="search-button__overlay"></div>
+        <div class="search-button__search-container">      
+            <form class="bd-search d-flex align-items-center" action="search.html" method="get">
+                <i class="icon fas fa-search"></i>
+                <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+            </form>
         </div>
-      </div>
-      {% include 'partials/footer.njk' %}
+    </div>
 
+    {% include 'partials/navbar.njk' %}  
+
+    <div class="bd-container">
+        <div class="bd-container__inner bd-page-width">
+      
+            <div class="bd-sidebar-primary bd-sidebar bg-transparent">
+                <div class="sidebar-start-items sidebar-primary__section">
+                    {% include "partials/sidebar-primary.njk" %}
+                </div>
+
+            </div>
+            <main class="bd-main">
+                <div class="bd-content">
+                    <div class="bd-article-container bg-white">        
+            
+                        {{ content | safe }}
+
+                    </div>
+          
+                    {% if sidebar %}
+                        <div class="bd-sidebar-secondary bd-toc">
+                            {% set sidebarCode = ["partials/sidebar-", sidebar, ".njk"] | join %}
+                            {% include sidebarCode %}
+                        </div>
+                    {% endif %}
+          
+                </div>
+                <footer class="bd-footer-content">
+                    <div class="bd-footer-content__inner">
+                        
+                    </div>
+                </footer>
+
+                {% if comments %}
+                    <div id="disqus_thread"></div>
+                    <script>
+                        /**
+                        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                        
+                        var disqus_config = function () {
+                        this.page.url = "https://www.opencilk.org{{ page.url }}";  // Replace PAGE_URL with your page's canonical URL variable
+                        this.page.identifier = "{{ page.fileSlug }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                        };
+                        
+                        (function() { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://opencilk.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                {% endif %}                
+            </main>
+        </div>
+    </div>
+
+    {% include 'partials/footer.njk' %} 
+    
+    <!-- Scripts loaded after <body> so the DOM is not blocked -->
+    <script src="{{ sphinxDir }}_static/scripts/pydata-sphinx-theme.js?digest=9b1a4fa89bdd0e95b23b"></script>
+
+ 
       <!-- Netlify CMS -->
       <script>
         if (window.netlifyIdentity) {
@@ -90,7 +97,7 @@
           });
         }
       </script>
-    </div>
-  </body>
+    
+</body>
 </html>
 {% endif %}

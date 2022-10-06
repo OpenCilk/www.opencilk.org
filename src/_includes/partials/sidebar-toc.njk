@@ -6,30 +6,13 @@
 {% set context = eleventyNavigation.parent %}
 {% endif %}
 
-<div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
 
-    <h5 class="w-100 p-2 rounded" style="margin-left: -0.4em; color: var(--midnight); background-color: var(--lime);">
-        {{ context }}
-    </h5>
-    <div class="collapse show" id="collapseContext">
-    <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
-        {% set items = collections.all | eleventyNavigation(context) %}
-        <ul>
-        {% for item in items %}
-            <li class="{% if page.url == item.url %} postlist-item-active {% else %} postlist-item {% endif %}">
-                <a href="{{ item.url }}" class="postlist-link" {% if page.url == item.url %} class="aria-current="page" {% endif %}>{{ item.title }}</a>
-            </li>
-        {% endfor %}
-        </ul>
+<div class="toc-item">
+  
+    <div class="tocsection onthispage">
+        <i class="fas fa-list"></i> On this page
     </div>
-    </div>
-    <h6 class="p-2 rounded" style="margin-left: -0.4em; color: var(--midnight); background-color: var(--teal);">
-        On this page
-    </h6>
-    <div class="collapse show" id="collapseToc">
-        <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
-            {{ content | toc | safe }}
-        </div>
-    </div> 
-
+    <nav id="bd-toc-nav" class="page-toc">
+    {{ content | toc | safe }}
+    </nav>
 </div>

@@ -23,6 +23,7 @@ date: 2022-07-05T16:59:41.487Z
 * Dorothy Curtis (MIT), Project Manager
 * Bruce Hoppe, Documentation Specialist and Outreach Coordinator
 * [Charles E. Leiserson](https://people.csail.mit.edu/cel/) (MIT), Executive Director
+</div>
 
 ## Contributors
 
@@ -34,8 +35,9 @@ date: 2022-07-05T16:59:41.487Z
 * Billy Moses (MIT)
 * Kyle Singer (WUSTL)
 * Daniele Vettorel (Google)
-* Grace Yin  <!-- (XXX Where is grace) -->
+* Grace Yin  
 * Brian Wheatman (JHU)
+</div>
 
 ## Academic board
 
@@ -47,24 +49,8 @@ date: 2022-07-05T16:59:41.487Z
 * [John Owens](https://www.ece.ucdavis.edu/~jowens/) (UCD), Chair
 * [Vivek Sarkar](https://vsarkar.cc.gatech.edu) (GATECH)
 * [Tao B. Schardl](http://neboat.mit.edu/) (MIT)
-
-<!--
-<div class="list-tight">
-{% for person in academic_board %}
- - \\\\\[{{ person.name }}]({{ person.url }}), {{ person.organization }}
-{% endfor %}
 </div>
--->
 
-<!--
-## Advisory board
-
-<div class="list-tight">
-{% for person in advisory_board %}
- - \\\\\[{{ person.name }}]({{ person.url }}), {{ person.organization }}
-{% endfor %}
-</div>
--->
 
 ## Acknowledgments
 

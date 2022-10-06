@@ -6,7 +6,7 @@ templateClass: tmpl-page
   <h1>{{ title }}</h1>
 {% endif %}
 
-<div style="font-size: larger;">
+<div>
     {% if tagline %}
     <p>{{ tagline | markdownify | safe }}</p>
     {% endif %}

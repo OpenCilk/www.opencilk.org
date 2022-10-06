@@ -1,47 +1,52 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: var(--midnight);">
-
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-        <img class="icon" src="/img/OpenCilk-icon-512.png"></img>
-      </a>
-      <div class="small-screen-warn" style="color: #c0c0c0; font-weight: bold;">
-        <span class="nav-item">For best results, use screen at least 960px wide.</span>
-      </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="d-flex w-100 justify-content-between align-items-center">
-          {% set navPages = collections.all | eleventyNavigation("Home") %}
-          <div class="d-flex">
-            <ul class="d-flex navbar-nav me-auto mb-2 mb-lg-0" style="font-size: large; font-weight: bold;">
-              {% for entry in navPages %}
-                <li class="nav-item {{ dropdown }}">
-                  {% if page.url == entry.url %}
-                    <a class="nav-link active"  aria-current="page" href="{{ entry.url | url }}">{{ entry.title }}</a>
-                  {% else %}
-                    <a class="nav-link" href="{{ entry.url | url }}">{{ entry.title }}</a>
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-
-          <div class="d-flex align-items-center" style="color: white; font-weight: light;">
-            <div style="margin-right: 1em; color: #c0c0c0;">Website work in progress.</div>
-            <img src="/img/under-construction.png" height="70px;"></img>
-          </div>
-          <div class="d-flex">
-            <form>
-              <div class="w-64">
-                <div id="search"></div>
-              </div>
-            </form>
-          </div>
-          
-        </div>
-      </div>
+<nav class="bd-header navbar navbar-dark navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+    <label class="sidebar-toggle primary-toggle" for="__primary">
+        <span class="fas fa-bars"></span>
+    </label>
+    <div id="navbar-start">
+        <a class="navbar-brand logo" href="/">
+            <img src="{{ sphinxDir }}_static/OpenCilk-icon-330.png" class="logo__image" alt="Logo image">
+        </a>
     </div>
 
-  
+    <div class="col-lg-9 navbar-header-items">
+        <div id="navbar-center" class="mr-auto">
+        
+            <div class="navbar-center-item">
+                <nav class="mynavbar-nav">
+                    <ul id="navbar-main-elements" class="mynavbar-nav">
+                        {% for entry in collections.all | eleventyNavigation("Home") %}
+                        <li class="mynav-item">
+                            {% if page.url == entry.url %}
+                            <a class="mynav-link active"  aria-current="page" href="{{ entry.url | url }}">{{ entry.title }}</a>
+                            {% else %}
+                            <a class="mynav-link" href="{{ entry.url | url }}">{{ entry.title }}</a>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        
+        </div>
+
+        <div id="navbar-end">
+            <div class="navbar-end-item navbar-end__search-button-container">        
+                <form>
+                  <div class="w-64">
+                    <div id="search"></div>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-button-container--mobile">
+        <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+        <span class="fas fa-outdent"></span>
+    </label>
 </nav>
