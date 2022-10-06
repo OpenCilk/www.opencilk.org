@@ -1,0 +1,23 @@
+{% set navPages = ['Blog', 'Documentation', 'Community', 'About us', 'Contribute'] %}
+{% if eleventyNavigation.key in navPages %}
+{% set context = eleventyNavigation.key %}
+{% else %}
+{% set context = eleventyNavigation.parent %}
+{% endif %}
+
+<div class="sidebar-start-items__item">
+    <nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+        <p class="bd-links__title" role="heading" aria-level="1">
+            {{ context }}
+        </p>
+        <div class="bd-toc-item navbar-nav">
+            <ul class="nav bd-sidenav">
+                {% for item in collections.all | eleventyNavigation(context) %}
+                    <li class="{% if page.url == item.url %}  toctree-l1 active {% else %} toctree-l1 {% endif %}">
+                        <a href="{{ item.url }}" class="reference" {% if page.url == item.url %} class="aria-current="page" {% endif %}>{{ item.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+</div>

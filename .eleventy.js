@@ -26,6 +26,11 @@ module.exports = function(eleventyConfig) {
   // Support .yaml extension in _data
   eleventyConfig.addDataExtension("yaml", contents => yaml.load(contents));
 
+  // Copy the sphinx/docs/build/html folder to the output
+  eleventyConfig.addPassthroughCopy({
+    "./src/sphinx/docs/build/html": "sphinx",
+  });
+
   // Copy Netlify CMS config to the output
   eleventyConfig.addPassthroughCopy({
     "./src/admin/index.html": "./admin/index.html",
@@ -50,6 +55,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginNavigation);
   eleventyConfig.addPlugin(pluginTOC, {
     tags: ['h1', 'h2'],
+    wrapper: 'nav',
+    wrapperClass: 'visible nav section-nav flex-column',
     ul: true
   });
 

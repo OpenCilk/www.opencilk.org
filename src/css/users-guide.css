@@ -11,6 +11,9 @@ main h3 {
     margin-left: -0.25em;
     padding-left: 0.25em;
 }
-main ul li {
+.bd-article-container ul li {
     list-style-image: url("/img/caret-right-fill.svg");
+}
+main h2 a {
+    color: var(--teal);
 }

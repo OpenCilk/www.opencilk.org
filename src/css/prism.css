@@ -14,7 +14,7 @@ pre[class*="language-"] {
     font-family: 'Ubuntu Mono', monospace;
     font-size: 105%;
     text-align: left;
-    white-space: pre-wrap;
+    white-space: pre;
     word-spacing: normal;
     word-break: normal;
     word-wrap: normal;

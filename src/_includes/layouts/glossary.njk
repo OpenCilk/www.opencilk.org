@@ -11,6 +11,6 @@ templateClass: tmpl-page
   <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
 {%- endfor %}
 
-<div style="font-size: larger;">
-{{ content | markdownify | safe }}
+<div>
+  {{ content | markdownify | safe }}
 </div>
