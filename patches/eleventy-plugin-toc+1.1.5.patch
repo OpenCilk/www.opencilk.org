@@ -1,0 +1,35 @@
+diff --git a/node_modules/eleventy-plugin-toc/.eleventy.js b/node_modules/eleventy-plugin-toc/.eleventy.js
+index 6a926b8..f87651d 100644
+--- a/node_modules/eleventy-plugin-toc/.eleventy.js
++++ b/node_modules/eleventy-plugin-toc/.eleventy.js
+@@ -4,7 +4,7 @@ const parseOptions = require('./src/ParseOptions')
+ module.exports = (eleventyConfig, globalOpts) => {
+   globalOpts = globalOpts || {}
+   eleventyConfig.namespace(globalOpts, () => {
+-    eleventyConfig.addFilter('toc', (content, localOpts) => {
++    eleventyConfig.addFilter('toc', function (content, localOpts) {
+       return buildTOC(content, parseOptions(localOpts, globalOpts))
+     })
+   })
+diff --git a/node_modules/eleventy-plugin-toc/src/BuildTOC.js b/node_modules/eleventy-plugin-toc/src/BuildTOC.js
+index 50ced4a..00e3e60 100644
+--- a/node_modules/eleventy-plugin-toc/src/BuildTOC.js
++++ b/node_modules/eleventy-plugin-toc/src/BuildTOC.js
+@@ -29,11 +29,12 @@ const BuildTOC = (text, opts) => {
+ 
+   const label = wrapperLabel ? `aria-label="${wrapperLabel}"` : ''
+ 
+-  return wrapper
+-    ? `<${wrapper} class="${wrapperClass}" ${label}>
+-        ${BuildList(headings, ul, flat)}
+-      </${wrapper}>`
+-    : BuildList(headings, ul, flat)
++  const content = BuildList(headings, ul, flat);
++  return (
++      typeof wrapper === 'function' ? wrapper(content, label)
++    : wrapper ? `<${wrapper} class="${wrapperClass}" ${label}>${content}</${wrapper}>`
++    : content
++  );
+ }
+ 
+ module.exports = BuildTOC
