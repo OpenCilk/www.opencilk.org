@@ -1,54 +1,33 @@
 ---
 title: Convert a C++ program
+author: Timothy Kaler
+date: 2022-07-20T16:22:55.620Z
+attribution: true
 ---
+OpenCilk can help you add parallelism to existing serial code without changing the original program's semantics. This guide will walk you through the process of converting an existing serial C or C++ code to an OpenCilk parallel program and show how OpenCilk's suite of tools can be used to debug race conditions and scalability bottlenecks.
 
-{% alert "primary" %}
-***Note:*** This page will be updated soon to include `cilk_scope`, introduced with OpenCilk 2.0.
+## General workflow
+
+The typical process for adding parallelism to existing serial C or C++ programs using OpenCilk involves five steps:
+
+1. **Debug serial code:** Verify the original program is correct. It's good practice to write correct and well-tested serial code prior to attempting parallelization. Bugs that exist in the serial code will also exist after introducing parallelism, but may be more difficult to debug. 
+2. **Identify parallelism:** Identify regions of the code that could benefit from parallel execution. Typically, operations that are relatively long-running and/or tasks that can be performed independently are prime candidates for parallelization.
+3. **Annotate parallelism:** Introduce parallelism to the code using the OpenCilk keywords {% defn "cilk_for" %}, {% defn "cilk_spawn" %}, and {% defn "cilk_scope" %}:
+   * `cilk_for` identifies a loop for which all iterations can execute in parallel.
+   * `cilk_spawn` indicates a call to a function (a "child") that can proceed in parallel with the caller (the "parent").
+   * `cilk_scope` indicates that all spawned children within the scoped region must complete before proceeding.
+4. **Compile:** Compile the code using the [OpenCilk compiler](/doc/users-guide/getting-started/#using-the-compiler) (e.g., using the `clang` or `clang++` commands within your OpenCilk installation). One compiled, the program can be run on the local machine to test for correctness and measure performance.
+5. **Verify absence of races:** Use OpenCilk's {% defn "Cilksan" %} race detector to verify the absence of race conditions in the parallel program. If the parallelization of the original (correct) serial program contains no {% defn "race condition", "race conditions" %}, then the parallel program will produce the same result as the serial program. With the help of OpenCilk's tools, one can identify and resolve race conditions through the use of {% defn "reducer", "reducers" %}, locks, and recoding. 
+
+## Example: Quicksort
+
+We'll illustrate the process of parallelizing an existing serial code by walking through an example where we expose parallelism in a serial implementation of  [quicksort](http://en.wikipedia.org/wiki/Quicksort). 
+
+{% alert "info" %}
+***Note:*** We use the function name `sample_qsort` in order to avoid confusion with the Standard C Library `qsort` function.
 {% endalert %}
 
-## Overview
-
-Here is the sequence of steps to create a parallel program using OpenCilk.
-
-* Typically, you will start with a serial C or C++ program that implements the basic
-  functions or algorithms that you want to parallelize. You will likely
-  be most successful if the serial program is correct to begin with!
-  Any bugs in the serial program will occur in the parallel program, but
-  they will be more difficult to identify and fix.
-* Next, identify the program regions that will benefit from parallel
-  operation. Operations that are relatively long-running and which can
-  be performed independently are prime candidates.
-* Use the three OpenCilk keywords to identify tasks that can execute in
-  parallel:
-      * `cilk_spawn` indicates a call to a function (a "child") that can proceed in parallel with the caller (the "parent").*
-       `cilk_sync` indicates that all spawned children must complete before proceeding.
-      * `cilk_for` identifies a loop for which all iterations can execute in parallel.
-* Build the program:
-
-  * **Linux* OS:** Use the `clang` or `clang++` compiler command.
-* Run the program. If there are no ***race conditions***, the parallel program will produce the same result
-  as the serial program.
-* Even if the parallel and serial program results are the same, there
-  may still be race conditions. Run the program under the ***cilksan
-  race detector*** to identify possible race
-  conditions introduced by parallel operations.
-* ***Correct any race conditions*** with ***reducers***, locks, or recode to resolve
-  conflicts.
-* Note that a traditional debugger can debug the *serialization* of a parallel program, which you can create
-  easily with OpenCilk.
-
-We will walk through this process in detail using a sort program as an example.
-
-## Start with a serial program
-
-We'll demonstrate how to use write an OpenCilk program by parallelizing
-a simple implementation of ***Quicksort***
-([<span class="underline">http://en.wikipedia.org/wiki/Quicksort</span>](http://en.wikipedia.org/wiki/Quicksort)).
-
-Note that the function name `sample_qsort` avoids confusion with the
-Standard C Library `qsort` function.
-
-```c
+```cilkc#
 #include <algorithm>
 #include <iostream>
 #include <iterator>
@@ -59,155 +38,181 @@ Standard C Library `qsort` function.
 // This is pure C++ code before Cilk++ conversion.
 void sample_qsort(int * begin, int * end)
 {
-    if (begin != end) {
-        --end; // Exclude last element (pivot)
-        int * middle = std::partition(begin, end,
-                    std::bind2nd(std::less<int(),*end));
-        std::swap(*end, *middle); // pivot to middle
-        sample_qsort(begin, middle);
-        sample_qsort(++middle, ++end); // Exclude pivot
-    }
+  if (begin != end) {
+    --end;                                      // Exclude last element (pivot)
+    int * middle = std::partition(begin, end,
+        std::bind2nd(std::less<int(),*end));
+    std::swap(*end, *middle);                   // pivot to middle
+    sample_qsort(begin, middle);
+    sample_qsort(++middle, ++end);              // Exclude pivot
+  }
 }
 
 // A simple test harness
 int qmain(int n)
 {
-    int *a = new int[n];
-    for (int i = 0; i < n; ++i) 
-        a[i] = i;
-    std::random_shuffle(a, a + n);
-    std::cout << "Sorting " << n << " integers"
-            << std::endl;
-    sample_qsort(a, a + n);
-    // Confirm that a is sorted and that each element
-    // contains the index.
-    for (int i = 0; i < n-1; ++i) {
-        if ( a[i] = a[i+1] || a[i] != i ) {
-            std::cout << "Sort failed at location i=" << i << " a[i] = "
-                    << a[i] << " a[i+1] = " << a[i+1] << std::endl;
-            delete[] a;
-            return 1;
-        }
+  int *a = new int[n];
+  for (int i = 0; i < n; ++i) 
+    a[i] = i;
+  std::random_shuffle(a, a + n);
+  std::cout << "Sorting " << n << " integers"
+          << std::endl;
+  sample_qsort(a, a + n);
+  // Confirm that a is sorted and that each element
+  // contains the index.
+  for (int i = 0; i < n-1; ++i) {
+    if ( a[i] = a[i+1] || a[i] != i ) {
+      std::cout << "Sort failed at location i=" << i << " a[i] = "
+              << a[i] << " a[i+1] = " << a[i+1] << std::endl;
+      delete[] a;
+      return 1;
     }
-    std::cout << "Sort succeeded." << std::endl;
-    delete[] a;
-    return 0;
+  }
+  std::cout << "Sort succeeded." << std::endl;
+  delete[] a;
+  return 0;
 }
 
 int main(int argc, char* argv[])
 {
-    int n = 10*1000*1000;
-    if (argc 1)
-        n = std::atoi(argv[1]);
-    return qmain(n); 
+  int n = 10*1000*1000;
+  if (argc 1)
+    n = std::atoi(argv[1]);
+  return qmain(n); 
 }
 ```
 
-## Convert to an OpenCilk program
+## Identify parallelism
 
-Converting the C++ code to OpenCilk C++ code is very simple.
+The  `sample_qsort` function is invoked recursively on two disjoint subarrays on line 16 and line 17. These independent tasks will be relatively long-running and are good candidates for parallelization. This proposed parallelization of quicksort represents a typical divide-and-conquer strategy for parallelizing recursive algorithms. An intrepid reader might also notice that the `partition` function invoked on line 13 may also be parallelized for even greater scalability.
 
-* Add a "`#include <cilk.h>`" statement to the source. `cilk.h`
-  declares all the entry points to the OpenCilk runtime.
+## Annotate parallelism
 
-The result is an OpenCilk program that has no parallelism yet.
+The next step is to actually introduce parallelism into our quicksort program. This can be accomplished through the judicious use of OpenCilk's three keywords for expressing parallelism: `cilk_for`, `cilk_spawn`, and `cilk_scope`. 
 
-Compile the program to ensure that the OpenCilk SDK development
-environment is setup correctly.
+In this example, we shall make use of just the `cilk_spawn` and `cilk_scope` keywords. The `cilk_spawn` keyword indicates that a function (the *child*) may be executed in parallel with the code that follows the `cilk_spawn` statement (the *parent*). Note that the keyword *allows* but does not *require* parallel operation. The OpenCilk scheduler will dynamically determine what actually gets executed in parallel when multiple processors are available. The `cilk_scope` statement indicates that the function may not continue until all `cilk_spawn` requests within the scoped region have completed. 
 
-Typically, OpenCilk programs are built with optimized code for best
-performance.
+Let's look at a version of the quicksort code that has been parallelized using OpenCilk.
 
-##### Linux* OS
-
-```shell
-> clang++ qsort.cpp -o qsort –O3 -fopencilk
-```
-
-## Add parallelism using `cilk_spawn`
-
-We are now ready to introduce parallelism into our `qsort` program.
-
-The `cilk_spawn` keyword indicates that a function (the *child*) may be
-executed in parallel with the code that follows the `cilk_spawn`
-statement (the *parent*). Note that the keyword *allows* but does not
-*require* parallel operation. The OpenCilk scheduler will dynamically
-determine what actually gets executed in parallel when multiple
-processors are available. The `cilk_sync` statement indicates that the
-function may not continue until all `cilk_spawn` requests in the same
-function have completed. `cilk_sync` does not affect parallel strands
-spawned in other functions.
-
-```c
+```cilkc#
 void sample_qsort(int * begin, int * end)
 {
-    if (begin != end) {
-        --end; // Exclude last element (pivot)
-        int * middle = std::partition(begin, end,
-                    std::bind2nd(std::less<int>(),*end));        
-        std::swap(*end, *middle); // pivot to middle
-        cilk_spawn sample_qsort(begin, middle);
-        sample_qsort(++middle, ++end); // Exclude pivot
-        cilk_sync;
+  if (begin != end) {
+    --end;                                      // Exclude last element (pivot)
+    int * middle = std::partition(begin, end,
+        std::bind2nd(std::less<int>(),*end));        
+    std::swap(*end, *middle);                   // pivot to middle
+    cilk_scope {
+      cilk_spawn sample_qsort(begin, middle);
+      sample_qsort(++middle, ++end);            // Exclude pivot
     }
+  }
 }
 ```
 
-In line 8, we spawn a recursive invocation of `sample_qsort` that can
-execute asynchronously. Thus, when we call `sample_qsort` again in line 9, the call at line 8 might not have completed. The `cilk_sync`
-statement at line 10 indicates that this function will not continue
-until all `cilk_spawn` requests in the same function have completed.
+In the example code above, the serial quicksort code has been converted into a parallel OpenCilk code by adding the `cilk_spawn` keyword on line 9, and defining the  `cilk_scope` region to include lines 9-10. The `cilk_spawn` keyword on line 9 indicates that the function call `sample_qsort(begin, middle)` is allowed to execute in parallel with its ***continuation*** which includes the function call `sample_qsort(++middle, ++end)` on line 10.     
 
-There is an implicit `cilk_sync` at the end of every function that waits
-until all tasks spawned in the function have returned, so the `cilk_sync` here is redundant, but written explicitly for clarity.
+The `cilk_spawn` keyword can be thought of as allowing the recursive invocation of `sample_qsort` on line 10 to execute asynchronously. Thus, when we call `sample_qsort` again in line 10, the call at line 9 might not have completed. The end of the `cilk_scope` region at line 11 indicates that this function will not continue until all `cilk_spawn` requests in the same scoped region have completed. There is an implicit `cilk_scope` surrounding the body of every function so that at the end of every function all tasks spawned in the function have returned.
 
-The above change implements a typical divide-and-conquer strategy for
-parallelizing recursive algorithms. At each level of recursion, we have
-two-way parallelism; the parent strand (line 9) continues executing the
-current function, while a child strand executes the other recursive
-call. This recursion can expose quite a lot of parallelism.
+## Compile
 
-## Build, execute, and test
+Before you can compile your Cilk program with the OpenCilk compiler, you must add `#include <cilk.h>` to the source file. The `cilk.h` header file contains declarations of the OpenCilk runtime API and the keywords used to specify parallel control flow. After adding the `cilk.h` header file, you can compile the quicksort program using the `clang++` compiler in your [OpenCilk installation](/doc/users-guide/getting-started/#using-the-compiler).
 
-With these changes, you can now build and execute the OpenCilk version
-of the qsort program. Build and run the program exactly as we did with
-the previous example:
+{% alert "info" %}
 
-##### Linux* OS:
+_**Note:**_ This guide assumes that OpenCilk is installed within
+`/opt/opencilk/` and that the OpenCilk C++ compiler can be invoked from the
+terminal as `/opt/opencilk/bin/clang++`, as shown in [this
+example](/doc/users-guide/install/#example).
 
-```shell
-> clang++ qsort.cpp -o qsort –O3 -fopencilk
+{% endalert %}
+
+```shell-session
+$ /opt/opencilk/bin/clang++ qsort.cpp -o qsort –O3 -fopencilk
 ```
 
-### Run qsort from the command line
+### Build, execute, and test
 
-```shell
-> qsort
+Now that you have introduced parallelism into the quicksort program, you can build and execute the OpenCilk version of the qsort program with the command shown below.
+
+```shell-session
+$ /opt/opencilk/bin/clang++ qsort.cpp -o qsort –O3 -fopencilk
+```
+
+The quicksort code can be run from the command line as shown below to verify correctness and measure its runtime performance.
+
+```shell-session
+$ ./qsort
 Sorting 10000000 integers
 5.641 seconds 
 Sort succeeded.
 ```
 
-By default, an OpenCilk program will query the operating system and use
-all available cores. You can control the number of workers by setting
-the CILK_NWORKERS environment variable:
+By default, an OpenCilk program will execute in parallel using all of the cores available on the machine. You can control the number of workers for a particular execution by setting the `CILK_NWORKERS` environment variable as shown below.
 
-```shell
+```shell-session
 CILK_NWORKERS=8 ./qsort
 ```
 
-### Observe speedup on a multicore system
+Using the `CILK_NWORKERS` environment variable, you can measure the parallel speedup achieved by quicksort when varying the number of utilized cores. Below we show the result of running the quicksort program using one and two cores.
 
-Run qsort using one and then two cores:
-
-```powershell
-> CILK_NWORKERS=1 qsort
+```shell-session
+$ CILK_NWORKERS=1 qsort
 Sorting 10000000 integers
 2.909 seconds Sort succeeded.
 
-> CILK_NWORKERS=2 qsort
+$ CILK_NWORKERS=2 qsort
 Sorting 10000000 integers
 1.468 seconds Sort succeeded.
 ```
 
-Alternately, run cilkscale to get a more detailed performance graph.
+## Verify absence of races
+
+The Cilksan race detector can be used to check for race conditions in the parallelized quicksort code. To run Cilksan on our parallel quicksort routine, you must compile the program with Cilksan enabled and then execute the instrumented program.
+
+```shell-session
+$ /opt/opencilk/bin/clang++ qsort.cpp -o qsort –Og -g -fopencilk -fsanitize=cilk
+$ ./qsort 10000000
+
+Cilksan detected 0 distinct races.
+Cilksan suppressed 0 duplicate race reports.
+```
+
+The Cilksan race detector will report any race conditions present in the program and verify the absence of races in a race-free program. More detailed instructions about the use of Cilksan can be found [here](/doc/users-guide/getting-started/#using-cilksan).
+
+## Measure scalability
+
+Cilkscale can be used to benchmark and analyze the parallelism, in terms of {% defn "work" %} and {% defn "span" %}, of an OpenCilk program. These measurements can be used to predict performance when running on a varying number of cores.
+
+One can use Cilkscale to benchmark the parallel scalability of quicksort by compiling with the additional flag `-fcilktool=cilkscale` and then executing the program as shown below.
+
+```shell-session
+$ /opt/opencilk/bin/clang++ qsort.cpp -o qsort –O3 -fopencilk -fcilktool=cilkscale
+$ ./qsort 10000000
+
+Sorting 10000000 integers
+All sorts succeeded
+tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
+,14.511,0.191245,75.8764,0.191514,75.7699
+```
+
+Cilkscale will report the total work, span, and parallelism in the code at the end of the program execution, as shown above.
+
+The Cilkscale tool can be used in conjunction with other benchmarking and visualization scripts provided as part of the OpenCilk toolbox. More information about the use of Cilkscale and related tools for benchmarking and visualizing parallel program performance can be found [here](/doc/users-guide/cilkscale). 
+
+Plots illustrating the parallel execution time and speedup of the quicksort program we have parallelized in this example are shown below.
+
+![Cilkscale speedup for quicksort.](/img/cilkscale-qsort-speedup.png "Quicksort speedup")
+
+![Cilkscale execution time for quicksort.](/img/cilkscale-qsort-execution-time.png "Quicksort execution time")
+
+## Discussion
+
+We have seen how to convert a serial C++ program into a parallel Cilk program.  So... what next?
+We might seek to use the parallel processing enabled by OpenCilk to obtain additional performance improvements.
+We will return to this topic with forthcoming
+documentation and blog posts.  Please [let us know](/contribute/contact/) if
+you'd like to be notified about important updates to OpenCilk and its
+documentation.
+
+The parallelization of quicksort provided in this example implements a typical divide-and-conquer strategy for parallelizing recursive algorithms. At each level of recursion, we have two-way parallelism; the parent strand continues executing the current function, while a child strand executes the other recursive call. In general, recursive divide-and-conquer algorithms can expose significant parallelism. In the case of quicksort, however, parallelizing according to the standard recursive structure of the serial algorithm only exposes limited parallelism. The reason for this is due to the substantial amount of work performed by the serial `partition` function. This function may be parallelized for better scalability, but we shall leave this task as an exercise to the intrepid reader.
