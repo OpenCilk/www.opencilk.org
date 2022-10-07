@@ -55,7 +55,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginNavigation);
   eleventyConfig.addPlugin(pluginTOC, {
     tags: ['h1', 'h2'],
-    wrapper: 'nav',
+    wrapper(content, label) {
+      return `<nav id="bd-toc-nav" class="page-toc" aria-label="Site navigation">
+    ${content.replaceAll('<ul>', '<ul class="visible nav section-nav flex-column">').replaceAll('<li>', '<li class="toc-h2 nav-item toc-entry">').replaceAll('<a href', '<a class="reference internal nav-link" href')}
+    </nav>`
+    },
     wrapperClass: 'visible nav section-nav flex-column',
     ul: true
   });

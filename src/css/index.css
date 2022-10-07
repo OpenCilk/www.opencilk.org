@@ -13,6 +13,15 @@ a {
 a:hover {
   color: var(--lime);
 }
+.toc-entry a.nav-link, nav.bd-links li a {
+  color: var(--blue);
+}
+.toc-entry a.nav-link:hover, nav.bd-links li a:hover {
+  color: var(--lime);
+}
+.toc-entry a.nav-link.active, nav.bd-links .active a {
+  color: var(--blue);
+}
 .mynavbar-nav {
   display: flex;
   flex-direction: row;
