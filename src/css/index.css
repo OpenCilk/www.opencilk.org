@@ -13,14 +13,15 @@ a {
 a:hover {
   color: var(--lime);
 }
-.toc-entry a.nav-link, nav.bd-links li a {
+.toc-entry a.nav-link, nav.bd-links li a, li.toctree-l1 a.reference {
   color: var(--blue);
 }
-.toc-entry a.nav-link:hover, nav.bd-links li a:hover {
+.toc-entry a.nav-link:hover, nav.bd-links li a:hover, li.toctree-l1 a.reference:hover {
   color: var(--lime);
 }
-.toc-entry a.nav-link.active, nav.bd-links .active a {
+.toc-entry a.nav-link.active, nav.bd-links .active a, li.toctree-l1.active a.reference {
   color: var(--blue);
+  font-weight: 600;
 }
 .mynavbar-nav {
   display: flex;
@@ -42,7 +43,17 @@ ul#navbar-main-elements li.mynav-item {
   margin-right: 2em;
 }
 .bd-sidebar-primary {
+  padding: 1rem;
   border-right: 2px solid var(--lime);
+}
+.bd-container .bd-sidebar-primary {
+  background-color: transparent;
+}
+input#__primary:checked ~ .bd-container .bd-sidebar-primary {
+  background-color: white;
+}
+.bd-sidebar-secondary {
+  padding: 1rem;
 }
 .bd-article-container a {
   text-decoration: underline;
