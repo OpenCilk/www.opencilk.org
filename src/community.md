@@ -1,8 +1,9 @@
 ---
 layout: layouts/page.njk
-title: Community
-sidebar: toc
+stylesheet: users-guide.css
 background: bg-white
+sidebar: toc
+title: Community
 eleventyNavigation:
   key: Community
   parent: Home
@@ -31,7 +32,5 @@ Below are the academic conferences traditionally most popular with the OpenCilk 
 {% for conf in  conferences %}
  - [{{ conf.shortName }}]({{ conf.url }})
 {% endfor %}
-
-
 
 See also: **[Contribute](/contribute)**.

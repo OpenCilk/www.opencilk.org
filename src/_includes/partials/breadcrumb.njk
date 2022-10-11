@@ -1,0 +1,19 @@
+                        {% if page.url != "/" %}
+                        <small>
+                            {% if eleventyNavigation.key %}
+                                {% set crumbPages = collections.all | eleventyNavigationBreadcrumb( eleventyNavigation.key ) %}
+                                <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                {%- for entry in crumbPages %}
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ entry.url | url }}">{{ entry.title }}</a>
+                                    </li>
+                                {%- endfor %}
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    {{ title }}
+                                </li>
+                                </ol>
+                                </nav>
+                            {% endif %}
+                        </small>
+                        {% endif %}
