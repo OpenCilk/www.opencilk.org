@@ -38,13 +38,24 @@ a.mynav-link.active {
 a.mynav-link:hover {
   color: var(--lime);
 }
+ul#navbar-main-elements {
+  padding: 0;
+}
 ul#navbar-main-elements li.mynav-item {
   display: inline;
   margin-right: 2em;
 }
+.bd-header #navbar-start {
+  margin-right: inherit;
+  width: 16.4em;
+}
 .bd-sidebar-primary {
   padding: 1rem;
   border-right: 2px solid var(--lime);
+}
+.toc-item {
+  border-left: none;
+  padding-left: 0;
 }
 .bd-container .bd-sidebar-primary {
   background-color: transparent;
@@ -55,6 +66,16 @@ input#__primary:checked ~ .bd-container .bd-sidebar-primary {
 .bd-sidebar-secondary {
   padding: 1rem;
 }
+.bd-page-width {
+  max-width: 100em;
+}
+.bd-main .bd-content {
+  width: 100%;
+}
+.bd-main .bd-content .bd-article-container {
+  flex-grow: 1;
+  max-width: none;
+}
 .bd-article-container a {
   text-decoration: underline;
 }
@@ -64,6 +85,7 @@ footer.bd-footer {
 a.defn {
   font-weight: bold;
   font-style: italic;
+  text-decoration: none;
 }
 .blog.card-body {
   color: white;

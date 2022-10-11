@@ -43,7 +43,6 @@ linking the Cilk program.  During compilation, the flag ensures that the Cilk
 keywords are recognized and compiled.  During linking, it ensures the program
 is properly linked with the OpenCilk runtime library.
 
-<br/>
 {% alert "danger" %}
 
 Former users of Intel Cilk Plus with GCC: Do **not** include the
@@ -211,7 +210,6 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 will only analyze whole-program execution.  To analyze specific regions of your
 Cilk program, use the [Cilkscale work-span API](/doc/reference/cilkscale/#cc++-api-for-fine-grained-analysis).
 
-<br/>
 {% alert "primary" %}
 
 ***Example:*** The tutorial program `qsort_wsp.c` shows how to modify the code
