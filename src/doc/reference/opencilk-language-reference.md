@@ -9,7 +9,7 @@ attribution: false
 ---
 
 OpenCilk is an extension to the C and C++ programming language adding
-support for {% defn "task-parallel" %} programming.  It uses a
+support for {% defn "task-parallel programming" %}.  It uses a
 modified version of [clang](https://clang.llvm.org) (the C compiler
 from the LLVM project) and a user-mode work-stealing scheduler.  At
 the source level, OpenCilk has five additional keywords compared to C:
@@ -66,9 +66,15 @@ after the `=` sign of an assignment (or `+=`, `-=`, etc.).
 
 ```cilkc
 int x = cilk_spawn f(0);
-cilk_spawn y = f(1);
+cilk_spawn y = f(1); // [TB says this is not the same as the previous]
 cilk_spawn { z = f(2); }
 ```
+
+[Only if cilk_spawn precedes the function call are the arguments
+evaluated before the spawn.]
+
+[Test op= forms and add an example or remove the allegation that
+they are allowed.]
 
 Although the compiler accepts spawns inside of expressions, they are
 unlikely to have the expected semantics.  A future version of the
@@ -79,6 +85,10 @@ at or near the top of the parse tree of a statement.
 
 A sync statement, `cilk_sync;`, ends a region of potentially parallel
 execution.  It takes no arguments.
+
+[Find a real example with a conditional sync.  Or have some spawns
+to be synced.  Matteo Frigo's all pairs shortest path code has
+conditional sync, says TB.]
 
 ```cilkc
 if (time_to_sync)
@@ -131,9 +141,12 @@ For the loop to be parallelized, several conditions must be met:
 * The third expression must modify the loop variable using `++`,
   `--`, `+=`, or `-=`.
 
-`Break` may not be used to exit the body of a `cilk_for` loop.
+The `break` statement may not be used to exit the body of a `cilk_for` loop.
 
-[what about exceptions thrown from the loop body?]
+[In the section on behavior, to be written,
+discuss exceptions thrown from the loop body.
+An exception probably aborts an unpredictable amount of
+later work.]
 
 #### Grain size
 
@@ -145,8 +158,10 @@ pragma:
 
 ```cilkc
  #pragma cilk grainsize 128
- cilk_for (int i = 0; i < n; ++i)
+ cilk_for (int i = 0; i < n; ++i) {
+   array1[i] = f(i);
    array2[i] = f(i);
+ }
 ```
 
 The pragma in the example tells the compiler that groups of 128
@@ -194,15 +209,17 @@ This section describes how the keywords added above may affect
 execution.  A basic principle of Cilk is that the new keywords do not
 necessarily change execution.  If `cilk_for` is replaced by `for` and
 the other keywords are removed, the result is a valid C or C++ program
-_with the same meaning_ called the %{ defn "serial projection" %}.  A
+_with the same meaning_ called the {% defn "serial projection" %}.  A
 program can be developed and debugged serially and parallelism added
 later.
 
 ### Strand
 
-A _%{defn "strand" %}_ is a series of instructions between one spawn
+A _{%defn "strand" %}_ is a series of instructions between one spawn
 or sync and the next spawn or sync.  A strand executes on a single
 thread.
+
+#### Spawn
 
 In some cases it is necessary to specify exactly where the spawn point
 is in a spawn statement.
@@ -225,6 +242,8 @@ In the current implementation all side effects other than
 assignment of a function return value happen before the spawn.
 The outermost function call of the spawned statement can be
 considered the point of the spawn.
+[The previous sentence was difficult for TB.]
+[Probably rewrite the whole previous part.]
 
 ```cilkc
 x[i++] = cilk_spawn f(a++, b++, c++);
@@ -256,12 +275,12 @@ OpenCilk.
 The code that follows the spawn point is called the _continuation_ of
 the spawn.
 
-### Sync
+#### Sync
 
 A sync operation waits for previous spawns to complete before
 continuing.
 
-#### Explicit sync
+##### Explicit sync
 
 An explicit sync is a statement using `cilk_sync`.  This form normally
 has function scope, meaning it waits for all spawns in the same
@@ -277,7 +296,7 @@ cilk_spawn cilk_scope { cilk_spawn ... }
 ```
 ]
 
-#### Implicit syncs
+##### Implicit syncs
 
 In addition to the sync statements in the code, there is an implicit sync
 before exit from some scopes:
@@ -325,14 +344,14 @@ syncs section.]
 
 Concurrency invites races.  If the same object is accessed by two
 statements running in parallel, and at least one of the accesses is a
-write, there is said to be a _%{defn "data race" %}_.  Data races have
+write, there is said to be a _{%defn "data race" %}_.  Data races have
 undefined behavior.
 
 [Do we want to clarify that atomic accesses are unspecified rather than undefined?]
 
 ### Reducers
 
-%{ defn "hyperobject", "Hyperobjects" %} are special variables that
+{% defn "hyperobject", "Hyperobjects" %} are special variables that
 can be accessed in parallel without data races.  The OpenCilk runtime
 gives each thread running in parallel a separate copy of the variable
 and merges the values as necessary.  The local copy of the variable is
@@ -357,7 +376,7 @@ and is essentially a form of thread-local storage.
 
 #### Types
 
-A declaration of a reducer requires a _%{defn "monoid" }_.  Aside from
+A declaration of a reducer requires a _{%defn "monoid" }_.  Aside from
 the view type, a reducer monoid includes two callback functions.
 
 When declaring a type the `cilk_reducer` keyword is used in the same
