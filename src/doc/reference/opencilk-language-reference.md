@@ -65,13 +65,10 @@ The `cilk_spawn` keyword should appear at the start of a statement or
 after the `=` sign of an assignment (or `+=`, `-=`, etc.).
 
 ```cilkc
-int x = cilk_spawn f(0);
-cilk_spawn y = f(1); // [TB says this is not the same as the previous]
-cilk_spawn { z = f(2); }
+int x = cilk_spawn f(i++);
+cilk_spawn y[j++] = f(i++);
+cilk_spawn { z[j++] = f(i++); }
 ```
-
-[Only if cilk_spawn precedes the function call are the arguments
-evaluated before the spawn.]
 
 [Test op= forms and add an example or remove the allegation that
 they are allowed.]
@@ -173,6 +170,11 @@ in the range 1..2<sup>31</sup>-1.  [Do we want to deprecate this
 range in favor of a smaller range, or in the other direction
 up to a `size_t`?]
 
+Whether the grain size is static or dynamic, an exception thrown from
+the loop body will abort the remainder of the group of iterations.
+The scope of `cilk_sync` will also include all iterations in the
+group.
+
 
 ### Reducers
 
@@ -222,34 +224,45 @@ thread.
 #### Spawn
 
 In some cases it is necessary to specify exactly where the spawn point
-is in a spawn statement.
+is in a spawn statement.  All code up to the point of spawning
+executes in series.  The code that follows the spawn point is called
+the _continuation_ of the spawn.  It potentially executes in parallel
+with the following statements of the program.
 
 Contrary to the syntax, the spawn itself should be considered as
-having a `void` value.  The compiler internally rewrites an expression
-like
+having a `void` value.  The return value of spawn is like a promise or
+lazily evaluated value.  If it is consumed immediately the parallelism
+is lost.  The compiler rewrites supported uses of `cilk_spawn` into a
+form where the value of the spawned expression is consumed in the
+continuation.
+
+
+These three statements are equivalent:
 
 ```cilkc
 x = cilk_spawn f();
-```
-
-into
-
-```cilkc
+cilk_spawn x = f();
 cilk_spawn { x = f(); }
 ```
 
-In the current implementation all side effects other than
-assignment of a function return value happen before the spawn.
-The outermost function call of the spawned statement can be
-considered the point of the spawn.
-[The previous sentence was difficult for TB.]
-[Probably rewrite the whole previous part.]
+When there are side effects the situation is more complex.
+
+When `cilk_spawn` appears after an assignment operator and before a
+function call, the spawn is after all arguments are evaluated and
+after the address of the left hand side is evaluated.  Side effects do
+not race with the continuation.  The spawn is before the function call
+and assignment of its return value.  The body of the called function
+and the assignment do race with the continuation.  In C++, destructors
+for function arguments also race with the continuation.
 
 ```cilkc
 x[i++] = cilk_spawn f(a++, b++, c++);
 // It is safe to access i, a, b, and c here (they have been incremented)
 // but it is not safe to access the memory location being assigned.
 ```
+
+When `cilk_spawn` appears at the start of a statement the entire
+statement is spawned and everything in it races with the continuation.
 
 While syntactically valid, code like
 
@@ -266,14 +279,13 @@ nonsense.c:4:18: warning: Failed to emit spawn
 1 warning generated.
 ```
 
-The return value of spawn is like a promise or lazily evaluated value.
-If it is consumed immediately the parallelism is lost.
+In this case the compiler is unable to move the use of `i++` into the
+spawned expression.
 
-As noted above, this syntax may be removed in a future version of
-OpenCilk.
-
-The code that follows the spawn point is called the _continuation_ of
-the spawn.
+This syntax may be removed in a future version of OpenCilk and
+`cilk_spawn` required to appear at the start of a statement or between
+an assignment operator and an immediately following function call or
+constructor call.
 
 #### Sync
 
@@ -295,6 +307,8 @@ inner scopes.  This situation does not normally occur.
 cilk_spawn cilk_scope { cilk_spawn ... }
 ```
 ]
+[But the Cilk scope doesn't exit until the inner spawn is synced so maybe
+this does not need a rule after all.]
 
 ##### Implicit syncs
 
@@ -309,7 +323,8 @@ before exit from some scopes:
   `cilk_scope` statement.
 * On exit from the body of a `cilk_for`, i.e. once per iteration of the loop.
   This sync has scope equal to the loop body.
-  [Does grain size change this?]
+  If a grain size is specified, the sync affects the entire group of
+  iterations in which it is executes.  [TODO: Test grain size.]
 
 [What about on entry to a try block?]
 
@@ -338,7 +353,18 @@ syncs section.]
 
 ### Left hand side side effects
 
-[TB can explain this]
+When a function call is spawned in OpenCilk and the result is
+assigned, the compiler evaluates the address of the left hand side of
+the assignment before calling the function.  This conflicts with
+recent versions of C++, which require evaluation of the left hand
+side to follow return from the function.
+
+```cilkcpp
+    extern int global;
+    a[global++] = cilk_spawn f(); // f() sees incremented value of global
+```
+
+[TB needs to confirm or deny this]
 
 ## Races and reducers
 
@@ -347,7 +373,8 @@ statements running in parallel, and at least one of the accesses is a
 write, there is said to be a _{%defn "data race" %}_.  Data races have
 undefined behavior.
 
-[Do we want to clarify that atomic accesses are unspecified rather than undefined?]
+Parallel atomic accesses do not yield undefined behavior, but the
+order of parallel atomic operations is generally unspecified.
 
 ### Reducers
 
