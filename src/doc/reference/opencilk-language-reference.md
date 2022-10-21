@@ -31,12 +31,12 @@ compared to older forms of parallelism using C's `pthread_create` and
 Java's `Thread.start`.  These functions encourage writing programs
 that do not work without multithreading.
 
-The statements executed in a task parallel program form a {% defn
-"parallel trace", "directed acyclic graph" %} (DAG).  A spawn node has
-one incoming edge and two outgoing edges.  A sync node has one
-outgoing edge.  Two statements are said to be logically parallel if
-neither precedes the other in DAG order.  Whether they actually run
-in parallel (at the same time) depends on scheduling.
+The statements executed in a task parallel program form a directed
+acyclic graph (DAG).  A spawn node has one incoming edge and two
+outgoing edges.  A sync node has one outgoing edge.  Two statements
+are said to be logically parallel if neither precedes the other in DAG
+order.  Whether they actually run in parallel (at the same time)
+depends on scheduling.
 
 ```cilkc
   int x = cilk_spawn f(); // the body of f()...
@@ -376,7 +376,7 @@ and is essentially a form of thread-local storage.
 
 #### Types
 
-A declaration of a reducer requires a _{%defn "monoid" }_.  Aside from
+A declaration of a reducer requires a _{% defn "monoid" %}_.  Aside from
 the view type, a reducer monoid includes two callback functions.
 
 When declaring a type the `cilk_reducer` keyword is used in the same
