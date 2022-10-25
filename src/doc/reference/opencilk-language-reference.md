@@ -70,13 +70,11 @@ cilk_spawn y[j++] = f(i++);
 cilk_spawn { z[j++] = f(i++); }
 ```
 
-[Test op= forms and add an example or remove the allegation that
-they are allowed.]
-
-Although the compiler accepts spawns inside of expressions, they are
-unlikely to have the expected semantics.  A future version of the
-language may explicitly limit `cilk_spawn` to the contexts above,
-at or near the top of the parse tree of a statement.
+Although the compiler accepts `cilk_spawn` before almost any
+expression, spawns inside of expressions are unlikely to have the
+expected semantics.  A future version of the language may explicitly
+limit `cilk_spawn` to the contexts above, at or near the top of the
+parse tree of a statement.
 
 ### Sync
 
@@ -127,7 +125,8 @@ cilk_for (int i = 0; i < n; ++i)
 The syntax of a `cilk_for` statement is very similar to a C `for`
 statement.  It is followed by three expressions, the first of which
 may declare variables.  Unlike in C all three expressions are
-mandatory.  C++ range `for` constructs are not allowed.
+mandatory.  C++ range `for` constructs are not allowed.  (Range for
+is planned for a future version of OpenCilk.)
 
 For the loop to be parallelized, several conditions must be met:
 
@@ -147,11 +146,11 @@ later work.]
 
 #### Grain size
 
-The compiler often recognizes that the overhead of allowing parallel
-execution can exceed the benefit.  If the body of a loop does little
-work the compiler will arrange for groups of consecutive iterations to
-run sequentially.  This behavior can be manually overridden with a
-pragma:
+If a single loop iteration does very little work, the overhead of
+spawning it exceeds any benefit from parallelism.  In many cases the
+compiler will recognize this situation and merge several consecutive
+iterations into a single task that runs sequentially.  This behavior
+can be manually overridden with a pragma:
 
 ```cilkc
  #pragma cilk grainsize 128
@@ -161,14 +160,18 @@ pragma:
  }
 ```
 
-The pragma in the example tells the compiler that groups of 128
+The pragma in the example tells the compiler that each group of 128
 consecutive iterations should be executed as a serial loop.  If there
 are 1024 loop iterations in total, there are only 8 parallel tasks.
+There is guaranteed to be no spawn or sync between the iterations
+for `i=0` and `i=1` (assuming `n` is at least 2, otherwise there
+will be no second iteration).
 
-The argument to the grain size pragma must be an integer constant
-in the range 1..2<sup>31</sup>-1.  [Do we want to deprecate this
-range in favor of a smaller range, or in the other direction
-up to a `size_t`?]
+In OpenCilk 2.0 the argument to the grain size pragma must be an
+integer constant in the range 1..2<sup>31</sup>-1.
+
+Without an explicit grainsize the runtime will choose a value from 1
+to 2048.
 
 Whether the grain size is static or dynamic, an exception thrown from
 the loop body will abort the remainder of the group of iterations.
@@ -182,10 +185,10 @@ A type may be suffixed with `cilk_reducer`.  Syntactically it appears
 where `*` may be used to declare a pointer type.  The type to the left
 of `cilk_reducer` is the _view type_.
 
-Two values appear in parentheses after `cilk_reducer`.  Both must be
-function types returning `void`.  The first, the _identity callback_,
-takes one argument of type `void *`.  The second, the _reduce callback_,
-takes two arguments of type `void *`.
+Two values appear in parentheses after `cilk_reducer`.  Both emust be
+functions returning `void` or pointers to functions returning void.
+The first, the _identity callback_, takes one argument of type `void*`.
+The second, the _reduce callback_, takes two arguments of type `void *`.
 
 Two reducer types are the same if their view types are the same and
 their callbacks are the same function mentioned by name.  Otherwise
@@ -204,6 +207,12 @@ identical.
 
 In the current version of OpenCilk the callbacks may be omitted.
 This behavior may be removed in a future version of OpenCilk.
+
+In the current version of OpenCilk the arguments to `cilk_reducer`
+are evaluated each time a reducer is created.  This behavior may
+change in a future version of OpenCilk.  For compatibility and
+predictable behavior the arguments to `cilk_reducer` should not
+have side effects.
 
 ## Execution of an OpenCilk program
 
