@@ -61,8 +61,9 @@ identifiers.
 A statement using `cilk_spawn` is the start of a potentially parallel
 region of code.
 
-The `cilk_spawn` keyword should appear at the start of a statement or
-after the `=` sign of an assignment (or `+=`, `-=`, etc.).
+The `cilk_spawn` keyword should appear at the start of an expression
+statement or after the `=` sign of an assignment (or `+=`, `-=`,
+etc.).
 
 ```cilkc
 int x = cilk_spawn f(i++);
@@ -75,6 +76,8 @@ expression, spawns inside of expressions are unlikely to have the
 expected semantics.  A future version of the language may explicitly
 limit `cilk_spawn` to the contexts above, at or near the top of the
 parse tree of a statement.
+
+A declaration may not begin with `cilk_spawn`.
 
 ### Sync
 
@@ -125,8 +128,8 @@ cilk_for (int i = 0; i < n; ++i)
 The syntax of a `cilk_for` statement is very similar to a C `for`
 statement.  It is followed by three expressions, the first of which
 may declare variables.  Unlike in C all three expressions are
-mandatory.  C++ range `for` constructs are not allowed.  (Range for
-is planned for a future version of OpenCilk.)
+mandatory.  Parallel C++ range `for` constructs are not supported
+in OpenCilk 2.0.
 
 For the loop to be parallelized, several conditions must be met:
 
@@ -137,12 +140,13 @@ For the loop to be parallelized, several conditions must be met:
 * The third expression must modify the loop variable using `++`,
   `--`, `+=`, or `-=`.
 
-The `break` statement may not be used to exit the body of a `cilk_for` loop.
-
-[In the section on behavior, to be written,
-discuss exceptions thrown from the loop body.
-An exception probably aborts an unpredictable amount of
-later work.]
+Because loop iterations may execute out of order there is no way to
+predictably stop the loop in the middle.  The `break` statement may
+not be used to exit the body of a `cilk_for` loop.  An exception
+thrown out of a loop body is only guaranteed to terminate the current
+iteration.  (Also, any later iteration of the same grain; see below.)
+The effect on other iterations is unpredictable; they may run to
+completion or not run at all.
 
 #### Grain size
 
@@ -205,8 +209,9 @@ identical.
     int cilk_reducer(idp, reduce) type4; // not the same as type3
 ```
 
-In the current version of OpenCilk the callbacks may be omitted.
-This behavior may be removed in a future version of OpenCilk.
+In the current version of OpenCilk the callbacks may be omitted in
+contexts other than definition of a variable.  This behavior may be
+removed in a future version of OpenCilk.
 
 In the current version of OpenCilk the arguments to `cilk_reducer`
 are evaluated each time a reducer is created.  This behavior may
@@ -241,12 +246,10 @@ with the following statements of the program.
 Contrary to the syntax, the spawn itself should be considered as
 having a `void` value.  The return value of spawn is like a promise or
 lazily evaluated value.  If it is consumed immediately the parallelism
-is lost.  The compiler rewrites supported uses of `cilk_spawn` into a
-form where the value of the spawned expression is consumed in the
-continuation.
+is lost.  When `cilk_spawn` follows `=` the store to the left hand
+side is made part of what is spawned.
 
-
-These three statements are equivalent:
+These three statements assigning to an ordinary variable are equivalent:
 
 ```cilkc
 x = cilk_spawn f();
@@ -308,16 +311,14 @@ has function scope, meaning it waits for all spawns in the same
 function.  A sync inside the body of a `cilk_for` or `cilk_scope` only
 waits for spawns inside the same construct.
 
-Sync scopes are disjoint, so a sync outside a `cilk_for` or
-`cilk_scope` never waits for a spawn belonging to one of these
-inner scopes.  This situation does not normally occur.
-[This handles
+If spawns are nested as in
 ```cilkc
 cilk_spawn cilk_scope { cilk_spawn ... }
+...
+cilk_sync;
 ```
-]
-[But the Cilk scope doesn't exit until the inner spawn is synced so maybe
-this does not need a rule after all.]
+a `cilk_sync` at top level waits for the outer spawn to complete, and
+the outer spawn waits for the inner spawn to complete.
 
 ##### Implicit syncs
 
@@ -360,6 +361,13 @@ inserts an implicit sync at the end of a try block if the try contains
 a spawn.  [Make sure this is consistent with the wording in the implicit
 syncs section.]
 
+If an exception is thrown from the body of a `cilk_for` statement the
+current loop iteration is aborted, consistent with the semantics of
+`throw`.  If the `grainsize` pragma is used, later iterations in the
+current grain do not execute.  No guarantee is made about which other
+loop iterations execute, except that a grain in progress is not
+affected by an exception thrown from outside the grain.
+
 ### Left hand side side effects
 
 When a function call is spawned in OpenCilk and the result is
@@ -397,27 +405,53 @@ Because each thread may operate on a separate copy, the address of a
 view is not constant.  This is also true of thread local variables,
 but reducers do not follow the same rules as thread local variables.
 
+Also because each thread operates on a separate copy, a view of a
+reducer only has a well-defined value in serial code.  Within any
+strand the value does not change except due to that strand's actions.
+At a strand boundary the value of a view may change even if its
+address does not.
+
 The specific kind of hyperobject implemented by OpenCilk 2.0 is a
-_reducer_.
+_reducer_.  Reducers are intended for operations like accumulation and
+list concatenation.  OpenCilk guarantees that if a reducer is operated
+on as a _{% defn "monoid" %}_, the final value in otherwise race-free
+parallel code will be the same as in serial code.
 
-A view of a reducer has a well-defined value in serial code and an
-indeterminate value in parallel code.
+A monoid is a combination of a data type (the view type), an
+_identity_ value, and a binary associative operation.  If either
+operand of the associative operation is the identity value, the result
+is the other operand.  For example, `(double, 0.0, +)` is a monoid
+(ignoring non-finite values).  In a reducer type the identity value is
+provided by a function; the function takes a pointer to a view (cast
+to `void *`) and should store the identity value there.  The reduction
+operation takes two pointers to views (cast to `void *`) and should
+combine the two views and deposit the result in the first view.  The
+first view is often called the _left_ view and program execution is
+considered to go left to right.
 
-monoid
+If the view type is a C++ object with a non-trivial constructor the
+identity function should use placement new to construct a new view.
+If the view type is a C++ object with a non-trivial destructor the
+reduce function should explicitly call the destructor on the second
+(right) argument.  The storage will be freed by the runtime; use
+the `->~T()` syntax instead of `delete`.
 
-value is unspecified; do read-modify-write operations and ignore the result
+```
+void identity(void *view) {
+    new(view) View();
+}
+void reduce(void *left, void *right) {
+    static_cast<View *>(left)->merge(static_cast<View *>(right));
+    static_cast<View *>(right)->~View();
+}
+```
 
 If the reduce callback does nothing the reducer is called a _holder_
 and is essentially a form of thread-local storage.
 
-#### Types
-
-A declaration of a reducer requires a _{% defn "monoid" %}_.  Aside from
-the view type, a reducer monoid includes two callback functions.
-
 When declaring a type the `cilk_reducer` keyword is used in the same
 contexts as `*` or (in C++) `&`.  It follows a type, which is referred
-to as the _view type_ of the reducer.
+to as the view type of the reducer.
 
 ```cilkc
 int cilk_reducer(zero, plus) sum = 0;
@@ -427,7 +461,7 @@ int cilk_reducer(zero, plus) *sum_pointer = 0;
 #### Values
 
 At any point in execution the value in a reducer is based on a
-contiguous subset of all prior modifications performed in the serial
+contiguous subset of prior modifications performed in the serial
 order of the program.  The subset may be empty.
 
 When all spawns since the initialization of the variable have been
@@ -436,4 +470,14 @@ synced, the variable has the serially correct value.
 
 #### Handles
 
-`__builtin_addressof`
+Taking the address of a reducer gives a pointer to the current view.
+To pass a reducer by reference to reducer-aware code, use the
+function `__builtin_addressof`.
+
+```cilkc
+    extern void f_reducer(double reducer(zero, add) *);
+    extern void f_view(double *);
+    double reducer(zero, add) x = 0.0;
+    f_reducer(__builtin_addressof(x));
+    f_view(&x);
+```
