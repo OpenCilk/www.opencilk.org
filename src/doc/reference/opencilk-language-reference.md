@@ -317,8 +317,10 @@ continuing.
 
 An explicit sync is the statement `cilk_sync;`.  This form normally
 has function scope, meaning it waits for all spawns in the same
-function.  A sync inside the body of a `cilk_for` or `cilk_scope` only
-waits for spawns inside the same construct.
+function.  A sync inside the body of a `try`, `cilk_for`, or
+`cilk_scope` only waits for spawns inside the same construct.
+A sync in the `catch` block of a `try ... catch` construct does
+wait for spawns in the enclosing scope.
 
 If spawns are nested as in
 ```cilkc
@@ -340,13 +342,11 @@ before exit from some scopes:
   `cilk_scope` statement.
 * On exit from the body of a `cilk_for`, i.e. once per iteration of the loop.
   This sync has scope equal to the loop body.
-* Before entering a `catch` block.  This sync has the same scope as
-  the `try .. catch` construct as a whole: the smallest enclosing
-  function, `cilk_scope`, or `cilk_for` body.  [No, it applies to
-  the try block, which gets its own sync region.  Test this.]
+* On exit from a `try` block, whether or not an exception is thrown.
+  This sync has the scope of the try block.
 
-When exiting from a block scope, destructors for block scope variables
-are run after the implicit sync.
+When exiting from a scope with an implicit sync, destructors for
+variables defined in that scope are called after the implicit sync.
 
 ## Differences between C++ and OpenCilk
 
