@@ -56,26 +56,29 @@ features:
   <p class="mb-4 mx-auto">{{ metadata.tagline }}</p>
 </div>
 
-<div class="container px-4 mb-3" style="max-width: 1120px;">
-  <div class="row justify-content-center g-5 ">
 
-  {% for item in features %}
-    <div class="col-md-6 rounded">
-      <div class="row h-100 flex-row-reverse align-items-center rounded border shadow-lg" style="background-color: {{ item.image_bg }};">
-        <div class="col-7 h-100 rounded m-0 p-0"
-          style="background-image: url('img/{{ item.image }}'); background-size: cover;">
+
+<!-- homepage gallery -->
+<div class="sphinx-bs container pb-4 " style="max-width: 1200px;">
+    <div class="d-flex row ">
+        {% for item in features %} 
+        <div class="d-flex col-lg-6 col-md-12 my-3">
+            <div class="card w-100 shadow intro-card overflow-hidden">
+                <div class="row h-100 flex-row-reverse align-items-center" style="background-color: {{ item.image_bg }};">
+                    <div class="col-7 h-100 rounded m-0 p-0"><img src="/img/{{ item.image }}" style="object-fit: cover; object-position: left; height: 100%;">
+                    </div>
+                    <div class="d-flex align-content-between flex-wrap  col-5 h-100 py-3 rounded" style="color: {{ item.call_color }}; background-color: {{ item.call_bg }};">
+                      <div class="d-flex"><span class="myCard-header">{{ item.call }}</span></div>
+                      <div class="d-flex"><span class="myCard-lead">{{ item.call_description }}</span></div>
+                      <div class="d-flex"><a href="{{ item.button_link }}" class="btn btn-lg px-4 me-md-2" style="color: {{ item.button_color }}; background-color: {{ item.button_bg }};">{{ item.button }}</a></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="d-flex align-content-between flex-wrap  col-5 h-100 py-3 rounded" style="color: {{ item.call_color }}; background-color: {{ item.call_bg }};">
-          <div class="d-flex"><h4 class="display-8 fw-bold lh-1 mt-0 mb-3">{{ item.call }}</h4></div>
-          <div class="d-flex"><p class="lead">{{ item.call_description }}</p></div>
-          <div class="d-flex"><a href="{{ item.button_link }}" class="btn border btn-lg px-4 me-md-2" style="color: {{ item.button_color }}; background-color: {{ item.button_bg }};">{{ item.button }}</a></div>
-        </div>
-      </div>
+        {% endfor %}
     </div>
-  {% endfor %}
-
-  </div>
 </div>
+
 
 <div class="mx-0 bg-white" style="border-top-style: solid; border-top-color: var(--lime);">
 <div class="container py-4 px-4" style="max-width: 1120px;">

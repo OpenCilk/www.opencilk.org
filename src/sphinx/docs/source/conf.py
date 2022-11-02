@@ -17,12 +17,15 @@ release = '2.0'
 extensions = [
     'sphinx.ext.mathjax',
     'sphinx_design',
+    'sphinx-panels',
 ]
 
 templates_path = ['_templates']
 exclude_patterns = []
 
-
+# sphinx-panels shouldn't add bootstrap css since the pydata-sphinx-theme
+# already loads it
+panels_add_bootstrap_css = False
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

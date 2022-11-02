@@ -8,6 +8,10 @@ node_modules/
 package-lock.json
 .env
 *~
+src/sphinx/docs/build/doctrees
+src/sphinx/docs/build/html/.doctrees
+src/sphinx/docs/build/html/objects.inv
+src/sphinx/docs/build/html/searchindex.js
 
 # Local Netlify folder
 .netlify

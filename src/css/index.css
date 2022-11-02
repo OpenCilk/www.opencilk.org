@@ -79,6 +79,24 @@ input#__primary:checked ~ .bd-container .bd-sidebar-primary {
 .bd-article-container a {
   text-decoration: underline;
 }
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.myCard-header {
+  font-family: Ubuntu;
+  margin-top: 0px;
+  margin-bottom: 6px;
+  font-size: larger;
+  font-weight: 600;
+  line-height: normal;
+}
+.myCard-lead {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 30px;
+  margin-bottom: 16px;
+}
 footer.bd-footer {
   border-top: 2px solid var(--lime);
 }
