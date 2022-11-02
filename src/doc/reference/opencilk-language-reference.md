@@ -61,36 +61,41 @@ identifiers.
 A statement using `cilk_spawn` is the start of a potentially parallel
 region of code.
 
-The `cilk_spawn` keyword should appear at the start of an expression
-statement or after the `=` sign of an assignment (or `+=`, `-=`,
-etc.).
+The `cilk_spawn` keyword should appear before an expression statement,
+before a block statement, after the `=` sign of a variable
+initialization, or after the `=` of an assignment that is the entire
+body of an expression statement.
 
 ```cilkc
 int x = cilk_spawn f(i++);
+x = cilk_spawn f(i++);
 cilk_spawn y[j++] = f(i++);
 cilk_spawn { z[j++] = f(i++); }
 ```
 
-Although the compiler accepts `cilk_spawn` before almost any
-expression, spawns inside of expressions are unlikely to have the
-expected semantics.  A future version of the language may explicitly
-limit `cilk_spawn` to the contexts above, at or near the top of the
-parse tree of a statement.
+A future version of OpenCilk may limit use of `cilk_spawn` to
+these four contexts.
 
-A declaration may not begin with `cilk_spawn`.
+OpenCilk 2.0 allows other statements, except declarations, to be
+spawned.  Although the compiler accepts `cilk_spawn` before almost any
+expression, spawns inside of expressions are unlikely to have the
+expected semantics.
+
+OpenCilk 2.0 will also accept `cilk_spawn;` as a statement with no
+effect.
 
 ### Sync
 
 A sync statement, `cilk_sync;`, ends a region of potentially parallel
-execution.  It takes no arguments.
-
-[Find a real example with a conditional sync.  Or have some spawns
-to be synced.  Matteo Frigo's all pairs shortest path code has
-conditional sync, says TB.]
+execution.  It takes no arguments.  It may be conditional and has
+no effect if not executed.
 
 ```cilkc
-if (time_to_sync)
-  cilk_sync;
+for (int i = 0; i < n; i++) {
+  cilk_spawn f(i);
+  if (i % 4 == 3)
+    cilk_sync;
+}
 ```
 
 ### Scope
@@ -113,6 +118,8 @@ cilk_scope {
 // x, y, and z are usable here because of the implicit sync
 ```
 
+The compiler also accepts `cilk_scope;` as a statement with no effect.
+
 ### For
 
 A loop written using `cilk_for` executes each iteration of its body in
@@ -126,27 +133,36 @@ cilk_for (int i = 0; i < n; ++i)
 ```
 
 The syntax of a `cilk_for` statement is very similar to a C `for`
-statement.  It is followed by three expressions, the first of which
-may declare variables.  Unlike in C all three expressions are
-mandatory.  Parallel C++ range `for` constructs are not supported
-in OpenCilk 2.0.
+statement except that none of the three items in parentheses may be
+omitted.  C++ "range for" is not supported with `cilk_for` in
+OpenCilk 2.0.
 
-For the loop to be parallelized, several conditions must be met:
+The first statement inside parentheses must declare at least one
+variable.
 
-* The first expression must declare a variable (the "loop variable").
-* The second expression must compare the loop variable using one of the
-  relational operators `<=`, `<`, `!=`, `>`, and `>=`.
-* The value compared to must be [...]
-* The third expression must modify the loop variable using `++`,
+While the following constraints not required by syntax, the compiler
+may not be able to parallelize the loop if they are not satisfied.
+
+* The first expression must declare one variable, the _control variable_.
+* In C the control variable must be an integer no larger than 64 bits or
+  a pointer to a complete type.  In C++ it may be any random access iterator.
+  Among other things, this implies that the difference between starting and
+  ending values must be an integer computable by subtraction or `operator-`.
+* The second expression must compare the control variable using one of the
+  relational operators `<=`, `<`, `!=`, `>`, and `>=`.  The value to which
+  it is compared is the _loop bound_.  (See below for the
+  interpretation of this value.)
+* The third expression must modify the control variable using `++`,
   `--`, `+=`, or `-=`.
+
+The compiler will emit a warning if the loop can not be unrolled,
+eliminated, or parallelized.
 
 Because loop iterations may execute out of order there is no way to
 predictably stop the loop in the middle.  The `break` statement may
 not be used to exit the body of a `cilk_for` loop.  An exception
 thrown out of a loop body is only guaranteed to terminate the current
-iteration.  (Also, any later iteration of the same grain; see below.)
-The effect on other iterations is unpredictable; they may run to
-completion or not run at all.
+iteration.
 
 #### Grain size
 
@@ -167,9 +183,6 @@ can be manually overridden with a pragma:
 The pragma in the example tells the compiler that each group of 128
 consecutive iterations should be executed as a serial loop.  If there
 are 1024 loop iterations in total, there are only 8 parallel tasks.
-There is guaranteed to be no spawn or sync between the iterations
-for `i=0` and `i=1` (assuming `n` is at least 2, otherwise there
-will be no second iteration).
 
 In OpenCilk 2.0 the argument to the grain size pragma must be an
 integer constant in the range 1..2<sup>31</sup>-1.
@@ -177,28 +190,24 @@ integer constant in the range 1..2<sup>31</sup>-1.
 Without an explicit grainsize the runtime will choose a value from 1
 to 2048.
 
-Whether the grain size is static or dynamic, an exception thrown from
-the loop body will abort the remainder of the group of iterations.
-The scope of `cilk_sync` will also include all iterations in the
-group.
-
-
 ### Reducers
 
-A type may be suffixed with `cilk_reducer`.  Syntactically it appears
-where `*` may be used to declare a pointer type.  The type to the left
-of `cilk_reducer` is the _view type_.
+A type may be suffixed with `cilk_reducer`.  Syntactically this
+keyword appears where `*` may be used to declare a pointer type.  The
+type to the left of `cilk_reducer` is the _view type_.
 
-Two values appear in parentheses after `cilk_reducer`.  Both emust be
-functions returning `void` or pointers to functions returning void.
-The first, the _identity callback_, takes one argument of type `void*`.
-The second, the _reduce callback_, takes two arguments of type `void *`.
+Two values appear in parentheses after `cilk_reducer`, separated by a
+comma.  Both must be functions returning `void` or pointers to
+functions returning void.  The first, the _identity callback_, takes
+one argument of type `void *`.  The second, the _reduce callback_,
+takes two arguments of type `void *`.
 
 Two reducer types are the same if their view types are the same and
-their callbacks are the same function mentioned by name.  Otherwise
-two reducer types are different and not compatible.  This rule arises
-from the impossibility of proving that two different functions are
-identical.
+their corresponding callbacks are the same function mentioned by name.
+Otherwise two reducer types are different and not compatible.  The
+requirement that the corresponding arguments be manifestly the same
+function is dictated by the impossibility of proving that two
+different expressions are equivalent.
 
 ```
     extern void identity(void *), reduce(void *, void *);
@@ -209,15 +218,15 @@ identical.
     int cilk_reducer(idp, reduce) type4; // not the same as type3
 ```
 
-In the current version of OpenCilk the callbacks may be omitted in
-contexts other than definition of a variable.  This behavior may be
-removed in a future version of OpenCilk.
+In the OpenCilk 2.0 the callbacks may be omitted in contexts other
+than definition of a variable.  This behavior may be removed in a
+future version of OpenCilk.
 
-In the current version of OpenCilk the arguments to `cilk_reducer`
-are evaluated each time a reducer is created.  This behavior may
-change in a future version of OpenCilk.  For compatibility and
-predictable behavior the arguments to `cilk_reducer` should not
-have side effects.
+In the current version of OpenCilk the arguments to `cilk_reducer` are
+evaluated each time a reducer is created but not when a reducer is
+accessed.  This behavior may change in a future version of OpenCilk.
+For compatibility and predictable behavior the arguments to
+`cilk_reducer` should not have side effects.
 
 ## Execution of an OpenCilk program
 
@@ -240,8 +249,8 @@ thread.
 In some cases it is necessary to specify exactly where the spawn point
 is in a spawn statement.  All code up to the point of spawning
 executes in series.  The code that follows the spawn point is called
-the _continuation_ of the spawn.  It potentially executes in parallel
-with the following statements of the program.
+the _continuation_ of the spawn.  The spawn potentially executes in
+parallel with the continuation, up to the next sync.
 
 Contrary to the syntax, the spawn itself should be considered as
 having a `void` value.  The return value of spawn is like a promise or
@@ -306,7 +315,7 @@ continuing.
 
 ##### Explicit sync
 
-An explicit sync is a statement using `cilk_sync`.  This form normally
+An explicit sync is the statement `cilk_sync;`.  This form normally
 has function scope, meaning it waits for all spawns in the same
 function.  A sync inside the body of a `cilk_for` or `cilk_scope` only
 waits for spawns inside the same construct.
@@ -317,8 +326,8 @@ cilk_spawn cilk_scope { cilk_spawn ... }
 ...
 cilk_sync;
 ```
-a `cilk_sync` at top level waits for the outer spawn to complete, and
-the outer spawn waits for the inner spawn to complete.
+a `cilk_sync` at top level waits for the top level spawn to complete, and
+the top level spawn waits for everything spawned inside it to complete.
 
 ##### Implicit syncs
 
@@ -327,24 +336,22 @@ before exit from some scopes:
 
 * Before returning from a function, after calculating the value to
   be returned.  This sync has function scope.
-* On exit from the body of a `try` block.  This sync has function scope.
-  [Is this true?  Is it true only if the try block spawns?]
 * On exit from a `cilk_scope` statement.  This sync has the scope of the
   `cilk_scope` statement.
 * On exit from the body of a `cilk_for`, i.e. once per iteration of the loop.
   This sync has scope equal to the loop body.
-  If a grain size is specified, the sync affects the entire group of
-  iterations in which it is executes.  [TODO: Test grain size.]
-
-[What about on entry to a try block?]
+* Before entering a `catch` block.  This sync has the same scope as
+  the `try .. catch` construct as a whole: the smallest enclosing
+  function, `cilk_scope`, or `cilk_for` body.  [No, it applies to
+  the try block, which gets its own sync region.  Test this.]
 
 When exiting from a block scope, destructors for block scope variables
 are run after the implicit sync.
 
 ## Differences between C++ and OpenCilk
 
-In C++ code there are two exceptions to the rule that serial and
-parallel programs are the same.
+There are three exceptions to the rule that serial and parallel
+programs are the same.
 
 ### Exceptions
 
@@ -356,32 +363,69 @@ observable if the continuation has side effects.
 When the parent function executes an implicit or explicit `cilk_sync`
 the runtime checks whether the spawned child threw an exception.  If
 it did, any exception thrown by the parent is discarded and the
-exception thrown by the child is handled at the sync.  The compiler
-inserts an implicit sync at the end of a try block if the try contains
-a spawn.  [Make sure this is consistent with the wording in the implicit
-syncs section.]
+exception thrown by the child is handled as if thrown at the sync.
+The compiler inserts an implicit sync at the end of a try block if the
+try contains a spawn.
 
 If an exception is thrown from the body of a `cilk_for` statement the
 current loop iteration is aborted, consistent with the semantics of
-`throw`.  If the `grainsize` pragma is used, later iterations in the
-current grain do not execute.  No guarantee is made about which other
-loop iterations execute, except that a grain in progress is not
-affected by an exception thrown from outside the grain.
+`throw`.  Other loop iterations may or may not execute, depending on
+scheduling.  An exception thrown by one iteration of the loop will not
+prematurely terminate another iteration.
+
+If more than one exception reaches a sync the earliest in serial
+order is thrown by the sync.  The other exceptions are destructed.
 
 ### Left hand side side effects
 
 When a function call is spawned in OpenCilk and the result is
 assigned, the compiler evaluates the address of the left hand side of
 the assignment before calling the function.  This conflicts with
-recent versions of C++, which require evaluation of the left hand
-side to follow return from the function.
+C++17, which requires evaluation of the left hand side to follow
+return from the function.
 
 ```cilkcpp
     extern int global;
     a[global++] = cilk_spawn f(); // f() sees incremented value of global
 ```
 
-[TB needs to confirm or deny this]
+Occurring before the spawn, the evaluation of the left hand side is in
+series with the continuation of the spawn.
+
+### Loops
+
+Parallel for loops are implemented by looping over an integer range.
+This transformation requires that the loop count be known before
+the loop begins execution and that the control variable be calculable
+by adding an integer to the starting value.
+
+The observable differences are
+
+* The loop bound expression may be executed fewer times, likely only
+once.
+
+* In C++, `operator-` may be called to subtract the start value from
+the loop bound (if the increment is positive) or the loop bound from
+the initial value (if the increment is negative).
+
+* The loop increment expression may not be executed or may be executed
+fewer times than in the serial program.
+
+* In C++, `operator+` may be called to add an integer to the starting
+value of the control variable.
+
+The program is not guaranteed to call `operator+` or `operator-` and
+these operators not have side effects.  If the loop is not
+parallelized it may be executed as written.  For example, the compiler
+may decide to unroll the loop instead.  If a `cilk_for` loop is
+compiled to a serial loop the compiler will emit a warning.
+
+The control variable must not wrap around, even if the control
+variable is an unsigned integer with well defined semantics.  As
+consequence of this rule, if the loop condition uses `!=` the
+difference between start and end must be an exact multiple of the
+increment.  This can also be expressed as a requirement that the
+difference between start and end fit in a signed integer.
 
 ## Races and reducers
 
