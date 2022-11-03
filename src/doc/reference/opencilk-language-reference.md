@@ -32,11 +32,12 @@ Java's `Thread.start`.  These functions encourage writing programs
 that do not work without multithreading.
 
 The statements executed in a task parallel program form a directed
-acyclic graph (DAG).  A spawn node has one incoming edge and two
-outgoing edges.  A sync node has one outgoing edge.  Two statements
-are said to be logically parallel if neither precedes the other in DAG
-order.  Whether they actually run in parallel (at the same time)
-depends on scheduling.
+acyclic graph (DAG).  Most statements execute sequentially.  A spawn
+node has one incoming edge and two outgoing edges.  A sync node has
+one outgoing edge.  Two statements are said to be logically parallel
+if neither precedes the other in DAG order.  Whether they actually run
+in parallel (at the same time) depends on scheduling.  Statements that
+are not in parallel are said to be in series.
 
 ```cilkc
   int x = cilk_spawn f(); // the body of f()...
@@ -102,9 +103,8 @@ for (int i = 0; i < n; i++) {
 
 The keyword `cilk_scope` is followed by a statement, normally a
 compound statement.  Any spawns within the statement are synced before
-exit from the statment.  Syncs within the statement, including the
-implicit sync before exit, do not wait for spawns outside the
-statement.
+exit from the statment.  Syncs within the statement do not wait for
+spawns outside the statement.
 
 ```cilkc
 int w, x, y, z;
@@ -123,7 +123,7 @@ The compiler also accepts `cilk_scope;` as a statement with no effect.
 ### For
 
 A loop written using `cilk_for` executes each iteration of its body in
-parallel.
+parallel with all the others.
 
 ```cilkc
 cilk_for (int i = 0; i < n; ++i)
@@ -158,6 +158,11 @@ may not be able to parallelize the loop if they are not satisfied.
 The compiler will emit a warning if the loop can not be unrolled,
 eliminated, or parallelized.
 
+The first evaluation of the loop condition precedes any iteration of
+the loop.  Otherwise it is unspecified whether the loop condition and
+increment expressions execute in parallel with any instance of the
+loop body.  These expressions should not have side effects.
+
 Because loop iterations may execute out of order there is no way to
 predictably stop the loop in the middle.  The `break` statement may
 not be used to exit the body of a `cilk_for` loop.  An exception
@@ -170,7 +175,7 @@ If a single loop iteration does very little work, the overhead of
 spawning it exceeds any benefit from parallelism.  In many cases the
 compiler will recognize this situation and merge several consecutive
 iterations into a single task that runs sequentially.  This behavior
-can be manually overridden with a pragma:
+can be overridden with a pragma:
 
 ```cilkc
  #pragma cilk grainsize 128
@@ -248,9 +253,10 @@ thread.
 
 In some cases it is necessary to specify exactly where the spawn point
 is in a spawn statement.  All code up to the point of spawning
-executes in series.  The code that follows the spawn point is called
-the _continuation_ of the spawn.  The spawn potentially executes in
-parallel with the continuation, up to the next sync.
+executes in series.  The code that follows the spawning statement is
+called the _continuation_ of the spawn.  Code after the spawn point in
+the spawning statement potentially executes in parallel with the
+continuation, up to the next sync in the same scope.
 
 Contrary to the syntax, the spawn itself should be considered as
 having a `void` value.  The return value of spawn is like a promise or
@@ -270,11 +276,12 @@ When there are side effects the situation is more complex.
 
 When `cilk_spawn` appears after an assignment operator and before a
 function call, the spawn is after all arguments are evaluated and
-after the address of the left hand side is evaluated.  Side effects do
-not race with the continuation.  The spawn is before the function call
-and assignment of its return value.  The body of the called function
-and the assignment do race with the continuation.  In C++, destructors
-for function arguments also race with the continuation.
+after the address of the left hand side is evaluated.  Side effects
+are not in parallel with the continuation.  The spawn is before the
+function call and assignment of its return value.  The body of the
+called function and the assignment are in parallel with the
+continuation.  In C++, destructors for function arguments are
+also in parallel with the continuation.
 
 ```cilkc
 x[i++] = cilk_spawn f(a++, b++, c++);
@@ -283,7 +290,8 @@ x[i++] = cilk_spawn f(a++, b++, c++);
 ```
 
 When `cilk_spawn` appears at the start of a statement the entire
-statement is spawned and everything in it races with the continuation.
+statement is spawned and everything in it is in parallel with the
+continuation.
 
 While syntactically valid, code like
 
@@ -301,12 +309,10 @@ nonsense.c:4:18: warning: Failed to emit spawn
 ```
 
 In this case the compiler is unable to move the use of `i++` into the
-spawned expression.
+spawned expression because its value is needed immediately.
 
-This syntax may be removed in a future version of OpenCilk and
-`cilk_spawn` required to appear at the start of a statement or between
-an assignment operator and an immediately following function call or
-constructor call.
+As noted above, this syntax (spawning a subexpression) may be removed
+in a future version of OpenCilk.
 
 #### Sync
 
@@ -355,26 +361,26 @@ programs are the same.
 
 ### Exceptions
 
-If a spawned function throws an exception, the parent function may
-have continued straight line execution past the spawn.  The serial
-program goes directly to an exception handler.  The difference is
-observable if the continuation has side effects.
+If a spawned function throws an exception, the spawning function may
+have continued execution past the `cilk_spawn`.  The serial program
+goes directly to an exception handler.  The difference is observable
+if the continuation has side effects.
 
-When the parent function executes an implicit or explicit `cilk_sync`
-the runtime checks whether the spawned child threw an exception.  If
-it did, any exception thrown by the parent is discarded and the
-exception thrown by the child is handled as if thrown at the sync.
-The compiler inserts an implicit sync at the end of a try block if the
-try contains a spawn.
+At each implicit or explicit sync OpenCilk checks whether any spawned
+child threw an exception.  If it did, any exception thrown by the
+parent is discarded and the exception thrown by the child is handled
+as if thrown at the sync.  If more than one child throws an exception
+the earliest in serial order is kept and the rest discarded.
+Discarded exceptions are destructed.
+
+The implicit sync at the end of a try block ensures that an exception
+thrown by a spawned function will be handled by the correct `catch`.
 
 If an exception is thrown from the body of a `cilk_for` statement the
 current loop iteration is aborted, consistent with the semantics of
 `throw`.  Other loop iterations may or may not execute, depending on
 scheduling.  An exception thrown by one iteration of the loop will not
 prematurely terminate another iteration.
-
-If more than one exception reaches a sync the earliest in serial
-order is thrown by the sync.  The other exceptions are destructed.
 
 ### Left hand side side effects
 
@@ -404,6 +410,11 @@ The observable differences are
 * The loop bound expression may be executed fewer times, likely only
 once.
 
+* In C++ the comparison operator of the loop condition,
+e.g. `operator<`, may not be called.  The loop range may be calculated
+assuming that the comparison operator is suitable for a random access
+iterator.
+
 * In C++, `operator-` may be called to subtract the start value from
 the loop bound (if the increment is positive) or the loop bound from
 the initial value (if the increment is negative).
@@ -412,13 +423,15 @@ the initial value (if the increment is negative).
 fewer times than in the serial program.
 
 * In C++, `operator+` may be called to add an integer to the starting
-value of the control variable.
+value of the control variable.  The result becomes the value of the
+control variable for a loop iteration.
 
-The program is not guaranteed to call `operator+` or `operator-` and
-these operators not have side effects.  If the loop is not
-parallelized it may be executed as written.  For example, the compiler
-may decide to unroll the loop instead.  If a `cilk_for` loop is
-compiled to a serial loop the compiler will emit a warning.
+If the loop is not parallelized it may be executed as written.  The
+C++ operators mentioned above should not have side effects.
+
+If a `cilk_for` loop is compiled to a serial loop the compiler will
+emit a warning.  If the loop is unrolled it will silently use the
+serial behavior.
 
 The control variable must not wrap around, even if the control
 variable is an unsigned integer with well defined semantics.  As
@@ -445,12 +458,19 @@ gives each thread running in parallel a separate copy of the variable
 and merges the values as necessary.  The local copy of the variable is
 called a _view_.
 
+A hyperobject type is distinct from a view type.  When hyperobjects
+are accessed using the hyperobject type, those accesses are not
+data races because statements that actually execute in parallel
+always have separate views.
+
 Because each thread may operate on a separate copy, the address of a
-view is not constant.  This is also true of thread local variables,
-but reducers do not follow the same rules as thread local variables.
+view is not constant.  (This is also true of thread local variables,
+but reducers do not follow the same rules as thread local variables.)
+If a pointer or reference to a view is used outside the strand in
+which it was created, the behavior is undefined.
 
 Also because each thread operates on a separate copy, a view of a
-reducer only has a well-defined value in serial code.  Within any
+reducer only has a predictable value in serial code.  Within any
 strand the value does not change except due to that strand's actions.
 At a strand boundary the value of a view may change even if its
 address does not.
@@ -465,13 +485,13 @@ A monoid is a combination of a data type (the view type), an
 _identity_ value, and a binary associative operation.  If either
 operand of the associative operation is the identity value, the result
 is the other operand.  For example, `(double, 0.0, +)` is a monoid
-(ignoring non-finite values).  In a reducer type the identity value is
-provided by a function; the function takes a pointer to a view (cast
-to `void *`) and should store the identity value there.  The reduction
-operation takes two pointers to views (cast to `void *`) and should
-combine the two views and deposit the result in the first view.  The
-first view is often called the _left_ view and program execution is
-considered to go left to right.
+(provided that values remain finite).  In a reducer type the identity
+value is provided by a function; the function takes a pointer to a
+view (cast to `void *`) and should store the identity value there.
+The reduction operation takes two pointers to views (cast to `void *`)
+and should combine the two views and deposit the result in the first
+view.  The first view is often called the _left_ view and program
+execution is considered to go left to right.
 
 If the view type is a C++ object with a non-trivial constructor the
 identity function should use placement new to construct a new view.
@@ -509,14 +529,14 @@ contiguous subset of prior modifications performed in the serial
 order of the program.  The subset may be empty.
 
 When all spawns since the initialization of the variable have been
-synced, the variable has the serially correct value.
-
+synced, the variable has the same value as in serial code.
 
 #### Handles
 
-Taking the address of a reducer gives a pointer to the current view.
-To pass a reducer by reference to reducer-aware code, use the
-function `__builtin_addressof`.
+Taking the address of a reducer gives a pointer to the current view
+which is not valid outside of the current strand.  To pass a reducer
+by reference to reducer-aware code, use the function
+`__builtin_addressof`.
 
 ```cilkc
     extern void f_reducer(double reducer(zero, add) *);
