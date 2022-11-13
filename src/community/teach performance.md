@@ -15,7 +15,7 @@ To help you develop your own course or module on performance engineering, we are
 - [Performance engineering of software systems](#performance-engineering-of-software-systems)
 - [Modern algorithms workshop: parallel algorithms](#modern-algorithms-workshop:-parallel-algorithms)
 
-Each listing includes links to basic materials (e.g., PDF lecture slides). Additional materials (e.g., editable slide decks, and solutions for homeworks, quizzes, and tests) are often also available, as detailed below.
+Each listing includes links to basic materials (e.g., lecture PDFs). Additional materials (e.g., editable slide decks, and solutions for homeworks and quizzes) are often also available, as detailed below, when you [join the OpenCilk community](../join-us/).
 
 ## Performance engineering of software systems
 
@@ -50,7 +50,7 @@ At MIT, _Performance Engineering of Software Systems_ is an upper-division under
 MIT's course has a significant homework/project component. Enabling students to achieve high performance on project submissions is a significant goal of the course. MIT typically uses servers from commercial cloud providers (historically AWS) to accept project submissions and measure performance.
 Recent projects have included rotating an image, parallelization of a physical simulation, and memory management. The traditional MIT capstone project is a bot that plays one side of a 2-player game, where optimized bot performance is a necessity for a competitive submission.
 
-Join the OpenCilk community for access to
+[Join the OpenCilk community](../join-us/) for access to
 - PowerPoint source for slides
 - LaTeX source for homework and projects from a past course offering
 - Reference code for homeworks and projects
@@ -69,5 +69,5 @@ Originally created as a single full-day class, this workshop includes an introdu
 - Case study: Jaccard similarity
 - Post-Moore software
 
-Join the OpenCilk community for access to editable slide decks.
+[Join the OpenCilk community](../join-us/) for access to editable slide decks.
 
