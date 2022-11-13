@@ -9,7 +9,7 @@ eleventyNavigation:
   order: 5
 ---
 
-OpenCilk is a community-driven open source project developed by a diverse group of contributors. [Join us](/contribute)!
+OpenCilk is a community-driven open source project developed by a diverse group of contributors. [Join us](/community/join-us/)!
 
 ## Where can I get help?
 
