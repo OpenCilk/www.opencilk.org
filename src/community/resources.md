@@ -2,6 +2,7 @@
 layout: layouts/page.njk
 sidebar: toc
 title: Resources
+draft: true
 eleventyNavigation:
   key: Resources
   parent: Community
