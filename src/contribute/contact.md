@@ -8,7 +8,7 @@ eleventyNavigation:
 
 Do you have questions or comments about OpenCilk, our open-source community, or software performance engineering?
 
-We would love to hear from you. 
+We would love to hear from you. Please use the form below or email `contact@opencilk.org`. Thank you!
 
 <div class="content ms-4">
     <form action="POST" name="contact-form" content-type="application/x-www-form-urlencoded" data-netlify="true" style="max-width: 40em;">
