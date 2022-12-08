@@ -11,12 +11,19 @@ eleventyNavigation:
 
 The OpenCilk project welcomes your expertise and enthusiasm. A few specific opportunities are listed below. If you see anything interesting, or have ideas that we haven't thought of, please [contact us](/contribute/contact/).
 
+
+## Teaching
+
+{% imgLeft "/img/owl.png", 60 %}
+Are you teaching with OpenCilk?
+
+We hope you'll join our [community of educators](/community/teach-performance) who are developing resources for teaching topics in software performance engineering.
+
+## Documenting
+Are you doing something with performance engineering that you want people to hear about? Are you writing how-tos or tutorials to help students with OpenCilk? We would love to hear! Have you prepared a presentation, video, or other educational materials about OpenCilk? Let us know! If you’re unsure where to start or how your skills fit in, [reach out](/contribute/contact/)! 
+
 ## Open projects
-We are looking for people to help us with the following projects with OpenCilk.
-- Develop an **OpenCilk [language server](https://microsoft.github.io/language-server-protocol/)** that integrates with OpenCilk's tools.  For example, the language server would integrate with Cilksan to allow editors to mark locations in the program's source that are involved in a determinacy race.
-- Improve the output of Cilksan to syntax-highlight names of functions in the call stack, especially the namespaces and types in C++ function names.
-- Fix GDB to correctly identify stack frames in the cactus stack of a Cilk program.
-- Fix the RR debugger's behavior to handle Cilk's stack switching when rewinding the parallel execution of a Cilk program.
+We are looking for people to help us with several OpenCilk projects, including develping an OpenCilk language server, improving Cilksan reporting, and fixing relevant debuggers to interface properly with the OpenCilk runtime system. See [open projects](./open-projects) for more.
 
 ## Testing
 We are interested in your experiences or issues in installing and writing code and running OpenCilk programs.
@@ -25,8 +32,8 @@ We are also interested in collecting performance figures for different computer 
 - Please report runtime bugs at https://github.com/OpenCilk/cheetah/issues
 - Please report website and documentation bugs at https://github.com/OpenCilk/www.opencilk.org/issues
 
-## Porting
-You can help by porting OpenCilk to other platforms.
+## Porting and scripting
+You can help by porting OpenCilk to other platforms, and writing scripts to automate release testing.
 
 ## Coding
 Want to customize your own compiler or runtime environment? Check out OpenCilk code that's maintained in these GitHub repositories:
@@ -37,18 +44,6 @@ Want to customize your own compiler or runtime environment? Check out OpenCilk c
 - [Productivity tools](https://github.com/OpenCilk/productivity-tools): Code for Cilksan, Cilkscale, and other tools lives here.
 
 In addition to developing the OpenCilk codebase, we need your help extending existing code libraries to run in parallel with OpenCilk. Notable opportunities include the C++ Standard Template Library (STL) and the [GraphBLAS](https://graphblas.org/) Graph Linear Algebra API.  Also improving the productivity tools.
-
-## Scripting
-Writing scripts to automate release testing.
-
-## Documenting
-Are you doing something with performance engineering that you want people to hear about? Are you writing how-tos or tutorials to help students with OpenCilk? We would love to hear! Have you prepared a presentation, video, or other educational materials about OpenCilk? Let us know! If you’re unsure where to start or how your skills fit in, [reach out](https://github.com/OpenCilk/opencilk-project/discussions)! 
-
-## Educating
-Are you teaching with OpenCilk?  We welcome your contributions in this area.
-
-## Forums
-Ask or answer questions on the OpenCilk forums.
 
 ## Postdoc Positions
 
