@@ -46,38 +46,36 @@ int main() {
   cilk::opadd_reducer<int> inside_circle;
   cilk::opadd_reducer<int> outside_circle;
 
-// Run the Monte Carlo simulation in parallel
-cilk_for(int i = 0; i < num_iterations; i++) {
-  // Generate two pseudorandom numbers for the x and y coordinates
-  double x = (double)generate_random_number() / UINT64_MAX;
-  double y = (double)generate_random_number() / UINT64_MAX;
+  // Run the Monte Carlo simulation in parallel
+  cilk_for(int i = 0; i < num_iterations; i++) {
+    // Generate two pseudorandom numbers for the x and y coordinates
+    double x = (double)generate_random_number() / UINT64_MAX;
+    double y = (double)generate_random_number() / UINT64_MAX;
 
-  // Compute the distance of the point from the origin
-  double dist = sqrt(x * x + y * y);
+    // Compute the distance of the point from the origin
+    double dist = sqrt(x * x + y * y);
 
-  // Increment the counter for points inside or outside the circle based on the distance
-  if (dist <= radius) {
-    inside_circle++;
-  } else {
-    outside_circle++;
+    // Increment the counter for points inside or outside the circle based on the distance
+    if (dist <= radius) {
+      inside_circle++;
+    } else {
+      outside_circle++;
+    }
   }
-}
 
-// Compute the ratio of points inside the circle to the total number of points
-double ratio = (double)inside_circle.get_value() / (double)(inside_circle.get_value() + outside_circle.get_value());
+  // Compute the ratio of points inside the circle to the total number of points
+  double ratio = (double)inside_circle.get_value() / (double)(inside_circle.get_value() + outside_circle.get_value());
 
-// Use this ratio to compute an estimate of pi
-double pi_estimate = 4.0 * ratio;
+  // Use this ratio to compute an estimate of pi
+  double pi_estimate = 4.0 * ratio;
 
-// Print the result
-printf("Estimate of pi: %.10f\n", pi_estimate);
+  // Print the result
+  printf("Estimate of pi: %.10f\n", pi_estimate);
 
-return 0;
+  return 0;
 }
 ```
 
-
-
-The example above runs a Monte Carlo simulation to generate points in a two-dimensional plane. The points are generated using the `generate_random_number()` function, which uses the `__cilkrts_get_dprand()` function to generate pseudorandom numbers. The coordinates of the points are computed by scaling the pseudorandom numbers to the range $\[0, 1]$. The distance of each point from the origin is then computed, and the point is counted as inside or outside the circle with radius 1 based on its distance from the origin. After all points have been counted the ratio of the points inside and outside of the circle is used to estimate pi.\
+The example above runs a Monte Carlo simulation to generate points in a two-dimensional plane. The points are generated using the `generate_random_number()` function, which uses the `__cilkrts_get_dprand()` function to generate pseudorandom numbers. The coordinates of the points are computed by scaling the pseudorandom numbers to the range $\[0, 1]$. The distance of each point from the origin is then computed, and the point is counted as inside or outside the circle with radius 1 based on its distance from the origin. After all points have been generated and counted, the ratio of points inside the circle to the total number of points is computed and used to estimate the value of $\pi$. The result is printed to the console.\
 \
 This example uses the `cilk_opadd_reducer` reducer type to avoid race conditions on the `inside_circle` and `outside_circle` counters. These counters are now declared as reducer objects, and the `++` operator is used to increment them in the parallel loop. The final value of the counters can be accessed by calling the `get_value()` method on the reducer objects. This ensures that the counters are updated atomically and that their values are consistent across all strands.
