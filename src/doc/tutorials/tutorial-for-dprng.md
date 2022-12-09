@@ -15,7 +15,7 @@ There are three options for using DPRNG with OpenCilk 2.0:
 
 Here is a usage example for implementing DPRNG with OpenCilk 2.0 using the built-in pseudorandom number generator:
 
-```
+```cilkcpp#
 #include <stdio.h>
 #include <stdint.h>
 #include <cilk/cilk.h>
