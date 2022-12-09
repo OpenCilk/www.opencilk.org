@@ -19,8 +19,8 @@ Here is a usage example for implementing DPRNG with OpenCilk 2.0 using the built
 #include <stdio.h>
 #include <stdint.h>
 #include <cilk/cilk.h>
+#include <cilk/cilk_api.h>
 #include <math.h>
-#include <cilk/reducer_opadd.h>
 
 // Generate a pseudorandom number using the built-in DPRNG in OpenCilk 2.0
 uint64_t generate_random_number() {
@@ -85,7 +85,6 @@ int main() {
 
   return 0;
 }
-
 ```
 
 The example above runs a Monte Carlo simulation to generate points in a two-dimensional plane. The points are generated using the `generate_random_number()` function, which uses the `__cilkrts_get_dprand()` function to generate pseudorandom numbers. The coordinates of the points are computed by scaling the pseudorandom numbers to the range $\[0, 1]$. The distance of each point from the origin is then computed, and the point is counted as inside or outside the circle with radius 1 based on its distance from the origin. After all points have been generated and counted, the ratio of points inside the circle to the total number of points is computed and used to estimate the value of $\pi$. The result is printed to the console.
