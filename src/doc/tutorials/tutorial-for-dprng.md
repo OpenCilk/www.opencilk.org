@@ -32,6 +32,16 @@ void reseed_dprng(uint64_t seed) {
   __cilkrts_dprand_set_seed(seed);
 }
 
+// Identity function for the reducer
+void zero(void *v) {
+  *(int *)v = 0;
+}
+
+// Reduce function for the reducer
+void plus(void *l, void *r) {
+  *(int *)l += *(int *)r;
+}
+
 int main() {
   // Reseed the DPRNG with a value of 12345
   reseed_dprng(12345);
@@ -43,8 +53,8 @@ int main() {
   double radius = 1.0;
 
   // Create reducer objects for the counters for the number of points inside and outside the circle
-  cilk::opadd_reducer<int> inside_circle;
-  cilk::opadd_reducer<int> outside_circle;
+  int cilk_reducer(zero, plus) inside_circle = 0;
+  int cilk_reducer(zero, plus) outside_circle = 0;
 
   // Run the Monte Carlo simulation in parallel
   cilk_for(int i = 0; i < num_iterations; i++) {
@@ -63,8 +73,9 @@ int main() {
     }
   }
 
-  // Compute the ratio of points inside the circle to the total number of points
-  double ratio = (double)inside_circle.get_value() / (double)(inside_circle.get_value() + outside_circle.get_value());
+  // Compute the ratio of points inside the circle to
+  // the total number of points
+  double ratio = (double)inside_circle / (double)(inside_circle + outside_circle);
 
   // Use this ratio to compute an estimate of pi
   double pi_estimate = 4.0 * ratio;
@@ -74,6 +85,7 @@ int main() {
 
   return 0;
 }
+
 ```
 
 The example above runs a Monte Carlo simulation to generate points in a two-dimensional plane. The points are generated using the `generate_random_number()` function, which uses the `__cilkrts_get_dprand()` function to generate pseudorandom numbers. The coordinates of the points are computed by scaling the pseudorandom numbers to the range $\[0, 1]$. The distance of each point from the origin is then computed, and the point is counted as inside or outside the circle with radius 1 based on its distance from the origin. After all points have been generated and counted, the ratio of points inside the circle to the total number of points is computed and used to estimate the value of $\pi$. The result is printed to the console.\
