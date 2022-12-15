@@ -4,6 +4,27 @@ sidebar: toc
 eleventyNavigation:
   key: Teach performance
   parent: Community
+courses:
+- name: Modern Algorithms Workshop
+  filenamePrefix: /community/resources/modern-algorithms-workshop/
+  filenameSuffix: -modern-algorithms-workshop-2018.pdf
+  modules:
+  - name: Cilk model
+    file: 02cilk
+  - name: Detecting nondeterminism
+    file: 03nondeterminism
+  - name: What is parallelism?
+    file: 04parallelism
+  - name: Scheduling theory primer
+    file: 05scheduling
+  - name: Analysis of parallel loops
+    file: 06loops
+  - name: Case study - matrix multiplication
+    file: 07matrixmult
+  - name: Case study - Jaccard similarity
+    file: 08jaccard
+  - name: Post-Moore software
+    file: 09postmoore
 ---
 
 The end of Moore's Law makes software performance engineering a priority for modern computer-science curricula.
@@ -58,16 +79,15 @@ Recent projects have included rotating an image, parallelization of a physical s
 
 ## Modern algorithms workshop: parallel algorithms
 
-Originally created as a single full-day class, this workshop includes an introduction and 8 separate modules listed below.
+Originally created as a single full-day class, this workshop includes an [introduction](/community/resources/modern-algorithms-workshop/01intro-modern-algorithms-workshop-2018.pdf) and 8 separate modules listed below.
 
-- Cilk model
-- Detecting nondeterminism
-- What Is parallelism?
-- Scheduling theory primer
-- Analysis of parallel loops
-- Case study: matrix multiplication
-- Case study: Jaccard similarity
-- Post-Moore software
+<ul>
+{% for course in courses %}
+  {% for module in course.modules %}
+<li>{{ module.name }} (<a href="{{ course.filenamePrefix }}{{ module.file }}{{ course.filenameSuffix }}">PDF</a>)</li>
+  {% endfor %}
+{% endfor %}
+</ul>
 
 [Join the OpenCilk community](../join-us/) for access to editable slide decks.
 

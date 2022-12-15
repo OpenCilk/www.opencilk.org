@@ -32,6 +32,9 @@ module.exports = function(eleventyConfig) {
     "./src/admin/config.yml": "./admin/config.yml",
   });
 
+  // Copy community resources to the output
+  eleventyConfig.addPassthroughCopy("src/community/resources");
+  
   // Copy the `img` and `css` folders to the output
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/css");
