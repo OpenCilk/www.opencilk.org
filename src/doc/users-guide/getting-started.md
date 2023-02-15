@@ -143,11 +143,11 @@ Race detected on location 7f515c3f34f6
      Spawn 4995b3 nqueens /home/user/opencilk/tutorial/nqueens.c:67:29
 [...output truncated...]
 
-1.137000
+Time(nqueens) = 2.325475944 sec
 Total number of solutions : 14200
 
 Cilksan detected 1 distinct races.
-Cilksan suppressed 781409 duplicate race reports.
+Cilksan suppressed 3479367 duplicate race reports.
 ```
 
 Programs instrumented with Cilksan are always run serially, regardless of the
@@ -189,8 +189,9 @@ example:
 $ ./qsort 10000000
 Sorting 10000000 integers
 All sorts succeeded
+Time(sample_qsort) = 0.721748768 sec
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-,11.9831,0.167725,71.4447,0.168013,71.3225
+,7.32019,0.168512,43.4402,0.168877,43.3462
 ```
 
 To output the Cilkscale measurements to a file, set the `CILKSCALE_OUT`
@@ -200,9 +201,10 @@ environment variable:
 $ CILKSCALE_OUT=qsort_workspan.csv ./qsort 10000000
 Sorting 10000000 integers
 All sorts succeeded
+Time(sample_qsort) = 0.711326910 sec
 $ cat qsort_workspan.csv
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-,12.3098,0.166994,73.7141,0.167288,73.5847
+,7.15883,0.168538,42.4761,0.168909,42.3828
 ```
 
 {% alert "info" %}
@@ -249,6 +251,7 @@ cpu_counts=None, output_csv='out.csv', output_plot='plot.pdf', rows_to_plot='all
 >> STDOUT (./qsort_wsp 10000000)
 Sorting 10000000 integers
 All sorts succeeded
+Time(sample_qsort) = 0.713108289 sec
 << END STDOUT
 
 >> STDERR (./qsort_wsp 10000000)
