@@ -1,25 +1,25 @@
 {% for post in postslist | reverse %}
-  <div class="col col-12 col-lg-6 g-2">
-    <div class="row g-0 p-2 h-100 align-items-center rounded border shadow overflow-hidden">
-      <div class="col-9 g-0 h-100 rounded">
-        <a class="col mb-2 text-decoration-none" href="{{ post.url | url }}">
-          <h4 class="display-8 fw-bold lh-1 mb-2">{{ post.data.title }}</h4>
-        </a>
-        <small><p class="fw-light my-0 py-0"><span>{{ post.data.date | readableDate }}</span> &mdash; By {{ post.data.author }}</p></small>
+
+  <div class="col-md-6">
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-2 d-flex flex-column position-static">
+        <a href="{{ post.url | url }}"><h3 class="font-weight-bold mt-0 mb-0">{{ post.data.title }}</h3></a>
+        <div class="mb-1 text-muted">{{ post.data.date | readableDate }} &mdash; By {{ post.data.author }}</div>
         {% if post.data.tagline %}
-          <p style="line-height: 1.3;">{{ post.data.tagline | markdownify | safe }}</p>
+          <p class="mb-auto">{{ post.data.tagline | markdownify | safe }}</p>
         {% endif %}
-        <small>
+        <normal>
           {% for tag in post.data.tags | filterTagList %}
           {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
             <a href="{{ tagUrl | url }}" class="card-tag">{{ tag }}</a>{{ ", " if not loop.last else "" }}
           {% endfor %}
-        </small>
+        </normal>
       </div>
-      <div class="col-3 g-0 h-100 rounded m-0 p-0 overflow-hidden">
-        <img class="img-fluid" src="{% if post.data.image %} {{ post.data.image }} {% else %} /img/fib-nocode-trace-dag.png {% endif %}">
+      <div class="col-auto d-none d-lg-block">
+        <img class="img-fluid p-2" width="160" height="160" src="{{ post.data.image }}"/>
       </div>
     </div>
   </div>
+
 {% endfor %}
 
