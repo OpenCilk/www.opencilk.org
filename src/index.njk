@@ -81,7 +81,7 @@ features:
 
 
 <div class="mx-0 bg-white" style="border-top-style: solid; border-top-color: var(--lime);">
-<div class="container py-4 px-4" style="max-width: 1120px;">
+<div class="container py-4" style="max-width: 1120px;">
   <div class="row justify-content-center">
     <div class="col-12">
       <div class="text-center">
@@ -97,7 +97,7 @@ features:
 
     <h3 class="my-4">Featured blog posts</h3>
     <div class="container" id="featured-3">
-      <div class="row g-2">
+      <div class="d-flex row">
         {% set postslist = collections.featuredPosts %}
         {% include "posts_cards.njk" %}
       </div>
