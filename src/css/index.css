@@ -23,32 +23,6 @@ a:hover {
   color: var(--blue);
   font-weight: 600;
 }
-.mynavbar-nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 0;
-}
-a.mynav-link {
-  color: var(--gray);
-}
-a.mynav-link.active {
-  color: white;
-}
-a.mynav-link:hover {
-  color: var(--lime);
-}
-ul#navbar-main-elements {
-  padding: 0;
-}
-ul#navbar-main-elements li.mynav-item {
-  display: inline;
-  margin-right: 2em;
-}
-.bd-header #navbar-start {
-  margin-right: inherit;
-  width: 16.4em;
-}
 .bd-sidebar-primary {
   padding: 1rem;
   border-right: 2px solid var(--lime);
