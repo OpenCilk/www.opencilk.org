@@ -1,30 +1,32 @@
 {% set context = 'Fast code' %}
-<div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
 
-    <h5 class="w-100 p-2 rounded" style="margin-left: -0.4em; color: var(--midnight); background-color: var(--lime);">
-        {{ context }}
-    </h5>
-    <div class="collapse show" id="collapseContext">
-        <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
-            {% set postslist = collections.posts %}
-            <ul>
-            {% for post in postslist | reverse %}
-            <li class="{% if page.url == post.url %} postlist-item-active {% else %} postlist-item {% endif %}">
-                <a href="{{ post.url | url }}" class="postlist-link" {% if page.url == post.url %} aria-current="page" {% endif %}>{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
-            </li>
-            {% endfor %}
+<div class="sidebar-start-items__item">
+    <nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+        <h5 class="w-100 p-2 rounded" style="margin-left: -0.4em; margin-top: 0; color: var(--midnight); background-color: var(--lime);">
+            {{ context }}
+        </h5>
+        {% set postslist = collections.posts %}
+        <div class="bd-toc-item navbar-nav">
+            <ul class="nav bd-sidenav">
+                {% for item in postslist | reverse %}
+                    <li class="{% if page.url == item.url %}  toctree-l1 active {% else %} toctree-l1 {% endif %}">
+                        <a href="{{ item.url | url }}" class="reference" {% if page.url == item.url %} class="aria-current="page" {% endif %}>{{ item.data.title }}</a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
-    </div>
-    {% if page.url != '/posts/' %}
-    <h6 class="p-2 rounded" style="margin-left: -0.4em; color: var(--midnight); background-color: var(--teal);">
-        On this page
-    </h6>
-        <div class="collapse show" id="collapseToc">
-        <div class="list-group ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
-            {{ content | toc | safe }}
-        </div>
-        </div> 
-    {% endif %}
-    
+    </nav>
 </div>
+
+{% if page.url != '/posts/' %}
+    <div class="sidebar-start-items__item">
+        <div class="toc-item">
+            <h6 class="p-2 rounded" style="margin-left: -0.4em; margin-top: 0; color: var(--midnight); background-color: var(--teal);">
+                On this page
+            </h6>
+            <nav id="bd-toc-nav" class="page-toc">
+                {{ content | toc | safe }}
+            </nav>
+        </div>
+    </div>
+{% endif %}
