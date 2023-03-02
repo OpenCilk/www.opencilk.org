@@ -16,7 +16,7 @@ OpenCilk 2.0 is now available.  See the [Install](/doc/users-guide/install) page
 ## Major changes
 
 OpenCilk 2.0 features the following major changes from OpenCilk 1.1:
-- **[Beta feature]** Cilk reducer hyperobjects (a.k.a., reducers) are now supported through a new language syntax and implementation.  A local or global variable in C or C++ can be made into a reducer by adding `cilk_reducer(I,R)` to its type, where `I` and `R` designate the identity and reduce functions for the reducer.  You can find documentation on the new reducer syntax [here](/doc/reference/reducers), but as a simple example, here is how a simple integer-summation reducer can be implemented using the new reducer syntax:
+- **[Beta feature]** Cilk reducer hyperobjects (a.k.a., reducers) are now supported through a new language syntax and implementation.  A local or global variable in C or C++ can be made into a reducer by adding `cilk_reducer(I,R)` to its type, where `I` and `R` designate the identity and reduce functions for the reducer.  You can find documentation on the new reducer syntax [here](/doc/reference/reducers).  As a simple example, here is how a simple integer-summation reducer can be implemented using the new reducer syntax:
 ```c
 #include <cilk/cilk.h>
 
@@ -36,8 +36,8 @@ int foo(int *A, int n) {
 }
 ```
 - The compiler has been upgraded to be based on LLVM 14.0.6.
-- Support has been improved and optimized for pedigrees and built-in deterministic parallel random-number generation. In particular, pedigrees are now correctly updated at both spawns and syncs.
-- Support for pedigrees has been streamlined.  To enable pedigree support, simply link the Cilk program with the pedigree library, `-lopencilk-pedigrees`.
+- Support has been improved and optimized for deterministic parallel random-number generators (DPRNGs).  Pedigrees — which can be used to implement custom DPRNGs — are now correctly updated at both spawns and syncs.  The runtime system also supports a fast built-in DPRNG.
+- Support for DPRNGs (and pedigrees) has been streamlined.  To enable this support, simply link the Cilk program with the library, `-lopencilk-pedigrees`.
 - Many bug fixes and performance improvements have been included compared to the previous version.
 
 ## Known limitations
