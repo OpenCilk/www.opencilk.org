@@ -102,9 +102,9 @@ Time(fib) = 1.459649400 sec
 
 ## Using Cilksan
 
-Use the OpenCilk [Cilksan race detector](#) to verify that your
+Use the OpenCilk Cilksan race detector to verify that your
 parallel Cilk program is deterministic.  Cilksan instruments a program to
-detect [determinacy race bugs](#) at runtime.  Cilksan is guaranteed to
+detect {% defn "determinacy race" %} bugs at runtime.  Cilksan is guaranteed to
 find any and all determinacy races that arise in a given program execution.  If
 there are no races, Cilksan will report that the execution was race-free.
 
@@ -168,11 +168,9 @@ $ xcrun /opt/opencilk/bin/clang -fopencilk -fsanitize=cilk -Og -g -D_FORTIFY_SOU
 
 ## Using Cilkscale
 
-Use the OpenCilk [Cilkscale scalability analyzer](#) script to measure
-the [work, span, and
-parallelism](../../../posts/2022-05-20-what-the-is-parallelism-anyhow/ "What
-the \$#@! is parallelism, anyhow?") of your Cilk program, and to benchmark
-parallel its speedup on different numbers of cores.
+Use the OpenCilk [Cilkscale scalability analyzer](/doc/users-guide/cilkscale) script to measure
+the work, span, and parallelism of your Cilk program, and to benchmark
+its parallel speedup on different numbers of cores.
 
 To measure work and span with Cilkscale, add the `-fcilktool=cilkscale`
 flag during compilation and linking:
@@ -211,7 +209,7 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 
 ***Work-span analysis of specific program regions:*** By default, Cilkscale
 will only analyze whole-program execution.  To analyze specific regions of your
-Cilk program, use the [Cilkscale work-span API](#).
+Cilk program, use the [Cilkscale work-span API](/doc/reference/cilkscale/#cc++-api-for-fine-grained-analysis).
 
 <br/>
 {% alert "primary" %}
@@ -279,4 +277,4 @@ Running the `cilkscale.py` script as above does the following:
    as plots in a PDF document (`plot.pdf`).
 
 For more information on the Cilkscale scalability analysis and visualization
-script, see the [Cilkscale documentation page](#).
+script, see the [Cilkscale documentation page](/doc/users-guide/cilkscale).
