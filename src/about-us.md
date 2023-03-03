@@ -1,6 +1,5 @@
 ---
 layout: layouts/page.njk
-stylesheet: users-guide.css
 background: bg-white
 sidebar: toc
 title: About us

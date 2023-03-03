@@ -13,6 +13,14 @@ a {
 a:hover {
   color: var(--lime);
 }
+h2 a.direct-link, h3 a.direct-link {
+  color: var(--lightgray);
+  text-decoration: none;
+}
+h2 a.direct-link:hover, h3 a.direct-link:hover {
+  color: var(--lime);
+  text-decoration: none;
+}
 .toc-entry a.nav-link, nav.bd-links li a, li.toctree-l1 a.reference {
   color: var(--blue);
 }
@@ -49,6 +57,7 @@ input#__primary:checked ~ .bd-container .bd-sidebar-primary {
 .bd-main .bd-content .bd-article-container {
   flex-grow: 1;
   max-width: none;
+  justify-content: start;
 }
 .bd-article-container a {
   text-decoration: underline;
