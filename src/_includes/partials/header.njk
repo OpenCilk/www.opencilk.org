@@ -47,10 +47,12 @@
   <link rel="stylesheet" type="text/css" href="/css/prism.css">
   <link rel="stylesheet" type="text/css" href="/css/index.css">
   
-  <!-- Page styling -->
+  <!-- Page styling default is adapted from Cilk Plus Users Guide -->
   {% if stylesheet %}
     {% set styleCss = ['/css/', stylesheet] | join %}
     <link rel="stylesheet" href="{{ styleCss | url }}">
+  {% else %}
+    <link rel="stylesheet" href="/css/users-guide.css">
   {% endif %}
   <link rel="alternate" href="{{ metadata.blog.feed.path | url }}" type="application/atom+xml" title="{{ metadata.blog.title }}">
   <link rel="alternate" href="{{ metadata.blog.jsonfeed.path | url }}" type="application/json" title="{{ metadata.blog.title }}">

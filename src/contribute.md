@@ -1,6 +1,5 @@
 ---
 layout: layouts/page.njk
-stylesheet: users-guide.css
 background: bg-white
 sidebar: toc
 title: Contribute to OpenCilk
@@ -15,7 +14,7 @@ The OpenCilk project welcomes your expertise and enthusiasm. A few specific oppo
 
 ## Teaching
 
-{% imgLeft "/img/owl.png", 60 %}
+{% imgLeft "/img/owl.png", "60px" %}
 Are you teaching with OpenCilk?
 
 We hope you'll join our [community of educators](/community/teach-performance) who are developing resources for teaching topics in software performance engineering.

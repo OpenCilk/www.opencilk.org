@@ -6,7 +6,6 @@ main h2 {
     padding-left: 0.25em;
 }
 main h3 {
-    background-color: white;
     font-weight: bold;
     margin-left: -0.25em;
     padding-left: 0.25em;
@@ -19,14 +18,6 @@ h2 a.direct-link {
     text-decoration: none;
 }
 h2 a.direct-link:hover {
-    color: var(--lime);
-    text-decoration: none;
-}
-h3 a.direct-link {
-    color: var(--lightgray);
-    text-decoration: none;
-}
-h3 a.direct-link:hover {
     color: var(--lime);
     text-decoration: none;
 }

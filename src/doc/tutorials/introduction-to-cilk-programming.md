@@ -38,7 +38,7 @@ parallel.)  The OpenCilk compiler produces optimized parallel code, and the
 OpenCilk runtime system schedules and load-balances your computation onto the
 available processors in a way that is provably close to optimal.
 
-{% img "/img/fib-code-multicore-wide.png", "1200" %}
+{% img "/img/fib-code-multicore-wide.png", "1200px" %}
 
 When using the OpenCilk platform, you write code in the Cilk language, which
 extends C and C++ with a just few keywords to support task-parallel
