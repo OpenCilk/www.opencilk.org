@@ -101,9 +101,9 @@ Time(fib) = 1.459649400 sec
 
 ## Using Cilksan
 
-Use the OpenCilk [Cilksan race detector](#) to verify that your
+Use the OpenCilk Cilksan race detector to verify that your
 parallel Cilk program is deterministic.  Cilksan instruments a program to
-detect [determinacy race bugs](#) at runtime.  Cilksan is guaranteed to
+detect {% defn "determinacy race" %} bugs at runtime.  Cilksan is guaranteed to
 find any and all determinacy races that arise in a given program execution.  If
 there are no races, Cilksan will report that the execution was race-free.
 
@@ -142,11 +142,11 @@ Race detected on location 7f515c3f34f6
      Spawn 4995b3 nqueens /home/user/opencilk/tutorial/nqueens.c:67:29
 [...output truncated...]
 
-1.137000
+Time(nqueens) = 2.325475944 sec
 Total number of solutions : 14200
 
 Cilksan detected 1 distinct races.
-Cilksan suppressed 781409 duplicate race reports.
+Cilksan suppressed 3479367 duplicate race reports.
 ```
 
 Programs instrumented with Cilksan are always run serially, regardless of the
@@ -167,11 +167,9 @@ $ xcrun /opt/opencilk/bin/clang -fopencilk -fsanitize=cilk -Og -g -D_FORTIFY_SOU
 
 ## Using Cilkscale
 
-Use the OpenCilk [Cilkscale scalability analyzer](#) script to measure
-the [work, span, and
-parallelism](../../../posts/2022-05-20-what-the-is-parallelism-anyhow/ "What
-the \$#@! is parallelism, anyhow?") of your Cilk program, and to benchmark
-parallel its speedup on different numbers of cores.
+Use the OpenCilk [Cilkscale scalability analyzer](/doc/users-guide/cilkscale) script to measure
+the work, span, and parallelism of your Cilk program, and to benchmark
+its parallel speedup on different numbers of cores.
 
 To measure work and span with Cilkscale, add the `-fcilktool=cilkscale`
 flag during compilation and linking:
@@ -188,8 +186,9 @@ example:
 $ ./qsort 10000000
 Sorting 10000000 integers
 All sorts succeeded
+Time(sample_qsort) = 0.721748768 sec
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-,11.9831,0.167725,71.4447,0.168013,71.3225
+,7.32019,0.168512,43.4402,0.168877,43.3462
 ```
 
 To output the Cilkscale measurements to a file, set the `CILKSCALE_OUT`
@@ -199,16 +198,17 @@ environment variable:
 $ CILKSCALE_OUT=qsort_workspan.csv ./qsort 10000000
 Sorting 10000000 integers
 All sorts succeeded
+Time(sample_qsort) = 0.711326910 sec
 $ cat qsort_workspan.csv
 tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_parallelism
-,12.3098,0.166994,73.7141,0.167288,73.5847
+,7.15883,0.168538,42.4761,0.168909,42.3828
 ```
 
 {% alert "info" %}
 
 ***Work-span analysis of specific program regions:*** By default, Cilkscale
 will only analyze whole-program execution.  To analyze specific regions of your
-Cilk program, use the [Cilkscale work-span API](#).
+Cilk program, use the [Cilkscale work-span API](/doc/reference/cilkscale/#cc++-api-for-fine-grained-analysis).
 
 {% alert "primary" %}
 
@@ -247,6 +247,7 @@ cpu_counts=None, output_csv='out.csv', output_plot='plot.pdf', rows_to_plot='all
 >> STDOUT (./qsort_wsp 10000000)
 Sorting 10000000 integers
 All sorts succeeded
+Time(sample_qsort) = 0.713108289 sec
 << END STDOUT
 
 >> STDERR (./qsort_wsp 10000000)
@@ -274,4 +275,4 @@ Running the `cilkscale.py` script as above does the following:
    as plots in a PDF document (`plot.pdf`).
 
 For more information on the Cilkscale scalability analysis and visualization
-script, see the [Cilkscale documentation page](#).
+script, see the [Cilkscale documentation page](/doc/users-guide/cilkscale).
