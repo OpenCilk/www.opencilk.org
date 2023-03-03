@@ -9,11 +9,11 @@
     {% for entry in collections.all | eleventyNavigation("Home") %}
         {% if page.url == entry.url %}
         <li class="nav-item active">
-            <a class="nav-link active" style="font-size: 90%; color:#91b301;" aria-current="page" href="{{ entry.url | url }}">{{ entry.title }}</a>
+            <a class="nav-link active" aria-current="page" href="{{ entry.url | url }}">{{ entry.title }}</a>
         </li>
         {% else %}
         <li class="nav-item">
-            <a class="nav-link" href="{{ entry.url | url }}" style="font-size: 90%; color:#e0e0e0;">{{ entry.title }}</a>
+            <a class="nav-link" href="{{ entry.url | url }}">{{ entry.title }}</a>
         </li>
         {% endif %}
     {% endfor %}

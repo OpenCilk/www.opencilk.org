@@ -31,6 +31,17 @@ h2 a.direct-link:hover, h3 a.direct-link:hover {
   color: var(--blue);
   font-weight: 600;
 }
+.bd-header .navbar-nav li a.nav-link  {
+  color: #e0e0e0;
+  font-size: 90%;
+}
+.bd-header .navbar-nav > .active > .nav-link {
+  color: var(--lime);
+  font-weight: 600;
+}
+.bd-header .navbar-nav li a.nav-link:hover {
+  color: var(--safetyyellow);
+}
 .bd-sidebar-primary {
   padding: 1rem;
   border-right: 2px solid var(--lime);
