@@ -1,6 +1,7 @@
 :root {
   --pst-font-size-base: 19.2px;
   --pst-font-size-monospace: 19.2px;
+  --pst-color-text-base: 0, 0, 0;
 
   --pst-font-family-base-system: -apple-system, BlinkMacSystemFont,
     Roboto, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
@@ -20,6 +21,7 @@
   --white: #fff;
   --lime: #91b301;
   --teal: #11a5a1;
+  --lightteal: #1abcb8;
   --darkteal: #0e8481;
   --sky: #0cb3e1;
   --tangelo: #f44500;
@@ -28,20 +30,48 @@
   --safetyyellow: #f4d400;
 }
 html[data-theme="light"] {
-  --pst-color-primary: var(--darkgray);
-  --pst-color-on-background: var(--midnight);
+  --pst-color-header: var(--blue);
+  --pst-color-primary: var(--gray);
+  --pst-color-success: var(--lime);
+  --pst-color-info: var(--teal);
+  --pst-color-warning: var(--yellow);
+  --pst-color-danger: var(--tangelo);
+  --pst-color-text-base: 51, 51, 51;
+  --pst-color-text-base: var(--darkgray);
+  --pst-color-on-background: var(--pst-color-surface);
+  --pst-color-link: var(--blue);
+  --pst-color-link-hover: var(--lime);
+  --pst-color-headerlink: 198, 15, 15;
+  --pst-color-headerlink-hover: 255, 255, 255;
+  --pst-color-preformatted-text: red;
+  --pst-color-preformatted-background: white;
+  --pst-color-inline-code: var(--tangelo);
 }
 html[data-theme="dark"] {
-  --pst-color-primary: white;
+  --pst-color-header: var(--gray);
+  --pst-color-primary: var(--darkgray);
+  --pst-color-text-base: var(--lightgray);
+  --pst-color-background: black;
+  --pst-color-on-background: var(--pst-color-surface);
+  --pst-color-link: var(--teal);
+  --pst-color-link-hover: var(--lime);
+  --pst-color-headerlink: 198, 15, 15;
+  --pst-color-headerlink-hover: 255, 255, 255;
+  --pst-color-preformatted-text: var(--yellow);
+  --pst-color-preformatted-background: white;
+  --pst-color-inline-code: var(--lightteal);
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: Ubuntu, sans-serif;
-  color: var(--blue);
+  color: var(--pst-color-header);
 }
 h2, h3, h4, h5, h6 {
   margin-top: 1.1rem;
   margin-bottom: 0.4rem;
   padding: 0.2rem 0 0.1rem;
+}
+.bd-header {
+  background-color: var(--pst-color-header) !important;
 }
 .bd-sidebar-primary {
   max-width: 17rem;
@@ -53,4 +83,7 @@ h2, h3, h4, h5, h6 {
 .breadcrumb {
   padding: 0;
   background-color: transparent;
+}
+.admonition > .admonition-title::before, div.admonition > .admonition-title::before {
+  opacity: 0.3;
 }

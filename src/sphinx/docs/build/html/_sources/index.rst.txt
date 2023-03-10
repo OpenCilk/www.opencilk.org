@@ -12,10 +12,7 @@ See also our `Fast code <https://opensource.org/posts>`_ blog, which puts it all
    :maxdepth: 2
    :caption: Contents:
 
-   usage
-   demo
-   user
-
+   dummy
 
 
 Indices and tables
