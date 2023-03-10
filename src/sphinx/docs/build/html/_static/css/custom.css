@@ -30,13 +30,13 @@
   --safetyyellow: #f4d400;
 }
 html[data-theme="light"] {
+  --pst-color-navbar: var(--midnight);
   --pst-color-header: var(--blue);
   --pst-color-primary: var(--gray);
   --pst-color-success: var(--lime);
   --pst-color-info: var(--teal);
   --pst-color-warning: var(--yellow);
   --pst-color-danger: var(--tangelo);
-  --pst-color-text-base: 51, 51, 51;
   --pst-color-text-base: var(--darkgray);
   --pst-color-on-background: var(--pst-color-surface);
   --pst-color-link: var(--blue);
@@ -48,8 +48,9 @@ html[data-theme="light"] {
   --pst-color-inline-code: var(--tangelo);
 }
 html[data-theme="dark"] {
+  --pst-color-navbar: var(--blue);
   --pst-color-header: var(--gray);
-  --pst-color-primary: var(--darkgray);
+  --pst-color-primary: var(--gray);
   --pst-color-text-base: var(--lightgray);
   --pst-color-background: black;
   --pst-color-on-background: var(--pst-color-surface);
@@ -71,7 +72,7 @@ h2, h3, h4, h5, h6 {
   padding: 0.2rem 0 0.1rem;
 }
 .bd-header {
-  background-color: var(--pst-color-header) !important;
+  background-color: var(--pst-color-navbar) !important;
 }
 .bd-sidebar-primary {
   max-width: 17rem;
