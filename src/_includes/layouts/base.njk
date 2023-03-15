@@ -34,8 +34,8 @@
                 </div>  
             {% endif %}    
             <main class="bd-main">
-                <div class="bd-content">
-                    <div class="bd-article-container {% if page.url !== '/' %} bg-white {% endif %}">        
+                <div class="bd-content" {% if page.url !== '/' %} style="background-color: var(--pst-color-background);" {% endif %}>
+                    <div class="bd-article-container">        
                         {% if page.url !== '/' %}
                             {% include 'partials/breadcrumb.njk' %}
                         {% endif %}
