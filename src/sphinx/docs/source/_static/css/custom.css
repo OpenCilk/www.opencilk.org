@@ -52,6 +52,18 @@ html[data-theme="light"] {
   --pst-color-preformatted-background: white;
   --pst-color-inline-code: var(--tangelo);
 }
+html[data-theme="light"] img.hero-light {
+  display: block;
+}
+html[data-theme="light"] img.hero-dark {
+  display: none;
+}
+html[data-theme="dark"] img.hero-light {
+  display: none;
+}
+html[data-theme="dark"] img.hero-dark {
+  display: block;
+}
 html[data-theme="dark"] {
   background: url('/img/dark-grey-silk-bg.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -71,6 +83,9 @@ html[data-theme="dark"] {
   --pst-color-preformatted-text: var(--yellow);
   --pst-color-preformatted-background: white;
   --pst-color-inline-code: var(--yellow);
+}
+html[data-theme="dark"] .bd-content img:not(.only-dark) {
+  background: transparent;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: Ubuntu, sans-serif;
