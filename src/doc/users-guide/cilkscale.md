@@ -32,18 +32,18 @@ information, see the [Cilkscale reference page](/doc/reference/cilkscale).
 
 {% img "/img/qsort-cilkscale-scalability-plots-sample-qsort-only.png", "100%" %}
 
-{% alert "info" %}
+{% alert "warning", "Note:" %}
 
-_**Note:**_ This guide assumes that OpenCilk is installed within
+This guide assumes that OpenCilk is installed within
 `/opt/opencilk/` and that the OpenCilk C++ compiler can be invoked from the
 terminal as `/opt/opencilk/bin/clang++`, as shown in [this
 example](/doc/users-guide/install/#example).
 
 {% endalert %}
 
-{% alert "info" %}
+{% alert "note", "System setup for reported performance measurements:" %}
 
-_**System setup for reported performance measurements:**_ All timings reported
+All timings reported
 in this page are measured on a laptop with an 8-core Intel Core i7-10875H CPU,
 using OpenCilk 2.0.1 on Ubuntu 20.04 (via the Windows Subsystem for Linux v2 on
 Windows 10).
@@ -154,9 +154,9 @@ Cilkscale](/doc/reference/cilkscale/#workspan-analysis-measurements-reported-by-
 As before, the reported measurements above are untagged and refer to
 whole-program execution.
 
-{% alert "info" %}
+{% alert %}
 
-_**Note:**_ The Cilkscale-instrumented binary in work/span analysis mode is
+The Cilkscale-instrumented binary in work/span analysis mode is
 slower than its non-instrumented counterpart.  The slowdown is generally no
 larger than 10x and typically less than 2x.  In the examples above, `qsort` and
 `qsort_cs_bench` took 2.3s while `qsort_cs` took 3.4s (slowdown = 1.5x).
@@ -228,9 +228,9 @@ sample_qsort,26.1502,1.08122,24.1859,1.08153,24.1788
 The last row in the Cilkscale report is always untagged and corresponds to
 the execution of the whole program.
 
-{% alert "info" %}
+{% alert %}
 
-_**Note:**_ If you compile your code without a Cilkscale instrumentation flag,
+If you compile your code without a Cilkscale instrumentation flag,
 calls to the Cilkscale API are effectively ignored with zero overhead.
 
 {% endalert %}
@@ -257,9 +257,9 @@ Cilkscale Python script helps you do the following:
 The Cilkscale Python script is found at `share/Cilkscale_vis/cilkscale.py`
 within the OpenCilk installation directory.
 
-{% alert "warning" %}
+{% alert "warning", "Prerequisites:" %}
 
-_**Prerequisites:**_ To use the Cilkscale Python script, you need:
+To use the Cilkscale Python script, you need:
 
 - [Python](https://www.python.org/downloads/) 3.8 or later.
 - (Optional) [matplotlib](https://pypi.org/project/matplotlib/) 3.5.0 or later;

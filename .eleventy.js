@@ -207,16 +207,10 @@ module.exports = function(eleventyConfig) {
     }
   );
 
-  // Paired Shortcode for Bootstrap 5 alerts
-	eleventyConfig.addPairedShortcode(
-    "alert",
-    function(content, classes='primary') { return `<div class="alert alert-${classes}">${markdownLibrary.render(content)}</div>` }
-  );
-
   // Paired Shortcode for pydata-sphinx admonition-notes
 	eleventyConfig.addPairedShortcode(
-    "note",
-    function(content, title='Note') { return `<div class="admonition note"><p class="admonition-title">${title}</p>${markdownLibrary.render(content)}</div>` }
+    "alert",
+    function(content, type='Note', title='Note:') { return `<div class="admonition ${type.toLowerCase()}"><p class="admonition-title">${title}</p>${markdownLibrary.render(content)}</div>` }
   );
 
   // Override Browsersync defaults (used only with --serve)

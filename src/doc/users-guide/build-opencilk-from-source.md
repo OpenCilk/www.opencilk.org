@@ -114,8 +114,8 @@ $ infrastructure/tools/build --help
 
 If you encounter problems during the build process, see [Troubleshooting](#troubleshooting) for guidance on fixing common problems, or contact us via the [OpenCilk issue tracker](https://github.com/OpenCilk/opencilk-project/issues) or by emailing us at [contact@opencilk.org](mailto:contact@opencilk.org).
 
-{% alert "info" %}
-***Advanced build options:*** If you wish, you can customize your
+{% alert "note", "Advanced build options:" %}
+If you wish, you can customize your
 build of OpenCilk beyond what the script provides --- e.g., to build
 additional LLVM subprojects --- by running the necessary CMake
 commands yourself.  When run, the `infrastructure/tools/build`
