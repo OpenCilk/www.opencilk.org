@@ -5,7 +5,9 @@ eleventyNavigation:
   key: Home
   order: 1
 hero:
-  image: /img/OpenCilk-Logo-1001.png
+  image:
+    light: /img/OpenCilk-Logo-1001.png
+    dark: /img/OpenCilk-Logo-1001-dark.png
   subtitle: The language of performance engineering
 features:
 - call: Write fast code
@@ -51,7 +53,8 @@ features:
 
 ---
 
-<img class="d-block pt-4 pb-4 mx-auto" src="{{ hero.image }}" width="440">
+<img class="hero-light pt-4 pb-4 mx-auto" src="{{ hero.image.light }}" width="440">
+<img class="hero-dark only-dark pt-4 pb-4 mx-auto" src="{{ hero.image.dark }}" width="440">
 <div class="text-center" style="font-size: large;">
   <p class="mb-4 mx-auto">{{ metadata.tagline }}</p>
 </div>

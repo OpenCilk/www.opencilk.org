@@ -1,7 +1,7 @@
 {% for post in postslist | reverse %}
 
   <div class="col-md-6">
-    <div class="row p-2 no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    <div class="row p-2 no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: var(--pst-color-surface);">
       <div class="col-9 d-flex flex-column position-static">
         <a href="{{ post.url | url }}"><h3 class="font-weight-bold mt-0 mb-0">{{ post.data.title }}</h3></a>
         <div class="mb-1 text-muted">{{ post.data.date | readableDate }} &mdash; By {{ post.data.author }}</div>
