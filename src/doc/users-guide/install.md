@@ -38,14 +38,14 @@ ARM processors.  It has been tested on the following operating systems:
  - Fedora (34, 36)
  - macOS (10.15, 11.6, 12.4)
 
-{% alert "primary" %}
-***Prerequisites:*** The OpenCilk binaries assume that system header files and system libraries
+{% note "Prerequisites:" %}
+The OpenCilk binaries assume that system header files and system libraries
 are already installed on the system.
 - On Linux, we recommend installing GCC (or equivalent) to provide these necessary system files.
 - On macOS, you must install [XCode](https://developer.apple.com/support/xcode/) or
 the [XCode Command Line Tools](https://mac.install.guide/commandlinetools/index.html) to get
 the necessary system files. 
-{% endalert %}
+{% endnote %}
 
 ## Methods of installation
 
@@ -102,9 +102,9 @@ The OpenCilk C (or C++) compiler can be invoked via `bin/clang` (or
 Optionally, you can configure your system so that `clang` and `clang++` point to the OpenCilk C and C++
 compilers (e.g., by setting your `PATH` environment variable or installing system-wide symbolic links).
 
-{% alert "primary" %}
+{% note "Example:" %}
 
-<span id="example">_**Example:**_</span> The following example shows the
+ The following example shows the
 process on Ubuntu 20.04 to install OpenCilk into `/opt/opencilk` without adding
 a version-specific subdirectory.  The installation and setup process is
 analogous for macOS and other Linux systems.
@@ -130,7 +130,7 @@ Unpacking finished successfully
 compilers.  This can be achieved in numerous ways, such as by setting your
 `PATH` environment variable to look in `/opt/opencilk/bin/` or by installing
 system-wide symbolic links.
-{% endalert %}
+{% endnote %}
 
 ## Installing using a tarball
 
@@ -162,12 +162,12 @@ $ tar xvzf OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04.tar.gz
 will extract the OpenCilk installation into a subdirectory
 `OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/` within the current working directory.
 
-{% alert "primary" %}
-***Note:*** Extracting the tarball as above is equivalent to running the corresponding
+{% note "Note:" %}
+Extracting the tarball as above is equivalent to running the corresponding
 shell archive with options `--skip-license --include-subdir`.  Installing using this method,
 or by passing `--skip-license` to the shell archive, implies that you accept OpenCilk's
 software license.
-{% endalert %}
+{% endnote %}
 
 ## Docker image
 

@@ -155,7 +155,7 @@ module.exports = function(eleventyConfig) {
   }).use(markdownItAnchor, {
     permalink: markdownItAnchor.permalink.ariaHidden({
       placement: "after",
-      class: "direct-link",
+      class: "headerlink",
       symbol: "#",
       level: [1,2,3,4],
     }),
@@ -211,6 +211,12 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPairedShortcode(
     "alert",
     function(content, classes='primary') { return `<div class="alert alert-${classes}">${markdownLibrary.render(content)}</div>` }
+  );
+
+  // Paired Shortcode for pydata-sphinx admonition-notes
+	eleventyConfig.addPairedShortcode(
+    "note",
+    function(content, title='Note') { return `<div class="admonition note"><p class="admonition-title">${title}</p>${markdownLibrary.render(content)}</div>` }
   );
 
   // Override Browsersync defaults (used only with --serve)

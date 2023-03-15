@@ -13,11 +13,14 @@ main h3 {
 .bd-article-container ul li {
     list-style-image: url("/img/caret-right-fill.svg");
 }
-h2 a.direct-link {
+h2 a.headerlink {
     color: var(--darkteal);
     text-decoration: none;
 }
-h2 a.direct-link:hover {
+h3 a.headerlink, h4 a.headerlink {
+    color: var(--pst-color-headerlink);
+}
+h2 a.headerlink:hover, h3 a.headerlink:hover, h4 a.headerlink:hover {
     color: var(--lime);
     text-decoration: none;
 }

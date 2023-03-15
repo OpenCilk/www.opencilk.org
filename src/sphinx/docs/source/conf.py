@@ -31,11 +31,6 @@ panels_add_bootstrap_css = False
 
 html_theme = 'pydata_sphinx_theme'
 
-# switch from "auto" to "light"
-html_context = {
-   "default_mode": "light"
-}
-
 html_theme_options = {
   "logo": {
       "image_light": "OpenCilk-icon-330.png",
