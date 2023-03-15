@@ -2,8 +2,8 @@
 title: Convert a C++ program
 ---
 
-{% alert "primary" %}
-***Note:*** This page will be updated soon to include `cilk_scope`, introduced with OpenCilk 2.0.
+{% alert %}
+This page will be updated soon to include `cilk_scope`, introduced with OpenCilk 2.0.
 {% endalert %}
 
 ## Overview

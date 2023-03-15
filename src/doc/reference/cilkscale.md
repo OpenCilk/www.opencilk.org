@@ -23,9 +23,9 @@ To learn more about how to use Cilkscale to analyze the parallel performance of
 your Cilk program, see the [Cilkscale user's
 guide](/doc/users-guide/cilkscale).
 
-{% alert "info" %}
+{% alert %}
 
-_**Note:**_ The terminal command examples in this page assume that OpenCilk is
+The terminal command examples in this page assume that OpenCilk is
 installed within `/opt/opencilk/`, as shown in the [Install
 page](/doc/users-guide/install/#example).
 
@@ -67,9 +67,7 @@ each analyzed program region.
   worst-case parallel scheduling (and ignoring other possible factors of
   parallel slowdown).
 
-{% alert "info" %}
-
-_**References:**_ 
+{% alert "note", "References:" %}
 
 - Y. He, C.E. Leiserson, and W.M. Leiserson, [_The Cilkview scalability
   analyzer_](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/cilkview.pdf),
@@ -99,9 +97,8 @@ _**References:**_
   Instrument the program to measure wall-clock execution time (in seconds)
   instead of work and span.
 
-{% alert "primary" %}
+{% alert "note", "Example:" %}
 
-_**Example:**_
 ```shell-session
 $ /opt/opencilk/bin/clang qsort.c -fopencilk -fcilktool=cilkscale -O3 -o qsort_cs
 $ /opt/opencilk/bin/clang qsort.c -fopencilk -fcilktool=cilkscale-instructions -O3 -o qsort_csinstr
@@ -110,9 +107,9 @@ $ /opt/opencilk/bin/clang qsort.c -fopencilk -fcilktool=cilkscale-benchmark -O3 
 
 {% endalert %}
 
-{% alert "info" %}
+{% alert "warning", "Note:" %}
 
-_**Note:**_ The Cilkscale instrumentation flags must be used for both
+The Cilkscale instrumentation flags must be used for both
 compilation and linking.
 
 {% endalert %}
@@ -125,9 +122,7 @@ measurements by printing them to the standard output stream by default.  To
 output Cilkscale measurements into a file instead of the standard output, set
 the desired file path as the value of the environment variable `CILKSCALE_OUT`.
 
-{% alert "primary" %}
-
-_**Example:**_
+{% alert "note", "Example:" %}
 
 ```shell-session
 $ CILKSCALE_OUT=qsort_workspan_report.csv ./qsort_cs 100000000
@@ -139,9 +134,9 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 
 {% endalert %}
 
-{% alert "info" %}
+{% alert "warning", "Note:" %}
 
-_**Note:**_ Cilkscale assumes that the path in `CILKSCALE_OUT` points to a file
+Cilkscale assumes that the path in `CILKSCALE_OUT` points to a file
 in an existing directory.
 
 - If the directory does not exist, the report is printed to the standard output
@@ -161,9 +156,9 @@ If, however, the program is compiled with the flag
 `-fcilktool=cilkscale-benchmark`, then the functions below measure wall-clock
 execution time instead of work and span.
 
-{% alert "info" %}
+{% alert %}
 
-_**Note:**_ Calls to the Cilkscale API functions are elided if the program is
+Calls to the Cilkscale API functions are elided if the program is
 compiled without any of the Cilkscale instrumentation flags.
 
 {% endalert %}
@@ -247,9 +242,9 @@ variables:
 
 ### Examples
 
-{% alert "primary" %}
+{% alert "note", "Example 1:" %}
 
-_**Example 1:**_ Measure the work and span of a computation in a contiguous
+Measure the work and span of a computation in a contiguous
 code region.
 
 ```c
@@ -262,9 +257,9 @@ wsp_dump(elapsed, "my computation");
 
 {% endalert %}
 
-{% alert "primary" %}
+{% alert "note", "Example 2:" %}
 
-_**Example 2:**_ Measure the work and span of an iterative computation.  The
+Measure the work and span of an iterative computation.  The
 analyzed code region is non-contiguous in the program's execution trace.
   
 ```c
@@ -291,9 +286,9 @@ It takes as input two Cilkscale-instrumented binaries of the same application
 and a number of optional arguments.  Its output is a table and set of graphical
 plots of parallel performance and scalability measurements.
 
-{% alert "warning" %}
+{% alert "warning", "Prerequisites:" %}
 
-_**Prerequisites:**_ To use the `cilkscale.py` script, you need:
+To use the `cilkscale.py` script, you need:
 
 - [Python](https://www.python.org/downloads/) 3.8 or later.
 - (Optional) [matplotlib](https://pypi.org/project/matplotlib/) 3.5.0 or later;
@@ -355,9 +350,7 @@ $ python3 /opt/opencilk/share/Cilkscale_vis/cilkscale.py ARGUMENTS
   program binary.  
   _Default:_ no arguments.
 
-{% alert "primary" %}
-
-_**Example:**_
+{% alert "note", "Example:" %}
 
 ```shell-session
 $ /opt/opencilk/bin/clang qsort.c -fopencilk -fcilktool=cilkscale -O3 -o qsort_cs

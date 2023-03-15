@@ -36,25 +36,24 @@ compiler.  For example:
 $ /opt/opencilk/bin/clang -fopencilk -O3 fib.c -o fib
 ```
 
-{% alert "info" %}
+{% alert  %}
 
-***Note:*** Pass the `-fopencilk` flag to the compiler both when compiling and
+Pass the `-fopencilk` flag to the compiler both when compiling and
 linking the Cilk program.  During compilation, the flag ensures that the Cilk
 keywords are recognized and compiled.  During linking, it ensures the program
 is properly linked with the OpenCilk runtime library.
 
-{% alert "danger" %}
+{% alert "danger", "Former users of Intel Cilk Plus with GCC:"  %}
 
-Former users of Intel Cilk Plus with GCC: Do **not** include the
-`-lcilkrts` flag when linking.
-
-{% endalert %}
+Do **not** include the `-lcilkrts` flag when linking.
 
 {% endalert %}
 
-{% alert "info" %}
+{% endalert %}
 
-***macOS users:*** On macOS, `clang` needs the standard system libraries and
+{% alert "note", "macOS users:" %}
+
+On macOS, `clang` needs the standard system libraries and
 headers that are provided by
 [XCode](https://developer.apple.com/support/xcode/) or the [XCode Command Line
 Tools](https://mac.install.guide/commandlinetools/index.html).  To run the
@@ -154,8 +153,8 @@ number of processors that are available or specified.  The instrumented program
 is expected to run up to several times slower than its non-instrumented serial
 counterpart.
 
-{% alert "info" %}
-***macOS users:*** On macOS, the compiled `nqueens.c` binary uses builtins that
+{% alert "note", "macOS users:" %}
+On macOS, the compiled `nqueens.c` binary uses builtins that
 Cilksan does not currently recognize.  To work around this behavior, add the
 flag `–D_FORTIFY_SOURCE=0` when compiling:
 
@@ -204,21 +203,19 @@ tag,work (seconds),span (seconds),parallelism,burdened_span (seconds),burdened_p
 ,7.15883,0.168538,42.4761,0.168909,42.3828
 ```
 
-{% alert "info" %}
+{% alert "note", "Work-span analysis of specific program regions:" %}
 
-***Work-span analysis of specific program regions:*** By default, Cilkscale
+By default, Cilkscale
 will only analyze whole-program execution.  To analyze specific regions of your
 Cilk program, use the [Cilkscale work-span API](/doc/reference/cilkscale/#cc++-api-for-fine-grained-analysis).
 
-{% alert "primary" %}
-
-***Example:*** The tutorial program `qsort_wsp.c` shows how to modify the code
+***Example:*** 
+The tutorial program `qsort_wsp.c` shows how to modify the code
 of `qsort.c` to measure the work and span of the core function
 `sample_qsort()`.  Compiling `qsort_wsp.c` with Cilkscale and running the
 instrumented binary will output an additional row in Cilkscale's CSV table with
 the analysis results for `sample_qsort()`.
 
-{% endalert %}
 
 {% endalert %}
 

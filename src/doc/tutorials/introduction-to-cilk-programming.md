@@ -117,7 +117,7 @@ have been evaluated.
 
 {% alert %}
 
-**Note:** Any expression that is or can be converted to a function can be
+Any expression that is or can be converted to a function can be
 spawned.  For instance, you can spawn a computation using a function pointer or
 member function pointer, as in:
 
@@ -133,9 +133,7 @@ If you spawn a function that returns a value, make sure the spawned function
 has finished executing before using its returned value.  The same is true for
 any state that may change as a side-effect of a spawned function.
 
-{% alert "danger" %}
-
-**Incorrect:**
+{% alert "error", "Incorrect:" %}
 
 ```cilkc
 cilk_scope {
@@ -147,9 +145,7 @@ cilk_scope {
 
 {% endalert %}
 
-{% alert "success" %}
-
-**Correct:**
+{% alert "tip", "Correct:" %}
 
 ```cilkc
 cilk_scope {
@@ -166,9 +162,7 @@ declare the variable which will receive the returned value before the
 `cilk_scope` block that uses it.  Otherwise, that variable won't be defined
 outside the `cilk_scope` block (which is where its value is assigned).
 
-{% alert "danger" %}
-
-**Incorrect:**
+{% alert "error", "Incorrect:" %}
 
 ```cilkc
 cilk_scope {
@@ -184,9 +178,7 @@ nested within another scope that also uses `x` and `y` identifiers.
 
 {% endalert %}
 
-{% alert "success" %}
-
-**Correct:**
+{% alert "tip", "Correct:" %}
 
 ```cilkc
 int x, y;
