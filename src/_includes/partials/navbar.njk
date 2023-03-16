@@ -19,10 +19,20 @@
     {% endfor %}
     </ul>
 
-    <form class="form-inline my-2 my-md-0">
-      <div class="w-64">
-        <div id="search"></div>
+    <div id="navbar-end">
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle">
+            <a class="theme-switch" data-mode="light"><i class="fas fa-sun"></i></a>
+            <a class="theme-switch" data-mode="dark"><i class="far fa-moon"></i></a>
+            <a class="theme-switch" data-mode="auto"><i class="fas fa-adjust"></i></a>
+        </span>
       </div>
-    </form>
-  </div>
+      <div class="navbar-end-item navbar-end__search-button-container">  
+        <form class="form-inline my-2 my-md-0">
+          <div class="w-64">
+            <div id="search"></div>
+          </div>
+        </form>
+      </div>
+    </div>
 </nav>
