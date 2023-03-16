@@ -194,5 +194,5 @@ The generator for this site has been programmed to recognize the following short
 - `{% img "/img/filename.ext", "optional_size" %}`: this shortcode displays a centered image (as a CSS block), sized so that neither its width nor height exceed `"optional_size"`, which defaults to 400px.
   * `{% imgRight "/img/filename.ext", "size" %}`: similar to `img` but floats right
   * `{% imgLeft "/img/filename.ext", "size" %}`: similar to `img` but floats left
-- `{% alert "optional_style" %} lorem ipsum {% endalert %}`: this paired shortcode renders its content inside a [Bootstrap 5 alert box](https://getbootstrap.com/docs/5.0/components/alerts/), using `"optional_style"` as the style of alert ("info" is the default).
+- `{% alert "optional_type", "optional_title" %} lorem ipsum {% endalert %}`: this paired shortcode renders its content inside a [Pydata-Sphinx admonition box](https://pydata-sphinx-theme.readthedocs.io/en/stable/examples/kitchen-sink/admonitions.html), using `"optional_type"` as the type of admonition and "optional_title" as the text above the content (i.e. the title). The default type is "note" and the default title is "Note:".
 
