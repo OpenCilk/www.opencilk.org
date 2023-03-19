@@ -8,15 +8,17 @@ attribution: false
 ---
 {% imgLeft "/img/John Owens Headshot.png", "130px" %}
 
-In fall 2021, I taught a graduate course in performance engineering at UC Davis, based on [MIT's 6.106](/community/teach-performance/#performance-engineering-of-software-systems). 
-I had an absolutely fantastic time learning and teaching this material. I felt like a conduit, delivering enormous value to my students based on the MIT class I was adapting. 
-I hope this account inspires you to try your own hand teaching performance engineering. 
-My friends in industry tell me they see so many job candidates who can program in JavaScript and Python but simply don't have the background to dive into performance at the level needed at their companies.
-Academics can help students to bridge this gap -- without compromising conceptual rigor.
-Our students so often learn small and deep slices of technical material.
-We need to teach more than that, so they can learn the broadly interconnected material covered in courses like performance engineering.
+In fall 2021, I taught a graduate course in performance engineering at UC Davis, based on [MIT's 6.106](/community/teach-performance/#performance-engineering-of-software-systems).
+I had an absolutely fantastic time learning and teaching this material, and was fortunate to have such a rich set of teaching material from which to begin.
+I hope this account inspires you to try your own hand teaching performance engineering.
 
-If you have any questions or want to discuss teaching performance engineering, please [let me know](mailto:jowens@ucdavis.edu).
+My friends in industry tell me they see so many job candidates who can program in JavaScript and Python but simply don't have the background to dive into performance at the level needed at their companies.
+What I internalized from my teaching experience is that performance engineering is something that can be taught, and taught well, and can deliver real and rare skills to our students.
+So much of our teaching is small and deep slices of technical material.
+But understanding the big picture, and techniques and approaches that cross layers of the computing stack, are at least as important.
+Finally, besides its importance, I found this material provided a rich intellectual experience for me, and a lot of fun besides.
+
+If you have any questions or want to discuss teaching performance engineering, please [let me know](https://www.ece.ucdavis.edu/~jowens/).
 
 ## Course context: students, prerequisites, and academic calendars
 
@@ -100,8 +102,8 @@ The only brand-new lecture from me was Potpourri, where I presented 5 vignettes:
 - Brendan Gregg's [Flame Graphs](https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html), with hopes students would feel comfortable writing their own simple visualization tools to make sense of performance data.
 - An ARM spinlock, [explained in great detail](https://blog.regehr.org/archives/2173).
 - Timsort, how it works, and what it targets (not "sort a random array" but instead real arrays that typically have some structure). See [here](https://bugs.python.org/file4451/timsort.txt), [here](https://hackernoon.com/timsort-the-fastest-sorting-algorithm-youve-never-heard-of-36b28417f399), and [here](https://medium.com/@rylanbauermeister/understanding-timsort-191c758a42f3).
-- [Fast case conversion](https://github.com/apankrat/notes/tree/master/fast-case-conversion), a simple problem but one with good compute-vs.-space tradeoffs and good engineering. 
-- "[How I Cut GTA Online Loading Times by 70%](https://nee.lv/2021/02/28/How-I-cut-GTA-Online-loading-times-by-70/)", a wonderful story of debugging and performance analysis with a lovely ending. 
+- [Fast case conversion](https://github.com/apankrat/notes/tree/master/fast-case-conversion), a simple problem but one with good compute-vs.-space tradeoffs and good engineering.
+- "[How I Cut GTA Online Loading Times by 70%](https://nee.lv/2021/02/28/How-I-cut-GTA-Online-loading-times-by-70/)", a wonderful story of debugging and performance analysis with a lovely ending.
 
 The MIT teaching staff (Charles Leiserson and Jonathan Ragan-Kelley) made both their lecture slides (PPT) and their lecture recordings available to me. I watched every lecture. (Having played them all at 150%, I was a bit shocked when I finally talked with Professor Leiserson and discovered he spoke at a normal rate.) I also converted all lecture slides from PowerPoint to Keynote and made notes on what I changed/added; for me, converting slides is time well spent because I get a chance to go over every slide.
 
