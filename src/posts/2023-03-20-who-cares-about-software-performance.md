@@ -23,13 +23,22 @@ compatibility, etc.
 
 When our list is well populated, I ask the students, "If programmers are willing to sacrifice performance for these properties, why study performance? Why bother taking this class? Why not leave now and take one that will teach any of these many more important topics?'' (Not one student has ever left.)
 
-Years ago, I thought long and hard about why I felt in my gut that software performance should be taught.  As with many difficult questions, I came to my own answer with the help of an analogy, which I'll pose as a question to you.  Which would you rather have right now: a gallon of water or $100?  If you're like most of my students, you would snatch the $100.  Why?  After all, water is essential to life, and money is not.  But economics teaches us that the price of a commodity does not necessarily reflect the value people place on it.  The price is determined by supply and demand, not by any notion of intrinsic value.  Consequently, in modern society, people prefer $100 to a gallon of water because they can buy a gallon of water for $1 and have $99 left over for other things.
+Years ago, I thought long and hard about why I felt in my gut that software performance should be taught.  As with many difficult questions, I came to my own answer with the help of an analogy, which I'll pose as a question to you.  Which would you rather have right now: a gallon of water or $100?
+
+{% img "/img/water-jug-and-hundred-dollars.png", "700px" %}
+
+If you're like most of my students, you would snatch the $100.  Why?  After all, water is essential to life, and money is not.  But economics teaches us that the price of a commodity does not necessarily reflect the value people place on it.  The price is determined by supply and demand, not by any notion of intrinsic value.  Consequently, in modern society, people prefer $100 to a gallon of water because they can buy a gallon of water for $1 and have $99 left over for other things.
 
 I contend that computing performance is like currency:  We want performance because we can use it to buy software properties we value more.  For example, in 1984, Apple famously changed the history of technology by devoting an unprecedentedly large fraction of the Macintosh computer's performance capacity to its user interface.  Apple traded performance for an intuitive user interface.  Python has risen to the top of IEEE *Spectrum*'s list of top programming languages, even though it tends to produce slower code than C or C++, because many people value low software-development time over the speed of their code.  They trade performance for fast development time.  
 
 \[Performance is limited in supply. (say more)]
 
-In the next few blog posts, I'll overview the history of computing performance, including the important role of Moore's Law -- "Every two years, Intel shall double the computational capacity of a microchip'' -- the technological and economic trend that has enhanced computing power by almost a billion times since Gordon Moore, the founder of Intel, articulated it in 1965.  Moore's Law has been a printing press for the currency of computing performance for decades.  I'll argue that the recent demise of Moore's Law has elevated the importance of software performance engineering as a primary means for obtaining application performance.  I'll demonstrate the dramatic gains possible from performance engineering, which will touch on techniques such as vectorization, caching, and parallel programming.  I will aim to convince you that performance engineering is a basic skill that every undergraduate in computer science should know.
+
+In the next few blog posts, I'll overview the history of computing performance, including the important role of Moore's Law, the technological and economic trend that has enhanced computing power by almost a billion times since Gordon Moore, the founder of Intel, articulated it in 1965.
+
+{% img "/img/moores-commandment.png", "400px" %}
+
+Moore's Law has been a printing press for the currency of computing performance for decades.  I'll argue that the recent demise of Moore's Law has elevated the importance of software performance engineering as a primary means for obtaining application performance.  I'll demonstrate the dramatic gains possible from performance engineering, which will touch on techniques such as vectorization, caching, and parallel programming.  I will aim to convince you that performance engineering is a basic skill that every undergraduate in computer science should know.
 
 Unfortunately, there's a catch. 
 Just because performance engineering is a basic skill doesn't make it easy.
