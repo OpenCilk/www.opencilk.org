@@ -11,15 +11,21 @@ OpenCilk enables you to teach principles of multicore computing using a state-of
 
 ## List of classes and workshops
 
-To help you develop your own course or module on performance engineering, we are compiling a list of relevant classes and workshops with materials that you can adapt. Do you have your own class or module to add to our list? Please [let us know](/contribute/contact/).
-- [Performance engineering of software systems](#performance-engineering-of-software-systems)
+To help you develop your own course or module on performance engineering, we are compiling a list of relevant classes and workshops with materials that you can adapt. Each listing includes links to basic materials (e.g., lecture PDFs). Additional materials (e.g., editable slide decks, and solutions for homeworks and quizzes) are often also available, as detailed below, when you [join the OpenCilk community](../join-us/). Do you have your own class or module to add to our list? Please [let us know](/contribute/contact/).
+
+Click on the list below to jump ahead.
+- Performance engineering of software systems
+  * [MIT 6.106](#MIT-6-106)
+  * [UC Davis EEC 289Q]
 - [Modern algorithms workshop: parallel algorithms](#modern-algorithms-workshop:-parallel-algorithms)
 
-Each listing includes links to basic materials (e.g., lecture PDFs). Additional materials (e.g., editable slide decks, and solutions for homeworks and quizzes) are often also available, as detailed below, when you [join the OpenCilk community](../join-us/).
+
 
 ## Performance engineering of software systems
 
-At MIT, _Performance Engineering of Software Systems_ is an upper-division undergraduate course with prereqs of introductory computer architecture, algorithms, and programming courses. Other faculty have adapted this material as an introductory graduate course. The class uses the C language with OpenCilk task-parallel extensions. Materials from Fall 2018 are available on [MIT Open CourseWare](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/), which includes 23 lectures (listed below), [10 homeworks](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/pages/assignments), [4 projects](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/pages/projects), [4 quizzes](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/pages/quizzes), and [practice problems](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/pages/recitation-problems) from selected recitations.
+### MIT 6.106
+
+At MIT, _Performance Engineering of Software Systems_ is an upper-division undergraduate course with prerequisitess of introductory computer architecture, algorithms, and programming courses. Other faculty have adapted this material as an introductory graduate course. The class uses the C language with OpenCilk task-parallel extensions. Materials from Fall 2018 are available on [MIT Open CourseWare](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/), which includes 23 lectures (listed below), [10 homeworks](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/pages/assignments), [4 projects](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/pages/projects), [4 quizzes](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/pages/quizzes), and [practice problems](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/pages/recitation-problems) from selected recitations.
 
 #### Lectures
 
@@ -55,6 +61,31 @@ Recent projects have included rotating an image, parallelization of a physical s
 - LaTeX source for homework and projects from a past course offering
 - Reference code for homeworks and projects
 - A library of past quiz and exam questions
+
+### UC Davis EEC 289Q
+
+John Owens adapted the course at MIT to create _Performance Engineering of Software Systems_ at UC Davis.
+
+1. Intro and Matrix Multiplication ([PDF](https://ucdavis.box.com/s/lqbbzplf7cjo1dnxi8hon2pkjigest7n))
+2. Bentley Rules for Optimizing Work ([PDF](https://ucdavis.box.com/s/7asxi08fobekk6e1pkoo5r7zuyjrktrw))
+3. Bit Hacks ([PDF](https://ucdavis.box.com/s/xd10fgi2aslmjiv67q9uajuvh0srfvo8))
+4. Computer Architecture ([PDF](https://ucdavis.box.com/s/itjn1m2cu5czh4qhz5doin4bpbx0f515))
+5. C to Assembly ([PDF](https://ucdavis.box.com/s/n6nvroi4gyk2j0lswcn35eqp81g95bny))
+6. What Compilers Can and Cannot Do ([PDF](https://ucdavis.box.com/s/l9bq9sfkvl6oah88tpzio4hxsvqkmwp7))
+7. Multicore Programming ([PDF](https://ucdavis.box.com/s/hmc5zjo8bnojke8svj5gedyxgveuzh6r))
+8. Races and Parallelism ([PDF](https://ucdavis.box.com/s/h8z91f2t23qhpa976hbt4bnaf972avir))
+9. Analysis of Parallel Algorithms I ([PDF](https://ucdavis.box.com/s/o45xbyoaenzvcww8o0eb4v2o3dg3e9as))
+10. Analysis of Parallel Algorithms II ([PDF](https://ucdavis.box.com/s/etxfwg2l50gqxd40ydk0p8nnpxs9e6z4))
+11. Measurement and Timing ([PDF](https://ucdavis.box.com/s/aplokuj304hzc2qmdbp4w9auo7kb8uct))
+12. Cheetah -- Cilk Runtime ([PDF](https://ucdavis.box.com/s/6eb956s19hair2awfborukl1uk3rsvsz))
+13. Storage Allocation ([PDF](https://ucdavis.box.com/s/eb05vbh9ldem2txtmvbm7ov5r1xpxowz))
+14. Parallel Storage Allocation ([PDF](https://ucdavis.box.com/s/vbpz9zgc3qbbd34808wpjc88y77j9bo5))
+15. Cache-Efficient Algorithms ([PDF](https://ucdavis.box.com/s/11ojllbna5yfdvscm386vg4ne1nr2w17))
+16. Cache-Oblivious Algorithms ([PDF](https://ucdavis.box.com/s/2g6m7ztsj71w34j7m1u4x8dlm29h8x0e))
+17. Nondeterministic Parallel Programming ([PDF](https://ucdavis.box.com/s/8abgpbd67b35d8i2a2piflav2crndszs))
+18. Synchronization without Locks ([PDF](https://ucdavis.box.com/s/dohev283rm0p7iwtlclu849iigdhrrkj))
+19. Potpourri ([PDF](https://ucdavis.box.com/s/a98i1k7c70jg3tw9wdw9kj7xsexbgifx))
+20. Speculative Parallelism ([PDF](https://ucdavis.box.com/s/7px55i4u01kgem0xtq384aenmjm6u23y))
 
 ## Modern algorithms workshop: parallel algorithms
 
