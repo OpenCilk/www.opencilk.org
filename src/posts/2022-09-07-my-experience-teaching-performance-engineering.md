@@ -14,8 +14,8 @@ I hope this account inspires you to try your own hand teaching performance engin
 
 My friends in industry tell me they see so many job candidates who can program in JavaScript and Python but simply don't have the background to dive into performance at the level needed at their companies.
 What I internalized from my teaching experience is that performance engineering is something that can be taught, and taught well, and can deliver real and rare skills to our students.
-So much of our teaching is small and deep slices of technical material.
-But understanding the big picture, and techniques and approaches that cross layers of the computing stack, are at least as important.
+So much of our teaching is small and deep slices of technical material, 
+but it's at least as important to understand the big picture of techniques and approaches that cross layers of the computing stack.
 Finally, besides its importance, I found this material provided a rich intellectual experience for me, and a lot of fun besides.
 
 If you have any questions or want to discuss teaching performance engineering, please [let me know](https://www.ece.ucdavis.edu/~jowens/).
