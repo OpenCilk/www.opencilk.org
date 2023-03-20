@@ -8,6 +8,7 @@ author: Charles E. Leiserson
 date: 2023-03-20T19:30:21.415Z
 attribution: false
 ---
+
 About 15 years ago, Saman Amarasinghe and I developed a new class at MIT that aims to teach students how to make code run fast. Our hands-on curriculum combines algorithms, software, and architecture, and we've taught it annually ever since.  Currently, about 140 MIT undergraduates (mostly juniors and seniors) take the class each fall to learn about software performance.
 
 I tell students in the first lecture that we will be studying how to develop fast code.  Then I ask them, "What software properties are more important than performance?"  After a little prompting, they volunteer a variety of answers: 
@@ -23,6 +24,8 @@ compatibility, etc.
 
 When our list is well populated, I ask the students, "If programmers are willing to sacrifice performance for these properties, why study performance? Why bother taking this class? Why not leave now and take one that will teach any of these many more important topics?'' (Not one student has ever left.)
 
+## Price vs. value
+
 Years ago, I thought long and hard about why I felt in my gut that software performance should be taught.  As with many difficult questions, I came to my own answer with the help of an analogy, which I'll pose as a question to you.  Which would you rather have right now: a gallon of water or $100?
 
 {% img "/img/water-jug-and-hundred-dollars.png", "700px" %}
@@ -33,6 +36,7 @@ I contend that computing performance is like currency:  We want performance beca
 
 \[Performance is limited in supply. (say more)]
 
+## After Moore's Law: a return to the roots of coding
 
 In the next few blog posts, I'll overview the history of computing performance, including the important role of Moore's Law, the technological and economic trend that has enhanced computing power by almost a billion times since Gordon Moore, the founder of Intel, articulated it in 1965.
 
