@@ -1,6 +1,6 @@
 ---
 layout: layouts/post.njk
-title: Who cares about software performance
+title: Who cares about software performance?
 tagline: Software performance, like money, is useful for buying other more
   important system properties like usability and security. How can we teach
   students to be good stewards of such a resource?
