@@ -1,6 +1,6 @@
 ---
 layout: layouts/post.njk
-title: My experience teaching performance engineering
+title: My experience teaching software performance engineering
 tagline: Lessons I learned creating a new course at my university
 author: John Owens
 date: 2022-09-07T20:08:01.475Z
