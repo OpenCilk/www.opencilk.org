@@ -87,6 +87,9 @@ html[data-theme="dark"] {
 html[data-theme="dark"] .bd-content img:not(.only-dark) {
   background: transparent;
 }
+html[data-theme="dark"] div#disqus_thread {
+  background-color: var(--gray);
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: Ubuntu, sans-serif;
   color: var(--pst-color-header);
