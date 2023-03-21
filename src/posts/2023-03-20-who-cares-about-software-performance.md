@@ -36,7 +36,7 @@ I contend that computing performance is like currency:  We want performance beca
 
 \[Performance is limited in supply. (say more)]
 
-## After Moore's Law: a return to the roots of coding
+## After Moore's Law
 
 In the next few blog posts, I'll overview the history of computing performance, including the important role of Moore's Law, the technological and economic trend that has enhanced computing power by almost a billion times since Gordon Moore, the founder of Intel, articulated it in 1965.
 
