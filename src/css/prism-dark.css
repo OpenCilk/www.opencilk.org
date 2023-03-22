@@ -1,0 +1,190 @@
+/* PrismJS 1.29.0
+https://prismjs.com/download.html#themes=prism&languages=clike+bash+c+cpp+cilkc+cilkcpp&plugins=line-numbers */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+ html[data-theme="dark"] code[class*="language-"],
+ html[data-theme="dark"] pre[class*="language-"] {
+    color: var(--lightgray);
+    background: none;
+    text-shadow: 0 1px black;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 105%;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.3;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+html[data-theme="dark"] pre[class*="language-"]::-moz-selection,
+html[data-theme="dark"] pre[class*="language-"] ::-moz-selection,
+html[data-theme="dark"] code[class*="language-"]::-moz-selection,
+html[data-theme="dark"] code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background: black;
+}
+
+html[data-theme="dark"] pre[class*="language-"]::selection,
+html[data-theme="dark"] pre[class*="language-"] ::selection,
+html[data-theme="dark"] code[class*="language-"]::selection,
+html[data-theme="dark"] code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: black;
+}
+
+@media print {
+
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+html[data-theme="dark"] pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+html[data-theme="dark"] :not(pre)>code[class*="language-"],
+html[data-theme="dark"] pre[class*="language-"] {
+    background: var(--pst-color-surface);
+}
+
+/* Inline code */
+html[data-theme="dark"] :not(pre)>code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+html[data-theme="dark"] .token.comment,
+html[data-theme="dark"] .token.prolog,
+html[data-theme="dark"] .token.doctype,
+html[data-theme="dark"] .token.cdata,
+html[data-theme="dark"] .token.punctuation {
+    color: rgb(161, 171, 180);
+}
+
+html[data-theme="dark"] .token.namespace {
+    opacity: .7;
+}
+
+html[data-theme="dark"] .token.property,
+html[data-theme="dark"] .token.tag,
+html[data-theme="dark"] .token.boolean,
+html[data-theme="dark"] .token.number,
+html[data-theme="dark"] .token.constant,
+html[data-theme="dark"] .token.symbol,
+html[data-theme="dark"] .token.deleted {
+    color: rgb(223, 85, 161);
+}
+
+html[data-theme="dark"] .token.selector,
+html[data-theme="dark"] .token.attr-name,
+html[data-theme="dark"] .token.string,
+html[data-theme="dark"] .token.char,
+html[data-theme="dark"] .token.builtin,
+html[data-theme="dark"] .token.inserted {
+    color: rgb(137, 182, 48);
+}
+
+html[data-theme="dark"] .token.operator,
+html[data-theme="dark"] .token.entity,
+html[data-theme="dark"] .token.url,
+html[data-theme="dark"] .language-css .token.string,
+html[data-theme="dark"] .style .token.string {
+    color: #b18f66;
+}
+
+html[data-theme="dark"] .token.parallel-keyword.keyword {
+    color: var(--tangelo);
+}
+
+html[data-theme="dark"] .token.atrule,
+html[data-theme="dark"] .token.attr-value,
+html[data-theme="dark"] .token.keyword {
+    color: rgb(153, 184, 241);
+}
+
+html[data-theme="dark"] .token.function,
+html[data-theme="dark"] .token.class-name {
+    /* Darker lime */
+    color: #8ca51f;
+}
+
+html[data-theme="dark"] .token.regex,
+html[data-theme="dark"] .token.important,
+html[data-theme="dark"] .token.variable {
+    color: #e90;
+}
+
+html[data-theme="dark"] .token.important,
+html[data-theme="dark"] .token.bold {
+    font-weight: bold;
+}
+
+html[data-theme="dark"] .token.italic {
+    font-style: italic;
+}
+
+html[data-theme="dark"] .token.entity {
+    cursor: help;
+}
+
+html[data-theme="dark"] pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+html[data-theme="dark"] pre[class*="language-"].line-numbers>code {
+    position: relative;
+    white-space: inherit;
+}
+
+html[data-theme="dark"] .line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em;
+    /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+html[data-theme="dark"] .line-numbers-rows>span {
+    display: block;
+    counter-increment: linenumber;
+}
+
+html[data-theme="dark"] .line-numbers-rows>span:before {
+    content: counter(linenumber);
+    color: #999;
+    display: block;
+    padding-right: 0.8em;
+    text-align: right;
+}
