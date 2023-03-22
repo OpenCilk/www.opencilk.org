@@ -23,6 +23,14 @@ h2 a.direct-link:hover, h3 a.direct-link:hover {
 .toc-entry a.nav-link.active {
   border-left: 2px solid var(--pst-color-header);
 }
+.toc-entry a.nav-link {
+  line-height: 130%;
+  padding: 0.4rem 0 0.4rem 1rem;
+}
+nav.bd-links li > a {
+  line-height: 130%;
+  padding: 0.4rem 0;
+}
 .bd-header .navbar-nav li a.nav-link  {
   color: #e0e0e0;
   font-size: 90%;
@@ -135,7 +143,7 @@ code {
   padding: 1em;
 }
 footer a {
-  color: var(--teal);
+  color: var(--sky);
 }
 .postlist-date,
 .postlist-item:before {

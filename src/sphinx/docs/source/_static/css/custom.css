@@ -15,6 +15,7 @@
 
   --lightgray: #e0e0e0;
   --gray: #C0C0C0;
+  --gentlegray: #c8c3bc;
   --darkgray: #333;
   --midnight: #001630;
   --blue: #043065;
@@ -24,6 +25,7 @@
   --lightteal: #1abcb8;
   --darkteal: #0e8481;
   --sky: #0cb3e1;
+  --lightsky: #a4e3f5;
   --tangelo: #f44500;
   --yellow: #f4b200;
   --americanyellow: #f4b200;
@@ -70,13 +72,15 @@ html[data-theme="dark"] {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover; 
-  --pst-color-navbar: var(--darkgray);
-  --pst-color-header: var(--lightgray);
+  --pst-color-navbar: var(--midnight);
+  --pst-color-header: var(--lightsky);
   --pst-color-primary: var(--gray);
-  --pst-color-text-base: var(--lightgray);
-  --pst-color-background: black;
-  --pst-color-on-background: var(--pst-color-surface);
-  --pst-color-link: var(--lightteal);
+  --pst-color-text-base: var(--gentlegray);
+  --pst-color-background: #181a1b;
+  --pst-color-on-background: #1e2021;
+  --pst-color-surface: #202121;
+  --pst-color-on-surface: #2b2e2e;
+  --pst-color-link: var(--lightsky);
   --pst-color-link-hover: var(--lime);
   --pst-color-headerlink: var(--gray);
   --pst-color-headerlink-hover: var(--lime);
