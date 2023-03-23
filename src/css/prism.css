@@ -104,7 +104,7 @@ html[data-theme="light"] .token.string,
 html[data-theme="light"] .token.char, 
 html[data-theme="light"] .token.builtin,
 html[data-theme="light"] .token.inserted {
-    color: rgb(97, 0, 153);
+    color: rgb(114, 54, 148);
 }
 
 html[data-theme="light"] .token.operator,
