@@ -98,10 +98,10 @@ html[data-theme="dark"] .token.deleted {
 html[data-theme="dark"] .token.selector,
 html[data-theme="dark"] .token.attr-name,
 html[data-theme="dark"] .token.string,
-html[data-theme="dark"] .token.char,
+html[data-theme="dark"] .token.char, 
 html[data-theme="dark"] .token.builtin,
 html[data-theme="dark"] .token.inserted {
-    color: rgb(137, 182, 48);
+    color: rgb(178, 133, 204);
 }
 
 html[data-theme="dark"] .token.operator,
@@ -167,7 +167,7 @@ html[data-theme="dark"] .line-numbers .line-numbers-rows {
     width: 3em;
     /* works for line-numbers below 1000 lines */
     letter-spacing: -1px;
-    border-right: 1px solid #999;
+    border-right: 1px solid var(--pst-color-border);
 
     -webkit-user-select: none;
     -moz-user-select: none;

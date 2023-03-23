@@ -101,10 +101,10 @@ html[data-theme="light"] .token.deleted {
 html[data-theme="light"] .token.selector,
 html[data-theme="light"] .token.attr-name,
 html[data-theme="light"] .token.string,
-html[data-theme="light"] .token.char,
+html[data-theme="light"] .token.char, 
 html[data-theme="light"] .token.builtin,
 html[data-theme="light"] .token.inserted {
-    color: #690;
+    color: rgb(97, 0, 153);
 }
 
 html[data-theme="light"] .token.operator,
@@ -132,7 +132,7 @@ html[data-theme="light"] .token.keyword {
 html[data-theme="light"] .token.function,
 html[data-theme="light"] .token.class-name {
     /* Darker lime */
-    color: #728c00;
+    color: #677e03;
 }
 
 html[data-theme="light"] .token.regex,
@@ -174,7 +174,7 @@ html[data-theme="light"] .line-numbers .line-numbers-rows {
     width: 3em;
     /* works for line-numbers below 1000 lines */
     letter-spacing: -1px;
-    border-right: 1px solid #999;
+    border-right: 1px solid var(--pst-color-border);
 
     -webkit-user-select: none;
     -moz-user-select: none;
