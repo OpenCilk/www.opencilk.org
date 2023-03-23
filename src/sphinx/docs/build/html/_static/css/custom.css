@@ -53,6 +53,7 @@ html[data-theme="light"] {
   --pst-color-preformatted-text: red;
   --pst-color-preformatted-background: white;
   --pst-color-inline-code: var(--tangelo);
+  --pst-color-border: var(--gentlegray);
 }
 html[data-theme="light"] img.hero-light {
   display: block;
@@ -79,7 +80,7 @@ html[data-theme="dark"] {
   --pst-color-background: #181a1b;
   --pst-color-on-background: #1e2021;
   --pst-color-surface: #202121;
-  --pst-color-on-surface: #2b2e2e;
+  --pst-color-on-surface: #323333;
   --pst-color-link: var(--lightsky);
   --pst-color-link-hover: var(--lime);
   --pst-color-headerlink: var(--gray);
@@ -87,6 +88,7 @@ html[data-theme="dark"] {
   --pst-color-preformatted-text: var(--yellow);
   --pst-color-preformatted-background: white;
   --pst-color-inline-code: var(--yellow);
+  --pst-color-border: #404242;
 }
 html[data-theme="dark"] .bd-content img:not(.only-dark) {
   background: transparent;
