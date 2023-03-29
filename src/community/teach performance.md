@@ -13,12 +13,14 @@ OpenCilk enables you to teach principles of multicore computing using a state-of
 
 To help you develop your own course or module on performance engineering, we are compiling a list of relevant classes and workshops with materials that you can adapt. Each listing includes links to basic materials (e.g., lecture PDFs). Additional materials (e.g., editable slide decks, and solutions for homeworks and quizzes) are often also available, as detailed below, when you [join the OpenCilk community](../join-us/). Do you have your own class or module to add to our list? Please [let us know](/contribute/contact/).
 
-Click on the list below to jump ahead.
+{% alert "hint", "Click on a link below to jump to that section:" %}
+
 - Performance engineering of software systems
-  * [MIT 6.106](#MIT-6-106)
-  * [UC Davis EEC 289Q]
+  * [MIT 6.106](#mit-6.106)
+  * [UC Davis EEC 289Q](#uc-davis-eec-289q)
 - [Modern algorithms workshop: parallel algorithms](#modern-algorithms-workshop:-parallel-algorithms)
 
+{% endalert %}
 
 
 ## Performance engineering of software systems
@@ -64,7 +66,9 @@ Recent projects have included rotating an image, parallelization of a physical s
 
 ### UC Davis EEC 289Q
 
-John Owens adapted the course at MIT to create _Performance Engineering of Software Systems_ at UC Davis.
+John Owens adapted [MIT 6.106](#mit-6.106) to create _Performance Engineering of Software Systems_ at UC Davis.
+
+#### Lectures
 
 1. Intro and Matrix Multiplication ([PDF](https://ucdavis.box.com/s/lqbbzplf7cjo1dnxi8hon2pkjigest7n))
 2. Bentley Rules for Optimizing Work ([PDF](https://ucdavis.box.com/s/7asxi08fobekk6e1pkoo5r7zuyjrktrw))
@@ -89,16 +93,17 @@ John Owens adapted the course at MIT to create _Performance Engineering of Softw
 
 ## Modern algorithms workshop: parallel algorithms
 
-Originally created as a single full-day class, this workshop includes an introduction and 8 separate modules listed below.
+Originally created in 2018 as a single full-day class, this workshop includes an introduction and 8 separate modules listed below.
 
-- Cilk model
-- Detecting nondeterminism
-- What Is parallelism?
-- Scheduling theory primer
-- Analysis of parallel loops
-- Case study: matrix multiplication
-- Case study: Jaccard similarity
-- Post-Moore software
+- Introduction ([PDF](https://ucdavis.box.com/s/8fhamacjnflkrlf8zfpkd2w6k8y9nh1n))
+- Cilk model ([PDF](https://ucdavis.box.com/s/dpth16i82wfj1hos846id9jlrlyghiks))
+- Detecting nondeterminism ([PDF](https://ucdavis.box.com/s/wp28q6ixdg9awsm5ffk7aee7py6zzl1d))
+- What Is parallelism? ([PDF](https://ucdavis.box.com/s/zjq7henchsbtxss1piz48qa22p0cvtkr))
+- Scheduling theory primer ([PDF](https://ucdavis.box.com/s/29jdmgjamnl1oa1umswvitx2i11gxn0p))
+- Analysis of parallel loops ([PDF](https://ucdavis.box.com/s/zja591gt7riw8fj3rv367jzx8odbxeag))
+- Case study: matrix multiplication ([PDF](https://ucdavis.box.com/s/v6iydl9hgk8evewihjngyd6i8fkvq95i))
+- Case study: Jaccard similarity ([PDF](https://ucdavis.box.com/s/1dtmh0m6w080f4tcnial1qdfgla73udg))
+- Post-Moore software ([PDF](https://ucdavis.box.com/s/35umq7ysmjjl1pq4u39zf7nhrlpsb43x))
 
 [Join the OpenCilk community](../join-us/) for access to editable slide decks.
 
