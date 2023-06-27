@@ -173,7 +173,7 @@ reducer-aware code.
 ```c
 extern long f(int index);
 // The argument is a pointer to a reducer.
-void compute_sum(long cilk_reducer(zero, add) *reducer)
+void compute_sum(long cilk_reducer(zero, add) *sum)
 {
     cilk_for (int i = 0; i < 10000000; ++i)
         *sum += f(i); // dereferenced pointer converts to current view
