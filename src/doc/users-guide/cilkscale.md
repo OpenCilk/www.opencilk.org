@@ -436,7 +436,7 @@ exhibits sufficient slackness for only 2–3 cores.
 
 An additional issue is that the memory bandwidth of the laptop that was used in
 these experiments becomes insufficient as more processing cores are used.  This
-is often the case for computations with low {% defn "arithmetic intensity" %}
+is often the case for computations with low arithmetic intensity
 when the observed parallel speedup falls below the burdened-dag speedup bound.
 (Another possible cause for speedup below the burdened-dag bound is {% defn
 "contention" %} of parallel resources.)  The memory bandwidth ceiling was

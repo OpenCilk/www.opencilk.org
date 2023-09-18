@@ -22,8 +22,7 @@ accumulator or appending an item to a list.  As long as the operation
 is _associative_ (`A ⊕ (B ⊕ C) = (A ⊕ B) ⊕ C`) the final result will
 be correct.
 
-Formally, a reducer is a mathematical object called a _{% defn
-"monoid" %}_, meaning it has the following components:
+Formally, a reducer is a mathematical object called a _monoid_, meaning it has the following components:
 * a type (e.g `double`),
 * an _identity_ value (`0.0`), and
 * an associative binary operation (`+`).
