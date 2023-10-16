@@ -4,7 +4,7 @@
         Tags
     </h5>
 
-    <div class="d-flex flex-wrap ps-3 sticky-top sticky-offset" style="margin-left: -2em;">
+    <div class="d-flex flex-wrap ps-3 sticky-top sticky-offset">
     {% for tag in collections.tagList %}
         {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
         <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
