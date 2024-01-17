@@ -10,7 +10,7 @@ OpenCilk is available as source code in
 [three Git repositories](https://github.com/OpenCilk).  We provide an
 [infrastructure facilities repository](https://github.com/OpenCilk/infrastructure)
 with scripts for downloading and building OpenCilk from source.
-OpenCilk 2.0 is only guaranteed to support 64-bit x86 on Linux and other Unix-like
+OpenCilk 2.1 is only guaranteed to support 64-bit x86 on Linux and other Unix-like
 operating systems, although prototype support for 64-bit ARM is
 included.
 
@@ -38,7 +38,7 @@ source on a compatible system with prerequisite software installed.
 1. Clone the OpenCilk infrastructure repository:
 
 ```shell-session
-$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/infrastructure
+$ git clone -b opencilk/v2.1 https://github.com/OpenCilk/infrastructure
 ```
 
 2. Run the `get` script to get the OpenCilk source code:
@@ -63,9 +63,9 @@ Cheetah runtime and OpenCilk tool repositories must be cloned into specific
 subdirectories of the OpenCilk project directory:
 
 ```shell-session
-$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/opencilk-project
-$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/cheetah opencilk-project/cheetah
-$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/productivity-tools opencilk-project/cilktools
+$ git clone -b opencilk/v2.1 https://github.com/OpenCilk/opencilk-project
+$ git clone -b opencilk/v2.1 https://github.com/OpenCilk/cheetah opencilk-project/cheetah
+$ git clone -b opencilk/v2.1 https://github.com/OpenCilk/productivity-tools opencilk-project/cilktools
 ```
 
 Note that, because these commands clone specific tags of the OpenCilk
@@ -76,7 +76,7 @@ Clone the OpenCilk infrastructure repository, which contains the OpenCilk build
 script:
 
 ```shell-session
-$ git clone -b opencilk/v2.0 https://github.com/OpenCilk/infrastructure
+$ git clone -b opencilk/v2.1 https://github.com/OpenCilk/infrastructure
 ```
 
 ## Building OpenCilk (detailed instructions)
