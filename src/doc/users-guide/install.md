@@ -15,12 +15,12 @@ download:
     binary: opencilk-2.1.0-x86_64-linux-gnu-ubuntu-22.04.tar.gz
     size: 1.07 GB
   macos_x86: 
-    shell: openCilk-2.1.0-x86_64-apple-darwin21.6.0.sh
-    binary: openCilk-2.1.0-x86_64-apple-darwin21.6.0.tar.gz
+    shell: opencilk-2.1.0-x86_64-apple-darwin21.6.0.sh
+    binary: opencilk-2.1.0-x86_64-apple-darwin21.6.0.tar.gz
     size: 1.04 GB
   macos_arm:
     shell: opencilk-2.1.0-arm64-apple-darwin21.6.0.sh
-    binary: openCilk-2.1.0-arm64-apple-darwin21.6.0.tar.gz
+    binary: opencilk-2.1.0-arm64-apple-darwin21.6.0.tar.gz
     size: 979 MB
   docker: 
     binary: docker-opencilk-v2.1.tar.gz
@@ -80,7 +80,7 @@ Download the appropriate shell archive for your system using one of the followin
 
 ### Install
 
-Execute the shell script to extract OpenCilk 2.0 into the current directory.  For example:
+Execute the shell script to extract OpenCilk 2.1 into the current directory.  For example:
 
 ```shell-session
 $ sh opencilk-2.1.0-x86_64-linux-gnu-ubuntu-22.04.sh
@@ -159,7 +159,7 @@ Extract OpenCilk 2.1 from the downloaded tarball.  For example:
 $ tar xvzf opencilk-2.1.0-x86_64-linux-gnu-ubuntu-22.04.tar.gz
 ```
 will extract the OpenCilk installation into a subdirectory
-`opencilk-2.0.0-x86_64-linux-gnu-ubuntu-22.04/` within the current working directory.
+`opencilk-2.1.0-x86_64-linux-gnu-ubuntu-22.04/` within the current working directory.
 
 {% alert "Note", "Note:" %}
 Extracting the tarball as above is equivalent to running the corresponding
@@ -178,7 +178,7 @@ You can download the docker image here:
 
 The OpenCilk C and C++ compilers are available as `clang` and `clang++` in the
 image.  To use the OpenCilk 2.1 Docker image, download the
-`docker-opencilk-v2.0.tar.gz` file, load the image, and run a container.  For
+`docker-opencilk-v2.1.tar.gz` file, load the image, and run a container.  For
 example:
 
 ```shell-session
