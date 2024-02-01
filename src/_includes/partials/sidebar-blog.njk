@@ -1,9 +1,7 @@
-{% set context = 'Fast code' %}
-
 <div class="sidebar-start-items__item">
     <nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
         <h5 class="w-100 p-2 rounded" style="margin-left: -0.4em; margin-top: 0; color: var(--midnight); background-color: var(--lime);">
-            {{ context }}
+            {{ metadata.blog.title }}
         </h5>
         {% set postslist = collections.posts %}
         <div class="bd-toc-item navbar-nav">
