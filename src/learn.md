@@ -9,7 +9,7 @@ eleventyNavigation:
   order: 3
 ---
 
-We are actively maintaining the following list of resources to help you learn **sofware performance engineering** &mdash; developing fast code for applications that run on modern multicore computers. If you have any questions, comments, or suggested additions, please [let us know](/contribute/contact/).
+We are actively maintaining the following list of resources to help you learn ***software performance engineering*** &mdash; developing fast code for applications that run on modern multicore computers. If you have any questions, comments, or suggested additions, please [let us know](/contribute/contact/).
 
 ## Introductory materials
 * [Introduction to Parallel Computing](https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial): This overview briefly introduces a broad range of topics and concludes with its own list of [recommended reading](https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial##References). (By Livermore Computing)
