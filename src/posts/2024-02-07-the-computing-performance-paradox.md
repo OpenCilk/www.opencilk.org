@@ -1,20 +1,17 @@
 ---
 layout: layouts/post.njk
 title: The Computing-Performance Paradox
-tagline: Why should we care about how fast our software runs?
+tagline: Why should we care about how fast our software runs, when many other properties are often more important? Perhaps the answer lies in 18th century economics.
+tags: performance engineering
 author: Charles E. Leiserson
+image: /img/Charles Leiserson.jpg
 date: 2024-02-07T18:46:37.291Z
 attribution: false
 ---
-Why should we care about how fast our software runs? Many other system properties — security, functionality, maintainability, usability, etc. — are arguably more important than performance. Then why do we value performance (or for performance skeptics, should we value performance)? Perhaps the answer lies at the origin of economics in the 18th century, long before computers were invented.
+{% imgLeft "/img/Charles Leiserson.jpg", "130px" %}
 
-Welcome to the Fastcode blog. Fastcode is a website focused on ***software performance engineering***: making
-code run fast or otherwise use few resources, such as energy, storage,
-network bandwidth, etc. My name is Charles Leiserson, and I’ve been a
-professor of computer science and engineering at MIT for 42 years. You
-can find more about me at my website <http://people.csail.mit.edu/cel>.
-For this kickoff blog post, I’d like to share with you a paradox about
-computing performance that confused me until about 15 years ago.
+Welcome to the Fastcode blog. Fastcode is a website focused on ***software performance engineering***: making code run fast or otherwise use few resources, such as energy, storage, network bandwidth, etc. My name is Charles Leiserson, and I’ve been a professor of computer science and engineering at MIT for 42 years. You
+can find more about me at my website <http://people.csail.mit.edu/cel>. For this kickoff blog post, I’d like to share with you a paradox about computing performance that confused me until about 15 years ago.
 
 It all started when my colleague Saman Amarasinghe and I introduced a
 new class at MIT aiming to teach students how to make code run fast. At
@@ -44,16 +41,16 @@ willing to sacrifice performance for these properties, why study
 performance? It sounds as if lots of other topics are more
 consequential. In other words, why bother taking this class?” I invite
 them to leave and take one of the many other computer-science classes at
-MIT that will teach obviously far more important topics. (I have never
-seen any students leave.)
+MIT that will teach obviously far more important topics. I have never
+seen any students leave.
 
 A bit later in the lecture, I invite a student volunteer to the lecture
-podium to play a game called *Which Do You Choose?* I tell them[1] that
+podium to play a game called *Which Do You Choose?* I tell them that
 I will exhibit two objects, and they can pick either one to take back to
 their seat. That’s it. They see the two objects, and they choose one.
 
 After confirming that the student understands the rules, I show them the
-first object: a 16.9-ounce bottle of water.[2] Then I reveal the second
+first object: a 16.9-ounce bottle of water. Then I reveal the second
 object: a $10 bill. I ask them which they want to take back to their
 seat. Every year, the student says the same thing: “I’ll take the ten
 dollars.”
@@ -135,11 +132,3 @@ engineering, and we will write about them here as well, but we invite
 you to try OpenCilk. Its simple language, small codebase, and
 mathematically provable guarantees of performance set it apart from
 other platforms.
-
-
-[1] Whenever possible, I will try to use gender-neutral terminology out
-of respect for the diversity of humans, which I cherish.
-
-[2] Personally, I tend to minimize my use of single-use plastic
-containers, but for this demonstration for almost 200 students, I
-compromised my morals.
