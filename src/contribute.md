@@ -53,7 +53,7 @@ The Supertech research group in the MIT Computer Science and Artificial Intellig
 - software productivity tools;
 - user interface design and implementation;
 - software performance engineering (writing fast code);
-- lgorithms and data structures;
+- algorithms and data structures;
 - software engineering, testing, benchmarking, and/or release management;
 - cloud environments and operating systems.
 
