@@ -1,7 +1,5 @@
-
 main h2 {
-    color: white;
-    background-color: var(--blue);
+    background-color: #f6f4f4;
     margin-left: -0.25em;
     padding-left: 0.25em;
 }

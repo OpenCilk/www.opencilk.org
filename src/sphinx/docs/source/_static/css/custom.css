@@ -13,6 +13,7 @@
   --pst-font-family-heading: var(--pst-font-family-base-system);
   --pst-font-family-monospace: var(--pst-font-family-monospace-system);
 
+  --silk: #d1d6d6;
   --lightgray: #e0e0e0;
   --gray: #C0C0C0;
   --gentlegray: #c8c3bc;
@@ -104,6 +105,12 @@ h2, h3, h4, h5, h6 {
   margin-top: 1.1rem;
   margin-bottom: 0.4rem;
   padding: 0.2rem 0 0.1rem;
+}
+html[data-theme="dark"] main h2 {
+  color: white;
+  background-color: var(--blue);
+  margin-left: -0.25em;
+  padding-left: 0.25em;
 }
 .bd-header {
   background-color: var(--pst-color-navbar) !important;

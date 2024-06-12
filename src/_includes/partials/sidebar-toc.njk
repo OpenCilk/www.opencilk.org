@@ -1,5 +1,4 @@
-{% set navPages = ['Blog', 'Documentation', 'Community', 'About us', 'Contribute'] %}
-{% if eleventyNavigation.key in navPages %}
+{% if eleventyNavigation.parent == 'Home' %}
 {% set context = eleventyNavigation.key %}
 {% else %}
 {% set context = eleventyNavigation.parent %}
