@@ -9,18 +9,18 @@ eleventyNavigation:
 
 The OpenCilk project welcomes your expertise and enthusiasm. Please fill out the form below to get started. Thank you for your interest!
 
-<form name="join-us-form" method="POST" data-netlify="true">
+<form name="join-us-formx" method="POST" data-netlify="true" data-netlify-recaptcha="true">
   <div class="form-group">
-    <label for="name" name="name">Name</label>
-    <input type="text" class="form-control" id="name" placeholder="Fib O'Nacci">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Fib O'Nacci" required>
   </div>
   <div class="form-group">
-    <label for="email" name="email">Email address</label>
-    <input type="email" class="form-control" id="email" placeholder="onacci@exemplary.edu">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="onacci@exemplary.edu" required>
   </div>
   <div class="form-group">
-    <label for="company" name="company">Organization</label>
-    <input type="text" class="form-control" id="company" placeholder="Exemplary Institute">
+    <label for="company">Organization</label>
+    <input type="text" class="form-control" id="company" name="company" placeholder="Exemplary Institute">
   </div>
   <label>More about your work (Check all that apply.)</label>
   <div class="form-check">
@@ -175,21 +175,12 @@ The OpenCilk project welcomes your expertise and enthusiasm. Please fill out the
 </br>
 Thank you!
 
-  <p>
-    <label>Your Name: <input type="text" name="namex" /></label>
-  </p>
-  <p>
-    <label>Your Email: <input type="email" name="emailx" /></label>
-  </p>
-  <p>
-    <label>Your Role: <select name="rolex[]" multiple>
-      <option value="leader">Leader</option>
-      <option value="follower">Follower</option>
-    </select></label>
-  </p>
-  <p>
-    <label>Message: <textarea name="messagex"></textarea></label>
-  </p>
+
+  <div class="form-group">
+    <div data-netlify-recaptcha="true"></div>
+  </div>
+      
+
 
   <p>
     <button type="submit" class="btn btn-primary">Submit</button>
