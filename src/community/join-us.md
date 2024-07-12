@@ -9,66 +9,66 @@ eleventyNavigation:
 
 The OpenCilk project welcomes your expertise and enthusiasm. Please fill out the form below to get started. Thank you for your interest!
 
-<form name="contact" method="POST" data-netlify="true">
+<form name="join-form" method="POST" data-netlify="true">
   <div class="form-group">
-    <label for="name">Name</label>
+    <label for="name" name="name">Name</label>
     <input type="text" class="form-control" id="name" placeholder="Fib O'Nacci">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="onacci@exemplary.edu">
+    <label for="email" name="email">Email address</label>
+    <input type="email" class="form-control" id="email" placeholder="onacci@exemplary.edu">
   </div>
   <div class="form-group">
-    <label for="company">Organization</label>
+    <label for="company" name="company">Organization</label>
     <input type="text" class="form-control" id="company" placeholder="Exemplary Institute">
   </div>
   <label>More about your work (Check all that apply.)</label>
   <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="faculty">
-    <label class="form-check-label" for="faculty">
+    <label class="form-check-label" for="faculty" name="faculty">
       Faculty
     </label>
   </div>
   <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="postdoc">
-    <label class="form-check-label" for="postdoc">
+    <label class="form-check-label" for="postdoc" name="postdoc">
       Postdoc
     </label>
   </div>
   <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="research_scientist">
-    <label class="form-check-label" for="research_scientist">
+    <label class="form-check-label" for="research_scientist" name="research_scientist">
       Research Scientist
     </label>
   </div>
   <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="student">
-    <label class="form-check-label" for="student">
+    <label class="form-check-label" for="student" name="student">
       Student
     </label>
   </div>
   <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="ta">
-    <label class="form-check-label" for="ta">
+    <label class="form-check-label" for="ta" name="ta">
       Teaching Assistant
     </label>
   </div>
   <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="Industry">
-    <label class="form-check-label" for="Industry">
+    <label class="form-check-label" for="Industry" name="industry">
       Industry
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="Government">
-    <label class="form-check-label" for="Government">
+    <input class="form-check-input" type="checkbox" value="" id="government">
+    <label class="form-check-label" for="government" name="government">
       Government
     </label>
   </div>
   </br>
   <div class="form-group">
     <label for="research_area">Please describe your research area and research interests.</label>
-    <textarea class="form-control" id="research_area" rows="2"></textarea>
+    <textarea class="form-control" id="research_area" name="research_area" rows="2"></textarea>
   </div>
 
   </br>Indicate your level of agreement with the following statements, where 0=strongly disagree and 10=strongly agree.
