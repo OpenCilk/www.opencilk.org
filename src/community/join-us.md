@@ -10,7 +10,7 @@ eleventyNavigation:
 The OpenCilk team is part of Fastcode, an open-source community dedicated to advancing software performance engineering (SPE) -- making software run fast or otherwise consume few resources such as time, storage, and energy. This survey invites you to become part of Fastcode and help guide next steps for the community. Results of the survey will be used to create a short summary report about opportunities in SPE community-building, which will be shared with respondents and used to promote activity and investment in SPE. Thanks for your input!
 
 
-<form name="join-formxx" method="POST" data-netlify="true">
+<form name="join-formxxx" method="POST" data-netlify="true">
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" class="form-control" id="name" name="name" placeholder="Fib O'Nacci" required>
@@ -122,7 +122,7 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
   <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="events_compete" name="events_compete" value="events_compete">
     <label class="form-check-label" for="events_compete">
-      SPE events_competes (e.g. to measurably improve performance)
+      SPE competitions (e.g. to measurably improve performance)
     </label>
   </div>
   <div class="form-check">
