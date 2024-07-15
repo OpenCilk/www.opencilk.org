@@ -10,7 +10,7 @@ eleventyNavigation:
 The OpenCilk team is part of Fastcode, an open-source community dedicated to advancing software performance engineering (SPE) -- making software run fast or otherwise consume few resources such as time, storage, and energy. This survey invites you to become part of Fastcode and help guide next steps for the community. Results of the survey will be used to create a short summary report about opportunities in SPE community-building, which will be shared with respondents and used to promote activity and investment in SPE. Thanks for your input!
 
 
-<form name="join-formxxx" method="POST" data-netlify="true">
+<form name="join-fastcode" method="POST" data-netlify="true">
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" class="form-control" id="name" name="name" placeholder="Fib O'Nacci" required>
@@ -67,7 +67,7 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
     </label>
   </div>
   <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="other_work" name="other_work">
+      <input class="form-check-input" type="checkbox" id="other_work" name="other_work">
       <label class="form-check-label " for="other_work"> Other </label>
       <input class="form-control form-control-sm ml-3 w-25" id="other_work_txt" name="other_work_txt" type="text" style="display: inline">
   </div>
@@ -102,43 +102,43 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
 
   </br>Which activities would be most interesting to you for SPE community-building? (Check all that apply.)
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="events_like_hopc" name="events_like_hopc" value="events_like_hopc">
+    <input class="form-check-input" type="checkbox" id="events_like_hopc" name="events_like_hopc" value="events_like_hopc">
     <label class="form-check-label" for="events_like_hopc">
       Workshops like HOPC that present published papers from various conferences
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="events_like_dagstuhl" name="events_like_dagstuhl" value="events_like_dagstuhl">
+    <input class="form-check-input" type="checkbox" id="events_like_dagstuhl" name="events_like_dagstuhl" value="events_like_dagstuhl">
     <label class="form-check-label" for="events_like_dagstuhl">
       Workshops/seminars that stand alone, like Dagstuhl seminars
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="events_w_keynote" name="events_w_keynote" value="events_w_keynote">
+    <input class="form-check-input" type="checkbox" id="events_w_keynote" name="events_w_keynote" value="events_w_keynote">
     <label class="form-check-label" for="events_w_keynote">
       Workshops with invited keynote talks
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="events_compete" name="events_compete" value="events_compete">
+    <input class="form-check-input" type="checkbox" id="events_compete" name="events_compete" value="events_compete">
     <label class="form-check-label" for="events_compete">
       SPE competitions (e.g. to measurably improve performance)
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="events_students" name="events_students" value="events_students">
+    <input class="form-check-input" type="checkbox" id="events_students" name="events_students" value="events_students">
     <label class="form-check-label" for="events_students">
       Student research programs/events_competes
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="events_publish" name="events_publish" value="events_publish">
+    <input class="form-check-input" type="checkbox" id="events_publish" name="events_publish" value="events_publish">
     <label class="form-check-label" for="events_publish">
       New conferences/workshops that publish new peer-reviewed papers on SPE
     </label>
   </div>
   <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="other_work" name="other_events">
+      <input class="form-check-input" type="checkbox" id="other_work" name="other_events">
       <label class="form-check-label " for="other_events"> Other </label>
       <input class="form-control form-control-sm ml-3 w-25" id="other_events_txt" name="other_events_txt" type="text" style="display: inline">
   </div>
