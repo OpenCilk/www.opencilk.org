@@ -11,18 +11,18 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
 
 <form name="join-fastcode" method="POST" data-netlify="true">
   <div class="form-group">
-    <label for="name">Name</label>
+    <label for="name">Name*</label>
     <input type="text" class="form-control" id="name" name="name" placeholder="Fib O'Nacci" required>
   </div>
   <div class="form-group">
-    <label for="email">Email address</label>
+    <label for="email">Email address*</label>
     <input type="email" class="form-control" id="email" name="email" placeholder="onacci@exemplary.edu" required>
   </div>
   <div class="form-group">
     <label for="org">Organization</label>
     <input type="text" class="form-control" id="org" name="org" placeholder="Exemplary Institute">
   </div>
-  <label>More about your work (Check all that apply.)</label>
+  <label><strong>1.</strong> About your work (Check all that apply.)</label>
   <div class="form-check">
     <input class="form-check-input" type="checkbox" value="faculty" name="faculty" id="faculty">
     <label class="form-check-label" for="faculty">
@@ -72,11 +72,11 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
   </div>
   </br>
   <div class="form-group">
-    <label for="research_area">Please describe your work interests (e.g., research) related to SPE.</label>
+    <label for="research_area"><strong>2.</strong> Please describe your work interests (e.g., research) related to SPE.</label>
     <textarea class="form-control" id="research_area" name="research_area" rows="2"></textarea>
   </div>
 
-  </br>Indicate your level of agreement with the following statements, where 0=strongly disagree and 10=strongly agree.
+  </br><strong>3.</strong> Indicate your level of agreement with the following statements, where 0=strongly disagree and 10=strongly agree.
   <div class="form-group">
     <label for="spe-important-to-me">SPE is an important part of my work.</label></br>
     0<input type="range" class="form-range" name="spe_for_me" min="0" max="10" step="1" id="spe_important_to_me">10
@@ -95,11 +95,11 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
   </div>
 
   <div class="form-group">
-    <label for="conferences">Considering your areas of interest, which conferences do you think represent the best SPE research? You may optionally include rankings and/or comments with your answer.</label>
-    <textarea class="form-control" id="conferences" name="conferences" rows="2"></textarea>
+    <label for="conferences"><strong>4.</strong> Considering your areas of interest, which conferences do you think represent the best SPE research? You may optionally rank them based on your preference.</label>
+    <textarea class="form-control" id="conferences" name="conferences" rows="2" placeholder="1. first, 2. second, 3. third"></textarea>
   </div>
 
-  </br>Which activities would be most interesting to you for SPE community-building? (Check all that apply.)
+  </br><strong>5.</strong> Which activities would be most interesting to you for SPE community-building? (Check all that apply.)
   <div class="form-check">
     <input class="form-check-input" type="checkbox" id="events_like_hopc" name="events_like_hopc" value="events_like_hopc">
     <label class="form-check-label" for="events_like_hopc">
@@ -143,33 +143,33 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
   </div>
 </br>
   <div class="form-group">
-    <label for="help_with">What activities would you like to help organize and participate in?</label>
+    <label for="help_with"><strong>6.</strong> What activities would you like to help organize and participate in?</label>
     <textarea class="form-control" id="help_with" name="help_with" rows="2"></textarea>
   </div>
 
 
 </br>
   <div class="form-group">
-    <label for="rec_people">Are there any other individuals that you recommend be included in SPE community building? </label>
+    <label for="rec_people"><strong>7.</strong> Are there any other individuals that you recommend be included in SPE community building? </label>
     <textarea class="form-control" id="rec_people" name="rec_people" rows="1"></textarea>
   </div>
 
 </br>
-<label>Do you grant permission to include your reponses in a summary report on SPE?</label>
+<label><strong>8.</strong> Do you grant permission to include your reponses in a summary report on SPE?*</label>
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="permission" id="permission1" value="Yes_w_name">
+    <input class="form-check-input" type="radio" name="permission" id="permission1" value="Yes_w_name" required>
     <label class="form-check-label" for="permission1">
       Yes, and I permit my name to be included in the report along with my responses.
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="radio"  name="permission" id="permission2" value="Yes_anon">
+    <input class="form-check-input" type="radio"  name="permission" id="permission2" value="Yes_anon" required>
     <label class="form-check-label" for="permission2">
       Yes, but my responses should be anonymous.
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="radio"  name="permission" id="permission3" value="No">
+    <input class="form-check-input" type="radio"  name="permission" id="permission3" value="No" required>
     <label class="form-check-label" for="permission3">
       No, I do not permit my reponses to be included in the report.
     </label>
@@ -177,7 +177,7 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
 
 </br>
   <div class="form-group">
-    <label for="rec_people">Additional comments </label>
+    <label for="rec_people"><strong>9.</strong> Additional comments </label>
     <textarea class="form-control" id="additional_comments" name="additional_comments" rows="2"></textarea>
   </div>
 
