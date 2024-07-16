@@ -1,10 +1,9 @@
 ---
 layout: layouts/page.njk
 sidebar: toc
-title: Join us
+title: Join Fastcode
 eleventyNavigation:
-  key: Join us
-  order: 1
+  key: Join Fastcode
 ---
 
 The OpenCilk team is part of Fastcode, an open-source community dedicated to advancing software performance engineering (SPE) -- making software run fast or otherwise consume few resources such as time, storage, and energy. This survey invites you to become part of Fastcode and help guide next steps for the community. Results of the survey will be used to create a short summary report about opportunities in SPE community-building, which will be shared with respondents and used to promote activity and investment in SPE. Thanks for your input!
@@ -73,21 +72,21 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
   </div>
   </br>
   <div class="form-group">
-    <label for="research_area">Please describe your research area and research interests.</label>
+    <label for="research_area">Please describe your work interests (e.g., research) related to SPE.</label>
     <textarea class="form-control" id="research_area" name="research_area" rows="2"></textarea>
   </div>
 
   </br>Indicate your level of agreement with the following statements, where 0=strongly disagree and 10=strongly agree.
   <div class="form-group">
-    <label for="spe-important-to-me">SPE is an important part of my research.</label></br>
+    <label for="spe-important-to-me">SPE is an important part of my work.</label></br>
     0<input type="range" class="form-range" name="spe_for_me" min="0" max="10" step="1" id="spe_important_to_me">10
   </div>
   <div class="form-group">
-    <label for="me-important-to-spe">My research is an important part of advancing SPE.</label></br>
+    <label for="me-important-to-spe">My work is an important part of advancing SPE.</label></br>
     0<input type="range" class="form-range" name="me_for_spe" min="0" max="10" step="1" id="me_important_to_spe">10
   </div>
   <div class="form-group">
-    <label for="advancing-spe">I am interested in coalescing a community of researchers to advance SPE as scientific field in its own right.</label></br>
+    <label for="advancing-spe">I am interested in coalescing a professional community to advance SPE as scientific field in its own right.</label></br>
     0<input type="range" class="form-range" name="advancing_spe" min="0" max="10" step="1" id="advancing_spe">10
   </div>
   <div class="form-group">
@@ -104,7 +103,7 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
   <div class="form-check">
     <input class="form-check-input" type="checkbox" id="events_like_hopc" name="events_like_hopc" value="events_like_hopc">
     <label class="form-check-label" for="events_like_hopc">
-      Workshops like HOPC that present published papers from various conferences
+      Workshops that discuss SPE papers already published at other conferences
     </label>
   </div>
   <div class="form-check">
@@ -122,13 +121,13 @@ The OpenCilk team is part of Fastcode, an open-source community dedicated to adv
   <div class="form-check">
     <input class="form-check-input" type="checkbox" id="events_compete" name="events_compete" value="events_compete">
     <label class="form-check-label" for="events_compete">
-      SPE competitions (e.g. to measurably improve performance)
+      SPE competitions (e.g., to measurably improve performance)
     </label>
   </div>
   <div class="form-check">
     <input class="form-check-input" type="checkbox" id="events_students" name="events_students" value="events_students">
     <label class="form-check-label" for="events_students">
-      Student research programs/events_competes
+      Student research programs/competitions
     </label>
   </div>
   <div class="form-check">

@@ -4,6 +4,7 @@ sidebar: toc
 eleventyNavigation:
   key: Teach performance
   parent: Community
+  order: 1
 ---
 
 The end of Moore's Law makes software performance engineering a priority for modern computer-science curricula.
