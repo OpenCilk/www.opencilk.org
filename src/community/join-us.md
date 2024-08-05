@@ -9,183 +9,33 @@ eleventyNavigation:
 The OpenCilk team is part of Fastcode, an open-source community dedicated to advancing software performance engineering (SPE) -- making software run fast or otherwise consume few resources such as time, storage, and energy. This survey invites you to become part of Fastcode and help guide next steps for the community. Results of the survey will be used to create a short summary report about opportunities in SPE community-building, which will be shared with respondents and used to promote activity and investment in SPE. Thanks for your input!
 
 
-<form name="join-fastcode" method="POST" data-netlify="true">
-  <div class="form-group">
-    <label for="name">Name*</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Fib O'Nacci" required>
-  </div>
-  <div class="form-group">
-    <label for="email">Email address*</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="onacci@exemplary.edu" required>
-  </div>
-  <div class="form-group">
-    <label for="org">Organization</label>
-    <input type="text" class="form-control" id="org" name="org" placeholder="Exemplary Institute">
-  </div>
-  <label><strong>1.</strong> About your work (Check all that apply.)</label>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="faculty" name="faculty" id="faculty">
-    <label class="form-check-label" for="faculty">
-      Faculty
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="postdoc" name="postdoc" id="postdoc">
-    <label class="form-check-label" for="postdoc">
-      Postdoc
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="re_sci" name="re_sci" id="re_sci">
-    <label class="form-check-label" for="re_sci">
-      Research Scientist
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="student" name="student" id="student">
-    <label class="form-check-label" for="student">
-      Student
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="ta" name="ta" id="ta">
-    <label class="form-check-label" for="ta">
-      Teaching Assistant
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="industry" name="industry" id="Industry">
-    <label class="form-check-label" for="Industry">
-      Industry
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="govt" name="govt" id="govt">
-    <label class="form-check-label" for="govt">
-      Government
-    </label>
-  </div>
-  <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="other_work" name="other_work">
-      <label class="form-check-label " for="other_work"> Other </label>
-      <input class="form-control form-control-sm ml-3 w-25" id="other_work_txt" name="other_work_txt" type="text" style="display: inline">
-  </div>
-  </br>
-  <div class="form-group">
-    <label for="research_area"><strong>2.</strong> Please describe your work interests (e.g., research) related to SPE.</label>
-    <textarea class="form-control" id="research_area" name="research_area" rows="2"></textarea>
-  </div>
-
-  </br><strong>3.</strong> Indicate your level of agreement with the following statements, where 0=strongly disagree and 10=strongly agree.
-  <div class="form-group">
-    <label for="spe-important-to-me">SPE is an important part of my work.</label></br>
-    0<input type="range" class="form-range" name="spe_for_me" min="0" max="10" step="1" id="spe_important_to_me">10
-  </div>
-  <div class="form-group">
-    <label for="me-important-to-spe">My work is an important part of advancing SPE.</label></br>
-    0<input type="range" class="form-range" name="me_for_spe" min="0" max="10" step="1" id="me_important_to_spe">10
-  </div>
-  <div class="form-group">
-    <label for="advancing-spe">I am interested in coalescing a professional community to advance SPE as scientific field in its own right.</label></br>
-    0<input type="range" class="form-range" name="advancing_spe" min="0" max="10" step="1" id="advancing_spe">10
-  </div>
-  <div class="form-group">
-    <label for="teaching-spe">I am interested in teaching SPE.</label></br>
-    0<input type="range" class="form-range" name="teaching_spe" min="0" max="10" step="1" id="teaching_spe">10
-  </div>
-
-  <div class="form-group">
-    <label for="conferences"><strong>4.</strong> Considering your areas of interest, which conferences do you think represent the best SPE research? You may optionally rank them based on your preference.</label>
-    <textarea class="form-control" id="conferences" name="conferences" rows="2" placeholder="1. first, 2. second, 3. third"></textarea>
-  </div>
-
-  </br><strong>5.</strong> Which activities would be most interesting to you for SPE community-building? (Check all that apply.)
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" id="events_like_hopc" name="events_like_hopc" value="events_like_hopc">
-    <label class="form-check-label" for="events_like_hopc">
-      Workshops that discuss SPE papers already published at other conferences
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" id="events_like_dagstuhl" name="events_like_dagstuhl" value="events_like_dagstuhl">
-    <label class="form-check-label" for="events_like_dagstuhl">
-      Workshops/seminars that stand alone, like Dagstuhl seminars
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" id="events_w_keynote" name="events_w_keynote" value="events_w_keynote">
-    <label class="form-check-label" for="events_w_keynote">
-      Workshops with invited keynote talks
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" id="events_compete" name="events_compete" value="events_compete">
-    <label class="form-check-label" for="events_compete">
-      SPE competitions (e.g., to measurably improve performance)
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" id="events_students" name="events_students" value="events_students">
-    <label class="form-check-label" for="events_students">
-      Student research programs/competitions
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" id="events_publish" name="events_publish" value="events_publish">
-    <label class="form-check-label" for="events_publish">
-      New conferences/workshops that publish new peer-reviewed papers on SPE
-    </label>
-  </div>
-  <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="other_work" name="other_events">
-      <label class="form-check-label " for="other_events"> Other </label>
-      <input class="form-control form-control-sm ml-3 w-25" id="other_events_txt" name="other_events_txt" type="text" style="display: inline">
-  </div>
-</br>
-  <div class="form-group">
-    <label for="help_with"><strong>6.</strong> What activities would you like to help organize and participate in?</label>
-    <textarea class="form-control" id="help_with" name="help_with" rows="2"></textarea>
-  </div>
-
-
-</br>
-  <div class="form-group">
-    <label for="rec_people"><strong>7.</strong> Are there any other individuals that you recommend be included in SPE community building? </label>
-    <textarea class="form-control" id="rec_people" name="rec_people" rows="1"></textarea>
-  </div>
-
-</br>
-<label><strong>8.</strong> Do you grant permission to include your reponses in a summary report on SPE?*</label>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="permission" id="permission1" value="Yes_w_name" required>
-    <label class="form-check-label" for="permission1">
-      Yes, and I permit my name to be included in the report along with my responses.
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio"  name="permission" id="permission2" value="Yes_anon" required>
-    <label class="form-check-label" for="permission2">
-      Yes, but my responses should be anonymous.
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio"  name="permission" id="permission3" value="No" required>
-    <label class="form-check-label" for="permission3">
-      No, I do not permit my reponses to be included in the report.
-    </label>
-  </div>
-
-</br>
-  <div class="form-group">
-    <label for="rec_people"><strong>9.</strong> Additional comments </label>
-    <textarea class="form-control" id="additional_comments" name="additional_comments" rows="2"></textarea>
-  </div>
-
-</br>
-Thank you!  
-
-
-  <p>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </p>
+<div id="mc_embed_shell">
+      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+        #mc_embed_signup{background:#fff; false;clear:left; font:14px Helvetica,Arial,sans-serif; width: 600px;}
+        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+    <form action="https://opencilk.us13.list-manage.com/subscribe/post?u=b84cde3e97c75d985e0fab8de&amp;id=7ff8acc6ca&amp;f_id=007d0ae1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <div id="mc_embed_signup_scroll"><h2>Subscribe</h2>
+            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+            <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+        <div id="mce-responses" class="clear foot">
+            <div class="response" id="mce-error-response" style="display: none;"></div>
+            <div class="response" id="mce-success-response" style="display: none;"></div>
+        </div>
+    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+        /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
+        <input type="text" name="b_b84cde3e97c75d985e0fab8de_7ff8acc6ca" tabindex="-1" value="">
+    </div>
+        <div class="optionalParent">
+            <div class="clear foot">
+                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                <p style="margin: 0px auto;"><a href="http://eepurl.com/iUs7uA" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
+            </div>
+        </div>
+    </div>
 </form>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
