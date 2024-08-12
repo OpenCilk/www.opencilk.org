@@ -3,7 +3,7 @@ layout: layouts/page.njk
 title: Contact us
 eleventyNavigation:
   key: Contact
-  order: 99
+  order: 2
 ---
 
 Do you have questions or comments about OpenCilk, our open-source community, or software performance engineering?
