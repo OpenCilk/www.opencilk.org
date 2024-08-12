@@ -8,8 +8,9 @@ eleventyNavigation:
   parent: Home
   order: 5
 ---
-
-OpenCilk is a community-driven open source project developed by a diverse group of contributors. [Join us](/community/join-us/)!
+{% alert "note", "Part of Fastcode" %}
+The OpenCilk team is part of Fastcode, an open-source community dedicated to advancing software performance engineering -- making software run fast or otherwise consume few resources such as time, storage, and energy. [Join us](/community/join-us)!
+{% endalert %}
 
 ## Where can I get help?
 
