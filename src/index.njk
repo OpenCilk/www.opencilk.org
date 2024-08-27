@@ -1,5 +1,5 @@
 ---
-title: Write fast code with C/C++ and OpenCilk.
+title: OpenCilk makes it easy to
 layout: layouts/home.njk
 eleventyNavigation:
   key: Home
@@ -10,71 +10,78 @@ hero:
     dark: /img/OpenCilk-Logo-1001-dark.png
   subtitle: The language of performance engineering
 features:
-- call: Write fast code
-  call_description: Parallelize C/C++ with OpenCilk.
+- call_1: Go
+  call_2: Multicore
   call_color: var(--midnight)
   call_bg: var(--lime)
+  description: The end of Moore's Law makes software performance engineering a priority for modern computer-science curricula.
+  description_color: var(--midnight)
+  description_bg: var(--yellow)
   button: Install
   button_link: /doc/users-guide/install/
   button_color: var(--yellow)
   button_bg: var(--blue)
-  image_bg: var(--yellow)
-  image: qsort-code-light.png
-- call: Performance engineering
-  call_description: What is it and why does it matter?
+  image: multicore-simple.png
+- call_1: Teach
+  call_2: Performance
   call_color: var(--yellow)
   call_bg: var(--midnight)
+  description: OpenCilk enables you to teach principles of performance engineering using a state-of-the-art task-parallel platform that is easy to learn.
+  description_color: var(--midnight)
+  description_bg: var(--lightteal)
   button: Learn
   button_link: /posts/
   button_color: var(--yellow)
   button_bg: var(--blue)
-  image_bg: var(--midnight)
-  image: plenty-of-room-at-the-top.png
-- call: Teach performance
-  call_description: OpenCilk provides an ideal introduction.
+  image: fib-trace-dark.png
+- call_1: Lean and 
+  call_2: Modular
   call_color: var(--safetyyellow)
-  call_bg: var(--darkteal)
+  call_bg: var(--midnight)
+  description: You can readily incorporate OpenCilk components into your own systems.
+  description_color: var(--safetyyellow)
+  description_bg: var(--blue)
   button: Discover
   button_link: /community/teach-performance/
   button_color: var(--midnight)
   button_bg: var(--yellow)
-  image_bg: var(--teal)
-  image: fib-code-multicore.png
-- call: Go multicore
-  call_description: Convert your code to OpenCilk
+  image: opencilk-inside.png
+- call_1: Extensible and 
+  call_2: Open-source
   call_color: var(--midnight)
   call_bg: var(--yellow)
+  description: You can easily adapt the OpenCilk language, compiler, and runtime system to experiment with your own research ideas.
+  description_color: var(--midnight)
+  description_bg: var(--safetyyellow)
   button: Here's how
   button_link: /doc/users-guide/convert-a-c-program/
   button_color: var(--yellow)
   button_bg: var(--blue)
-  image_bg: var(--safetyyellow)
-  image: fib-nocode-trace-dag.png
+  image: toolbox.png
 
 ---
 
 <img class="hero-light pt-4 pb-4 mx-auto" src="{{ hero.image.light }}" width="440">
 <img class="hero-dark only-dark pt-4 pb-4 mx-auto" src="{{ hero.image.dark }}" width="440">
 <div class="text-center" style="font-size: large;">
-  <p class="mb-4 mx-auto">{{ metadata.tagline }}</p>
+  <p class="mb-4 mx-auto lead">{{ metadata.tagline }}</p>
 </div>
-
-
 
 <!-- homepage gallery -->
 <div class="sphinx-bs container pb-4 " style="max-width: 1200px;">
     <div class="d-flex row ">
         {% for item in features %} 
-        <div class="d-flex col-md-6 col-sm-12">
-          <div class="row  no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: {{ item.image_bg }};">
-            <div class="col-5 p-2 d-flex h-100 flex-column position-static" style="justify-content: space-between; color: {{ item.call_color }}; background-color: {{ item.call_bg }};">
-              <div class="d-flex"><span class="myCard-header">{{ item.call }}</span></div>
-              <div class="d-flex"><span class="myCard-lead">{{ item.call_description }}</span></div>
-              <div class="d-flex"><a href="{{ item.button_link }}" class="btn px-4 me-md-2" style="text-decoration: none; color: {{ item.button_color }}; background-color: {{ item.button_bg }};">{{ item.button }}</a></div>
+        <div class="d-flex col-lg-6 col-md-12">
+          <div class="row  no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col-5 p-2 d-flex h-100 flex-column align-items-center justify-content-between" style="background-color: {{ item.call_bg }}; border-top-left-radius: 0.33rem; border-bottom-left-radius: 0.33rem;">
+              <div class="d-flex text-center"><span class="myCard-header" style="color: {{ item.call_color }};">{{ item.call_1 }}</br>{{ item.call_2 }}</span></div>
+              <div class="d-none d-sm-block"><img src="img/{{ item.image }}" style="width:180px; height: auto;"/></div>
             </div>
-            <div class="col-7 h-100 m-0 p-0 overflow-hidden">
-              <img class="img-fluid" src="img/{{ item.image }}" style="object-fit: cover; object-position: left; height: 100%; max-height: 240px;"/>
+            <div class="col-7 m-0 p-2 d-flex flex-column justify-content-between" style="background-color: {{ item.description_bg }}; border-top-right-radius: 0.33rem; border-bottom-right-radius: 0.33rem;">
+            
+              <span class="myCard-lead" style="color: {{ item.description_color }};">{{ item.description }}</span>
             </div>
+            
           </div>
         </div>
         {% endfor %}
@@ -89,15 +96,37 @@ features:
       <div class="text-center">
       <h1>{{ title }}</h1>
       </div>
-      <p>OpenCilk is an open-source platform that makes parallel programming a simple extension of serial programming.</p>
-      <ul>
-        <li>Efficient compiling makes your OpenCilk program faster.</li>
-        <li>Provably efficient scheduling tunes each execution of your OpenCilk program to its host environment.</li>
-        <li>Provable race-detection guarantees that your OpenCilk program has a deterministic result.</li>
+      <ul class="d-flex align-items-center flex-column lead">
+        <li>Write fast parallel code for shared-memory multicores</li>
+        <li>Analyze and benchmark the parallel scalability of your program</li>
+        <li>Detect and debug races or prove that your program execution is race-free</li>
       </ul>
     </div>
 
-    <h3 class="my-4">Featured blog posts</h3>
+    <div class="d-flex flex-column col-lg-6 col-sm-12 mt-4">
+      <div class="flex-shrink-1  mb-4">
+        OpenCilk is an open-source software development infrastructure for task-parallel programming that allows for substantial code reuse and easy exploration of design choices in language abstraction, compilation strategy, runtime mechanism, and productivity tool development.
+      </div>
+      <div class="flex-shrink-1  mb-4">
+        OpenCilk provides an ideal environment for developing fast code for applications that run on commodity and cloud multicore computers. It features a simple language, small codebase, and mathematically provable guarantees of good performance.
+      </div>
+    </div>
+    <div class="d-flex flex-column col-lg-6 col-sm-12 mt-4">
+      <div class="flex-shrink-1  mb-4">
+        <h3 class="mt-0 pt-0">Measure parallelism and maximize scalability with automated benchmarking</h3>
+        With CilkScale you can ensure that your program scales up and down to make the most of any host system.
+      </div>
+      <div class="flex-shrink-1  mb-4">
+        <h3 class="mt-0 pt-0">Optimize your code with a compiler that KNOWS parallelism</h3>
+        OpenCilk augments the “middle-end” of LLVM to represent parallel control flow and bring every LLVM optimization to bear on your parallelized code.
+      </div>
+    </div>
+
+    <div class="col col-sm-12 lead text-center py-4" style="max-width:75%;">
+    <a href="/community/join-us">Join the community</a> of OpenCilk educators to <a href="/community/teach-performance/">share teaching materials</a> and learn about software performance engineering.
+    </div>
+
+    <h3 class="col col-sm-12 text-center my-4">Featured blog posts</h3>
     <div class="container" id="featured-3">
       <div class="d-flex row">
         {% set postslist = collections.featuredPosts %}
