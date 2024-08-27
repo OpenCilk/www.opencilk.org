@@ -106,7 +106,7 @@ If you edit with Netlify CMS, it will prompt you to edit each of these fields, a
 - Featured image: Eye-catching graphic to persuade a visitor to read this page.
   * Don’t worry if you can’t find one.
   * Better if image has no background.
-  * Should be readable when reduced to a thumbnail roughly 150 pixels wide, as you see on the [Fast Code](https://www.opencilk.org/posts) page. For example </br>![random-work-steal](/src/img/random-work-steal-154px.png)
+  * Should be readable when reduced to a thumbnail roughly 150 pixels wide, as you see on the [Fastcode Blog](https://www.opencilk.org/posts). For example </br>![random-work-steal](/src/img/random-work-steal-154px.png)
   * Tags
     - For existing tags, see [here](https://www.opencilk.org/tags/news/).
     - Alternatively, invent your own (try to be conservative).

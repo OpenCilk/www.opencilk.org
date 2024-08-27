@@ -8,9 +8,11 @@ eleventyNavigation:
   parent: Home
   order: 7
 ---
+{% alert "note", "Part of Fastcode" %}
+The OpenCilk team is part of Fastcode, an open-source community dedicated to advancing software performance engineering -- making software run fast or otherwise consume few resources such as time, storage, and energy. [Join us](/community/join-us).
+{% endalert %}
 
 The OpenCilk project welcomes your expertise and enthusiasm. A few specific opportunities are listed below. If you see anything interesting, or have ideas that we haven't thought of, please [contact us](/contribute/contact/).
-
 
 ## Teaching
 
@@ -53,10 +55,9 @@ The Supertech research group in the MIT Computer Science and Artificial Intellig
 - software productivity tools;
 - user interface design and implementation;
 - software performance engineering (writing fast code);
-- lgorithms and data structures;
+- algorithms and data structures;
 - software engineering, testing, benchmarking, and/or release management;
 - cloud environments and operating systems.
 
 Please see additional details here:
 [PostdocFlyer.pdf](https://github.com/OpenCilk/www.opencilk.org/files/8886546/PostdocFlyer.pdf)
-
