@@ -1,24 +1,24 @@
 {
   "tagline": "An integrated open-source ecosystem for teaching software performance engineering",
-  "author": "The OpenCilk Team",
-  "email": "contact@opencilk.org",
+  "author": "The Fastcode Team",
+  "email": "contact@fastcode.org",
   "attribution": {
     "cilkplus": "This work is derived from Cilk++ documentation with permission of Intel Corporation."
   },
   "blog": {
     "title": "Fastcode Blog",
-    "url": "https://opencilk.org/posts",
+    "url": "https://fastcode.org/posts",
     "language": "en",
     "description": "A blog about performance engineering",
     "feed": {
       "subtitle": "Featuring OpenCilk",
       "filename": "feed.xml",
       "path": "/feed/feed.xml",
-      "id": "https://opencilk.org/posts/"
+      "id": "https://fastcode.org/posts/"
     },
     "jsonfeed": {
       "path": "/feed/feed.json",
-      "url": "https://opencilk.org/feed/feed.json"
+      "url": "https://fastcode.org/feed/feed.json"
     }
   }
 }
