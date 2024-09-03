@@ -1,5 +1,5 @@
 ---
-title: Fastcode makes it easy to
+title: Explore software performance engineering
 layout: layouts/home.njk
 eleventyNavigation:
   key: Home
@@ -9,6 +9,27 @@ hero:
     light: /img/Fastcode-Logo.png
     dark: /img/Fastcode-Logo-dark.png
   subtitle: The language of performance engineering
+actioncalls:
+- number: 0
+  header: From "zero" to "performance engineering" in minutes
+  description: Get started on Speedcode, where there's nothing to install.
+  button: Learn more
+  button_link: https://speedcode.org
+- number: 1
+  header: Enter the programming competition at PPoPP
+  description: blingg
+  button: Learn more
+  button_link: /contribute
+- number: 2
+  header: Teach software performance engineering
+  description: OpenCilk lets you teach multicore computing with a state-of-the-art platform that is easy to learn.
+  button: Learn more
+  button_link: https://opencilk.org/community/teach-performance
+- number: 3
+  header: Join the SPE instructors' community
+  description: Share your questions and resources on performance engineering with like-minded faculty.
+  button: Learn more
+  button_link: https://opencilk.org/community/teach-performance
 features:
 - call_1: Go
   call_2: Multicore
@@ -64,38 +85,82 @@ features:
 <img class="hero-light pt-4 pb-4 mx-auto" src="{{ hero.image.light }}" width="440">
 <img class="hero-dark only-dark pt-4 pb-4 mx-auto" src="{{ hero.image.dark }}" width="440">
 <div class="text-center" style="font-size: large;">
-  <p class="mb-4 mx-auto lead">{{ metadata.tagline }}</p>
+  <p class="mb-0 mx-auto lead">{{ metadata.tagline }}</p>
 </div>
 
-<!-- homepage gallery -->
-<div class="sphinx-bs container pb-4 " style="max-width: 1200px;">
-    <div class="d-flex row ">
-        {% for item in features %} 
-        <div class="d-flex col-lg-6 col-md-12">
-          <div class="row  no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col-5 p-2 d-flex h-100 flex-column align-items-center justify-content-between" style="background-color: {{ item.call_bg }}; border-top-left-radius: 0.33rem; border-bottom-left-radius: 0.33rem;">
-              <div class="d-flex text-center"><span class="myCard-header" style="color: {{ item.call_color }};">{{ item.call_1 }}</br>{{ item.call_2 }}</span></div>
-              <div class="d-none d-sm-block"><img src="img/{{ item.image }}" style="width:180px; height: auto;"/></div>
+<div class="sphinx-bs container pb-4 ml-0" style="min-height: 32rem;">
+    
+        <div style="width: 90%;">
+          
+
+
+            <div id="carouselExampleCaptions" class="carousel slide w-100" data-interval="1000" data-bs-ride="carousel">
+              <div class="carousel-indicators w-100">
+                {% for item in actioncalls %}
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ item.number }}" {% if item.number == 0 %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ item.number }}"></button>
+                {% endfor %}
+              </div>
+
+              <div class="carousel-inner w-100">
+                {% for item in actioncalls %}
+                  <div class="carousel-item {% if item.number == 0 %}active{% endif %}" style="min-height: 18rem;">
+
+                    
+                    <div class="carousel-caption" style="bottom: none; top: 5.5rem; text-align: left;">
+                      <h1>{{ item.header }}</h1>
+                      <p>{{ item.description }}</p>
+                      <a href="{{ item.button_link }}" class="btn px-4 me-md-2" style="text-decoration: none; color: var(--yellow); background-color: var(--blue);">{{ item.button }}</a>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
-            <div class="col-7 m-0 p-2 d-flex flex-column justify-content-between" style="background-color: {{ item.description_bg }}; border-top-right-radius: 0.33rem; border-bottom-right-radius: 0.33rem;">
+
+              
             
-              <span class="myCard-lead" style="color: {{ item.description_color }};">{{ item.description }}</span>
-            </div>
-            
-          </div>
+          
         </div>
-        {% endfor %}
-    </div>
+   
 </div>
-
 
 <div class="mx-0" style="background-color: var(--pst-color-background); border-top-style: solid; border-top-color: var(--lime);">
+
+
 <div class="container py-4" style="max-width: 1120px;">
   <div class="row justify-content-center">
     <div class="col-12">
       <div class="text-center">
       <h1>{{ title }}</h1>
       </div>
+      <!-- homepage gallery -->
+      <div class="sphinx-bs container py-4 " style="max-width: 1200px;">
+          <div class="d-flex row ">
+              {% for item in features %} 
+              <div class="d-flex col-lg-6 col-md-12">
+                <div class="row  no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                  <div class="col-5 p-2 d-flex h-100 flex-column align-items-center justify-content-between" style="background-color: {{ item.call_bg }}; border-top-left-radius: 0.33rem; border-bottom-left-radius: 0.33rem;">
+                    <div class="d-flex text-center"><span class="myCard-header" style="color: {{ item.call_color }};">{{ item.call_1 }}</br>{{ item.call_2 }}</span></div>
+                    <div class="d-none d-sm-block"><img src="img/{{ item.image }}" style="width:180px; height: auto;"/></div>
+                  </div>
+                  <div class="col-7 m-0 p-2 d-flex flex-column justify-content-between" style="background-color: {{ item.description_bg }}; border-top-right-radius: 0.33rem; border-bottom-right-radius: 0.33rem;">
+                  
+                    <span class="myCard-lead" style="color: {{ item.description_color }};">{{ item.description }}</span>
+                  </div>
+                  
+                </div>
+              </div>
+              {% endfor %}
+          </div>
+      </div>
+
       <ul class="d-flex align-items-center flex-column lead">
         <li>Write fast parallel code for shared-memory multicores</li>
         <li>Analyze and benchmark the parallel scalability of your program</li>
