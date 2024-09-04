@@ -3,6 +3,6 @@
     "background": "bg-white",
     "permalink": "/community/{{ page.fileSlug | slugify }}/", 
     "eleventyNavigation": {
-        "parent": "Community"
+        "parent": "Get involved"
     }
 }

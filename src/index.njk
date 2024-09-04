@@ -22,14 +22,19 @@ actioncalls:
   button_link: /contribute
 - number: 2
   header: Teach software performance engineering
-  description: OpenCilk lets you teach multicore computing with a state-of-the-art platform that is easy to learn.
+  description: OpenCilk makes it easy to teach task-parallel multicore programming.
   button: Learn more
   button_link: https://opencilk.org/community/teach-performance
 - number: 3
   header: Join the SPE instructors' community
-  description: Share your questions and resources on performance engineering with like-minded faculty.
+  description: Share your performance-engineering thoughts with other faculty.
   button: Learn more
   button_link: https://opencilk.org/community/teach-performance
+- number: 4
+  header: Share your research
+  description: Fastcode can promote your contributions to performance engineering. 
+  button: Learn more
+  button_link: https://opencilk.org/posts
 features:
 - call_1: Go
   call_2: Multicore
@@ -95,11 +100,7 @@ features:
 
 
             <div id="carouselExampleCaptions" class="carousel slide w-100" data-interval="1000" data-bs-ride="carousel">
-              <div class="carousel-indicators w-100">
-                {% for item in actioncalls %}
-                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ item.number }}" {% if item.number == 0 %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ item.number }}"></button>
-                {% endfor %}
-              </div>
+
 
               <div class="carousel-inner w-100">
                 {% for item in actioncalls %}
@@ -108,19 +109,17 @@ features:
                     
                     <div class="carousel-caption" style="bottom: none; top: 5.5rem; text-align: left;">
                       <h1>{{ item.header }}</h1>
-                      <p>{{ item.description }}</p>
+                      <p class="lead">{{ item.description }}</p>
                       <a href="{{ item.button_link }}" class="btn px-4 me-md-2" style="text-decoration: none; color: var(--yellow); background-color: var(--blue);">{{ item.button }}</a>
                     </div>
                   </div>
                 {% endfor %}
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" style="opacity: 1;">
+                <h3><</h3>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" style="opacity: 1;">
+                <h3>></h3>
               </button>
             </div>
 

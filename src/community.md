@@ -1,10 +1,11 @@
 ---
 layout: layouts/page.njk
+stylesheet: None
 background: bg-white
 sidebar: toc
-title: Community
+title: Get involved
 eleventyNavigation:
-  key: Community
+  key: Get involved
   parent: Home
   order: 5
 ---

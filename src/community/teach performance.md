@@ -3,7 +3,7 @@ title: Teach performance
 sidebar: toc
 eleventyNavigation:
   key: Teach performance
-  parent: Community
+  parent: Get involved
   order: 1
 ---
 

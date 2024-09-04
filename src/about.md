@@ -1,12 +1,13 @@
 ---
 layout: layouts/page.njk
+stylesheet: None
 background: bg-white
 sidebar: toc
-title: About us
+title: About
 eleventyNavigation:
-  key: About us
+  key: About
   parent: Home
-  order: 6
+  order: 1
 date: 2022-07-05T16:59:41.487Z
 ---
 {% alert "note", "Our mission:" %}
