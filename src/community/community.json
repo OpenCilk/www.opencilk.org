@@ -1,8 +1,0 @@
-{
-    "layout": "layouts/page.njk",
-    "background": "bg-white",
-    "permalink": "/community/{{ page.fileSlug | slugify }}/", 
-    "eleventyNavigation": {
-        "parent": "Get involved"
-    }
-}

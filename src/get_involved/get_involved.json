@@ -1,0 +1,13 @@
+{
+    "layout": "layouts/page.njk",
+    "sidebar": "toc",
+    "background": "bg-white",
+    "permalink": "/get_involved/{{ page.fileSlug | slugify }}/", 
+    "eleventyNavigation": {
+        "parent": "Get involved"
+    },
+    "comments": false,
+    "tags": [
+        "get_involved"
+    ]
+}
