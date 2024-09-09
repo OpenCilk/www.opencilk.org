@@ -1,0 +1,20 @@
+---
+title: Events
+layout: layouts/page.njk
+background: bg-white
+sidebar: toc
+permalink: /events/
+eleventyNavigation:
+  key: Events
+  order: 7
+  parent: Home
+---
+
+<div class="container py-3" id="featured-3">
+  <div class="row g-2">
+
+    {% set postslist = collections.events %}
+    {% include "posts_cards.njk" %}
+
+  </div>
+</div>

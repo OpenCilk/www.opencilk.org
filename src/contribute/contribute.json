@@ -1,9 +1,0 @@
-{
-    "layout": "layouts/page.njk",
-    "sidebar": "toc",
-    "background": "bg-white",
-    "permalink": "/contribute/{{ page.fileSlug | slugify }}/", 
-    "eleventyNavigation": {
-        "parent": "Contribute"
-    }
-}

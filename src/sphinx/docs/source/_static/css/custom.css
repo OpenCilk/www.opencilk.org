@@ -32,7 +32,7 @@
   --safetyyellow: #f4d400;
 }
 html[data-theme="light"] {
-    background: url('/img/grey-silk-bg.jpg') no-repeat center center fixed;
+    background: url('/img/highway-horizon-bg.png') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -68,7 +68,7 @@ html[data-theme="dark"] img.hero-dark {
   display: block;
 }
 html[data-theme="dark"] {
-  background: url('/img/dark-grey-silk-bg.jpg') no-repeat center center fixed;
+  background: url('/img/highway-horizon-dark-bg.png') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
