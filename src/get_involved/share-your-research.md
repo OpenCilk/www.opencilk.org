@@ -1,6 +1,6 @@
 ---
 title: Share your research
-tagline: The OpenCilk team presented the following tutorial at the SPAA 2020 tutorial session.
+tagline: Let Fastcode promote your contributions to performance engineering.
 author: Bruce Hoppe
 image: /img/eagle-and-owl.png
 eleventyNavigation:
@@ -8,4 +8,4 @@ eleventyNavigation:
   order: 3
 ---
 
-blog ideas
+Landing page about contributing blog posts

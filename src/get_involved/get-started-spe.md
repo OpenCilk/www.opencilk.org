@@ -6,4 +6,4 @@ eleventyNavigation:
   key: Get started with SPE
 ---
 
-asdf
+A welcoming landing page that invites people to explore Speedcode

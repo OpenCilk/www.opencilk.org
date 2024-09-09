@@ -1,14 +1,14 @@
 ---
-title: Teach performance
+layout: layouts/page.njk
 sidebar: toc
+title: Join the SPE instructors community
 eleventyNavigation:
-  key: Teach performance
-  parent: Get involved
-  order: 1
+  key: Join the SPE instructors community
 ---
 
-The end of Moore's Law makes software performance engineering a priority for modern computer-science curricula.
-OpenCilk enables you to teach principles of multicore computing using a state-of-the-art task-parallel platform that is easy to learn.
+## Welcome etc
+
+Introduction to instructors community
 
 ## List of classes and workshops
 
@@ -107,4 +107,3 @@ Originally created in 2018 as a single full-day class, this workshop includes an
 - Post-Moore software ([PDF](https://ucdavis.box.com/s/35umq7ysmjjl1pq4u39zf7nhrlpsb43x))
 
 [Join the OpenCilk community](../join-us/) for access to editable slide decks.
-
