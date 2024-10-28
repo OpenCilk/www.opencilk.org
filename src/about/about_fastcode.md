@@ -17,4 +17,4 @@ Fastcode is an open-source community dedicated to advancing software performance
 
 ## Focusing on research and education
 
-To help get the community started, Fastcode has an "academic-first" strategy. By capturing the hearts and minds of students learning about parallel computing and software performance engineering, we can help software developers cope with the end of Moore’s Law.
+Fastcode has an "academic-first" strategy to kick-start the SPE community. Then, by capturing the hearts and minds of students learning about parallel computing and SPE, the core community can grow to help the larger world of software developers cope with the end of Moore’s Law.

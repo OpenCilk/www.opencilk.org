@@ -1,8 +1,9 @@
 ---
 title: PPoPP programming competition
-tagline: Sign up now!
+tagline: Sign up now! don't delay
 author: Bruce Hoppe
-date: 2024-09-07
+event_date: March 1, 2025
+reg_deadline: January 1, 2025
 image: /img/random-work-steal.png
 tags: competition
 ---
