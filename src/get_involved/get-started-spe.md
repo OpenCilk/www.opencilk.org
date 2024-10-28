@@ -8,7 +8,7 @@ eleventyNavigation:
 
   # Writing fast code
 
-  Many people know how to write code, but few know how to write code that runs efficiently. You might use algorithms to achieve efficiency, but there's a lot more to software performance engineering (SPE) than that!
+  Many people know how to write code, but few know how to write code that runs efficiently. You might use algorithms to achieve efficiency, but there's a lot more to performance engineering than that!
 
   [{% img "/img/make-code-fast.png", "400px" %}](https://speedcode.org)
 
