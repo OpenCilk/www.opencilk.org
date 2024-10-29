@@ -24,7 +24,7 @@ actioncalls:
   header: Teach software performance engineering
   description: OpenCilk makes it easy to teach task-parallel multicore programming.
   button: Learn more
-  button_link: /get_involved/teach-with-opencilk/
+  button_link: /get_involved/try-opencilk/
 - number: 3
   header: Join the SPE instructors' community
   description: Share your performance-engineering thoughts with other faculty.
@@ -40,11 +40,11 @@ features:
   call_2: Multicore
   call_color: var(--midnight)
   call_bg: var(--lime)
-  description: The end of Moore's Law makes software performance engineering a priority for modern computer-science curricula.
+  description: The end of Moore's Law makes performance engineering a priority for computer-science curricula.
   description_color: var(--midnight)
   description_bg: var(--yellow)
-  button: Install
-  button_link: /doc/users-guide/install/
+  button: Learn more
+  button_link: /about/about_spe/
   button_color: var(--yellow)
   button_bg: var(--blue)
   image: multicore-simple.png
@@ -52,35 +52,35 @@ features:
   call_2: Performance
   call_color: var(--yellow)
   call_bg: var(--midnight)
-  description: OpenCilk enables you to teach principles of performance engineering using a state-of-the-art task-parallel platform that is easy to learn.
+  description: Teach performance engineering with a cutting-edge task-parallel platform that is easy to learn.
   description_color: var(--midnight)
   description_bg: var(--lightteal)
-  button: Learn
-  button_link: /posts/
+  button: Try OpenCilk
+  button_link: /get_involved/try-opencilk/
   button_color: var(--yellow)
   button_bg: var(--blue)
   image: fib-trace-dark.png
-- call_1: Lean and 
-  call_2: Modular
+- call_1: Learn 
+  call_2: Performance
   call_color: var(--safetyyellow)
   call_bg: var(--midnight)
-  description: You can readily incorporate OpenCilk components into your own systems.
+  description: Practice making code faster with Speedcode -- no installation required.
   description_color: var(--safetyyellow)
   description_bg: var(--blue)
-  button: Discover
-  button_link: /community/teach-performance/
+  button: Try Speedcode
+  button_link: https://speedcode.org
   button_color: var(--midnight)
   button_bg: var(--yellow)
   image: opencilk-inside.png
-- call_1: Extensible and 
-  call_2: Open-source
+- call_1: Get 
+  call_2: Involved
   call_color: var(--midnight)
   call_bg: var(--yellow)
-  description: You can easily adapt the OpenCilk language, compiler, and runtime system to experiment with your own research ideas.
+  description: Share and learn in a community dedicated to software performance engineering.
   description_color: var(--midnight)
   description_bg: var(--safetyyellow)
-  button: Here's how
-  button_link: /doc/users-guide/convert-a-c-program/
+  button: Learn more
+  button_link: /get_involved/
   button_color: var(--yellow)
   button_bg: var(--blue)
   image: toolbox.png
@@ -133,7 +133,7 @@ features:
 <div class="mx-0" style="background-color: var(--pst-color-background); border-top-style: solid; border-top-color: var(--lime);">
 
 
-<div class="container py-4" style="max-width: 1120px;">
+<div class="container py-4" style="max-width: 1200px;">
   <div class="row justify-content-center">
     <div class="col-12">
       <div class="text-center">
@@ -152,6 +152,8 @@ features:
                   <div class="col-7 m-0 p-2 d-flex flex-column justify-content-between" style="background-color: {{ item.description_bg }}; border-top-right-radius: 0.33rem; border-bottom-right-radius: 0.33rem;">
                   
                     <span class="myCard-lead" style="color: {{ item.description_color }};">{{ item.description }}</span>
+                    <div class="d-flex"><a href="{{ item.button_link }}" class="btn px-4 me-md-2" style="text-decoration: none; color: {{ item.button_color }}; background-color: {{ item.button_bg }};">{{ item.button }}</a></div>
+            
                   </div>
                   
                 </div>
@@ -159,38 +161,19 @@ features:
               {% endfor %}
           </div>
       </div>
-
-      <ul class="d-flex align-items-center flex-column lead">
-        <li>Write fast parallel code for shared-memory multicores</li>
-        <li>Analyze and benchmark the parallel scalability of your program</li>
-        <li>Detect and debug races or prove that your program execution is race-free</li>
-      </ul>
-    </div>
-
-    <div class="d-flex flex-column col-lg-6 col-sm-12 mt-4">
-      <div class="flex-shrink-1  mb-4">
-        OpenCilk is an open-source software development infrastructure for task-parallel programming that allows for substantial code reuse and easy exploration of design choices in language abstraction, compilation strategy, runtime mechanism, and productivity tool development.
-      </div>
-      <div class="flex-shrink-1  mb-4">
-        OpenCilk provides an ideal environment for developing fast code for applications that run on commodity and cloud multicore computers. It features a simple language, small codebase, and mathematically provable guarantees of good performance.
-      </div>
-    </div>
-    <div class="d-flex flex-column col-lg-6 col-sm-12 mt-4">
-      <div class="flex-shrink-1  mb-4">
-        <h3 class="mt-0 pt-0">Measure parallelism and maximize scalability with automated benchmarking</h3>
-        With CilkScale you can ensure that your program scales up and down to make the most of any host system.
-      </div>
-      <div class="flex-shrink-1  mb-4">
-        <h3 class="mt-0 pt-0">Optimize your code with a compiler that KNOWS parallelism</h3>
-        OpenCilk augments the “middle-end” of LLVM to represent parallel control flow and bring every LLVM optimization to bear on your parallelized code.
-      </div>
-    </div>
-
-    <div class="col col-sm-12 lead text-center py-4" style="max-width:75%;">
-    <a href="/community/join-us">Join the community</a> of OpenCilk educators to <a href="/community/teach-performance/">share teaching materials</a> and learn about software performance engineering.
     </div>
 
 
+
+
+
+    <h1 class="my-4">Featured Fastcode events</h1>
+    <div class="container" id="featured-3">
+      <div class="d-flex row">
+        {% set postslist = collections.featuredEvents %}
+        {% include "event_cards.njk" %}
+      </div>
+    </div>
 
   </div>
 </div>
