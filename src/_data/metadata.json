@@ -6,7 +6,7 @@
     "cilkplus": "This work is derived from Cilk++ documentation with permission of Intel Corporation."
   },
   "blog": {
-    "title": "Fastcode Blog",
+    "title": "Fastcode blog",
     "url": "https://fastcode.org/posts",
     "language": "en",
     "description": "A blog about performance engineering",

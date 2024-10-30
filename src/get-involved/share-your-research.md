@@ -5,7 +5,7 @@ author: Bruce Hoppe
 image: /img/eagle-and-owl.png
 eleventyNavigation:
   key: Share your research
-  order: 3
+  order: 4
 ---
 
 Landing page about contributing blog posts

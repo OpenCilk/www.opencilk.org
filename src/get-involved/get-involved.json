@@ -3,7 +3,7 @@
     "stylesheet": "none",
     "sidebar": "toc",
     "background": "bg-white",
-    "permalink": "/get_involved/{{ page.fileSlug | slugify }}/", 
+    "permalink": "/get-involved/{{ page.fileSlug | slugify }}/", 
     "eleventyNavigation": {
         "parent": "Get involved"
     },

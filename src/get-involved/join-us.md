@@ -4,6 +4,7 @@ sidebar: toc
 title: Join Fastcode
 eleventyNavigation:
   key: Join Fastcode
+  order: 98
 ---
 
 The OpenCilk team is part of Fastcode, an open-source community dedicated to advancing software performance engineering (SPE) -- making software run fast or otherwise consume few resources such as time, storage, and energy. This survey invites you to become part of Fastcode and help guide next steps for the community. Results of the survey will be used to create a short summary report about opportunities in SPE community-building, which will be shared with respondents and used to promote activity and investment in SPE. Thanks for your input!

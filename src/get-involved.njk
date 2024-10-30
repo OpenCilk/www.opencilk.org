@@ -3,7 +3,7 @@ title: Get involved
 layout: layouts/page.njk
 background: bg-white
 sidebar: toc
-permalink: /get_involved/
+permalink: /get-involved/
 eleventyNavigation:
   key: Get involved
   order: 2
@@ -15,8 +15,8 @@ Fastcode has many ways for you to contribute and get involved.
 <div class="container py-3" id="featured-3">
   <div class="row g-2">
 
-    {% set postslist = collections.get_involved %}
-    {% include "article_cards.njk" %}
+    {% set postslist = collections.get_involved | sort(false, true, 'data.eleventyNavigation.order') %}
+    {% include "article-cards.njk" %}
 
   </div>
 </div>

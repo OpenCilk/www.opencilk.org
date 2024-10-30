@@ -14,7 +14,7 @@ actioncalls:
   header: From "zero" to "performance engineering" in minutes
   description: Get started on Speedcode, where there's nothing to install.
   button: Learn more
-  button_link: /get_involved/get-started-spe/
+  button_link: /get-involved/get-started-spe/
 - number: 1
   header: Enter the programming competition at PPoPP
   description: blingg
@@ -24,17 +24,17 @@ actioncalls:
   header: Teach software performance engineering
   description: OpenCilk makes it easy to teach task-parallel multicore programming.
   button: Learn more
-  button_link: /get_involved/try-opencilk/
+  button_link: /get-involved/try-opencilk/
 - number: 3
   header: Join the SPE instructors' community
   description: Share your performance-engineering thoughts with other faculty.
   button: Learn more
-  button_link: /get_involved/instructors-of-spe/
+  button_link: /get-involved/instructors-of-spe/
 - number: 4
   header: Share your research
   description: Fastcode can promote your contributions to performance engineering. 
   button: Learn more
-  button_link: /get_involved/share-your-research/
+  button_link: /get-involved/share-your-research/
 features:
 - call_1: Go
   call_2: Multicore
@@ -56,7 +56,7 @@ features:
   description_color: var(--midnight)
   description_bg: var(--lightteal)
   button: Try OpenCilk
-  button_link: /get_involved/try-opencilk/
+  button_link: /get-involved/try-opencilk/
   button_color: var(--yellow)
   button_bg: var(--blue)
   image: fib-trace-dark.png
@@ -80,7 +80,7 @@ features:
   description_color: var(--midnight)
   description_bg: var(--safetyyellow)
   button: Learn more
-  button_link: /get_involved/
+  button_link: /get-involved/
   button_color: var(--yellow)
   button_bg: var(--blue)
   image: toolbox.png
@@ -167,11 +167,11 @@ features:
 
 
 
-    <h1 class="my-4">Featured Fastcode events</h1>
+    <h1 class="my-4">Featured events</h1>
     <div class="container" id="featured-3">
       <div class="d-flex row">
-        {% set postslist = collections.featuredEvents %}
-        {% include "event_cards.njk" %}
+        {% set postslist = collections.events %}
+        {% include "event-cards.njk" %}
       </div>
     </div>
 

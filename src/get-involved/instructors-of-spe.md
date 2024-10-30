@@ -4,6 +4,7 @@ sidebar: toc
 title: Join the SPE instructors community
 eleventyNavigation:
   key: Join the SPE instructors community
+  order: 3
 ---
 
 ## Welcome etc
