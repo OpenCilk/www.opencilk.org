@@ -1,0 +1,32 @@
+{% for post in postslist | reverse %}
+
+  <div class="col-md-6">
+    <div class="row p-2 no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: var(--pst-color-surface);">
+      <div class="col-9 d-flex flex-column position-static">
+        <a href="{% if post.data.ext_url %}{{ post.data.ext_url | url }}{% else %}{{ post.url | url }}{% endif %}"><h3 class="font-weight-bold mt-0 mb-0">{{ post.data.title }}</h3></a>
+        {% if post.data.event_date %}
+          <p style="margin-bottom: 6pt;"><strong>{{ post.data.event_date }}</strong></p>
+        {% endif %}
+        {% if post.data.tagline %}
+          <p style="margin-bottom: 12pt;">{{ post.data.tagline }}</p>
+        {% endif %}
+        {% if post.data.reg_deadline %}
+          <p><em>Registration deadline: {{ post.data.reg_deadline }}</em></p>
+        {% endif %}
+        <normal style="display: none;">
+          {% for tag in post.data.tags | filterTagList %}
+          {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
+            <a href="{{ tagUrl | url }}" class="card-tag">{{ tag }}</a>{{ ", " if not loop.last else "" }}
+          {% endfor %}
+        </normal>
+      </div>
+      <div class="col-3 h-100 m-0 p-0 overflow-hidden">
+        {% if post.data.image %}
+          <img class="img-fluid" src="{{ post.data.image }}"/>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+

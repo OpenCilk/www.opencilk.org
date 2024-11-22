@@ -1,107 +1,177 @@
 ---
-title: Write fast code with C/C++ and OpenCilk.
+title: Explore software performance engineering
 layout: layouts/home.njk
 eleventyNavigation:
   key: Home
   order: 1
 hero:
   image:
-    light: /img/OpenCilk-Logo-1001.png
-    dark: /img/OpenCilk-Logo-1001-dark.png
+    light: /img/Fastcode-Logo.png
+    dark: /img/Fastcode-Logo-dark.png
   subtitle: The language of performance engineering
+actioncalls:
+- number: 0
+  header: From "zero" to "performance engineering" in minutes
+  description: Get started on Speedcode, where there's nothing to install.
+  button: Learn more
+  button_link: /get-involved/get-started-spe/
+- number: 1
+  header: Enter the programming competition at PPoPP
+  description: blingg
+  button: Learn more
+  button_link: /events/ppopp-programming-competition
+- number: 2
+  header: Teach software performance engineering
+  description: OpenCilk makes it easy to teach task-parallel multicore programming.
+  button: Learn more
+  button_link: /get-involved/try-opencilk/
+- number: 3
+  header: Join the SPE instructors' community
+  description: Share your performance-engineering thoughts with other faculty.
+  button: Learn more
+  button_link: /get-involved/instructors-of-spe/
+- number: 4
+  header: Share your research
+  description: Fastcode can promote your contributions to performance engineering. 
+  button: Learn more
+  button_link: /get-involved/share-your-research/
 features:
-- call: Write fast code
-  call_description: Parallelize C/C++ with OpenCilk.
+- call_1: Go
+  call_2: Multicore
   call_color: var(--midnight)
   call_bg: var(--lime)
-  button: Install
-  button_link: /doc/users-guide/install/
+  description: The end of Moore's Law makes performance engineering a priority for computer-science curricula.
+  description_color: var(--midnight)
+  description_bg: var(--yellow)
+  button: Learn more
+  button_link: /about/about_spe/
   button_color: var(--yellow)
   button_bg: var(--blue)
-  image_bg: var(--yellow)
-  image: qsort-code-light.png
-- call: Performance engineering
-  call_description: What is it and why does it matter?
+  image: multicore-simple.png
+- call_1: Teach
+  call_2: Performance
   call_color: var(--yellow)
   call_bg: var(--midnight)
-  button: Learn
-  button_link: /posts/
+  description: Teach performance engineering with a cutting-edge task-parallel platform that is easy to learn.
+  description_color: var(--midnight)
+  description_bg: var(--lightteal)
+  button: Try OpenCilk
+  button_link: /get-involved/try-opencilk/
   button_color: var(--yellow)
   button_bg: var(--blue)
-  image_bg: var(--midnight)
-  image: plenty-of-room-at-the-top.png
-- call: Teach performance
-  call_description: OpenCilk provides an ideal introduction.
+  image: fib-trace-dark.png
+- call_1: Learn 
+  call_2: Performance
   call_color: var(--safetyyellow)
-  call_bg: var(--darkteal)
-  button: Discover
-  button_link: /community/teach-performance/
+  call_bg: var(--midnight)
+  description: Practice making code faster with Speedcode -- no installation required.
+  description_color: var(--safetyyellow)
+  description_bg: var(--blue)
+  button: Try Speedcode
+  button_link: https://speedcode.org
   button_color: var(--midnight)
   button_bg: var(--yellow)
-  image_bg: var(--teal)
-  image: fib-code-multicore.png
-- call: Go multicore
-  call_description: Convert your code to OpenCilk
+  image: opencilk-inside.png
+- call_1: Get 
+  call_2: Involved
   call_color: var(--midnight)
   call_bg: var(--yellow)
-  button: Here's how
-  button_link: /doc/users-guide/convert-a-c-program/
+  description: Share and learn in a community dedicated to software performance engineering.
+  description_color: var(--midnight)
+  description_bg: var(--safetyyellow)
+  button: Learn more
+  button_link: /get-involved/
   button_color: var(--yellow)
   button_bg: var(--blue)
-  image_bg: var(--safetyyellow)
-  image: fib-nocode-trace-dag.png
+  image: toolbox.png
 
 ---
 
 <img class="hero-light pt-4 pb-4 mx-auto" src="{{ hero.image.light }}" width="440">
 <img class="hero-dark only-dark pt-4 pb-4 mx-auto" src="{{ hero.image.dark }}" width="440">
 <div class="text-center" style="font-size: large;">
-  <p class="mb-4 mx-auto">{{ metadata.tagline }}</p>
+  <p class="mb-0 mx-auto lead">{{ metadata.tagline }}</p>
 </div>
 
+<div class="sphinx-bs container pb-4 ml-0" style="min-height: 32rem;">
+    
+        <div style="width: 90%;">
+          
 
 
-<!-- homepage gallery -->
-<div class="sphinx-bs container pb-4 " style="max-width: 1200px;">
-    <div class="d-flex row ">
-        {% for item in features %} 
-        <div class="d-flex col-md-6 col-sm-12">
-          <div class="row  no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: {{ item.image_bg }};">
-            <div class="col-5 p-2 d-flex h-100 flex-column position-static" style="justify-content: space-between; color: {{ item.call_color }}; background-color: {{ item.call_bg }};">
-              <div class="d-flex"><span class="myCard-header">{{ item.call }}</span></div>
-              <div class="d-flex"><span class="myCard-lead">{{ item.call_description }}</span></div>
-              <div class="d-flex"><a href="{{ item.button_link }}" class="btn px-4 me-md-2" style="text-decoration: none; color: {{ item.button_color }}; background-color: {{ item.button_bg }};">{{ item.button }}</a></div>
+            <div id="carouselExampleCaptions" class="carousel slide w-100" data-interval="1000" data-bs-ride="carousel">
+
+
+              <div class="carousel-inner w-100">
+                {% for item in actioncalls %}
+                  <div class="carousel-item {% if item.number == 0 %}active{% endif %}" style="min-height: 18rem;">
+
+                    
+                    <div class="carousel-caption" style="bottom: none; top: 5.5rem; text-align: left;">
+                      <h1>{{ item.header }}</h1>
+                      <p class="lead">{{ item.description }}</p>
+                      <a href="{{ item.button_link }}" class="btn px-4 me-md-2" style="text-decoration: none; color: var(--yellow); background-color: var(--blue);">{{ item.button }}</a>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" style="opacity: 1;">
+                <h3><</h3>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" style="opacity: 1;">
+                <h3>></h3>
+              </button>
             </div>
-            <div class="col-7 h-100 m-0 p-0 overflow-hidden">
-              <img class="img-fluid" src="img/{{ item.image }}" style="object-fit: cover; object-position: left; height: 100%; max-height: 240px;"/>
-            </div>
-          </div>
+
+              
+            
+          
         </div>
-        {% endfor %}
-    </div>
+   
 </div>
-
 
 <div class="mx-0" style="background-color: var(--pst-color-background); border-top-style: solid; border-top-color: var(--lime);">
-<div class="container py-4" style="max-width: 1120px;">
+
+
+<div class="container py-4" style="max-width: 1200px;">
   <div class="row justify-content-center">
     <div class="col-12">
       <div class="text-center">
       <h1>{{ title }}</h1>
       </div>
-      <p>OpenCilk is an open-source platform that makes parallel programming a simple extension of serial programming.</p>
-      <ul>
-        <li>Efficient compiling makes your OpenCilk program faster.</li>
-        <li>Provably efficient scheduling tunes each execution of your OpenCilk program to its host environment.</li>
-        <li>Provable race-detection guarantees that your OpenCilk program has a deterministic result.</li>
-      </ul>
+      <!-- homepage gallery -->
+      <div class="sphinx-bs container py-4 " style="max-width: 1200px;">
+          <div class="d-flex row ">
+              {% for item in features %} 
+              <div class="d-flex col-lg-6 col-md-12">
+                <div class="row  no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                  <div class="col-5 p-2 d-flex h-100 flex-column align-items-center justify-content-between" style="background-color: {{ item.call_bg }}; border-top-left-radius: 0.33rem; border-bottom-left-radius: 0.33rem;">
+                    <div class="d-flex text-center"><span class="myCard-header" style="color: {{ item.call_color }};">{{ item.call_1 }}</br>{{ item.call_2 }}</span></div>
+                    <div class="d-none d-sm-block"><img src="img/{{ item.image }}" style="width:180px; height: auto;"/></div>
+                  </div>
+                  <div class="col-7 m-0 p-2 d-flex flex-column justify-content-between" style="background-color: {{ item.description_bg }}; border-top-right-radius: 0.33rem; border-bottom-right-radius: 0.33rem;">
+                  
+                    <span class="myCard-lead" style="color: {{ item.description_color }};">{{ item.description }}</span>
+                    <div class="d-flex"><a href="{{ item.button_link }}" class="btn px-4 me-md-2" style="text-decoration: none; color: {{ item.button_color }}; background-color: {{ item.button_bg }};">{{ item.button }}</a></div>
+            
+                  </div>
+                  
+                </div>
+              </div>
+              {% endfor %}
+          </div>
+      </div>
     </div>
 
-    <h3 class="my-4">Featured blog posts</h3>
+
+
+
+
+    <h1 class="my-4">Featured events</h1>
     <div class="container" id="featured-3">
       <div class="d-flex row">
-        {% set postslist = collections.featuredPosts %}
-        {% include "posts_cards.njk" %}
+        {% set postslist = collections.events %}
+        {% include "event-cards.njk" %}
       </div>
     </div>
 

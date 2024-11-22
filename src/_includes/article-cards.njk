@@ -1,0 +1,29 @@
+{% for post in postslist %}
+
+  <div class="col-md-6">
+    <div class="row p-2 no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: var(--pst-color-surface);">
+      <div class="col-9 d-flex flex-column position-static">
+        <a href="{{ post.url | url }}"><h3 class="font-weight-bold mt-0 mb-0">{{ post.data.title }}</h3></a>
+        {% if post.data.date %}
+          <div class="mb-1 text-muted">{{ post.data.date | readableDate }} &mdash; By {{ post.data.author }}</div>
+        {% endif %}
+        {% if post.data.tagline %}
+          <p class="mb-auto">{{ post.data.tagline | markdownify | safe }}</p>
+        {% endif %}
+        <normal style="display: none;">
+          {% for tag in post.data.tags | filterTagList %}
+          {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
+            <a href="{{ tagUrl | url }}" class="card-tag">{{ tag }}</a>{{ ", " if not loop.last else "" }}
+          {% endfor %}
+        </normal>
+      </div>
+      <div class="col-3 h-100 m-0 p-0 overflow-hidden">
+        {% if post.data.image %}
+          <img class="img-fluid" src="{{ post.data.image }}"/>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+

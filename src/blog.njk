@@ -1,22 +1,23 @@
 ---
-title: Fastcode Blog
+title: Fastcode blog
 layout: layouts/page.njk
 background: bg-white
 sidebar: blog
 permalink: /posts/
 eleventyNavigation:
   key: Blog
-  order: 2
+  order: 7
   parent: Home
 ---
-
-<p><strong class="codefont">Performance engineering:</strong> making software run fast or otherwise consume few resources, such as time, storage, energy, network bandwidth, etc.</p>
+{% alert "note", "Wanted: your SPE story" %}
+Would you like to share your perspective on software performance engineering? Contact us, and let Fastcode promote your contributions to SPE.
+{% endalert %}
 
 <div class="container py-3" id="featured-3">
   <div class="row g-2">
 
     {% set postslist = collections.posts %}
-    {% include "posts_cards.njk" %}
+    {% include "posts-cards.njk" %}
 
   </div>
 </div>

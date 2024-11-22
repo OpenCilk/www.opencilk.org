@@ -17,6 +17,7 @@ str
   .replace(/^-+|-+$/g, '');
 
 const featuredPosts = (post) => post.data.featured;
+const featuredEvents = (page) => page.data.featuredEvent
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.setQuietMode(true);
@@ -94,6 +95,12 @@ module.exports = function(eleventyConfig) {
     return collection
         .getFilteredByGlob("./src/posts/*.md") 
         .filter(featuredPosts);
+  });
+
+  eleventyConfig.addCollection("featuredEvents", (collection) => {
+    return collection
+        .getFilteredByGlob("./src/events/*.md") 
+        .filter(featuredEvents);
   });
 
   // for defn things see https://github.com/11ty/eleventy/issues/2565

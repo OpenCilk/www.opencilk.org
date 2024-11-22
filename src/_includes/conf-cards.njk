@@ -1,0 +1,32 @@
+{% for post in conferences | sort(false, true, 'start') %}
+
+  <div class="col-md-6">
+    <div class="row p-2 no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: var(--pst-color-surface);">
+      <div class="col-9 d-flex flex-column position-static">
+        <a href="{{ post.url | url }}"><h3 class="font-weight-bold mt-0 mb-0">{{ post.shortName }}</h3></a>
+        {% if post.date %}
+          <p style="margin-bottom: 6pt;"><strong>{{ post.date }}</strong></p>
+        {% endif %}
+        {% if post.tagline %}
+          <p style="margin-bottom: 12pt;">{{ post.tagline }}</p>
+        {% endif %}
+        {% if post.deadline %}
+          <p><em>Registration deadline: {{ post.deadline }}</em></p>
+        {% endif %}
+        <normal style="display: none;">
+          {% for tag in post.tags | filterTagList %}
+          {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
+            <a href="{{ tagUrl | url }}" class="card-tag">{{ tag }}</a>{{ ", " if not loop.last else "" }}
+          {% endfor %}
+        </normal>
+      </div>
+      <div class="col-3 h-100 m-0 p-0 overflow-hidden">
+        {% if post.image %}
+          <img class="img-fluid" src="{{ post.image }}"/>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+

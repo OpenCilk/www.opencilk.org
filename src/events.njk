@@ -1,0 +1,33 @@
+---
+title: Events
+layout: layouts/page.njk
+stylesheet: none
+background: bg-white
+sidebar: toc
+permalink: /events/
+eleventyNavigation:
+  key: Events
+  order: 7
+  parent: Home
+---
+
+<h2>Featured events</h2>
+
+<div class="container py-3" id="featured-3">
+  <div class="row g-2">
+
+    {% set postslist = collections.events %}
+    {% include "event-cards.njk" %}
+
+  </div>
+</div>
+
+<h2>Conferences of interest</h2>
+
+<div class="container py-3" id="featured-3">
+  <div class="row g-2">
+
+    {% include "conf-cards.njk" %}
+
+  </div>
+</div>

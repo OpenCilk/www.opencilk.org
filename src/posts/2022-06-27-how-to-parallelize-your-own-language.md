@@ -1,4 +1,7 @@
 ---
+permalink: false
+eleventyExcludeFromCollections: true
+---
 title: How to parallelize your own language using OpenCilk components
 tagline: Angelina Lee and TB Schardl presented the following tutorial at the PACT 2021 tutorial session.
 author: Bruce Hoppe

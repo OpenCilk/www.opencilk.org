@@ -1,17 +1,61 @@
 
 - shortName: PACT
-  url: https://pact22.cs.illinois.edu/
+  url: https://pact2024.github.io/
+  date: October 13-16, 2024
+  start: 2024-10-13
 - shortName: SPAA
   url: https://spaa.acm.org/
+  date: July 28 - August 1, 2025
+  start: 2025-07-28
 - shortName: PPoPP
-  url: https://ppopp22.sigplan.org/
+  url: https://ppopp25.sigplan.org/
+  date: March 1-5, 2025
+  start: 2025-03-01
 - shortName: IPDPS
   url: https://www.ipdps.org/
+  date: June 3-7, 2025
+  start: 2025-06-03
 - shortName: SODA
-  url: https://www.siam.org/conferences/cm/conference/soda22
-- shortName: APOCS
-  url: https://www.siam.org/conferences/cm/conference/apocs22
+  url: https://www.siam.org/conferences/cm/conference/soda25
+  date: January 12-15, 2025
+  start: 2025-01-12
 - shortName: ALENEX
-  url: https://www.siam.org/conferences/cm/conference/alenex22
+  url: https://www.siam.org/conferences/cm/conference/alenex25
+  date: January 12-15, 2025
+  start: 2025-01-12
 - shortName: PLDI
   url: https://conf.researchr.org/home/pldi-2022
+  date: June 16-20, 2025
+  start: 2025-06-16
+- shortName: ICCS
+  url: https://www.iccs-meeting.org/iccs2025/
+  date: July 7-9, 2025
+  start: 2025-07-07
+- shortName: ICPE
+  url: https://icpe2025.spec.org/
+  date: May 5-9, 2025
+  start: 2025-05-05
+- shortName: SIAM-CSE
+  url: https://www.siam.org/conferences-events/siam-conferences/cse25/
+  date: March 3-7, 2025
+  start: 2025-03-03
+- shortName: ACDA
+  url: https://siam.org/conferences-events/siam-conferences/acda25/
+  date: July 30 - August 1, 2025
+  start: 2025-07-30
+- shortName: HPEC
+  url: https://ieee-hpec.org/
+  date: September 23-27, 2024
+  start: 2024-09-23
+- shortName: ESA
+  url: https://algo-conference.org//2024/esa/
+  date: September 2-4, 2024
+  start: 2024-09-02
+- shortName: SC
+  url: https://sc24.supercomputing.org/
+  date: November 17-22, 2024
+  start: 2024-11-17
+- shortName: JuliaCon
+  url: https://discourse.julialang.org/t/call-for-hosts-for-juliacon-2025/116686
+  date: TBD
+  start: 2025-08-01

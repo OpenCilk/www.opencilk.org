@@ -1,4 +1,8 @@
 ---
+permalink: false
+eleventyExcludeFromCollections: true
+---
+---
 title: Research and teaching with OpenCilk
 tagline: The OpenCilk team presented the following tutorial at the SPAA 2020 tutorial session.
 author: Bruce Hoppe
