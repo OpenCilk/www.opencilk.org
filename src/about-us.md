@@ -13,7 +13,11 @@ date: 2022-07-05T16:59:41.487Z
 OpenCilk aims to make it easy for developers to write fast and correct multicore code, for researchers to pioneer technologies to do so, and for educators to teach and students to learn software performance engineering.
 {% endalert %}
 
-## Leadership
+## OpenCilk team
+
+The OpenCilk team is part of [Fastcode](https://fastcode.org), an open-source community dedicated to advancing software performance engineering -- making software run fast or otherwise consume few resources such as time, storage, and energy. [Join us](https://fastcode.org/get-involved/)!
+
+### Leadership
 
 <div class="list-tight">
 
@@ -25,7 +29,7 @@ OpenCilk aims to make it easy for developers to write fast and correct multicore
 * [Charles E. Leiserson](https://people.csail.mit.edu/cel/) (MIT), Executive Director
 </div>
 
-## Contributors
+### Contributors
 
 <div class="list-tight">
 
@@ -39,7 +43,7 @@ OpenCilk aims to make it easy for developers to write fast and correct multicore
 * Brian Wheatman (JHU)
 </div>
 
-## Academic board
+### Academic board
 
 <div class="list-tight">
 
