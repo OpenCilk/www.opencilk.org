@@ -9,7 +9,7 @@ eleventyNavigation:
   order: 5
 ---
 {% alert "note", "Part of Fastcode" %}
-The OpenCilk team is part of Fastcode, an open-source community dedicated to advancing software performance engineering -- making software run fast or otherwise consume few resources such as time, storage, and energy. [Join us](/community/join-us)!
+The OpenCilk team is part of [Fastcode](https://fastcode.org), an open-source community dedicated to advancing software performance engineering -- making software run fast or otherwise consume few resources such as time, storage, and energy. [Join us](https://fastcode.org/get-involved/)!
 {% endalert %}
 
 ## Where can I get help?
@@ -27,10 +27,10 @@ To report bugs and most feature requests, use GitHub Issues in the appropriate r
 To subscribe to announcements and have longer discussions,
 use [GitHub Discussions](https://github.com/OpenCilk/opencilk-project/discussions) in the [OpenCilk Project](https://github.com/OpenCilk/opencilk-project) repository.
 
-## Conferences
-Below are the academic conferences traditionally most popular with the OpenCilk community. Many of them include tutorial days with sessions on OpenCilk.
-{% for conf in  conferences %}
- - [{{ conf.shortName }}]({{ conf.url }})
-{% endfor %}
 
-See also: **[Contribute](/contribute)**.
+{% alert "note", "See also" %}
+- **[Contribute](/contribute)** for some current opportunities to help with OpenCilk.
+- **[Fastcode events](https://fastcode.org/events/)** for a list of conferences and events traditionally most popular with the OpenCilk community. Many of them include tutorial days with sessions on OpenCilk.
+{% endalert %}
+
+
