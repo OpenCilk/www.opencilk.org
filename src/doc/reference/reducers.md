@@ -181,7 +181,7 @@ void compute_sum(long cilk_reducer(zero, add) *sum)
 long provide_reducer()
 {
     long cilk_reducer(zero, add) sum = 0L; // must be initialized
-    compute_sum(__builtin_address(sum));
+    compute_sum(__builtin_addressof(sum));
     return sum;
 }
 ```
