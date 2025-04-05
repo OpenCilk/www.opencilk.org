@@ -28,10 +28,9 @@ error-prone than serial programming.  {% defn "OpenCilk" %} aims to bridge this
 gap.  OpenCilk supports the {% defn "Cilk" %} language extensions to C and C++,
 which make it easy to write parallel programs that are both correct and fast.
 
-OpenCilk is a {% defn "task-parallel-platforms-programming-and-algorithms",
-"task-parallel platform" %} that provides language abstractions for {% defn
-"shared-memory" %} parallel computations on {% defn "multicores", "multicore"
-%} systems.  As a Cilk programmer, you are only responsible for expressing the
+OpenCilk is a {% defn "task-parallel" %} platform that provides language abstractions for 
+{% defn "shared-memory" %} parallel computations on {% defn "multicore" %} 
+systems.  As a Cilk programmer, you are only responsible for expressing the
 {% defn "logical parallelism" %} in your application, that is, which tasks
 *may* run in parallel.  (With Cilk, there are no tasks which *must* run in
 parallel.)  The OpenCilk compiler produces optimized parallel code, and the
@@ -44,7 +43,7 @@ When using the OpenCilk platform, you write code in the Cilk language, which
 extends C and C++ with a just few keywords to support task-parallel
 programming.  Specifically, Cilk supports {% defn "fork-join parallelism" %}, a
 simple and effective form of task parallelism.  Cilk provides linguistic
-mechanisms for {% defn "spawning" %} and {% defn "parallel loops" %}.
+mechanisms for {% defn "spawn", "spawning" %} and {% defn "parallel loop", "parallel loops" %}.
 
 In this tutorial, we'll introduce spawning parallel tasks.  Upcoming tutorials
 will also cover the following:
@@ -52,7 +51,7 @@ will also cover the following:
 - How to use parallel loops.
 - How to ensure your program is free of {% defn "determinacy-race", "race bugs"
   %} using the {% defn "Cilksan" %} tool.
-- How to determine the {% defn "scalability" %} of your program on multiple
+- How to determine the {% defn "scale down", "scalability" %} of your program on multiple
   processors using the {% defn "Cilkscale" %} tool.
 - How OpenCilk runs your program to achieve good performance.
 
@@ -63,10 +62,10 @@ and parallel regions.  A serial region contains no parallelism and its tasks
 are executed in sequence, as usual.  A parallel region has two distinguishing
 characteristics:
 
-1. Within the parallel region, functions may be {% defn "spawning", "spawned"
+1. Within the parallel region, functions may be {% defn "spawn", "spawned"
    %}, i.e., they may be run in parallel with the caller.
 2. At the end of the parallel region, all functions that were spawned within it
-   are {% defn "syncing", "synced" %}, i.e., they have finished executing.
+   are {% defn "sync", "synced" %}, i.e., they have finished executing.
    
 Functions within either a serial or parallel region may themselves contain
 serial and parallel regions, allowing for {% defn "nested parallelism" %}.
