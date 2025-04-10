@@ -62,7 +62,7 @@ void sample_qsort(int * begin, int * end)
     if (begin != end) {
         --end; // Exclude last element (pivot)
         int * middle = std::partition(begin, end,
-                    std::bind2nd(std::less<int(),*end));
+                    std::bind2nd(std::less<int>(),*end));
         std::swap(*end, *middle); // pivot to middle
         sample_qsort(begin, middle);
         sample_qsort(++middle, ++end); // Exclude pivot
@@ -82,7 +82,7 @@ int qmain(int n)
     // Confirm that a is sorted and that each element
     // contains the index.
     for (int i = 0; i < n-1; ++i) {
-        if ( a[i] = a[i+1] || a[i] != i ) {
+        if ( a[i] == a[i+1] || a[i] != i ) {
             std::cout << "Sort failed at location i=" << i << " a[i] = "
                     << a[i] << " a[i+1] = " << a[i+1] << std::endl;
             delete[] a;
@@ -97,8 +97,8 @@ int qmain(int n)
 int main(int argc, char* argv[])
 {
     int n = 10*1000*1000;
-    if (argc 1)
-        n = std::atoi(argv[1]);
+    if (argc == 2)
+        n = std::atoi(argv[2]);
     return qmain(n); 
 }
 ```
