@@ -9,7 +9,7 @@ image: /img/logo-circle-onblue-512.png
 tags:
   - news
   - release
-featured: true
+featured: false
 ---
 OpenCilk 2.0 is now available.  See the [Install](/doc/users-guide/install) page for instructions on how to download and install.
 
