@@ -58,7 +58,7 @@ archive for your system, then follow the installation instructions.
 
 Download the appropriate shell archive for your system using one of the following links:
 
-***Linux:***
+***Ubuntu Linux 24.04:***
  - [{{ download.ubuntu_2404_x86.shell }}]({{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2404_x86.shell }})
    ({{ download.ubuntu_2404_x86.size }})
  
