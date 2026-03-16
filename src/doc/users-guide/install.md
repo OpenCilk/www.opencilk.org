@@ -46,7 +46,7 @@ Precompiled binaries for OpenCilk 3.0 can be installed in several ways:
 - Using a [docker image](#docker-image).
 
 You can also [build OpenCilk from source](../build-opencilk-from-source),
-which is the recommended approach for Ubuntu 18.04 and other operating systems for
+which we recommend for operating systems for
 which precompiled binaries are not available.
 
 ## Installing using a shell archive
