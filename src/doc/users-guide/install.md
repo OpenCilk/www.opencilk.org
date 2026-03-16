@@ -128,7 +128,7 @@ for your system, then follow the installation instructions.
 
 Download the appropriate tarball for your system using one of the following links:
 
-***Linux:***
+***Ubuntu Linux 24.04:***
  - <a id="{{ download.release }} ubuntu 2204 x86" href="{{ download.host }}releases/download/{{ download.release }}/{{ download.ubuntu_2404_x86.binary }}">{{ download.ubuntu_2404_x86.binary }}</a>
    ({{ download.ubuntu_2404_x86.size }})
  
