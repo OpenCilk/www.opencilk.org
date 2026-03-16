@@ -22,7 +22,7 @@ download:
 ## System requirements
 
 OpenCilk 3.0 runs on Intel x86 64-bit processors (Haswell and newer), AMD x86
-64-bit processors (Excavator and newer), and various 64-bit ARM processors, including Apple M1 and M2. It has been tested on the following operating systems:
+64-bit processors (Excavator and newer), and various 64-bit ARM processors, including Apple Silicon. It has been tested on the following operating systems:
 
  - Recent versions of Ubuntu, including via the Windows Subsystem for Linux v2 (WSL2) on Windows 10
  - Recent versions of macOS
